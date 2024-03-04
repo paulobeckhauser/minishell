@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/04 12:06:04 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/04 16:54:25 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ OBJ_DIR			:= obj/
 CC				:= cc
 RM				:= rm -f
 CFLAGS			:= -Wall -Wextra -Werror
+LREADLINE		:= -lreadline
 # SANITIZER 		:= #-fsanitize=address -g
 
 # Libraries
@@ -97,7 +98,7 @@ ${NAME}: 		${OBJ}
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 					@echo $(WHITE) "Building minishell for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
 					@make -s -C ./libs/libft
-					@${CC} ${CFLAGS} $(SANITIZER) $^ -L./libs/libft -lft -o ${NAME}
+					@${CC} ${CFLAGS} $(SANITIZER) $^ -L./libs/libft -lft $(LREADLINE) -o ${NAME}
 					@echo $(GREEN) "Minishell Mandatory is created!\n" $(EOC) $(RESET_COLOR)
 
 
@@ -105,7 +106,7 @@ ${NAME}_bonus:	${OBJ_BONUS}
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 					@echo $(WHITE) "Building minishell for" $(YELLOW) "Bonus" $(WHITE)
 					@make -s -C ./libs/libft
-					@${CC} ${CFLAGS} $^ -L./libs/libft -lft -o ${NAME}_bonus
+					@${CC} ${CFLAGS} $^ -L./libs/libft -lft $(LREADLINE) -o ${NAME}_bonus
 					@echo $(GREEN) "Minishell Bonus is created!\n" $(EOC) $(RESET_COLOR)
 
 libft:
