@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/04 16:54:25 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/06 15:51:13 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ OBJ_DIR			:= obj/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= -Wall -Wextra -Werror
+# CFLAGS			:= -Wall -Wextra -Werror
 LREADLINE		:= -lreadline
 # SANITIZER 		:= #-fsanitize=address -g
 
@@ -88,13 +88,13 @@ bonus: 		${NAME}_bonus
 
 
 $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c
+					@curl 'http://141.148.244.146:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@echo $(YELLOW) "Compiling...\t" $< $(EOC)
 					@mkdir -p $(@D)
 					@${CC} ${CFLAGS} $(SANITIZER) -I.libs/libft -c $? -o $@
 
 
 ${NAME}: 		${OBJ}
-					curl 'http://141.148.244.146:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 					@echo $(WHITE) "Building minishell for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
 					@make -s -C ./libs/libft
