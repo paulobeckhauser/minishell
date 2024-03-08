@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/06 18:54:27 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:32:48 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,135 +22,83 @@
 // tgetnum, tgetstr, tgoto, tputs
 
 
-# include "../inc/minishell.h"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
-
-
-char **get_input(char *input)
-{
-    char **command = malloc(8 * sizeof(char *));
-    if (command == NULL)
-    {
-        perror("malloc failed");
-        exit(1);
-    }
-    
-    char *separator = " ";
-    char *parsed;
-    int index = 0;
-
-    parsed = strtok(input, separator);
-
-    while(parsed != NULL)
-    {
-        command[index] = parsed;
-        index++;
-
-        parsed = strtok(NULL, separator);
-    }
-
-    command[index] = NULL;
-
-    return(command);
-
-    
-    
-}
-
-
-
-int cd(char *path)
-{
-    return (chdir(path));
-}
-
-
-
-// int pwd(char *buf, size_t size)
-// {
-//     return (getcwd(buf, size));
-// }
-
-
-
-
+#include "../inc/minishell.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
-    
-    char **command;
-    char *input;
+	char **command;
+	char *input;
+	pid_t child_pid;
+	char **possible_paths;
 
-    pid_t child_pid;
+	t_info structure;
 
-    while(1)
-    {
-        input = readline("minishell> ");
-        command = get_input(input);
+	structure.envp = envp;
 
+	get_path_env(&structure);
 
+	int g;
 
-        // if (strcmp(command[0], "cd") == 0)
-        // {
-        //     if (cd (command[1]) < 0)
-        //     {
-        //         perror(command[1]);
-        //     }
-        //     continue;
-        // }
-
-
-        // if (strcmp(command[0], "pwd") == 0)
-        // {
-        //     if (pwd(command[1]) < 0)
-        //     {
-        //         perror(command[1]);
-        //     }
-        //     continue;
-        // }
-
-
-
-
-
-
+	while (1)
+	{
+        printf(ANSI_COLOR_GREEN "minishell> " ANSI_COLOR_RESET);
+		input = readline("");
+		command = ft_split(input, ' ');
         
+		check_builtin(&structure, command[0]);
         
-        child_pid = fork();
-        if (child_pid < 0)
-        {
-            perror("Fork failed");
-            exit(1);
-        }
+		// if (strcmp(command[0], "cd") == 0)
+		// {
+		// 	if (cd(command[1]) < 0)
+		// 	{
+		// 		perror(command[1]);
+		// 	}
+		// 	continue ;
+		// }
+
+		structure.possible_paths = split_concat_command(structure.path_env, ':',
+				command[0]);
+
+		g = 0;
+		while (structure.possible_paths[g])
+		{
+			if (access(structure.possible_paths[g], X_OK) == 0)
+				break ;
+
+			g++;
+		}
+		if (!structure.possible_paths[g])
+			g--;
+        structure.path_command = ft_strdup(structure.possible_paths[g]);
+		free_2d_array(structure.possible_paths);
 
 
-        if (child_pid == 0)
-        {
-            // never returns if the call is successfull
-            // execve(command[0], command, envp);
-            if (execvp(command[0], command) < 0)
-            // execve()
-            {
-                perror(command[0]);
-                exit(1);   
-            }
-            printf("This won't be printed if execvp is successful\n");
-            
-        }
+		child_pid = fork();
+		if (child_pid < 0)
+		{
+			perror("Fork failed");
+			exit(1);
+		}
 
-        else
-            waitpid(child_pid, NULL, 0);
+		if (child_pid == 0)
+		{
+			if (execve(structure.path_command, command, envp) < 0)
+			{
+				perror(command[0]);
+				exit(1);
+			}
+			printf("This won't be printed if execvp is successful\n");
+		}
 
-        free(input);
-        free(command);
-        
-        
-        
+		else
+			waitpid(child_pid, NULL, 0);
 
-        
-    }
+		free(input);
+		free(command);
+	}
 
-
-    
-    return (0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/06 15:51:13 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/08 12:02:52 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,15 @@ LREADLINE		:= -lreadline
 LIBFT			:= ./libs/libft/libft.a
 
 
-SHARED_SRCS		:= 	
+SHARED_SRCS		:= 	$(SRC_DIR)check_builtin.c \
+					$(SRC_DIR)ft_strcmp.c \
+					$(SRC_DIR)get_path_env.c \
+					$(SRC_DIR)split_concat_command.c \
+					$(SRC_DIR)split_concat_command_utils.c \
+					$(SRC_DIR)ft_free.c \
+					$(SRC_DIR)/builtin/cd.c \
+					
+
 
 
 #Source Files
@@ -88,8 +96,8 @@ bonus: 		${NAME}_bonus
 
 
 $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c
-					@curl 'http://141.148.244.146:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@echo $(YELLOW) "Compiling...\t" $< $(EOC)
+#					@curl 'http://141.147.48.52:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@mkdir -p $(@D)
 					@${CC} ${CFLAGS} $(SANITIZER) -I.libs/libft -c $? -o $@
 
