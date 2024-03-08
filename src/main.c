@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/04 22:24:00 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:05:14 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,15 @@
 // getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
 // tgetnum, tgetstr, tgoto, tputs
 
-# include "../inc/minishell.h"
+#include "../inc/minishell.h"
 
 int	main(void)
 {
-    char	*buf;
-    char	*input;
+	t_input_data input_data;
 
-    while (1)
-    {
-		// display_dir_prompt_history (code below will be stored in the function)
-		buf = getcwd(NULL, 0);
-        if (buf == NULL)
-		{
-            perror("getcwd() error");
-            return (1);
-        }
-		buf = ft_strjoin(buf, "$ ");
-        input = readline(buf);
-        add_history(input);
-		free(input);
-        free(buf);
-    }
+	while (1)
+	{
+		lexer(&input_data);
+	}
     return (0);
 }
