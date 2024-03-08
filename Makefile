@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/04 16:54:25 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/08 19:25:07 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ SHARED_SRCS		:=
 
 #Source Files
 SRCS			:= 	$(SHARED_SRCS) \
-					$(SRC_DIR)main.c \
+					$(SRC_DIR)main.c $(SRC_DIR)token.c $(SRC_DIR)token_utils.c \
 
 
 SRCS_BONUS		:= 	$(SHARED_SRCS)\
