@@ -7,7 +7,7 @@ Minishell is a simple shell implementation with basic functionalities.
 - Search and launch the right executable (based on the PATH variable or using a relative or an absolute path) - :x:
 
 **Signal Handling**
-- Avoid using more than one global variable to indicate a received signal - :white_check_mark:
+- Avoid using more than one global variable to indicate a received signal - :x:
 
 **Quote Handling**
 - Handle ' (single quote) - :x:
@@ -27,19 +27,19 @@ Minishell is a simple shell implementation with basic functionalities.
 - Handle $? to expand to the exit status of the most recently executed foreground pipeline - :x:
 
 **Interactive Mode**
-- Handle ctrl-C, ctrl-D and ctrl-\ like in bash - :white_check_mark:
-- ctrl-C displays a new prompt on a new line - :white_check_mark:
-- ctrl-D exits the shell - :white_check_mark:
-- ctrl-\ does nothing - :white_check_mark:
+- Handle ctrl-C, ctrl-D and ctrl-\ like in bash - :x:
+- ctrl-C displays a new prompt on a new line - :x:
+- ctrl-D exits the shell - :x:
+- ctrl-\ does nothing - :x:
 
 **Builtins**
-- echo with option -n - :white_check_mark:
-- cd with only a relative or absolute path - :white_check_mark:
-- pwd with no options - :white_check_mark:
+- echo with option -n - :x:
+- cd with only a relative or absolute path - :x:
+- pwd with no options - :x:
 - export with no options - :x:
 - unset with no options - :x:
-- env with no options or arguments - :white_check_mark:
-- exit with no options - :white_check_mark:
+- env with no options or arguments - :x:
+- exit with no options - :x:
 
 ## Bonus Features
 - Implement '&&' and '||' with parenthesis for priorities - :x:
