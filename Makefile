@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/08 17:15:15 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/08 12:02:52 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,6 @@ NAME			= minishell
 # Directories
 SRC_DIR			:= src/
 OBJ_DIR			:= obj/
-EXECUTION_DIR	:= execution/
-BUILTIN			:= builtin/
 
 # Compiler and Flags
 CC				:= cc
@@ -66,13 +64,13 @@ LREADLINE		:= -lreadline
 LIBFT			:= ./libs/libft/libft.a
 
 
-SHARED_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
-					$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
-					$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
-					$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
-					$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
-					$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
-					$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN)cd.c \
+SHARED_SRCS		:= 	$(SRC_DIR)check_builtin.c \
+					$(SRC_DIR)ft_strcmp.c \
+					$(SRC_DIR)get_path_env.c \
+					$(SRC_DIR)split_concat_command.c \
+					$(SRC_DIR)split_concat_command_utils.c \
+					$(SRC_DIR)ft_free.c \
+					$(SRC_DIR)/builtin/cd.c \
 					
 
 

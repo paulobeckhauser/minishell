@@ -6,11 +6,11 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:49:45 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/08 17:13:47 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:58:09 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/minishell.h"
+# include "../inc/minishell.h"
 
 void	*ft_free(char **strs, int count)
 {
