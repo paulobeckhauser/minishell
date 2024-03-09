@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/08 17:38:46 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:53:51 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,16 @@ int	main(int argc, char *argv[], char *envp[])
 	{
         printf(ANSI_COLOR_GREEN "minishell> " ANSI_COLOR_RESET);
 		input = readline("");
+		
+		// EXIT FUNCTION
+		if (ft_strcmp(input, "exit") == 0)
+		{
+			free(input);
+			break;
+		}
+		// EXIT FUNCTION
 		command = ft_split(input, ' ');
+
         
 		check_builtin(&structure, command[0]);
         
@@ -58,6 +67,7 @@ int	main(int argc, char *argv[], char *envp[])
 		// 	}
 		// 	continue ;
 		// }
+
 
 		structure.possible_paths = split_concat_command(structure.path_env, ':',
 				command[0]);
@@ -75,38 +85,28 @@ int	main(int argc, char *argv[], char *envp[])
         structure.path_command = ft_strdup(structure.possible_paths[g]);
 		free_2d_array(structure.possible_paths);
 
-		printf("%s\n", structure.path_command);
-		
-		int k = 0;
-		while (command[k])
+		child_pid = fork();
+		if (child_pid < 0)
 		{
-			printf("%s\n", command[k]);
-			k++;
+			perror("Fork failed");
+			exit(1);
 		}
 
+		if (child_pid == 0)
+		{
+			if (execve(structure.path_command, command, envp) < 0)
+			{
+				perror(command[0]);
+				exit(1);
+			}
+			printf("This won't be printed if execvp is successful\n");
+		}
 
-		// child_pid = fork();
-		// if (child_pid < 0)
-		// {
-		// 	perror("Fork failed");
-		// 	exit(1);
-		// }
+		else
+			waitpid(child_pid, NULL, 0);
 
-		// if (child_pid == 0)
-		// {
-		// 	if (execve(structure.path_command, command, envp) < 0)
-		// 	{
-		// 		perror(command[0]);
-		// 		exit(1);
-		// 	}
-		// 	printf("This won't be printed if execvp is successful\n");
-		// }
-
-		// else
-		// 	waitpid(child_pid, NULL, 0);
-
-		// free(input);
-		// free(command);
+		free(input);
+		free(command);
 	}
 
 	return (0);
