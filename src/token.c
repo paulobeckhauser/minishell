@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/09 16:27:39 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:04:24 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,36 +44,42 @@ void	init_token_struct(t_input_data *input_data)
 	t_token	token;
 
 	type = find_token(input_data);
+	if (type == WRONG)
+		return ;
 	if (type == PIPE)
 	{
 		token.type = PIPE;
-		token.value = "|";
-		ft_printf("Found token PIPE: %s\n", token.value);
+		token.t_value.single_ptr = "|";
+		ft_printf("Found token PIPE: %s\n", token.t_value);
 	}
 	else if (type == REDIRECTION)
 	{
 		token.type = REDIRECTION;
-		token.value = verify_redirection(input_data);
-		ft_printf("Found token REDIRECTION: %s\n", token.value);
+		token.t_value.single_ptr = verify_redirection(input_data);
+		ft_printf("Found token REDIRECTION: %s\n", token.t_value);
 	}
 	else if (type == WORD)
 	{
 		count_words(input_data);
 		init_words_arr(input_data);
-		if (!builtin_cmd())
-			make_simple_cmd();
+		if (!builtin_cmd(input_data->arr[0]))
+			token = make_simple_cmd(input_data);
+		else
+			token = make_builtin_cmd(input_data);
 	}
+	return (token);
 }
 
 t_type	find_token(t_input_data *input_data)
 {
 	t_type	type;
 
-	input_data->start_ptr_save = input_data->input;
+	if (input_data->start_ptr_save == NULL)
+		input_data->start_ptr_save = input_data->input;
 	input_data->word_count = 0;
 	skip_whitespaces(input_data);
 	if (*input_data->input == 0)
-		return (0);
+		type = WRONG;
 	if (ft_strchr(input_data->symbols, *input_data->input))
 	{
 		if (*input_data->input == '|' && *(input_data->input + 1) != '|')
@@ -143,4 +149,22 @@ void	init_words_arr(t_input_data *input_data)
 	input_data->arr[i][y] = 0;
 	input_data->arr[i + 1] = NULL;
 	}
+}
+
+t_token	make_simple_cmd(t_input_data *input_data)
+{
+	t_token	token;
+
+	token.type = SIMPLE_COMMAND;
+	token.t_value.double_ptr = input_data->arr;
+	return (token);
+}
+
+t_token make_builtin_cmd(t_input_data *input_data)
+{
+	t_token	token;
+
+	token.type = BUILTIN_COMMAND;
+	token.t_value.double_ptr = input_data->arr;
+	return (token);
 }

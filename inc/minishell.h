@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/09 16:22:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:31:42 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,30 @@ typedef struct s_input_data
 
 typedef enum s_type
 {
-	PIPE = 0,
-	REDIRECTION = 1,
-	WORD = 2,
-	SIMPLE_COMMAND = 3,
-	COMMAND = 4,
-	ARGUMENT = 5,
+	WRONG = 0,
+	PIPE = 1,
+	REDIRECTION = 2,
+	WORD = 3,
+	SIMPLE_COMMAND = 4,
+	BUILTIN_COMMAND = 5,
+	ARGUMENT = 6,
 }	t_type;
 
 typedef struct s_token
 {
 	t_type	type;
-	char	*value;
+	union u_value
+	{
+		char	*single_ptr;
+		char	**double_ptr;
+	} t_value;
+	int	output ;
+	int input;
+	t_token left;
 }	t_token;
+
+output = STDOUT_FILENO;
+input = STDIN_FILENO;
 
 // token.c
 void	lexer(t_input_data *input_data);
@@ -62,10 +73,13 @@ t_type	find_token(t_input_data *input_data);
 char	*verify_redirection(t_input_data *input_data);
 void	count_words(t_input_data *input_data);
 void	init_words_arr(t_input_data *input_data);
+t_token	make_simple_cmd(t_input_data *input_data);
 
 // token_utils.c
-void	init_symbols_and_whitespace_strings(t_input_data* input_data);
+void	init_symbols_and_whitespace_strings(t_input_data *input_data);
 void	skip_whitespaces(t_input_data *input_data);
 int		get_word_length(t_input_data *input_data);
+int		builtin_cmd(char *str);
+void	free_double_arr(char **arr);
 
 #endif

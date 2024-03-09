@@ -1,0 +1,2 @@
+cat infile2 >infile1 | sort >infile2
+

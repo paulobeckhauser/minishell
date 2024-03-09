@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:26:18 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/09 16:52:53 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:06:12 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_symbols_and_whitespace_strings(t_input_data *input_data)
 {
+	input_data->start_ptr_save = NULL;
 	input_data->symbols = "|<>";
 	input_data->whitespace = " \t\r\n\v";
 }

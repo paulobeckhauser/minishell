@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/08 19:25:07 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/09 17:56:26 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,7 @@ $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c
 
 
 ${NAME}: 		${OBJ}
-					curl 'http://141.148.244.146:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
+#					curl 'http://141.148.244.146:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 					@echo $(WHITE) "Building minishell for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
 					@make -s -C ./libs/libft
