@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/08 23:51:10 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:15:54 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	find_token(t_input_data *input_data)
 
 	token_type = 0;
 	input_data->start_ptr_save = input_data->input;
-
+	input_data->word_count = 0;
 	skip_whitespaces(input_data);
 	if (*input_data->input == 0)
 		return (0);
@@ -90,18 +90,20 @@ void	count_words(t_input_data *input_data)
 	char	*start_ptr_save;
 
 	start_ptr_save = input_data->input;
+	input_data->word_count = 0;
 	while (!ft_strchr(input_data->symbols, *input_data->input) && *input_data->input)
 	{
 		if (ft_strchr(input_data->whitespace, *input_data->input))
 		{
 			skip_whitespaces(input_data);
-			input_data->word_count++;
+			if (*input_data->input)
+				input_data->word_count++;
 		}
 		else
 			input_data->input++;
 	}
-	// if (*input_data->input == 0 && ft_strlen(start_ptr_save) > 0)
-	// 	input_data->word_count++;
+	if (*input_data->input == 0)
+		input_data->word_count++;
 	input_data->input = start_ptr_save;
 	ft_printf("Word count: %i\n", input_data->word_count);
 }
