@@ -1,26 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   get_path_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 11:47:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/08 12:02:09 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/03/08 11:40:06 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/03/08 17:13:41 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minishell.h"
+# include "../../inc/minishell.h"
 
-void free_2d_array(char **array)
-{
-    int i;
-
-    i = 0;
-    while(array[i])
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
-}

@@ -6,11 +6,11 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:09:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/07 18:36:37 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:13:28 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minishell.h"
+# include "../../inc/minishell.h"
 
 void check_builtin(t_info *structure, char *str)
 {

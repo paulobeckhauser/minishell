@@ -6,11 +6,11 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:16:30 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/07 13:18:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:13:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/minishell.h"
+# include "../../../inc/minishell.h"
 
 int cd(char *path)
 {
