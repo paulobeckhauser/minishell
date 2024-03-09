@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/08 23:43:12 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/09 16:22:17 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ typedef enum s_type
 {
 	PIPE = 0,
 	REDIRECTION = 1,
-	SIMPLE_COMMAND = 2,
-	COMMAND = 3,
-	ARGUMENT = 4,
+	WORD = 2,
+	SIMPLE_COMMAND = 3,
+	COMMAND = 4,
+	ARGUMENT = 5,
 }	t_type;
 
 typedef struct s_token
@@ -57,7 +58,7 @@ typedef struct s_token
 void	lexer(t_input_data *input_data);
 void	default_display_with_history(t_input_data *input_data);
 void	init_token_struct(t_input_data *input_data);
-int		find_token(t_input_data *input_data);
+t_type	find_token(t_input_data *input_data);
 char	*verify_redirection(t_input_data *input_data);
 void	count_words(t_input_data *input_data);
 void	init_words_arr(t_input_data *input_data);

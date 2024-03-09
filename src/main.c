@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/09 00:05:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:47:03 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 
 int	main(void)
 {
-	t_input_data input_data;
+	t_input_data	input_data;
 
 	while (1)
 	{
 		lexer(&input_data);
 	}
-    return (0);
+	return (0);
 }
