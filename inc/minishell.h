@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 16:41:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:21:48 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ typedef struct s_token
 typedef struct s_token_node
 {
 	t_token				token;
+	int					index;
 	struct s_token_node	*next;
 }	t_token_node;
 
 
 // token.c
+void			parser(t_input_data *input_data);
 void			lexer(t_input_data *input_data);
 void			default_display_with_history(t_input_data *input_data);
 t_token_node	*init_token_list(t_input_data *input_data);

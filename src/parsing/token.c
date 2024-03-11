@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 17:04:00 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:45:59 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ void	lexer(t_input_data *input_data)
 	list = init_token_list(input_data);
 	if (!list)
 		perror("Error initializing token list.");
-	while (list)
-	{
-		ft_printf("%s ", type_to_string(list->token.type));
-		list = list->next;
-	}
-	ft_printf("\n");
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
 	free(input_data->input);
@@ -58,9 +52,11 @@ t_token_node	*init_token_list(t_input_data *input_data)
 	t_token_node	*node;
 	t_token_node	*start_ptr;
 	t_token_node	*current;
+	int				i;
 
 	start_ptr = NULL;
 	current = NULL;
+	i = 0;
 	while (1)
 	{
 		node = malloc(sizeof(t_token_node));
@@ -68,6 +64,7 @@ t_token_node	*init_token_list(t_input_data *input_data)
 			return (NULL);
 		node->token = init_token_struct(input_data);
 		node->next = NULL;
+		node->index = i++;
 		if (node->token.type == WRONG)
 		{
 			free(node);
