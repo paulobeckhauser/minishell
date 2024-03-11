@@ -6,16 +6,17 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:26:18 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 18:06:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:40:13 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 #include "../../inc/minishell.h"
 
-void	init_symbols_and_whitespace_strings(t_input_data *input_data)
+void	init_needed_data(t_input_data *input_data)
 {
 	input_data->start_ptr_save = NULL;
+	input_data->pipe_count = 0;
 	input_data->symbols = "|<>";
 	input_data->whitespace = " \t\r\n\v";
 }

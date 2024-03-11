@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 18:04:25 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:45:38 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	lexer(t_input_data *input_data)
 	list = init_token_list(input_data);
 	if (!list)
 		perror("Error initializing token list.");
+	check_token_order(list, input_data);
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
 	free(input_data->input);
@@ -50,11 +51,11 @@ void	default_display_with_history(t_input_data *input_data)
 t_token_node	*init_token_list(t_input_data *input_data)
 {
 	t_token_node	*node;
-	t_token_node	*start_ptr;
+	t_token_node	*start_ptr_save;
 	t_token_node	*current;
 	int				i;
 
-	start_ptr = NULL;
+	start_ptr_save = NULL;
 	current = NULL;
 	i = 0;
 	while (1)
@@ -70,9 +71,9 @@ t_token_node	*init_token_list(t_input_data *input_data)
 			free(node);
 			break ;
 		}
-		if (!start_ptr)
+		if (!start_ptr_save)
 		{
-			start_ptr = node;
+			start_ptr_save = node;
 			current = node;
 		}
 		else
@@ -81,7 +82,7 @@ t_token_node	*init_token_list(t_input_data *input_data)
 			current = current->next;
 		}
 	}
-	return (start_ptr);
+	return (start_ptr_save);
 }
 
 t_token	init_token_struct(t_input_data *input_data)
@@ -96,6 +97,7 @@ t_token	init_token_struct(t_input_data *input_data)
 	{
 		token.type = PIPE;
 		token.t_value.single_ptr = "|";
+		++input_data->pipe_count;
 	}
 	else if (type == REDIRECTION)
 	{
@@ -215,4 +217,23 @@ t_token make_builtin_cmd(t_input_data *input_data)
 	token.type = BUILTIN_COMMAND;
 	token.t_value.double_ptr = input_data->arr;
 	return (token);
+}
+
+void	check_token_order(t_token_node *token_node, t_input_data *input_data)
+{
+	t_token_node	*start_ptr_save;
+
+	start_ptr_save = token_node;
+	if (token_node->token.type == PIPE)
+	{
+		perror("bash: syntax error near unexpected token `|'");
+		return ;
+	}
+	if (input_data->pipe_count > 0)
+	{
+		while (token_node->token.type != PIPE)
+		{
+			
+		}
+	}
 }

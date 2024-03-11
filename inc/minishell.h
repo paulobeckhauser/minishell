@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 18:05:36 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:15:15 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_input_data
 	char	*whitespace;
 	char	**arr;
 	int		word_count;
+	int		pipe_count;
 }	t_input_data;
 
 typedef struct s_info
@@ -104,6 +105,15 @@ typedef struct s_token_node
 	struct s_token_node	*next;
 }	t_token_node;
 
+typedef struct s_cmd
+{
+	t_type			type;
+	char			**arr;
+	int				input;
+	int				output;
+	struct s_cmd	*next;
+}	t_cmd;
+
 
 // token.c
 void			parser(t_input_data *input_data);
@@ -117,9 +127,10 @@ void			count_words(t_input_data *input_data);
 void			init_words_arr(t_input_data *input_data);
 t_token			make_simple_cmd(t_input_data *input_data);
 t_token			make_builtin_cmd(t_input_data *input_data);
+void			check_token_order(t_token_node *token_node, t_input_data *input_data);
 
 // token_utils.c
-void			init_symbols_and_whitespace_strings(t_input_data *input_data);
+void			init_needed_data(t_input_data *input_data);
 void			skip_whitespaces(t_input_data *input_data);
 int				get_word_length(t_input_data *input_data);
 int				builtin_cmd(char *str);
