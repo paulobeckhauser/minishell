@@ -6,12 +6,15 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/08 12:35:41 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:15:07 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
+
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
 // Made libraries
 # include "../libs/libft/inc/ft_printf.h"
@@ -24,12 +27,26 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 
+// Store variables to handle input (SZYMON)
+typedef struct s_input_data
+{
+	char	*buf;
+	char	*input;
+	char	*start_ptr_save;
+	char	*curr_ptr_save;
+	char	*symbols;
+	char	*whitespace;
+	char	**arr;
+	int		word_count;
+}	t_input_data;
 
 typedef struct s_info
 {
-    char **envp; // maybe we don't need to restore, since use only once
+    int argc;
+	char **argv;
+	char **envp; // maybe we don't need to restore, since use only once
     int is_builtin;
     char *path_env;
 
@@ -56,4 +73,58 @@ void free_2d_array(char **array);
 // BUILTIN FUNCTIONS
 int cd(char *path);
 
-# endif
+
+typedef enum s_type
+{
+	WRONG = 0,
+	PIPE = 1,
+	REDIRECTION = 2,
+	WORD = 3,
+	SIMPLE_COMMAND = 4,
+	BUILTIN_COMMAND = 5,
+	ARGUMENT = 6,
+}	t_type;
+
+typedef struct s_token
+{
+	t_type	type;
+	union u_value
+	{
+		char	*single_ptr;
+		char	**double_ptr;
+	} t_value;
+	int	output ;
+	int input;
+}	t_token;
+
+typedef struct s_token_node
+{
+	t_token			token;
+	struct s_token_node	*next;
+}	t_token_node;
+
+
+// token.c
+void	lexer(t_input_data *input_data);
+void	default_display_with_history(t_input_data *input_data);
+t_token_node	*init_token_list(t_input_data *input_data);
+t_type	find_token(t_input_data *input_data);
+char	*verify_redirection(t_input_data *input_data);
+void	count_words(t_input_data *input_data);
+void	init_words_arr(t_input_data *input_data);
+t_token	make_simple_cmd(t_input_data *input_data);
+t_token	init_token_struct(t_input_data *input_data);
+t_token make_builtin_cmd(t_input_data *input_data);
+
+// token_utils.c
+void	init_symbols_and_whitespace_strings(t_input_data *input_data);
+void	skip_whitespaces(t_input_data *input_data);
+int		get_word_length(t_input_data *input_data);
+int		builtin_cmd(char *str);
+void	free_double_arr(char **arr);
+
+
+// EXECUTION
+void execution(int argc, char *argv[], char *envp[], t_info *structure);
+
+#endif

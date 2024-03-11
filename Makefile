@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/11 15:23:02 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/11 17:06:32 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,20 +67,27 @@ LREADLINE		:= -lreadline
 LIBFT			:= ./libs/libft/libft.a
 
 
-SHARED_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
-					$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
-					$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
-					$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
-					$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
-					$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
-					$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
+EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
+						$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
+						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
+						$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
+						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
+						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
+						$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 					
 
+PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)token.c \
+						$(SRC_DIR)$(PARSING_DIR)token_utils.c \
 
+
+SHARED_SRCS			:= $(SRC_DIR)main.c
 
 #Source Files
 SRCS			:= 	$(SHARED_SRCS) \
-					$(SRC_DIR)$(EXECUTION_DIR)main.c \
+					$(EXECUTION_SRCS) \
+					$(PARSING_SRCS) \
+					
 
 
 SRCS_BONUS		:= 	$(SHARED_SRCS)\
