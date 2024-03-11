@@ -6,9 +6,9 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:40:06 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/08 11:40:36 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:26:11 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minishell.h"
+# include "../../inc/minishell.h"
 

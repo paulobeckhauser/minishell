@@ -6,11 +6,11 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:13:54 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/07 13:14:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:26:08 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

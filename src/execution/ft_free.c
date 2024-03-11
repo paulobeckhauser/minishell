@@ -6,11 +6,11 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:47:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/08 12:02:09 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:26:00 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minishell.h"
+# include "../../inc/minishell.h"
 
 void free_2d_array(char **array)
 {
