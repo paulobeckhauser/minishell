@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 18:00:58 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:35:17 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,18 @@
 
 #include "../inc/minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
-	// t_info structure; // PAULO DATA STRUCTURE
-	t_input_data	input_data;
+	t_info structure; // PAULO DATA STRUCTURE
+	// t_input_data	input_data;
 
-	while (1)
-	{
-		lexer(&input_data);
-	}
-	// execution(argc, argv, envp, &structure);
+	// while (1)
+	// {
+	// 	lexer(&input_data);
+	// }
+
+
+
+	execution(argc, argv, envp, &structure);
 	return (0);
 }

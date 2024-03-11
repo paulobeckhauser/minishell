@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 17:49:15 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:34:54 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_info
     
 }   t_info;
 
-
+void execution(int argc, char *argv[], char *envp[], t_info *structure);
 int	ft_strcmp(const char *s1, const char *s2);
 void check_builtin(t_info *structure, char *str);
 void	get_path_env(t_info *structure);
