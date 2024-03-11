@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/09 19:04:24 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:11:08 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	lexer(t_input_data *input_data)
 {
 	init_symbols_and_whitespace_strings(input_data);
 	default_display_with_history(input_data);
-	init_token_struct(input_data);
+	if (!init_token_list(input_data))
+		perror("Error initializing token list.");
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
 	free(input_data->input);
@@ -38,14 +39,50 @@ void	default_display_with_history(t_input_data *input_data)
 	add_history(input_data->input);
 }
 
-void	init_token_struct(t_input_data *input_data)
+t_token_node	*init_token_list(t_input_data *input_data)
+{
+	t_token_node	*node;
+	t_token_node	*start_ptr;
+	t_token_node	*current;
+
+	start_ptr = NULL;
+	current = NULL;
+	while (1)
+	{
+		node = malloc(sizeof(t_token_node));
+		if (!node)
+			return (NULL);
+		node->token = init_token_struct(input_data);
+		node->next = NULL;
+		if (node->token.type == WRONG)
+		{
+			free(node);
+			break ;
+		}
+		if (!start_ptr)
+		{
+			start_ptr = node;
+			current = node;
+		}
+		else
+		{
+			current->next = node;
+			current = current->next;
+		}
+	}
+	return (start_ptr);
+}
+
+t_token	init_token_struct(t_input_data *input_data)
 {
 	t_type	type;
 	t_token	token;
+	t_token	error_token;
 
+	error_token.type = WRONG;
 	type = find_token(input_data);
 	if (type == WRONG)
-		return ;
+		return (error_token);
 	if (type == PIPE)
 	{
 		token.type = PIPE;

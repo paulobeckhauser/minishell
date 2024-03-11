@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/09 19:31:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:32:46 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,14 @@ typedef struct s_token
 	} t_value;
 	int	output ;
 	int input;
-	t_token left;
 }	t_token;
 
-output = STDOUT_FILENO;
-input = STDIN_FILENO;
+typedef struct s_token_node
+{
+	t_token			token;
+	t_token_node	*next;
+}	t_token_node;
+
 
 // token.c
 void	lexer(t_input_data *input_data);
