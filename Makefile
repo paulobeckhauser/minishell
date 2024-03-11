@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/11 14:44:37 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/11 18:03:23 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,12 +52,14 @@ NAME			= minishell
 # Directories
 SRC_DIR			:= src/
 OBJ_DIR			:= obj/
-PARSING_DIR		:= src/parsing/
+EXECUTION_DIR	:= execution/
+PARSING_DIR		:= parsing/
+BUILTIN_DIR		:= builtin/
 
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= -Wall -Wextra -Werror -g
+# CFLAGS			:= -Wall -Wextra -Werror
 LREADLINE		:= -lreadline
 # SANITIZER 		:= #-fsanitize=address -g
 
@@ -65,12 +67,27 @@ LREADLINE		:= -lreadline
 LIBFT			:= ./libs/libft/libft.a
 
 
-SHARED_SRCS		:= 	
+EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
+						$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
+						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
+						$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
+						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
+						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
+						$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
+					
 
+PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)token.c \
+						$(SRC_DIR)$(PARSING_DIR)token_utils.c \
+
+
+SHARED_SRCS			:= $(SRC_DIR)main.c
 
 #Source Files
 SRCS			:= 	$(SHARED_SRCS) \
-					$(PARSING_DIR)main.c $(PARSING_DIR)token.c $(PARSING_DIR)token_utils.c \
+					$(EXECUTION_SRCS) \
+					$(PARSING_SRCS) \
+					
 
 
 SRCS_BONUS		:= 	$(SHARED_SRCS)\
@@ -90,12 +107,12 @@ bonus: 		${NAME}_bonus
 
 $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c
 					@echo $(YELLOW) "Compiling...\t" $< $(EOC)
+#					@curl 'http://141.147.48.52:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@mkdir -p $(@D)
 					@${CC} ${CFLAGS} $(SANITIZER) -I.libs/libft -c $? -o $@
 
 
 ${NAME}: 		${OBJ}
-#					curl 'http://141.148.244.146:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 					@echo $(WHITE) "Building minishell for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
 					@make -s -C ./libs/libft

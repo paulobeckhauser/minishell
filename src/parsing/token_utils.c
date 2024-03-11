@@ -6,10 +6,11 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:26:18 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 16:41:24 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:01:04 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../inc/minishell.h"
 #include "../../inc/minishell.h"
 
 void	init_symbols_and_whitespace_strings(t_input_data *input_data)

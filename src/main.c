@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 17:04:16 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:02:23 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
 // tgetnum, tgetstr, tgoto, tputs
 
-#include "../../inc/minishell.h"
+#include "../inc/minishell.h"
 
 int	main(void)
 {
@@ -29,7 +29,7 @@ int	main(void)
 
 	while (1)
 	{
-		parser(&input_data);
+		lexer(&input_data);
 	}
 	return (0);
 }
