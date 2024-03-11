@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/11 17:06:32 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/11 17:59:19 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ BUILTIN_DIR		:= builtin/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-# CFLAGS			:= -Wall -Wextra -Werror
+# CFLAGS			:= -Wall -Wextra -Werror -g
 LREADLINE		:= -lreadline
 # SANITIZER 		:= #-fsanitize=address -g
 

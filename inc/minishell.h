@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 17:15:07 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:49:15 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,32 +99,31 @@ typedef struct s_token
 
 typedef struct s_token_node
 {
-	t_token			token;
+	t_token				token;
+	int					index;
 	struct s_token_node	*next;
 }	t_token_node;
 
 
 // token.c
-void	lexer(t_input_data *input_data);
-void	default_display_with_history(t_input_data *input_data);
+void			parser(t_input_data *input_data);
+void			lexer(t_input_data *input_data);
+void			default_display_with_history(t_input_data *input_data);
 t_token_node	*init_token_list(t_input_data *input_data);
-t_type	find_token(t_input_data *input_data);
-char	*verify_redirection(t_input_data *input_data);
-void	count_words(t_input_data *input_data);
-void	init_words_arr(t_input_data *input_data);
-t_token	make_simple_cmd(t_input_data *input_data);
-t_token	init_token_struct(t_input_data *input_data);
-t_token make_builtin_cmd(t_input_data *input_data);
+t_token			init_token_struct(t_input_data *input_data);
+t_type			find_token(t_input_data *input_data);
+char			*verify_redirection(t_input_data *input_data);
+void			count_words(t_input_data *input_data);
+void			init_words_arr(t_input_data *input_data);
+t_token			make_simple_cmd(t_input_data *input_data);
+t_token			make_builtin_cmd(t_input_data *input_data);
 
 // token_utils.c
-void	init_symbols_and_whitespace_strings(t_input_data *input_data);
-void	skip_whitespaces(t_input_data *input_data);
-int		get_word_length(t_input_data *input_data);
-int		builtin_cmd(char *str);
-void	free_double_arr(char **arr);
-
-
-// EXECUTION
-void execution(int argc, char *argv[], char *envp[], t_info *structure);
+void			init_symbols_and_whitespace_strings(t_input_data *input_data);
+void			skip_whitespaces(t_input_data *input_data);
+int				get_word_length(t_input_data *input_data);
+int				builtin_cmd(char *str);
+void			free_double_arr(char **arr);
+const char		*type_to_string(t_type type);
 
 #endif

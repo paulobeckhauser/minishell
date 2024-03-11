@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:26:18 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 17:15:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:56:46 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,28 @@ void	skip_whitespaces(t_input_data *input_data)
 
 char	*verify_redirection(t_input_data *input_data)
 {
-	if (*input_data->input != *(input_data->input + 1))
+	if (*input_data->input == '<' && *input_data->input != *(input_data->input + 1))
 	{
-		if (*input_data->input == '<')
-			return ("<");
-		else
-			return (">");
+		input_data->input++;
+		return ("<");		
+	}
+	else if (*input_data->input == '>' && *input_data->input != *(input_data->input + 1))
+	{
+		input_data->input++;
+		return (">");
+	}
+	else if (*input_data->input == '<' && *input_data->input == *(input_data->input + 1))
+	{
+		input_data->input += 2;
+		return ("<<");
+	}
+	else if (*input_data->input == '>' && *input_data->input == *(input_data->input + 1))
+	{
+		input_data->input += 2;
+		return (">>");
 	}
 	else
-	{
-		if (*input_data->input == '<')
-			return ("<<");
-		else
-			return (">>");
-	}
+		return (NULL);
 }
 
 int	get_word_length(t_input_data *input_data)
@@ -60,7 +68,7 @@ int	builtin_cmd(char *str)
 	char	**builtins;
 	int		i;
 
-	builtins = malloc(7 * sizeof(char *));
+	builtins = malloc(8 * sizeof(char *));
 	if (!builtins)
 		return (-1);
 	i = 0;
@@ -71,14 +79,15 @@ int	builtin_cmd(char *str)
 	builtins[4] = "unset";
 	builtins[5] = "env";
 	builtins[6] = "exit";
+	builtins[7] = NULL;
 	while (builtins[i])
 	{
 		if (ft_strncmp(builtins[i], str, ft_strlen(builtins[i])) == 0
 			&& ft_strlen(builtins[i]) == ft_strlen(str))
-			return (free_double_arr(builtins), 1);
+			return (free(builtins), 1);
 		i++;
 	}
-	free_double_arr(builtins);
+	free(builtins);
 	return (0);
 }
 
@@ -90,4 +99,18 @@ void	free_double_arr(char **arr)
 	while (arr[i])
 		free(arr[i++]);
 	free(arr);
+}
+
+const char	*type_to_string(t_type type)
+{
+    switch (type) {
+        case WRONG: return "WRONG";
+        case PIPE: return "PIPE";
+        case REDIRECTION: return "REDIRECTION";
+        case WORD: return "WORD";
+        case SIMPLE_COMMAND: return "SIMPLE_COMMAND";
+        case BUILTIN_COMMAND: return "BUILTIN_COMMAND";
+        case ARGUMENT: return "ARGUMENT";
+        default: return "UNKNOWN";
+    }
 }

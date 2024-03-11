@@ -6,17 +6,25 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 17:12:14 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:57:02 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+void	parser(t_input_data *input_data)
+{
+	lexer(input_data);
+}
+
 void	lexer(t_input_data *input_data)
 {
+	t_token_node	*list;
+
 	init_symbols_and_whitespace_strings(input_data);
 	default_display_with_history(input_data);
-	if (!init_token_list(input_data))
+	list = init_token_list(input_data);
+	if (!list)
 		perror("Error initializing token list.");
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
@@ -44,9 +52,11 @@ t_token_node	*init_token_list(t_input_data *input_data)
 	t_token_node	*node;
 	t_token_node	*start_ptr;
 	t_token_node	*current;
+	int				i;
 
 	start_ptr = NULL;
 	current = NULL;
+	i = 0;
 	while (1)
 	{
 		node = malloc(sizeof(t_token_node));
@@ -54,6 +64,7 @@ t_token_node	*init_token_list(t_input_data *input_data)
 			return (NULL);
 		node->token = init_token_struct(input_data);
 		node->next = NULL;
+		node->index = i++;
 		if (node->token.type == WRONG)
 		{
 			free(node);
@@ -81,19 +92,15 @@ t_token	init_token_struct(t_input_data *input_data)
 
 	error_token.type = WRONG;
 	type = find_token(input_data);
-	if (type == WRONG)
-		return (error_token);
 	if (type == PIPE)
 	{
 		token.type = PIPE;
 		token.t_value.single_ptr = "|";
-		ft_printf("Found token PIPE: %s\n", token.t_value);
 	}
 	else if (type == REDIRECTION)
 	{
 		token.type = REDIRECTION;
 		token.t_value.single_ptr = verify_redirection(input_data);
-		ft_printf("Found token REDIRECTION: %s\n", token.t_value);
 	}
 	else if (type == WORD)
 	{
@@ -104,6 +111,10 @@ t_token	init_token_struct(t_input_data *input_data)
 		else
 			token = make_builtin_cmd(input_data);
 	}
+	else
+		token = error_token;
+	if (type != WORD && type != REDIRECTION)
+		input_data->input++;
 	return (token);
 }
 
@@ -183,9 +194,9 @@ void	init_words_arr(t_input_data *input_data)
 		}
 		else
 			input_data->arr[i][y++] = *input_data->input++;
+	}
 	input_data->arr[i][y] = 0;
 	input_data->arr[i + 1] = NULL;
-	}
 }
 
 t_token	make_simple_cmd(t_input_data *input_data)
