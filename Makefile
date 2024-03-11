@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/09 17:56:26 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/11 14:44:37 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,12 @@ NAME			= minishell
 # Directories
 SRC_DIR			:= src/
 OBJ_DIR			:= obj/
+PARSING_DIR		:= src/parsing/
 
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= -Wall -Wextra -Werror
+CFLAGS			:= -Wall -Wextra -Werror -g
 LREADLINE		:= -lreadline
 # SANITIZER 		:= #-fsanitize=address -g
 
@@ -69,7 +70,7 @@ SHARED_SRCS		:=
 
 #Source Files
 SRCS			:= 	$(SHARED_SRCS) \
-					$(SRC_DIR)main.c $(SRC_DIR)token.c $(SRC_DIR)token_utils.c \
+					$(PARSING_DIR)main.c $(PARSING_DIR)token.c $(PARSING_DIR)token_utils.c \
 
 
 SRCS_BONUS		:= 	$(SHARED_SRCS)\

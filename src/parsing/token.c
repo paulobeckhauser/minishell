@@ -6,18 +6,27 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 14:11:08 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:47:15 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 void	lexer(t_input_data *input_data)
 {
+	t_token_node	*list;
+
 	init_symbols_and_whitespace_strings(input_data);
 	default_display_with_history(input_data);
-	if (!init_token_list(input_data))
+	list = init_token_list(input_data);
+	if (!list)
 		perror("Error initializing token list.");
+	while (list)
+	{
+		ft_printf("%s ", type_to_string(list->token.type));
+		list = list->next;
+	}
+	ft_printf("\n");
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
 	free(input_data->input);
@@ -81,19 +90,15 @@ t_token	init_token_struct(t_input_data *input_data)
 
 	error_token.type = WRONG;
 	type = find_token(input_data);
-	if (type == WRONG)
-		return (error_token);
 	if (type == PIPE)
 	{
 		token.type = PIPE;
 		token.t_value.single_ptr = "|";
-		ft_printf("Found token PIPE: %s\n", token.t_value);
 	}
 	else if (type == REDIRECTION)
 	{
 		token.type = REDIRECTION;
 		token.t_value.single_ptr = verify_redirection(input_data);
-		ft_printf("Found token REDIRECTION: %s\n", token.t_value);
 	}
 	else if (type == WORD)
 	{
@@ -104,6 +109,10 @@ t_token	init_token_struct(t_input_data *input_data)
 		else
 			token = make_builtin_cmd(input_data);
 	}
+	else
+		token = error_token;
+	if (type != WORD && type != REDIRECTION)
+		input_data->input++;
 	return (token);
 }
 
@@ -183,9 +192,9 @@ void	init_words_arr(t_input_data *input_data)
 		}
 		else
 			input_data->arr[i][y++] = *input_data->input++;
+	}
 	input_data->arr[i][y] = 0;
 	input_data->arr[i + 1] = NULL;
-	}
 }
 
 t_token	make_simple_cmd(t_input_data *input_data)
