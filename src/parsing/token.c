@@ -6,11 +6,16 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 16:47:15 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:04:00 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	parser(t_input_data *input_data)
+{
+	lexer(input_data);
+}
 
 void	lexer(t_input_data *input_data)
 {
