@@ -1,0 +1,7 @@
+obj/
+
+libs/libft/libft.a
+
+libs/libft/objs/
+
+minishell
