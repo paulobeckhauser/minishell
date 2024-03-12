@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 18:45:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:43:00 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ void	parser(t_input_data *input_data)
 void	lexer(t_input_data *input_data)
 {
 	t_token_node	*list;
+	t_token_node	*root;
 
-	init_symbols_and_whitespace_strings(input_data);
+	init_needed_data(input_data);
 	default_display_with_history(input_data);
 	list = init_token_list(input_data);
 	if (!list)
 		perror("Error initializing token list.");
-	check_token_order(list, input_data);
+	root = init_syntax_tree(list);
+	// print_tree(root, 0);
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
 	free(input_data->input);
@@ -58,6 +60,7 @@ t_token_node	*init_token_list(t_input_data *input_data)
 	start_ptr_save = NULL;
 	current = NULL;
 	i = 0;
+	ft_printf("type = %s\n", type_to_string(start_ptr_save->token.type));
 	while (1)
 	{
 		node = malloc(sizeof(t_token_node));
@@ -219,21 +222,83 @@ t_token make_builtin_cmd(t_input_data *input_data)
 	return (token);
 }
 
-void	check_token_order(t_token_node *token_node, t_input_data *input_data)
+t_token_node	*init_syntax_tree(t_token_node *token_node)
 {
-	t_token_node	*start_ptr_save;
+	t_token_node	*last_token;
+	t_token_node	*previous_token;
 
-	start_ptr_save = token_node;
 	if (token_node->token.type == PIPE)
 	{
 		perror("bash: syntax error near unexpected token `|'");
-		return ;
+		return (NULL);
 	}
-	if (input_data->pipe_count > 0)
+	last_token = NULL;
+	previous_token = NULL;
+	while (token_node->next)
 	{
-		while (token_node->token.type != PIPE)
+		if (token_node->token.type == WORD && previous_token->token.type != PIPE)
 		{
-			
+			if (!previous_token)
+				token_node->left = NULL;
+			else
+				token_node->left = previous_token;
+			token_node->right = NULL;
+			if (!last_token)
+				last_token = token_node;
+			previous_token = token_node;
+			ft_printf("type :%s\n", type_to_string(token_node->token.type));
+			token_node = token_node->next;
+			previous_token->next = NULL;
 		}
+		else if (token_node->token.type == PIPE)
+		{
+			token_node->left = previous_token;
+			if (token_node->next->token.type == WORD)
+				token_node->right = token_node->next;
+			else
+				return (NULL);
+			previous_token = token_node;
+			token_node = token_node->next;
+			previous_token->next = NULL;
+		}
+		else
+			token_node = token_node->next;
 	}
+	return (token_node);
 }
+
+// t_cmd	*init_tree_node(t_token_node *token_node)
+// {
+// 	t_cmd	*cmd;
+
+// 	cmd = malloc(sizeof(t_cmd));
+// 	if (!cmd)
+// 		return (NULL);
+// 	if (token_node->token.type != SIMPLE_COMMAND || token_node->token.type != BUILTIN_COMMAND)
+// 		return (NULL);
+// 	cmd->type = token_node->token.type;
+// 	cmd->arr = token_node->token.t_value.double_ptr;
+// 	cmd->in = STDIN_FILENO;
+// 	cmd->out = PIPE;
+// 	return (cmd);
+// }
+
+void print_tree(t_token_node *node, int depth)
+{
+    if (node == NULL)
+        return;
+
+    // Wypisz wcięcie na podstawie głębokości węzła
+    for (int i = 0; i < depth; i++)
+        printf("  ");
+
+    // Wypisz informacje o węźle
+    printf("Node: %s\n", type_to_string(node->token.type));
+
+    // Przejdź do lewego i prawego dziecka
+	if (node->left)
+    	print_tree(node->left, depth + 1);
+    if (node->right)
+		print_tree(node->right, depth + 1);
+}
+

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 19:15:15 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:25:33 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ typedef struct s_token
 		char	*single_ptr;
 		char	**double_ptr;
 	} t_value;
-	int	output ;
-	int input;
 }	t_token;
 
 typedef struct s_token_node
@@ -103,14 +101,17 @@ typedef struct s_token_node
 	t_token				token;
 	int					index;
 	struct s_token_node	*next;
+	struct s_token_node	*left;
+	struct s_token_node *right;
+	
 }	t_token_node;
 
 typedef struct s_cmd
 {
 	t_type			type;
 	char			**arr;
-	int				input;
-	int				output;
+	int				in;
+	int				out;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -128,6 +129,8 @@ void			init_words_arr(t_input_data *input_data);
 t_token			make_simple_cmd(t_input_data *input_data);
 t_token			make_builtin_cmd(t_input_data *input_data);
 void			check_token_order(t_token_node *token_node, t_input_data *input_data);
+t_token_node	*init_syntax_tree(t_token_node *token_node);
+void 			print_tree(t_token_node *node, int depth);
 
 // token_utils.c
 void			init_needed_data(t_input_data *input_data);

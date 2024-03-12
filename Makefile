@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/11 18:05:11 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/12 19:34:20 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ BUILTIN_DIR		:= builtin/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-# CFLAGS			:= -Wall -Wextra -Werror -g
+CFLAGS			:= -Wall -Wextra -Werror -g
 LREADLINE		:= -lreadline
 # SANITIZER 		:= #-fsanitize=address -g
 
@@ -85,7 +85,6 @@ SHARED_SRCS			:= $(SRC_DIR)main.c
 
 #Source Files
 SRCS			:= 	$(SHARED_SRCS) \
-					$(EXECUTION_SRCS) \
 					$(PARSING_SRCS) \
 					
 
