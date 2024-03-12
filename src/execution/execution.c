@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 17:18:36 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:46:48 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void execution(int argc, char *argv[], char *envp[], t_info *structure)
 	char *input;
 	pid_t child_pid;
 	char **possible_paths;
-    structure->argc = argc;
-    structure->argv = argv;
-	structure->envp = envp;
 
+	store_main_arguments(argc, argv, envp, structure);
+	
 	get_path_env(structure);
 
 	int g;

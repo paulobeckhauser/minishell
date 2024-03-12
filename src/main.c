@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 18:35:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:42:25 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_info structure; // PAULO DATA STRUCTURE
+	// PAULO DATA STRUCTURE
+	t_info structure;
+	// PAULO DATA STRUCTURE
+	
+
+	// SZYMON DATA STRUCTURE
 	// t_input_data	input_data;
+	// SZYMON DATA STRUCTURE
+
 
 	// while (1)
 	// {
