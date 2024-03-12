@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/12 13:46:48 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:34:56 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void execution(int argc, char *argv[], char *envp[], t_info *structure)
 	char **possible_paths;
 
 	store_main_arguments(argc, argv, envp, structure);
-	
 	get_path_env(structure);
 
-	int g;
+	int i;
 
 	while (1)
 	{
@@ -39,34 +38,68 @@ void execution(int argc, char *argv[], char *envp[], t_info *structure)
 		}
 		// EXIT FUNCTION
 		command = ft_split(input, ' ');
-
-        
 		check_builtin(structure, command[0]);
-        
-		// if (strcmp(command[0], "cd") == 0)
-		// {
-		// 	if (cd(command[1]) < 0)
-		// 	{
-		// 		perror(command[1]);
-		// 	}
-		// 	continue ;
-		// }
+
+
+
+		if (ft_strcmp(command[0], "cd") == 0)
+		{
+			// printf("cd function\n");
+
+			printf("%s\n", command[0]);
+			printf("%s\n", command[1]);
+			
+			char *function;
+			char *buff_curdir;
+			size_t sizet_curdir;
+
+			function = getcwd(buff_curdir, sizet_curdir);
+
+			
+
+
+			
+
+			
+			
+			
+			
+			
+
+			
+
+			printf("Return: %s\n", function);
+			// printf("Buffer: %s\n", buf);
+			// printf("Size: %zu\n", size);
+
+
+			
+			// chdir(command[1]);
+
+			// if (cd(command[1]) < 0)
+			// 	perror(command[1]);
+
+			
+	
+			continue;
+		
+		}
 
 
 		structure->possible_paths = split_concat_command(structure->path_env, ':',
 				command[0]);
 
-		g = 0;
-		while (structure->possible_paths[g])
+		i = 0;
+		while (structure->possible_paths[i])
 		{
-			if (access(structure->possible_paths[g], X_OK) == 0)
+			if (access(structure->possible_paths[i], X_OK) == 0)
 				break ;
 
-			g++;
+			i++;
 		}
-		if (!structure->possible_paths[g])
-			g--;
-        structure->path_command = ft_strdup(structure->possible_paths[g]);
+		if (!structure->possible_paths[i])
+			i--;
+        structure->path_command = ft_strdup(structure->possible_paths[i]);
 		free_2d_array(structure->possible_paths);
 
 		child_pid = fork();
