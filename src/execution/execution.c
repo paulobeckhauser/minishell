@@ -6,14 +6,13 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/12 18:34:56 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:14:12 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-// int	main(int argc, char *argv[], char *envp[])
-void execution(int argc, char *argv[], char *envp[], t_info *structure)
+void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 {
 	char **command;
 	char *input;
@@ -24,70 +23,33 @@ void execution(int argc, char *argv[], char *envp[], t_info *structure)
 	get_path_env(structure);
 
 	int i;
+	char *home_dir;
 
 	while (1)
 	{
-        printf(ANSI_COLOR_GREEN "minishell> " ANSI_COLOR_RESET);
+		printf(ANSI_COLOR_GREEN "minishell> " ANSI_COLOR_RESET);
 		input = readline("");
-		
+
 		// EXIT FUNCTION
 		if (ft_strcmp(input, "exit") == 0)
 		{
 			free(input);
-			break;
+			break ;
 		}
 		// EXIT FUNCTION
 		command = ft_split(input, ' ');
 		check_builtin(structure, command[0]);
 
-
-
-		if (ft_strcmp(command[0], "cd") == 0)
+		// cd with only a relative or absolute path
+		if (is_cd_command(command))
 		{
-			// printf("cd function\n");
-
-			printf("%s\n", command[0]);
-			printf("%s\n", command[1]);
-			
-			char *function;
-			char *buff_curdir;
-			size_t sizet_curdir;
-
-			function = getcwd(buff_curdir, sizet_curdir);
-
-			
-
-
-			
-
-			
-			
-			
-			
-			
-
-			
-
-			printf("Return: %s\n", function);
-			// printf("Buffer: %s\n", buf);
-			// printf("Size: %zu\n", size);
-
-
-			
-			// chdir(command[1]);
-
-			// if (cd(command[1]) < 0)
-			// 	perror(command[1]);
-
-			
-	
+			execute_cd_command(command);
 			continue;
-		
 		}
 
-
-		structure->possible_paths = split_concat_command(structure->path_env, ':',
-				command[0]);
+	
+		structure->possible_paths = split_concat_command(structure->path_env,
+				':', command[0]);
 
 		i = 0;
 		while (structure->possible_paths[i])
@@ -99,7 +61,7 @@ void execution(int argc, char *argv[], char *envp[], t_info *structure)
 		}
 		if (!structure->possible_paths[i])
 			i--;
-        structure->path_command = ft_strdup(structure->possible_paths[i]);
+		structure->path_command = ft_strdup(structure->possible_paths[i]);
 		free_2d_array(structure->possible_paths);
 
 		child_pid = fork();
@@ -125,6 +87,4 @@ void execution(int argc, char *argv[], char *envp[], t_info *structure)
 		free(input);
 		free(command);
 	}
-
-
 }

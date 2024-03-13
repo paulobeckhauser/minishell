@@ -6,23 +6,25 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:16:30 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/12 14:09:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:06:36 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-// void check_cd_command(char **command)
-// {
-//     if (ft_strcmp(command[0], "cd") == 0)
-//     {
-//         if (cd(command[1]) < 0)
-//             perror(command[1]);
-//         break;
-//     }
-// }
-
-int cd(char *path)
+int	is_cd_command(char **command)
 {
-    return(chdir(path));
+	return (ft_strcmp(command[0], "cd") == 0);
+}
+
+void	execute_cd_command(char **command)
+{
+	char	*path;
+
+	if (command[1] == NULL)
+		path = getenv("HOME");
+	else
+		path = command[1];
+	if (chdir(path) == -1)
+		perror("cd failed");
 }

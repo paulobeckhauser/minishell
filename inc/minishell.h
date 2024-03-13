@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/12 13:46:19 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:06:06 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	*ft_free(char **strs, int count);
 void free_2d_array(char **array);
 
 // BUILTIN FUNCTIONS
-int cd(char *path);
+// int cd(char *path);
+// int check_cd_command(char **command);
+int is_cd_command(char **command);
+void execute_cd_command(char **command);
 
 
 typedef enum s_type
