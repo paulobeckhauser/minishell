@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:26:18 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/11 18:40:13 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:49:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ const char	*type_to_string(t_type type)
         case PIPE: return "PIPE";
         case REDIRECTION: return "REDIRECTION";
         case WORD: return "WORD";
-        case SIMPLE_COMMAND: return "SIMPLE_COMMAND";
-        case BUILTIN_COMMAND: return "BUILTIN_COMMAND";
+        case SIMPLE_CMD: return "SIMPLE_CMD";
+        case BUILTIN_CMD: return "BUILTIN_CMD";
         case ARGUMENT: return "ARGUMENT";
         default: return "UNKNOWN";
     }

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/12 19:43:00 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:29:46 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	lexer(t_input_data *input_data)
 	default_display_with_history(input_data);
 	list = init_token_list(input_data);
 	if (!list)
-		perror("Error initializing token list.");
+		return ;
 	root = init_syntax_tree(list);
-	// print_tree(root, 0);
+	print_tree(root, 0, "(ROOT)");
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
 	free(input_data->input);
@@ -60,7 +60,6 @@ t_token_node	*init_token_list(t_input_data *input_data)
 	start_ptr_save = NULL;
 	current = NULL;
 	i = 0;
-	ft_printf("type = %s\n", type_to_string(start_ptr_save->token.type));
 	while (1)
 	{
 		node = malloc(sizeof(t_token_node));
@@ -208,7 +207,7 @@ t_token	make_simple_cmd(t_input_data *input_data)
 {
 	t_token	token;
 
-	token.type = SIMPLE_COMMAND;
+	token.type = SIMPLE_CMD;
 	token.t_value.double_ptr = input_data->arr;
 	return (token);
 }
@@ -217,54 +216,77 @@ t_token make_builtin_cmd(t_input_data *input_data)
 {
 	t_token	token;
 
-	token.type = BUILTIN_COMMAND;
+	token.type = BUILTIN_CMD;
 	token.t_value.double_ptr = input_data->arr;
 	return (token);
 }
 
-t_token_node	*init_syntax_tree(t_token_node *token_node)
+t_token_node	*init_syntax_tree(t_token_node *token)
 {
 	t_token_node	*last_token;
 	t_token_node	*previous_token;
 
-	if (token_node->token.type == PIPE)
+	if (token->token.type == PIPE)
 	{
 		perror("bash: syntax error near unexpected token `|'");
 		return (NULL);
 	}
 	last_token = NULL;
 	previous_token = NULL;
-	while (token_node->next)
+	while (token->next)
 	{
-		if (token_node->token.type == WORD && previous_token->token.type != PIPE)
+		if ((!previous_token || (previous_token && previous_token->token.type != PIPE))
+			&& (token->token.type == BUILTIN_CMD || token->token.type == SIMPLE_CMD))
 		{
 			if (!previous_token)
-				token_node->left = NULL;
+				token->left = NULL;
 			else
-				token_node->left = previous_token;
-			token_node->right = NULL;
+				token->left = previous_token;
+			token->right = NULL;
 			if (!last_token)
-				last_token = token_node;
-			previous_token = token_node;
-			ft_printf("type :%s\n", type_to_string(token_node->token.type));
-			token_node = token_node->next;
+				last_token = token;
+			previous_token = token;
+			token = token->next;
 			previous_token->next = NULL;
 		}
-		else if (token_node->token.type == PIPE)
+		else if (token->token.type == PIPE)
 		{
-			token_node->left = previous_token;
-			if (token_node->next->token.type == WORD)
-				token_node->right = token_node->next;
+			token->left = previous_token;
+			if (token->next->token.type == BUILTIN_CMD || token->next->token.type == SIMPLE_CMD)
+				token->right = token->next;
 			else
 				return (NULL);
-			previous_token = token_node;
-			token_node = token_node->next;
-			previous_token->next = NULL;
+			if (token->next && token->next->next)
+			{
+				previous_token = token;
+				token = token->next;
+				previous_token->next = NULL;
+			}
+			else
+				token->next = NULL;
 		}
 		else
-			token_node = token_node->next;
+			token = token->next;
 	}
-	return (token_node);
+	if (previous_token && previous_token->token.type != PIPE && (token->token.type == BUILTIN_CMD
+			|| token->token.type == SIMPLE_CMD))
+	{
+		if (!previous_token)
+			token->left = NULL;
+		else
+			token->left = previous_token;
+		token->right = NULL;
+	}
+	// else if (token->token.type == PIPE)
+	// {
+	// 	token->left = previous_token;
+	// 	if (token->next && (token->next->token.type == BUILTIN_CMD
+	// 		|| token->next->token.type == SIMPLE_CMD))
+	// 		token->right = token->next;
+	// 	else
+	// 		return (NULL);
+	// }
+	return (token);
 }
 
 // t_cmd	*init_tree_node(t_token_node *token_node)
@@ -274,7 +296,7 @@ t_token_node	*init_syntax_tree(t_token_node *token_node)
 // 	cmd = malloc(sizeof(t_cmd));
 // 	if (!cmd)
 // 		return (NULL);
-// 	if (token_node->token.type != SIMPLE_COMMAND || token_node->token.type != BUILTIN_COMMAND)
+// 	if (token_node->token.type != SIMPLE_CMD || token_node->token.type != BUILTIN_CMD)
 // 		return (NULL);
 // 	cmd->type = token_node->token.type;
 // 	cmd->arr = token_node->token.t_value.double_ptr;
@@ -283,22 +305,18 @@ t_token_node	*init_syntax_tree(t_token_node *token_node)
 // 	return (cmd);
 // }
 
-void print_tree(t_token_node *node, int depth)
+void print_tree(t_token_node *node, int depth, char *left_right)
 {
     if (node == NULL)
         return;
-
     // Wypisz wcięcie na podstawie głębokości węzła
     for (int i = 0; i < depth; i++)
-        printf("  ");
+        ft_printf("     ");
 
     // Wypisz informacje o węźle
-    printf("Node: %s\n", type_to_string(node->token.type));
-
+    ft_printf("%s %s\n", left_right, type_to_string(node->token.type));
     // Przejdź do lewego i prawego dziecka
-	if (node->left)
-    	print_tree(node->left, depth + 1);
-    if (node->right)
-		print_tree(node->right, depth + 1);
+    print_tree(node->left, depth + 1, "(LEFT)");
+	print_tree(node->right, depth + 1, "(RIGHT)");
 }
 

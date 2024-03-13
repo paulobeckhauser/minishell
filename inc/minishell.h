@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/12 19:25:33 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:27:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ typedef enum s_type
 	PIPE = 1,
 	REDIRECTION = 2,
 	WORD = 3,
-	SIMPLE_COMMAND = 4,
-	BUILTIN_COMMAND = 5,
+	SIMPLE_CMD = 4,
+	BUILTIN_CMD = 5,
 	ARGUMENT = 6,
 }	t_type;
 
@@ -130,7 +130,7 @@ t_token			make_simple_cmd(t_input_data *input_data);
 t_token			make_builtin_cmd(t_input_data *input_data);
 void			check_token_order(t_token_node *token_node, t_input_data *input_data);
 t_token_node	*init_syntax_tree(t_token_node *token_node);
-void 			print_tree(t_token_node *node, int depth);
+void 			print_tree(t_token_node *node, int depth, char	*left_right);
 
 // token_utils.c
 void			init_needed_data(t_input_data *input_data);
