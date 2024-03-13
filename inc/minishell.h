@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 14:06:06 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:55:46 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+
+
+// MACRO variable library
+# include <limits.h> // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 
 // Store variables to handle input (SZYMON)
 typedef struct s_input_data
@@ -77,6 +81,8 @@ void free_2d_array(char **array);
 // int check_cd_command(char **command);
 int is_cd_command(char **command);
 void execute_cd_command(char **command);
+int is_pwd_command(char **command);
+void execute_pwd_command(char **command);
 
 
 typedef enum s_type
