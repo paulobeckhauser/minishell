@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/12 13:42:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:26:27 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	main(int argc, char **argv, char **envp)
 	// }
 
 
-
-	execution(argc, argv, envp, &structure);
+	if (argc == 1)
+		execution(argc, argv, envp, &structure);
+	else
+		printf("Incorrect number of arguments\n");
 	return (0);
 }

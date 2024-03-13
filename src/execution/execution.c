@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 14:57:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:56:09 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,28 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 		{
 			// cd with only a relative or absolute path
 			if (is_cd_command(command))
-			{
 				execute_cd_command(command);
-				continue;
-			}
-
 			if (is_pwd_command(command))
-			{
 				execute_pwd_command(command);
+			if (is_echo_command(command))
+				execute_echo_command(command, 1); // need to implement reedirection
+			if (is_export_command(command))
+				execute_export_command(command);
+			if (is_unset_command(command))
+				execute_unset_command(command);
+			if (is_env_command(command))
+				execute_env_command(command);
+			if (is_exit_command(command))
+				execute_exit_command(command);
+			
 
-				continue;
-			}
+			
+			
+
+			continue;
+
+
+			
 		}
 
 		else

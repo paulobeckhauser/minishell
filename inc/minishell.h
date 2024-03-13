@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 14:55:46 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:55:34 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,16 @@ int is_cd_command(char **command);
 void execute_cd_command(char **command);
 int is_pwd_command(char **command);
 void execute_pwd_command(char **command);
+int is_echo_command(char **command);
+void    execute_echo_command(char **command, int fd);
+int is_export_command(char **command);
+void    execute_export_command(char **command);
+int is_unset_command(char **command);
+void    execute_unset_command(char **command);
+int is_env_command(char **command);
+void    execute_env_command(char **command);
+int is_exit_command(char **command);
+void    execute_exit_command(char **command);
 
 
 typedef enum s_type
