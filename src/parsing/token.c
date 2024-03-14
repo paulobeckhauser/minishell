@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/13 15:29:46 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:53:52 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_token_node	*init_token_list(t_input_data *input_data)
 			current = current->next;
 		}
 	}
+	input_data->token_count = i;
 	return (start_ptr_save);
 }
 
@@ -252,7 +253,8 @@ t_token_node	*init_syntax_tree(t_token_node *token)
 		else if (token->token.type == PIPE)
 		{
 			token->left = previous_token;
-			if (token->next->token.type == BUILTIN_CMD || token->next->token.type == SIMPLE_CMD)
+			if (token->next && (token->next->token.type == BUILTIN_CMD
+				|| token->next->token.type == SIMPLE_CMD))
 				token->right = token->next;
 			else
 				return (NULL);
@@ -268,8 +270,8 @@ t_token_node	*init_syntax_tree(t_token_node *token)
 		else
 			token = token->next;
 	}
-	if (previous_token && previous_token->token.type != PIPE && (token->token.type == BUILTIN_CMD
-			|| token->token.type == SIMPLE_CMD))
+	if ((!previous_token || (previous_token && previous_token->token.type != PIPE))
+		&& (token->token.type == BUILTIN_CMD || token->token.type == SIMPLE_CMD))
 	{
 		if (!previous_token)
 			token->left = NULL;
@@ -277,46 +279,92 @@ t_token_node	*init_syntax_tree(t_token_node *token)
 			token->left = previous_token;
 		token->right = NULL;
 	}
-	// else if (token->token.type == PIPE)
-	// {
-	// 	token->left = previous_token;
-	// 	if (token->next && (token->next->token.type == BUILTIN_CMD
-	// 		|| token->next->token.type == SIMPLE_CMD))
-	// 		token->right = token->next;
-	// 	else
-	// 		return (NULL);
-	// }
+	else if (token->token.type == PIPE && !token->right)
+	{
+		token->left = previous_token;
+		if (token->next && (token->next->token.type == BUILTIN_CMD
+			|| token->next->token.type == SIMPLE_CMD))
+			token->right = token->next;
+		else
+			token->right = NULL;
+	}
 	return (token);
 }
-
-// t_cmd	*init_tree_node(t_token_node *token_node)
-// {
-// 	t_cmd	*cmd;
-
-// 	cmd = malloc(sizeof(t_cmd));
-// 	if (!cmd)
-// 		return (NULL);
-// 	if (token_node->token.type != SIMPLE_CMD || token_node->token.type != BUILTIN_CMD)
-// 		return (NULL);
-// 	cmd->type = token_node->token.type;
-// 	cmd->arr = token_node->token.t_value.double_ptr;
-// 	cmd->in = STDIN_FILENO;
-// 	cmd->out = PIPE;
-// 	return (cmd);
-// }
 
 void print_tree(t_token_node *node, int depth, char *left_right)
 {
     if (node == NULL)
         return;
-    // Wypisz wcięcie na podstawie głębokości węzła
     for (int i = 0; i < depth; i++)
         ft_printf("     ");
 
-    // Wypisz informacje o węźle
     ft_printf("%s %s\n", left_right, type_to_string(node->token.type));
-    // Przejdź do lewego i prawego dziecka
     print_tree(node->left, depth + 1, "(LEFT)");
 	print_tree(node->right, depth + 1, "(RIGHT)");
 }
 
+void init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd	**start_ptr_save, t_input_data *input_data)
+{
+	if (node && node->token.type == PIPE && node->left && node->right
+		&& !node->left->left && !node->left->right)
+	{
+		*cmd = init_cmd(node->left, input_data);
+		if (!*cmd)
+		{
+		    perror("ERROR WITH TREE");
+			return ;
+		}
+		if (!*start_ptr_save)
+			*start_ptr_save = *cmd;
+		*cmd = (*cmd)->next;
+		node->left = NULL;
+	}
+	if (node && node->token.type == PIPE && !node->left && node->right
+		&& !node->right->left && !node->right->right)
+	{
+		*cmd = init_cmd(node->right, input_data);
+		if (!*cmd)
+		{
+			perror("ERROR WITH TREE");
+			return ;
+		}
+		*cmd = (*cmd)->next;
+		node->right = NULL;
+	}
+	if (node && node->left)
+		init_cmd_table(node->left, cmd, start_ptr_save, input_data);
+}
+
+t_cmd	*init_cmd(t_token_node *node, t_input_data *input_data)
+{
+	t_cmd	*cmd;
+
+	cmd = ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	cmd->type = node->token.type;
+	cmd->arr = node->token.t_value.double_ptr;
+	if (node->index != input_data->token_count - 1 && node->index != 0)
+	{
+		cmd->in_pipe = true;
+		cmd->out_pipe = true;
+	}
+	else if (node->index == 0 && input_data->token_count > 0)
+	{
+		cmd->in = STDIN_FILENO;
+		cmd->out_pipe = true;
+	}
+	else if (node->index == input_data->token_count - 1 && input_data->token_count > 0)
+	{
+		cmd->in_pipe = true;
+		cmd->out = STDOUT_FILENO;
+	}
+	else
+	{
+		cmd->in = STDIN_FILENO;
+		cmd->out = STDOUT_FILENO;
+	}
+	if (node->index == input_data->token_count - 1)
+		cmd->next = NULL;
+	return (cmd);
+}

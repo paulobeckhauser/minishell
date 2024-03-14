@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 15:27:28 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:27:25 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+# include <stdbool.h>
 
 // Store variables to handle input (SZYMON)
 typedef struct s_input_data
@@ -41,6 +42,7 @@ typedef struct s_input_data
 	char	**arr;
 	int		word_count;
 	int		pipe_count;
+	int		token_count;
 }	t_input_data;
 
 typedef struct s_info
@@ -111,7 +113,9 @@ typedef struct s_cmd
 	t_type			type;
 	char			**arr;
 	int				in;
+	bool			in_pipe;
 	int				out;
+	bool			out_pipe;
 	struct s_cmd	*next;
 }	t_cmd;
 

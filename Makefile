@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/12 19:34:20 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/14 12:49:48 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,9 @@ BUILTIN_DIR		:= builtin/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= -Wall -Wextra -Werror -g
+CFLAGS			:= -Wall -Wextra -Werror
 LREADLINE		:= -lreadline
+DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
 
 # Libraries
@@ -108,14 +109,14 @@ $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c
 					@echo $(YELLOW) "Compiling...\t" $< $(EOC)
 #					@curl 'http://141.147.48.52:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@mkdir -p $(@D)
-					@${CC} ${CFLAGS} $(SANITIZER) -I.libs/libft -c $? -o $@
+					@${CC} ${CFLAGS} ${DEBUG} $(SANITIZER) -I.libs/libft -c $? -o $@
 
 
 ${NAME}: 		${OBJ}
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 					@echo $(WHITE) "Building minishell for" $(YELLOW) "Mandatory" $(WHITE) "..." $(EOC)
 					@make -s -C ./libs/libft
-					@${CC} ${CFLAGS} $(SANITIZER) $^ -L./libs/libft -lft $(LREADLINE) -o ${NAME}
+					@${CC} ${CFLAGS} ${DEBUG} $(SANITIZER) $^ -L./libs/libft -lft $(LREADLINE) -o ${NAME}
 					@echo $(GREEN) "Minishell Mandatory is created!\n" $(EOC) $(RESET_COLOR)
 
 
