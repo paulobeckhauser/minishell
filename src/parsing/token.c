@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/14 20:53:52 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:02:07 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	lexer(t_input_data *input_data)
 {
 	t_token_node	*list;
 	t_token_node	*root;
+	t_cmd			*cmd_table;
+	t_cmd			*start_ptr_save;
 
 	init_needed_data(input_data);
 	default_display_with_history(input_data);
@@ -28,7 +30,10 @@ void	lexer(t_input_data *input_data)
 	if (!list)
 		return ;
 	root = init_syntax_tree(list);
-	print_tree(root, 0, "(ROOT)");
+	// print_tree(root, 0, "(ROOT)");
+	start_ptr_save = NULL;
+	init_cmd_table(root, &cmd_table, &start_ptr_save, input_data);
+	print_cmd_table(start_ptr_save);
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
 	free(input_data->input);
@@ -62,7 +67,7 @@ t_token_node	*init_token_list(t_input_data *input_data)
 	i = 0;
 	while (1)
 	{
-		node = malloc(sizeof(t_token_node));
+		node = ft_calloc(1, sizeof(t_token_node));
 		if (!node)
 			return (NULL);
 		node->token = init_token_struct(input_data);
@@ -288,6 +293,7 @@ t_token_node	*init_syntax_tree(t_token_node *token)
 		else
 			token->right = NULL;
 	}
+	token->root = true;
 	return (token);
 }
 
@@ -303,8 +309,10 @@ void print_tree(t_token_node *node, int depth, char *left_right)
 	print_tree(node->right, depth + 1, "(RIGHT)");
 }
 
-void init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd	**start_ptr_save, t_input_data *input_data)
+int	init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input_data *input_data)
 {
+	if (*cmd && (*cmd)->last_cmd && node->root)
+			return (1);
 	if (node && node->token.type == PIPE && node->left && node->right
 		&& !node->left->left && !node->left->right)
 	{
@@ -312,27 +320,29 @@ void init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd	**start_ptr_save, t_i
 		if (!*cmd)
 		{
 		    perror("ERROR WITH TREE");
-			return ;
+			return -1;
 		}
 		if (!*start_ptr_save)
 			*start_ptr_save = *cmd;
 		*cmd = (*cmd)->next;
 		node->left = NULL;
-	}
-	if (node && node->token.type == PIPE && !node->left && node->right
-		&& !node->right->left && !node->right->right)
-	{
 		*cmd = init_cmd(node->right, input_data);
 		if (!*cmd)
 		{
 			perror("ERROR WITH TREE");
-			return ;
+			return -1;
 		}
 		*cmd = (*cmd)->next;
 		node->right = NULL;
 	}
 	if (node && node->left)
-		init_cmd_table(node->left, cmd, start_ptr_save, input_data);
+	{
+		int result = init_cmd_table(node->left, cmd, start_ptr_save, input_data);
+		if (result != 0) {
+			return result;
+		}
+	}
+	return (0);
 }
 
 t_cmd	*init_cmd(t_token_node *node, t_input_data *input_data)
@@ -365,6 +375,20 @@ t_cmd	*init_cmd(t_token_node *node, t_input_data *input_data)
 		cmd->out = STDOUT_FILENO;
 	}
 	if (node->index == input_data->token_count - 1)
+	{
 		cmd->next = NULL;
+		cmd->last_cmd = true;
+	}
 	return (cmd);
+}
+
+void	print_cmd_table(t_cmd *cmd)
+{
+	if (!cmd)
+		ft_printf("HALO\n");
+	while (cmd)
+	{
+		ft_printf("asfg%s: %s\n", type_to_string(cmd->type), cmd->arr);
+		cmd = cmd->next;
+	}
 }
