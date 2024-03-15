@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 18:56:09 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/14 19:23:54 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 		{
 			free(input);
 			break ;
-		}
+		}	
 		// EXIT FUNCTION
+		
 		command = ft_split(input, ' ');
 		check_builtin(structure, command[0]);
 
@@ -59,17 +60,13 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 			if (is_echo_command(command))
 				execute_echo_command(command, 1); // need to implement reedirection
 			if (is_export_command(command))
-				execute_export_command(command);
+				execute_export_command(command, envp);
 			if (is_unset_command(command))
 				execute_unset_command(command);
 			if (is_env_command(command))
 				execute_env_command(command);
 			if (is_exit_command(command))
 				execute_exit_command(command);
-			
-
-			
-			
 
 			continue;
 

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 18:55:34 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:29:05 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+#include <stdlib.h>
 
 
 // MACRO variable library
@@ -86,13 +87,14 @@ void execute_pwd_command(char **command);
 int is_echo_command(char **command);
 void    execute_echo_command(char **command, int fd);
 int is_export_command(char **command);
-void    execute_export_command(char **command);
+void    execute_export_command(char **command, char **envp);
 int is_unset_command(char **command);
 void    execute_unset_command(char **command);
 int is_env_command(char **command);
 void    execute_env_command(char **command);
 int is_exit_command(char **command);
 void    execute_exit_command(char **command);
+int ft_setenv(const char *name, const char *value, int overwrite);
 
 
 typedef enum s_type
