@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:06:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/15 18:02:07 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/15 22:56:26 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	lexer(t_input_data *input_data)
 	// print_tree(root, 0, "(ROOT)");
 	start_ptr_save = NULL;
 	init_cmd_table(root, &cmd_table, &start_ptr_save, input_data);
+	// cmd_table = NULL;
+	// create_cmd_list(root, &cmd_table);
 	print_cmd_table(start_ptr_save);
 	input_data->input = input_data->start_ptr_save;
 	free(input_data->buf);
@@ -293,7 +295,6 @@ t_token_node	*init_syntax_tree(t_token_node *token)
 		else
 			token->right = NULL;
 	}
-	token->root = true;
 	return (token);
 }
 
@@ -303,46 +304,40 @@ void print_tree(t_token_node *node, int depth, char *left_right)
         return;
     for (int i = 0; i < depth; i++)
         ft_printf("     ");
-
-    ft_printf("%s %s\n", left_right, type_to_string(node->token.type));
+    printf("%s %s\n", left_right, type_to_string(node->token.type));
     print_tree(node->left, depth + 1, "(LEFT)");
 	print_tree(node->right, depth + 1, "(RIGHT)");
 }
 
-int	init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input_data *input_data)
+void	init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input_data *input_data)
 {
-	if (*cmd && (*cmd)->last_cmd && node->root)
-			return (1);
-	if (node && node->token.type == PIPE && node->left && node->right
-		&& !node->left->left && !node->left->right)
+	t_cmd	*new_cmd;
+
+	if (!node)
+		return ;
+	new_cmd = NULL;
+	if (node && node->left && node->left->right)
+		init_cmd_table(node->left, cmd, start_ptr_save, input_data);
+	if (node->token.type != PIPE)
+		return ;
+	if (node->left->token.type != PIPE)
 	{
-		*cmd = init_cmd(node->left, input_data);
-		if (!*cmd)
-		{
-		    perror("ERROR WITH TREE");
-			return -1;
-		}
+		new_cmd = init_cmd(node->left, input_data);
 		if (!*start_ptr_save)
-			*start_ptr_save = *cmd;
-		*cmd = (*cmd)->next;
-		node->left = NULL;
-		*cmd = init_cmd(node->right, input_data);
+			*start_ptr_save = new_cmd;
 		if (!*cmd)
+			*cmd = new_cmd;
+		else
 		{
-			perror("ERROR WITH TREE");
-			return -1;
+			(*cmd)->next = new_cmd;
+			*cmd = (*cmd)->next;
 		}
-		*cmd = (*cmd)->next;
-		node->right = NULL;
+		node->left = NULL;
 	}
-	if (node && node->left)
-	{
-		int result = init_cmd_table(node->left, cmd, start_ptr_save, input_data);
-		if (result != 0) {
-			return result;
-		}
-	}
-	return (0);
+	new_cmd = init_cmd(node->right, input_data);
+	(*cmd)->next = new_cmd;
+	*cmd = (*cmd)->next;
+	node->right = NULL;
 }
 
 t_cmd	*init_cmd(t_token_node *node, t_input_data *input_data)
@@ -375,20 +370,17 @@ t_cmd	*init_cmd(t_token_node *node, t_input_data *input_data)
 		cmd->out = STDOUT_FILENO;
 	}
 	if (node->index == input_data->token_count - 1)
-	{
 		cmd->next = NULL;
-		cmd->last_cmd = true;
-	}
 	return (cmd);
 }
 
 void	print_cmd_table(t_cmd *cmd)
 {
 	if (!cmd)
-		ft_printf("HALO\n");
+		printf("Error: empty command table.\n");
 	while (cmd)
 	{
-		ft_printf("asfg%s: %s\n", type_to_string(cmd->type), cmd->arr);
+		printf("%s\n", type_to_string(cmd->type));
 		cmd = cmd->next;
 	}
 }

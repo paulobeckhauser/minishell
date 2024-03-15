@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/15 16:55:11 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/15 22:50:49 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ typedef struct s_token
 
 typedef struct s_token_node
 {
-	bool				root;
 	t_token				token;
 	int					index;
 	struct s_token_node	*next;
@@ -117,7 +116,6 @@ typedef struct s_cmd
 	bool			in_pipe;
 	int				out;
 	bool			out_pipe;
-	bool			last_cmd;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -137,7 +135,7 @@ t_token			make_builtin_cmd(t_input_data *input_data);
 void			check_token_order(t_token_node *token_node, t_input_data *input_data);
 t_token_node	*init_syntax_tree(t_token_node *token_node);
 void 			print_tree(t_token_node *node, int depth, char *left_right);
-int				init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input_data *input_data);
+void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input_data *input_data);
 t_cmd			*init_cmd(t_token_node *node, t_input_data *input_data);
 void			print_cmd_table(t_cmd *cmd);
 
