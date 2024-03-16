@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 15:21:47 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:20:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(void)
 	t_cmd	table;
 
 	while (1)
-	{
+	{ 
 		parser(&table);
 	}
 	return (0);

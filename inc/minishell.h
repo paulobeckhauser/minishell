@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 17:49:04 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:18:34 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ typedef struct s_cmd
 {
 	t_type			type;
 	char			**arr;
-	int				in;
 	bool			in_pipe;
-	int				out;
+	int				in;
 	bool			out_pipe;
+	int				out;
 	struct s_cmd	*next;
 }	t_cmd;
 
