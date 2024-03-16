@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 13:15:27 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:44:47 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,9 @@ int	if_builtin_cmd(char *str)
 	return (0);
 }
 
-
-t_token	init_simple_cmd_token(t_input *input)
+void	skip_whitespaces(t_input *input)
 {
-	t_token	token;
-
-	token.type = SIMPLE_CMD;
-	token.t_value.double_ptr = input->arr;
-	return (token);
+	while (ft_strchr(input->whitespace, *input->input)
+		&& *input->input)
+		input->input++;
 }

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 11:30:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:47:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(void)
 
 	while (1)
 	{
-		lexer_parser(&input);
+		parser(&input);
 	}
 	return (0);
 }

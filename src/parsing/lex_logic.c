@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 13:14:35 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:34:33 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,72 +14,72 @@
 
 t_token_node	*init_token_list(t_input *input)
 {
-	t_token_node	*node;
-	t_token_node	*start_ptr_save;
+	t_token_node	*list;
+	t_token_node	*head;
 	t_token_node	*current;
 	int				i;
 
-	start_ptr_save = NULL;
+	head = NULL;
 	current = NULL;
 	i = 0;
 	while (1)
 	{
-		node = ft_calloc(1, sizeof(t_token_node));
-		if (!node)
+		list = init_token_node(input, i++);
+		if (!list)
 			return (NULL);
-		node->token = init_token_struct(input);
-		node->next = NULL;
-		node->index = i++;
-		if (node->token.type == WRONG)
+		if (list->token.type == WRONG)
 		{
-			free(node);
+			free(list);
 			break ;
 		}
-		if (!start_ptr_save)
-		{
-			start_ptr_save = node;
-			current = node;
-		}
-		else
-		{
-			current->next = node;
-			current = current->next;
-		}
+		add_node_to_list(&head, &current, list);
 	}
 	input->token_count = i;
-	return (start_ptr_save);
+	return (head);
+}
+
+t_token_node	*init_token_node(t_input *input, int index)
+{
+	t_token_node	*node;
+
+	node = ft_calloc(1, sizeof(t_token_node));
+	if (!node)
+		return (NULL);
+	node->token = init_token_struct(input);
+	node->next = NULL;
+	node->index = index;
+	return (node);
+}
+
+void	add_node_to_list(t_token_node **head, t_token_node **current,
+	t_token_node *new_node)
+{
+	if (!*head)
+	{
+		*head = new_node;
+		*current = new_node;
+	}
+	else
+	{
+		(*current)->next = new_node;
+		*current = (*current)->next;
+	}
 }
 
 t_token	init_token_struct(t_input *input)
 {
 	t_type	type;
 	t_token	token;
-	t_token	error_token;
 
-	error_token.type = WRONG;
 	type = find_token(input);
 	if (type == PIPE)
-	{
-		token.type = PIPE;
-		token.t_value.single_ptr = "|";
-		++input->pipe_count;
-	}
+		token = init_pipe_token(input);
 	else if (type == REDIRECTION)
-	{
-		token.type = REDIRECTION;
-		token.t_value.single_ptr = verify_redirection(input);
-	}
+		token = init_redirection_token(input);
 	else if (type == WORD)
-	{
-		count_words(input);
-		init_words_arr(input);
-		if (!if_builtin_cmd(input->arr[0]))
-			token = init_simple_cmd_token(input);
-		else
-			token = init_builtin_cmd_token(input);
-	}
+		token = init_cmd_token(input);
 	else
-		token = error_token;
+		token = init_error_token();
 	if (type != WORD && type != REDIRECTION)
 		input->input++;
 	return (token);
