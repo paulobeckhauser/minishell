@@ -1,84 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parse_logic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 12:47:04 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:46:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-t_token_node	*init_binary_tree(t_token_node *token)
+t_token_node	*init_binary_tree(t_token_node **token)
 {
-	t_token_node	*last_token;
 	t_token_node	*previous_token;
 
-	if (token->token.type == PIPE)
+	if ((*token)->token.type == PIPE)
 	{
 		perror("bash: syntax error near unexpected token `|'");
 		return (NULL);
 	}
-	last_token = NULL;
 	previous_token = NULL;
-	while (token->next)
+	while ((*token)->next)
 	{
-		if ((!previous_token || (previous_token && previous_token->token.type != PIPE))
-			&& (token->token.type == BUILTIN_CMD || token->token.type == SIMPLE_CMD))
-		{
-			if (!previous_token)
-				token->left = NULL;
-			else
-				token->left = previous_token;
-			token->right = NULL;
-			if (!last_token)
-				last_token = token;
-			previous_token = token;
-			token = token->next;
-			previous_token->next = NULL;
-		}
-		else if (token->token.type == PIPE)
-		{
-			token->left = previous_token;
-			if (token->next && (token->next->token.type == BUILTIN_CMD
-				|| token->next->token.type == SIMPLE_CMD))
-				token->right = token->next;
-			else
-				return (NULL);
-			if (token->next && token->next->next)
-			{
-				previous_token = token;
-				token = token->next;
-				previous_token->next = NULL;
-			}
-			else
-				token->next = NULL;
-		}
+		if (init_cmd_tree_branch(token, &previous_token))
+			continue ;
+		else if (init_pipe_tree_branch(token, &previous_token))
+			continue ;
 		else
-			token = token->next;
+			*token = (*token)->next;
 	}
-	if ((!previous_token || (previous_token && previous_token->token.type != PIPE))
-		&& (token->token.type == BUILTIN_CMD || token->token.type == SIMPLE_CMD))
-	{
-		if (!previous_token)
-			token->left = NULL;
-		else
-			token->left = previous_token;
-		token->right = NULL;
-	}
-	else if (token->token.type == PIPE && !token->right)
-	{
-		token->left = previous_token;
-		if (token->next && (token->next->token.type == BUILTIN_CMD
-			|| token->next->token.type == SIMPLE_CMD))
-			token->right = token->next;
-		else
-			token->right = NULL;
-	}
-	return (token);
+	return (*token);
 }
 
 void	init_cmd_table(t_token_node *node, t_cmd **table, t_cmd **head, t_input *input)

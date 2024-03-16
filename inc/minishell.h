@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 15:33:32 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:49:04 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,12 @@ int				if_builtin_cmd(char *str);
 void			skip_whitespaces(t_input *input);
 int				get_word_length(t_input *input);
 
+// parse_init_tree_node.c
+bool			init_cmd_tree_branch(t_token_node **token, t_token_node **previous_token);
+bool			init_pipe_tree_branch(t_token_node **token, t_token_node **previous_token);
+
 // parse_logic.c
-t_token_node	*init_binary_tree(t_token_node *token_node);
+t_token_node	*init_binary_tree(t_token_node **token_node);
 void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input *input);
 t_cmd			*init_cmd(t_token_node *node, t_input *input);
 

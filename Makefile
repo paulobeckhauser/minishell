@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/16 15:33:44 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/16 17:49:38 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_logic.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_utils_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_utils.c \
+						$(SRC_DIR)$(PARSING_DIR)parse_init_tree_node.c \
 						$(SRC_DIR)$(PARSING_DIR)parse_logic.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
 						$(SRC_DIR)$(PARSING_DIR)print.c \
