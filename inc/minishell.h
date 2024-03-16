@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 18:41:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 19:21:49 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,28 @@ typedef struct s_input
 	int		token_count;
 }	t_input;
 
+typedef enum s_type
+{
+	WRONG = 0,
+	PIPE = 1,
+	REDIRECTION = 2,
+	WORD = 3,
+	SIMPLE_CMD = 4,
+	BUILTIN_CMD = 5,
+	ARGUMENT = 6,
+}	t_type;
+
+typedef struct s_cmd
+{
+	t_type			type;
+	char			**arr;
+	bool			in_pipe;
+	int				in;
+	bool			out_pipe;
+	int				out;
+	struct s_cmd	*next;
+}	t_cmd;
+
 typedef struct s_info
 {
     int argc;
@@ -61,8 +83,9 @@ typedef struct s_info
     char **possible_paths;
     char *path_command;
 
-    
+    t_cmd	*table;
 }   t_info;
+
 
 void store_main_arguments(int argc, char **argv, char **envp, t_info *structure);
 void execution(int argc, char *argv[], char *envp[], t_info *structure);
@@ -101,16 +124,7 @@ int ft_setenv(const char *name, const char *value, int overwrite);
 int ft_putenv(char *string);
 
 
-typedef enum s_type
-{
-	WRONG = 0,
-	PIPE = 1,
-	REDIRECTION = 2,
-	WORD = 3,
-	SIMPLE_CMD = 4,
-	BUILTIN_CMD = 5,
-	ARGUMENT = 6,
-}	t_type;
+
 
 typedef struct s_token
 {
@@ -131,17 +145,6 @@ typedef struct s_token_node
 	struct s_token_node *right;
 	
 }	t_token_node;
-
-typedef struct s_cmd
-{
-	t_type			type;
-	char			**arr;
-	bool			in_pipe;
-	int				in;
-	bool			out_pipe;
-	int				out;
-	struct s_cmd	*next;
-}	t_cmd;
 
 // default_display.c
 void			default_display_with_history(t_input *input);
@@ -169,7 +172,7 @@ t_token			init_token_struct(t_input *input);
 t_type			find_token(t_input *input);
 
 // parser.c
-void			parser(t_cmd *table);
+void			parser(t_cmd **table);
 t_token_node	*lex(t_input *input);
 t_cmd			*parse(t_token_node *tokens, t_input *input);
 

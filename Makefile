@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/16 18:39:11 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/16 19:06:51 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ BUILTIN_DIR		:= builtin/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= -Wall -Wextra -Werror
+CFLAGS			:= #-Wall -Wextra -Werror
 LREADLINE		:= -lreadline
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
@@ -89,8 +89,18 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_main_variables.c \
 					
 
-PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)token.c \
-						$(SRC_DIR)$(PARSING_DIR)token_utils.c \
+PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
+						$(SRC_DIR)$(PARSING_DIR)free.c \
+						$(SRC_DIR)$(PARSING_DIR)init_input.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_init_token_2.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_init_token.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_logic.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_utils_2.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_utils.c \
+						$(SRC_DIR)$(PARSING_DIR)parse_init_tree_node.c \
+						$(SRC_DIR)$(PARSING_DIR)parse_logic.c \
+						$(SRC_DIR)$(PARSING_DIR)parser.c \
+						$(SRC_DIR)$(PARSING_DIR)print.c \
 
 
 SHARED_SRCS			:= $(SRC_DIR)main.c
