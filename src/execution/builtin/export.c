@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/15 14:27:56 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:22:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,4 +162,91 @@ void    execute_export_command(char **command, char **envp)
     
 
 
+}
+
+
+// char *ft_strtok(char *str, const char *delim)
+// {
+// 	int i;
+// 	int j;
+// 	// char charac;
+
+// 	// i = 0;
+// 	// j = 0;
+// 	// while(str[i])
+// 	// {
+// 	// 	if (str[i] == delim[j])
+// 	// 		i++;
+// 	// }
+// 	// printf("%d\n", i);
+
+// 	return(str);
+// }
+
+int ft_putenv(char *string)
+{
+	char *name;
+	char *name_2;
+
+	// printf("%s\n", string);
+	
+	// strtok(string, "=");
+	// name = strtok(string, "=");
+	// printf("%s\n", string);
+
+	// name_2 = ft_strtok(string, "=");
+
+	// name_2 = ft_strtok("TEST=legal", "=");
+
+	
+
+	// name_2 = ft_strtrim(string, "=");
+
+	// printf("%s\n", name);
+	printf("%s\n", name_2);
+
+
+
+	return (0);
+	
+}
+
+
+
+
+int ft_setenv(const char *name, const char *value, int overwrite)
+{
+	size_t len;
+	char *str;
+	int result;
+	
+	if (!overwrite && getenv(name))
+	{
+		// The environment variable already exists and we don't want to overwrite it
+		return (0);
+	}
+
+	// Calculate the length of the string we need to allocate
+	len = ft_strlen(name) + ft_strlen(value) + 2; // +2 for the '=' and the null terminator
+	
+	// Allocate the string
+	str = malloc(len);
+	if (!str)
+		return (-1);
+	
+	
+
+
+	ft_strlcpy(str, name, ft_strlen(name) + 2);
+	ft_strlcat(str, "=", ft_strlen(str) + 2);
+	ft_strlcat(str, value, ft_strlen(value) + ft_strlen(str) + 1);
+
+	// result = putenv(str);
+	
+	result = ft_putenv(str);
+
+	// printf("%s\n", str);
+	
+	return (result);
+	
 }
