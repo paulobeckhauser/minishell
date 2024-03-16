@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 20:54:04 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:03:38 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,31 @@
 // getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
 // tgetnum, tgetstr, tgoto, tputs
 
+// #include "../inc/minishell.h"
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_info	structure;
+
+// 	store_main_arguments(argc, argv, envp, &structure);
+// 	get_path_env(&structure);
+// 	while (1)
+// 	{ 
+// 		parser(&structure);
+// 		execution(argc, argv, envp, &structure);
+// 	}
+// 	return (0);
+// }
+
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	main(void)
 {
 	t_info	structure;
 
-	store_main_arguments(argc, argv, envp, &structure);
-	get_path_env(&structure);
 	while (1)
 	{ 
 		parser(&structure);
-		execution(argc, argv, envp, &structure);
 	}
 	return (0);
 }

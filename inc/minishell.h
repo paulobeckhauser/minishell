@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 20:54:27 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:00:16 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <sys/wait.h>
-#include <stdlib.h>
+# include <stdlib.h>
 
 
 // MACRO variable library

@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/16 19:06:51 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/16 21:04:36 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ BUILTIN_DIR		:= builtin/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= #-Wall -Wextra -Werror
+CFLAGS			:= -Wall -Wextra -Werror
 LREADLINE		:= -lreadline
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
@@ -69,7 +69,7 @@ DEBUG			:= -g
 LIBFT			:= ./libs/libft/libft.a
 
 					
-BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
+#BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)env.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)exit.c \
@@ -79,7 +79,7 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 
 
 
-EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
+#EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
