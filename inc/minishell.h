@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/15 22:50:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 11:12:05 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <stdbool.h>
 
 // Store variables to handle input (SZYMON)
-typedef struct s_input_data
+typedef struct s_input
 {
 	char	*buf;
 	char	*input;
@@ -43,7 +43,7 @@ typedef struct s_input_data
 	int		word_count;
 	int		pipe_count;
 	int		token_count;
-}	t_input_data;
+}	t_input;
 
 typedef struct s_info
 {
@@ -121,28 +121,28 @@ typedef struct s_cmd
 
 
 // token.c
-void			parser(t_input_data *input_data);
-void			lexer(t_input_data *input_data);
-void			default_display_with_history(t_input_data *input_data);
-t_token_node	*init_token_list(t_input_data *input_data);
-t_token			init_token_struct(t_input_data *input_data);
-t_type			find_token(t_input_data *input_data);
-char			*verify_redirection(t_input_data *input_data);
-void			count_words(t_input_data *input_data);
-void			init_words_arr(t_input_data *input_data);
-t_token			make_simple_cmd(t_input_data *input_data);
-t_token			make_builtin_cmd(t_input_data *input_data);
-void			check_token_order(t_token_node *token_node, t_input_data *input_data);
+void			parser(t_input *input);
+void			lexer(t_input *input);
+void			default_display_with_history(t_input *input);
+t_token_node	*init_token_list(t_input *input);
+t_token			init_token_struct(t_input *input);
+t_type			find_token(t_input *input);
+char			*verify_redirection(t_input *input);
+void			count_words(t_input *input);
+void			init_words_arr(t_input *input);
+t_token			make_simple_cmd(t_input *input);
+t_token			make_builtin_cmd(t_input *input);
+void			check_token_order(t_token_node *token_node, t_input *input);
 t_token_node	*init_syntax_tree(t_token_node *token_node);
 void 			print_tree(t_token_node *node, int depth, char *left_right);
-void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input_data *input_data);
-t_cmd			*init_cmd(t_token_node *node, t_input_data *input_data);
+void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input *input);
+t_cmd			*init_cmd(t_token_node *node, t_input *input);
 void			print_cmd_table(t_cmd *cmd);
 
 // token_utils.c
-void			init_needed_data(t_input_data *input_data);
-void			skip_whitespaces(t_input_data *input_data);
-int				get_word_length(t_input_data *input_data);
+void			init_needed_data(t_input *input);
+void			skip_whitespaces(t_input *input);
+int				get_word_length(t_input *input);
 int				builtin_cmd(char *str);
 void			free_double_arr(char **arr);
 const char		*type_to_string(t_type type);

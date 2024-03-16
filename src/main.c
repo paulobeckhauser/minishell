@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/12 19:34:58 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 11:12:39 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 int	main(void)
 {
 	// t_info structure; // PAULO DATA STRUCTURE
-	t_input_data	input_data;
+	t_input	input;
 
 	while (1)
 	{
-		parser(&input_data);
+		parser(&input);
 	}
 	return (0);
 }

@@ -6,61 +6,61 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:26:18 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/13 14:49:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 11:10:36 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 #include "../../inc/minishell.h"
 
-void	init_needed_data(t_input_data *input_data)
+void	init_needed_data(t_input *input)
 {
-	input_data->start_ptr_save = NULL;
-	input_data->pipe_count = 0;
-	input_data->symbols = "|<>";
-	input_data->whitespace = " \t\r\n\v";
+	input->start_ptr_save = NULL;
+	input->pipe_count = 0;
+	input->symbols = "|<>";
+	input->whitespace = " \t\r\n\v";
 }
 
-void	skip_whitespaces(t_input_data *input_data)
+void	skip_whitespaces(t_input *input)
 {
-	while (ft_strchr(input_data->whitespace, *input_data->input)
-		&& *input_data->input)
-		input_data->input++;
+	while (ft_strchr(input->whitespace, *input->input)
+		&& *input->input)
+		input->input++;
 }
 
-char	*verify_redirection(t_input_data *input_data)
+char	*verify_redirection(t_input *input)
 {
-	if (*input_data->input == '<' && *input_data->input != *(input_data->input + 1))
+	if (*input->input == '<' && *input->input != *(input->input + 1))
 	{
-		input_data->input++;
+		input->input++;
 		return ("<");		
 	}
-	else if (*input_data->input == '>' && *input_data->input != *(input_data->input + 1))
+	else if (*input->input == '>' && *input->input != *(input->input + 1))
 	{
-		input_data->input++;
+		input->input++;
 		return (">");
 	}
-	else if (*input_data->input == '<' && *input_data->input == *(input_data->input + 1))
+	else if (*input->input == '<' && *input->input == *(input->input + 1))
 	{
-		input_data->input += 2;
+		input->input += 2;
 		return ("<<");
 	}
-	else if (*input_data->input == '>' && *input_data->input == *(input_data->input + 1))
+	else if (*input->input == '>' && *input->input == *(input->input + 1))
 	{
-		input_data->input += 2;
+		input->input += 2;
 		return (">>");
 	}
 	else
 		return (NULL);
 }
 
-int	get_word_length(t_input_data *input_data)
+int	get_word_length(t_input *input)
 {
 	int	len;
 
 	len = 0;
-	while (!ft_strchr(input_data->symbols, input_data->input[len])
-		&& input_data->input[len])
+	while (!ft_strchr(input->symbols, input->input[len])
+		&& input->input[len])
 		len++;
 	return (len);
 }
