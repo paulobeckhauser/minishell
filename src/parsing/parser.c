@@ -6,13 +6,13 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 19:23:46 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:53:44 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	parser(t_cmd **table)
+void	parser(t_info *structure)
 {
 	t_input			input;
 	t_token_node	*tokens;
@@ -22,8 +22,8 @@ void	parser(t_cmd **table)
 	tokens = lex(&input);
 	if (!tokens)
 		return ;
-	*table = parse(tokens, &input);
-	if (!*table)
+	structure->table = parse(tokens, &input);
+	if (!structure->table)
 		return ;
 	// print_table(*table);
 	free_input(&input);

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 20:49:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:59:27 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	structure;
-	t_cmd	*table;
 
 	store_main_arguments(argc, argv, envp, &structure);
 	get_path_env(&structure);
 	while (1)
 	{ 
-		parser(&table);
-		structure.table = table;
+		parser(&structure);
 		execution(argc, argv, envp, &structure);
 	}
 	return (0);

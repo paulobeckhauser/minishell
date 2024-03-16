@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 19:21:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:54:27 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ t_token			init_token_struct(t_input *input);
 t_type			find_token(t_input *input);
 
 // parser.c
-void			parser(t_cmd **table);
+void			parser(t_info *structure);
 t_token_node	*lex(t_input *input);
 t_cmd			*parse(t_token_node *tokens, t_input *input);
 
