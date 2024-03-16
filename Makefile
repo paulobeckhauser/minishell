@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/16 14:47:38 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/16 15:33:44 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)free.c \
-						$(SRC_DIR)$(PARSING_DIR)init.c \
+						$(SRC_DIR)$(PARSING_DIR)init_input.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_init_token_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_init_token.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_logic.c \

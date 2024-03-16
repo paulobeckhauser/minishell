@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 14:46:58 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:33:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ void			default_display_with_history(t_input *input);
 void			free_input(t_input *input);
 void			free_double_arr(char **arr);
 
-// init.c
-void			init_variables(t_input *input);
+// init_input.c
+void			init_input(t_input *input);
 
 // lex_init_token.c lex_init_token_2.c
 t_token			init_error_token(void);
@@ -145,7 +145,7 @@ t_token			init_token_struct(t_input *input);
 t_type			find_token(t_input *input);
 
 // parser.c
-void			parser(t_input *input);
+void			parser(t_cmd *table);
 t_token_node	*lex(t_input *input);
 t_cmd			*parse(t_token_node *tokens, t_input *input);
 

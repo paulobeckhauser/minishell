@@ -6,23 +6,27 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 14:45:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:34:24 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	parser(t_input *input)
+void	parser(t_cmd *table)
 {
+	t_input			input;
 	t_token_node	*tokens;
-	t_cmd			*table;
 
-	init_variables(input);
-	default_display_with_history(input);
-	tokens = lex(input);
-	table = parse(tokens, input);
+	init_input(&input);
+	default_display_with_history(&input);
+	tokens = lex(&input);
+	if (!tokens)
+		return ;
+	table = parse(tokens, &input);
+	if (!table)
+		return ;
 	print_table(table);
-	free_input(input);
+	free_input(&input);
 }
 
 t_token_node	*lex(t_input *input)
