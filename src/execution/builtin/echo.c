@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 13:16:30 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 14:06:36 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/03/13 16:50:11 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-int	is_cd_command(char **command)
+int is_echo_command(char **command)
 {
-	return (ft_strcmp(command[0], "cd") == 0);
+    return(ft_strcmp(command[0], "echo") == 0);
 }
 
-void	execute_cd_command(char **command)
+void    execute_echo_command(char **command, int fd)
 {
-	char	*path;
+    char *string;
 
-	if (command[1] == NULL)
-		path = getenv("HOME");
-	else
-		path = command[1];
-	if (chdir(path) == -1)
-		perror("cd failed");
+    string = ft_strdup(command[1]);
+
+    ft_strlcat(string, "\n", ft_strlen(string) + 2);
+    ft_putstr_fd(string, fd);
+    // printf("\n");
 }

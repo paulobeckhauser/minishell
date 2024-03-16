@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 18:18:34 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:41:38 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+#include <stdlib.h>
+
+
+// MACRO variable library
+# include <limits.h> // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
 
 // Store variables to handle input (SZYMON)
@@ -59,10 +64,12 @@ typedef struct s_info
     
 }   t_info;
 
-
+void store_main_arguments(int argc, char **argv, char **envp, t_info *structure);
+void execution(int argc, char *argv[], char *envp[], t_info *structure);
 int	ft_strcmp(const char *s1, const char *s2);
 void check_builtin(t_info *structure, char *str);
 void	get_path_env(t_info *structure);
+
 
 
 // split_concat_commands
@@ -74,7 +81,24 @@ void	*ft_free(char **strs, int count);
 void free_2d_array(char **array);
 
 // BUILTIN FUNCTIONS
-int cd(char *path);
+// int cd(char *path);
+// int check_cd_command(char **command);
+int is_cd_command(char **command);
+void execute_cd_command(char **command);
+int is_pwd_command(char **command);
+void execute_pwd_command(char **command);
+int is_echo_command(char **command);
+void    execute_echo_command(char **command, int fd);
+int is_export_command(char **command);
+void    execute_export_command(char **command, char **envp);
+int is_unset_command(char **command);
+void    execute_unset_command(char **command);
+int is_env_command(char **command);
+void    execute_env_command(char **command);
+int is_exit_command(char **command);
+void    execute_exit_command(char **command);
+int ft_setenv(const char *name, const char *value, int overwrite);
+int ft_putenv(char *string);
 
 
 typedef enum s_type

@@ -6,6 +6,8 @@ libs/libft/objs/
 
 minishell
 
+.vscode/
+
 file1
 
 file2

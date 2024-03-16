@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/16 17:49:38 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/16 18:39:11 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,9 +63,20 @@ CFLAGS			:= -Wall -Wextra -Werror
 LREADLINE		:= -lreadline
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
+DEBUG			:= -g
 
 # Libraries
 LIBFT			:= ./libs/libft/libft.a
+
+					
+BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)env.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)exit.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)pwd.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)unset.c \
+
 
 
 EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
@@ -75,27 +86,19 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
-						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
+						$(SRC_DIR)$(EXECUTION_DIR)store_main_variables.c \
 					
 
-PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
-						$(SRC_DIR)$(PARSING_DIR)free.c \
-						$(SRC_DIR)$(PARSING_DIR)init_input.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_token_2.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_token.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_logic.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_utils_2.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_utils.c \
-						$(SRC_DIR)$(PARSING_DIR)parse_init_tree_node.c \
-						$(SRC_DIR)$(PARSING_DIR)parse_logic.c \
-						$(SRC_DIR)$(PARSING_DIR)parser.c \
-						$(SRC_DIR)$(PARSING_DIR)print.c \
+PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)token.c \
+						$(SRC_DIR)$(PARSING_DIR)token_utils.c \
 
 
 SHARED_SRCS			:= $(SRC_DIR)main.c
 
 #Source Files
 SRCS			:= 	$(SHARED_SRCS) \
+					$(EXECUTION_SRCS) \
+					$(BUILTIN_SRCS) \
 					$(PARSING_SRCS) \
 					
 
@@ -134,7 +137,7 @@ ${NAME}_bonus:	${OBJ_BONUS}
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
 					@echo $(WHITE) "Building minishell for" $(YELLOW) "Bonus" $(WHITE)
 					@make -s -C ./libs/libft
-					@${CC} ${CFLAGS} $^ -L./libs/libft -lft $(LREADLINE) -o ${NAME}_bonus
+					@${CC} ${CFLAGS} {DEBUG} $^ -L./libs/libft -lft $(LREADLINE) -o ${NAME}_bonus
 					@echo $(GREEN) "Minishell Bonus is created!\n" $(EOC) $(RESET_COLOR)
 
 libft:
