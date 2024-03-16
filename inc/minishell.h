@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 11:12:05 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/16 13:18:19 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,32 +119,44 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-
-// token.c
-void			parser(t_input *input);
-void			lexer(t_input *input);
+// default_display.c
 void			default_display_with_history(t_input *input);
+
+// free.c
+void			free_input(t_input *input);
+void			free_double_arr(char **arr);
+
+// init.c
+void			init_variables(t_input *input);
+
+// lexer_logic.c
 t_token_node	*init_token_list(t_input *input);
 t_token			init_token_struct(t_input *input);
 t_type			find_token(t_input *input);
+
+// lexer_parser.c
+void			lexer_parser(t_input *input);
+t_token_node	*lexer(t_input *input);
+t_cmd			*parser(t_token_node *tokens, t_input *input);
+
+// lexer_utils.c lexer_utils_2.c
 char			*verify_redirection(t_input *input);
 void			count_words(t_input *input);
 void			init_words_arr(t_input *input);
-t_token			make_simple_cmd(t_input *input);
-t_token			make_builtin_cmd(t_input *input);
-void			check_token_order(t_token_node *token_node, t_input *input);
-t_token_node	*init_syntax_tree(t_token_node *token_node);
-void 			print_tree(t_token_node *node, int depth, char *left_right);
-void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input *input);
-t_cmd			*init_cmd(t_token_node *node, t_input *input);
-void			print_cmd_table(t_cmd *cmd);
-
-// token_utils.c
-void			init_needed_data(t_input *input);
+int				if_builtin_cmd(char *str);
+t_token			init_simple_cmd_token(t_input *input);
+t_token			init_builtin_cmd_token(t_input *input);
 void			skip_whitespaces(t_input *input);
 int				get_word_length(t_input *input);
-int				builtin_cmd(char *str);
-void			free_double_arr(char **arr);
+
+// parser_logic.c
+t_token_node	*init_binary_tree(t_token_node *token_node);
+void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input *input);
+t_cmd			*init_cmd(t_token_node *node, t_input *input);
+
+// print.c
+void 			print_tree(t_token_node *node, int depth, char *left_right);
+void			print_table(t_cmd *table);
 const char		*type_to_string(t_type type);
 
 #endif

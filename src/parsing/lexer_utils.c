@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_utils.c                                      :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 18:26:18 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 11:10:36 by sfrankie         ###   ########.fr       */
+/*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
+/*   Updated: 2024/03/16 13:15:27 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-#include "../../inc/minishell.h"
-
-void	init_needed_data(t_input *input)
-{
-	input->start_ptr_save = NULL;
-	input->pipe_count = 0;
-	input->symbols = "|<>";
-	input->whitespace = " \t\r\n\v";
-}
-
-void	skip_whitespaces(t_input *input)
-{
-	while (ft_strchr(input->whitespace, *input->input)
-		&& *input->input)
-		input->input++;
-}
 
 char	*verify_redirection(t_input *input)
 {
@@ -54,18 +38,66 @@ char	*verify_redirection(t_input *input)
 		return (NULL);
 }
 
-int	get_word_length(t_input *input)
+void	count_words(t_input *input)
 {
-	int	len;
+	char	*start_ptr_save;
 
-	len = 0;
-	while (!ft_strchr(input->symbols, input->input[len])
-		&& input->input[len])
-		len++;
-	return (len);
+	start_ptr_save = input->input;
+	input->word_count = 0;
+	while (!ft_strchr(input->symbols, *input->input)
+		&& *input->input)
+	{
+		if (ft_strchr(input->whitespace, *input->input))
+		{
+			skip_whitespaces(input);
+			if (*input->input)
+				input->word_count++;
+		}
+		else
+			input->input++;
+	}
+	if (*input->input == 0)
+		input->word_count++;
+	input->input = start_ptr_save;
 }
 
-int	builtin_cmd(char *str)
+void	init_words_arr(t_input *input)
+{
+	int		i;
+	int		y;
+
+	i = 0;
+	y = 0;
+	input->arr = malloc((input->word_count + 1) * sizeof(char *));
+	if (!input->arr)
+		return ;
+	input->arr[i] = malloc(get_word_length(input) + 1);
+	if (!input->arr[i])
+		return ;
+	while (!ft_strchr(input->symbols, *input->input)
+		&& *input->input)
+	{
+		if (ft_strchr(input->whitespace, *input->input))
+		{
+			skip_whitespaces(input);
+			input->arr[i][y] = 0;
+			if (*input->input == 0
+				|| ft_strchr(input->symbols, *input->input))
+				break ;
+			i++;
+			input->arr[i] = malloc(get_word_length(input) + 1);
+			if (!input->arr[i])
+				return ;
+			y = 0;
+		}
+		else
+			input->arr[i][y++] = *input->input++;
+	}
+	input->arr[i][y] = 0;
+	input->arr[i + 1] = NULL;
+}
+
+int	if_builtin_cmd(char *str)
 {
 	char	**builtins;
 	int		i;
@@ -93,26 +125,12 @@ int	builtin_cmd(char *str)
 	return (0);
 }
 
-void	free_double_arr(char **arr)
-{
-	int	i;
 
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
-const char	*type_to_string(t_type type)
+t_token	init_simple_cmd_token(t_input *input)
 {
-    switch (type) {
-        case WRONG: return "WRONG";
-        case PIPE: return "PIPE";
-        case REDIRECTION: return "REDIRECTION";
-        case WORD: return "WORD";
-        case SIMPLE_CMD: return "SIMPLE_CMD";
-        case BUILTIN_CMD: return "BUILTIN_CMD";
-        case ARGUMENT: return "ARGUMENT";
-        default: return "UNKNOWN";
-    }
+	t_token	token;
+
+	token.type = SIMPLE_CMD;
+	token.t_value.double_ptr = input->arr;
+	return (token);
 }
