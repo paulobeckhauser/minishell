@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 20:59:27 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/17 11:52:48 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int argc, char **argv, char **envp)
 
 	store_main_arguments(argc, argv, envp, &structure);
 	get_path_env(&structure);
+	int l;
 	while (1)
 	{ 
 		parser(&structure);
