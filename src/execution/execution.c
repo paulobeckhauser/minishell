@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 12:52:39 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:49:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,141 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 	// char **possible_paths;
 
 	int i;
+	// int k;
+
 	get_number_commands(structure);
+	store_commands(structure);
+	store_path_commands(structure);
+
 	
-	printf("%d\n", structure->number_commands);
+
+	i = 0;
+	while (structure->path_commands[i])
+	{
+		printf("%s\n", structure->path_commands[i]);
+		i++;
+	}
+
+
+	// allocate_memory_commands
+	// i = 0;
+
+	
+	
+	
+	// allocate_memory_commands
+
+
+
+	// Allocate memory path
+	// i = 0;
+    // structure->path_commands = (char **)malloc((structure->number_commands + 1) * sizeof(char *));
+    // if (!structure->path_commands)
+    // {
+    //     perror("Memory allocation failed!\n");
+    //     exit(EXIT_FAILURE);
+    // }
+	// Allocate memory path
+
+	
+	// i = 0;
+	// while(i < structure->number_commands)
+	// {
+	// 	structure->possible_paths = split_concat_command(structure->path_env,
+	// 			':', structure->table->arr[i]);
+	// }
+
+
+	
+	
+	// while (structure->table)
+	// {
+		
+	// 	printf("%s\n", structure->table->arr[0]);
+	// 	structure->table = structure->table->next;
+	// }
+	
+
+
+	// Allocate memory path
+	// i = 0;
+    // structure->path_commands = (char **)malloc((structure->number_commands + 1) * sizeof(char *));
+    // if (!structure->path_commands)
+    // {
+    //     perror("Memory allocation failed!\n");
+    //     exit(EXIT_FAILURE);
+    // }
+	// Allocate memory path
+
+	// while (structure->table)
+	// {
+		
+	// 	printf("%s\n", structure->table->arr[0]);
+	// 	structure->table = structure->table->next;
+	// }
+
+
+
+
+	
+
+	// printf("%d\n", structure->number_commands);
+
+	
+
+	// while (structure->table)
+	// {
+		
+		
+	// 	structure->table = structure->table->next;
+	// }
+
+	
+
+	// store_path_commands(structure);
+
+	// int i;
+	// int j;
+
+	
+
+
+
+
+
+
+
+
+	// CREATE PIPES
+	// structure->fds_pipes = (int **)ft_calloc((structure->number_commands), sizeof(int *));
+	// if (structure->fds_pipes == NULL)
+	// {
+	// 	perror("Memory allocation failed");
+	// 	return ;
+	// }
+
+	// i = 0;
+
+	// while(i < structure->number_commands - 1)
+	// {
+	// 	structure->fds_pipes[i] = (int *)ft_calloc(2 + 1, sizeof(int));
+	// 	if (structure->fds_pipes[i] == NULL)
+	// 	{
+	// 		perror("Memory allocation failed");
+	// 		// free_variables(structure);
+	// 		return ;
+	// 	}
+	// 	if (pipe(structure->fds_pipes[i]) == -1)
+	// 		perror("Pipe creation failed");
+	// 	i++;
+	// }
+	// structure->fds_pipes[i] = NULL;
+
+
+
+	
+	
+	// printf("%d\n", structure->number_commands);
 	// int number_commands;
 
 	// number_commands = 0;

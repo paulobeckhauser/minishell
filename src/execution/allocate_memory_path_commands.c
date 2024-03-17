@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_number_commands.c                              :+:      :+:    :+:   */
+/*   allocate_memory_path_commands.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 12:49:06 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 14:05:49 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/03/17 13:30:34 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/03/17 13:32:17 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void get_number_commands(t_info *structure)
+void allocate_memory_path_commands(t_info *structure)
 {
-	t_cmd *current_table;
-	int number_commands;
+    int i;
 
-	current_table = structure->table;
-
-	while(current_table)
-	{
-		if (current_table->arr[0])
-			number_commands++;
-		current_table = current_table->next;
-	}
-	structure->number_commands = number_commands;
-
-	
-
+    i = 0;
+    
     
 }

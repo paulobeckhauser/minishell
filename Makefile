@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/17 12:50:49 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/17 14:21:14 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,8 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_main_variables.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_number_commands.c \
+						$(SRC_DIR)$(EXECUTION_DIR)store_path_commands.c \
+						$(SRC_DIR)$(EXECUTION_DIR)store_commands.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \

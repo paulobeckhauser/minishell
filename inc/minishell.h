@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 12:51:12 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:20:32 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,15 @@ typedef struct s_info
     int is_builtin;
     char *path_env;
 
+
+	char **commands;
     char **possible_paths;
-    char *path_command;
+
+	
+    char **path_commands;
 
 	int		number_commands;
-	// int **fds_pipes;
+	int **fds_pipes;
 	
 
     t_cmd	*table;
@@ -97,6 +101,9 @@ int	ft_strcmp(const char *s1, const char *s2);
 void check_builtin(t_info *structure, char *str);
 void	get_path_env(t_info *structure);
 void get_number_commands(t_info *structure);
+void store_path_commands(t_info *structure);
+void	store_commands(t_info *structure);
+
 
 
 
