@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 20:54:47 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/17 11:30:30 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 	int i;
 	char *home_dir;
 
-	while(structure->table)
-	{
-	// 	// CREATION OF PIPES
-		printf(structure->table.t)
+	// while(structure->table)
+	// {
+	// // 	// CREATION OF PIPES
+	// 	printf(structure->table.t)
 
-	}
+	// }
 
 	// if (structure->table->type == BUILTIN_CMD)
 	// {
