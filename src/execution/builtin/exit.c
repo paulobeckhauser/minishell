@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 13:16:30 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 14:06:36 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/03/13 18:54:50 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/03/13 19:11:19 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-int	is_cd_command(char **command)
+int	is_exit_command(char **command)
 {
-	return (ft_strcmp(command[0], "cd") == 0);
+	return (ft_strcmp(command[0], "exit") == 0);
 }
 
-void	execute_cd_command(char **command)
+void	execute_exit_command(char **command)
 {
-	char	*path;
-
-	if (command[1] == NULL)
-		path = getenv("HOME");
-	else
-		path = command[1];
-	if (chdir(path) == -1)
-		perror("cd failed");
+	printf("exit\n");
 }
