@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 13:05:37 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:59:12 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	print_table(t_cmd *table)
 const char	*type_to_string(t_type type)
 {
     switch (type) {
-        case WRONG: return "WRONG";
+        case END: return "END";
+		case WRONG_FD: return "WRONG_FD";
         case PIPE: return "PIPE";
         case REDIRECTION: return "REDIRECTION";
         case WORD: return "WORD";

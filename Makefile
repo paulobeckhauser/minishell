@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/16 21:04:36 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/17 18:07:00 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,13 +92,13 @@ LIBFT			:= ./libs/libft/libft.a
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)free.c \
 						$(SRC_DIR)$(PARSING_DIR)init_input.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_token_2.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_token.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_logic.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_init_single_token_2.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_init_single_token.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_init_token_list.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_utils_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_utils.c \
 						$(SRC_DIR)$(PARSING_DIR)parse_init_tree_node.c \
-						$(SRC_DIR)$(PARSING_DIR)parse_logic.c \
+						$(SRC_DIR)$(PARSING_DIR)parse_init_cmd_table.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
 						$(SRC_DIR)$(PARSING_DIR)print.c \
 

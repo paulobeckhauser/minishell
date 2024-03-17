@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 21:00:16 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:53:26 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <stdlib.h>
-
+# include <fcntl.h>
 
 // MACRO variable library
 # include <limits.h> // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
@@ -52,13 +52,14 @@ typedef struct s_input
 
 typedef enum s_type
 {
-	WRONG = 0,
-	PIPE = 1,
-	REDIRECTION = 2,
-	WORD = 3,
-	SIMPLE_CMD = 4,
-	BUILTIN_CMD = 5,
-	ARGUMENT = 6,
+	END = 0,
+	WRONG_FD = 1,
+	PIPE = 2,
+	REDIRECTION = 3,
+	WORD = 4,
+	SIMPLE_CMD = 5,
+	BUILTIN_CMD = 6,
+	ARGUMENT = 7,
 }	t_type;
 
 typedef struct s_cmd
@@ -129,6 +130,8 @@ int ft_putenv(char *string);
 typedef struct s_token
 {
 	t_type	type;
+	int	in;
+	int	out;
 	union u_value
 	{
 		char	*single_ptr;
@@ -156,7 +159,7 @@ void			free_double_arr(char **arr);
 // init_input.c
 void			init_input(t_input *input);
 
-// lex_init_token.c lex_init_token_2.c
+// lex_init_single_token.c lex_init_single_token_2.c
 t_token			init_error_token(void);
 t_token			init_pipe_token(t_input *input);
 t_token			init_redirection_token(t_input *input);
@@ -164,7 +167,7 @@ t_token			init_cmd_token(t_input *input);
 t_token			init_simple_cmd_token(t_input *input);
 t_token			init_builtin_cmd_token(t_input *input);
 
-// lex_logic.c
+// lex_init_token_list.c
 t_token_node	*init_token_list(t_input *input);
 t_token_node	*init_token_node(t_input *input, int index);
 void			add_node_to_list(t_token_node **head, t_token_node **current, t_token_node *new_node);
@@ -183,12 +186,14 @@ void			init_words_arr(t_input *input);
 int				if_builtin_cmd(char *str);
 void			skip_whitespaces(t_input *input);
 int				get_word_length(t_input *input);
+char			*fetch_file_name(t_input *input);
+char			*find_next_token_to_print_in_err(t_input *input);
 
 // parse_init_tree_node.c
 bool			init_cmd_tree_branch(t_token_node **token, t_token_node **previous_token);
 bool			init_pipe_tree_branch(t_token_node **token, t_token_node **previous_token);
 
-// parse_logic.c
+// parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);
 void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input *input);
 t_cmd			*init_cmd(t_token_node *node, t_input *input);

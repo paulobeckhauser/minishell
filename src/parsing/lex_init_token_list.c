@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_logic.c                                        :+:      :+:    :+:   */
+/*   lex_init_token_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 15:43:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:55:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,18 @@ t_token_node	*init_token_list(t_input *input)
 		list = init_token_node(input, i++);
 		if (!list)
 			return (NULL);
-		if (list->token.type == WRONG)
+		if (list->token.type == END)
 		{
 			free(list);
 			break ;
 		}
-		add_node_to_list(&head, &current, list);
+		else if (list->token.type == WRONG_FD)
+		{
+			free(list);
+			continue ;
+		}
+		else
+			add_node_to_list(&head, &current, list);
 	}
 	input->token_count = i;
 	return (head);
@@ -94,7 +100,7 @@ t_type	find_token(t_input *input)
 	input->word_count = 0;
 	skip_whitespaces(input);
 	if (*input->input == 0)
-		type = WRONG;
+		type = END;
 	if (ft_strchr(input->symbols, *input->input))
 	{
 		if (*input->input == '|' && *(input->input + 1) != '|')
