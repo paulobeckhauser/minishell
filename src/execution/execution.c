@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/18 10:51:39 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:56:43 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,63 +55,127 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 	// structure->fds_pipes[i] = NULL;
 	create_pipes(structure);
 
-	//CREATE CHILD PROCESSES
-	// create_child_processes(structure);
-	structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1),
-			sizeof(pid_t));
+
+	structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1), sizeof(pid_t));
 	i = 0;
-	// while(i < structure->number_commands)
+
 	while(structure->table)
 	{
 		structure->pid[i] = fork();
 
-		if (structure->pid[i] == 0) // This is a child process
+		if (structure->pid[i] == 0)
 		{
 			if (i != 0)
 			{
 				dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
 				close(structure->fds_pipes[i - 1][0]);
 			}
-			if (i != structure->number_commands - 1)
+			
+			if (structure->table->next != NULL)
 			{
 				dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
 				close(structure->fds_pipes[i][1]);
 			}
-
-			// Close the unused ends of the pipes
-			if (i != 0)
-				close(structure->fds_pipes[i - 1][1]);
-			if (i != structure->number_commands - 1)
-				close(structure->fds_pipes[i][0]);
-			
-			execve(structure->path_commands[i], structure->table->arr, structure->envp);
-			exit(0);//ensure the child process ends after execve
+			// Execute the command
+        	execve(structure->path_commands[i], structure->table->arr, structure->envp);
 		}
-		else // This is the parent process
+
+		else
 		{
 			if (i != 0)
-				close(structure->fds_pipes[i - 1][1]);
-			if (i != structure->number_commands - 1)
-				close(structure->fds_pipes[i][0]);
+				close(structure->fds_pipes[i - 1][0]);
+			if (structure->table->next != NULL)
+				close(structure->fds_pipes[i][1]);
 		}
 
-
-		
-	
-		structure->table = structure->table->next;
 		i++;
+		structure->table = structure->table->next;
 
+	}
 
-
-		
-	}	
-	// WAIT CHILD PROCESSES
+		// // WAIT CHILD PROCESSES
 	i = 0;
 	while (i < structure->number_commands)
 	{
 		waitpid(structure->pid[i], NULL, 0);
 		i++;
 	}
+	// WAIT CHILD PROCESSES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	//CREATE CHILD PROCESSES
+	// create_child_processes(structure);
+	// structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1),
+	// 		sizeof(pid_t));
+	// i = 0;
+	// // while(i < structure->number_commands)
+	// while(structure->table)
+	// {
+	// 	structure->pid[i] = fork();
+
+	// 	if (structure->pid[i] == 0) // This is a child process
+	// 	{
+	// 		if (i != 0)
+	// 		{
+	// 			dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+	// 			close(structure->fds_pipes[i - 1][0]);
+	// 		}
+	// 		if (i != structure->number_commands - 1)
+	// 		{
+	// 			dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+	// 			close(structure->fds_pipes[i][1]);
+	// 		}
+
+	// 		// Close the unused ends of the pipes
+	// 		if (i != 0)
+	// 			close(structure->fds_pipes[i - 1][1]);
+	// 		if (i != structure->number_commands - 1)
+	// 			close(structure->fds_pipes[i][0]);
+			
+	// 		execve(structure->path_commands[i], structure->table->arr, structure->envp);
+	// 		exit(0);//ensure the child process ends after execve
+	// 	}
+	// 	else // This is the parent process
+	// 	{
+	// 		if (i != 0)
+	// 			close(structure->fds_pipes[i - 1][1]);
+	// 		if (i != structure->number_commands - 1)
+	// 			close(structure->fds_pipes[i][0]);
+	// 	}
+
+
+		
+	
+	// 	structure->table = structure->table->next;
+	// 	i++;
+
+
+
+		
+	// }	
+	// // WAIT CHILD PROCESSES
+	// i = 0;
+	// while (i < structure->number_commands)
+	// {
+	// 	waitpid(structure->pid[i], NULL, 0);
+	// 	i++;
+	// }
 	// WAIT CHILD PROCESSES
 
 		
