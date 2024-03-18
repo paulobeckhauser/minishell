@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/18 14:14:39 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:50:34 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,46 @@ typedef struct s_prompt
 typedef enum s_type
 {
 	END = 0,
-	WRONG_FD = 1,
-	PIPE = 2,
-	REDIRECTION = 3,
-	WORD = 4,
-	SIMPLE_CMD = 5,
-	BUILTIN_CMD = 6,
-	ARGUMENT = 7,
+	PIPE = 1,
+	REDIRECTION = 2,
+	WORD = 3,
+	SIMPLE_CMD = 4,
+	BUILTIN_CMD = 5,
+	ARGUMENT = 6,
 }	t_type;
+
+typedef struct s_in
+{
+	bool	redirect;
+	int		fd;
+	char	file_name;
+}	t_in;
+
+typedef struct s_out
+{
+	bool	redirect;
+	int		fd;
+	char	file_name;
+}	t_out;
+
+typedef struct s_token
+{
+	t_type	type;
+	t_in	in;
+	t_out	out;
+	union u_value
+	{
+		char	*single_ptr;
+		char	**double_ptr;
+	} t_value;
+}	t_token;
 
 typedef struct s_cmd
 {
 	t_type			type;
 	char			**arr;
-	bool			in_pipe;
-	int				in;
-	bool			out_pipe;
-	int				out;
+	t_in			in;
+	t_out			out;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -126,18 +149,6 @@ int ft_putenv(char *string);
 
 
 
-
-typedef struct s_token
-{
-	t_type	type;
-	int	in;
-	int	out;
-	union u_value
-	{
-		char	*single_ptr;
-		char	**double_ptr;
-	} t_value;
-}	t_token;
 
 typedef struct s_token_node
 {

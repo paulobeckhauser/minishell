@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/18 14:09:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:43:29 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,26 +76,6 @@ t_cmd	*init_cmd(t_token_node *node, t_prompt *prompt)
 		return (NULL);
 	cmd->type = node->token.type;
 	cmd->arr = node->token.t_value.double_ptr;
-	if (node->index != prompt->token_count - 1 && node->index != 0)
-	{
-		cmd->in_pipe = true;
-		cmd->out_pipe = true;
-	}
-	else if (node->index == 0 && prompt->token_count > 0)
-	{
-		cmd->in = STDIN_FILENO;
-		cmd->out_pipe = true;
-	}
-	else if (node->index == prompt->token_count - 1 && prompt->token_count > 0)
-	{
-		cmd->in_pipe = true;
-		cmd->out = STDOUT_FILENO;
-	}
-	else
-	{
-		cmd->in = STDIN_FILENO;
-		cmd->out = STDOUT_FILENO;
-	}
 	if (node->index == prompt->token_count - 1)
 		cmd->next = NULL;
 	return (cmd);

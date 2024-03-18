@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/18 14:02:54 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:51:33 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_token init_pipe_token(t_prompt *prompt)
 	++prompt->pipe_count;
 	return (token);
 }
+
 t_token	init_redirection_token(t_prompt *prompt)
 {
 	t_token	token;
@@ -48,17 +49,28 @@ t_token	init_redirection_token(t_prompt *prompt)
 	}
 	else
 	{
-		token.in = open(file_name, O_RDONLY);
-		if (token.in == -1 && ft_strlen(token.t_value.single_ptr) == 1
-			&& token.t_value.single_ptr[0] == '<')
+		if ()
 		{
-			ft_printf("bash: %s: No such file or directory\n", file_name);
-			token.type = WRONG_FD;
-			printf("%i\n", token.in);
+			token.in = init_in_struct(&token, file_name);
+			token.type = REDIRECTION;
 		}
-		token.type = REDIRECTION;
+		
 	}
 	return (token);
+}
+
+t_in	init_in_struct(t_token *token, char *file_name)
+{
+	t_in	in;
+
+	in.redirect = true;
+	in.fd = open(file_name, O_RDONLY);
+	if (in.fd == -1 && ft_strlen(token->t_value.single_ptr) == 1
+		&& token->t_value.single_ptr[0] == '<')
+		in.file_name = file_name;
+	else
+		in.file_name = NULL;   
+	return (in);
 }
 
 t_token	init_cmd_token(t_prompt *prompt)
