@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/18 10:04:42 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:51:39 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,47 +65,41 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 	{
 		structure->pid[i] = fork();
 
-
-		
-		if (structure->pid[i] == 0)
+		if (structure->pid[i] == 0) // This is a child process
 		{
-			
 			if (i != 0)
 			{
 				dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
 				close(structure->fds_pipes[i - 1][0]);
 			}
-
 			if (i != structure->number_commands - 1)
 			{
 				dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
 				close(structure->fds_pipes[i][1]);
 			}
 
-			// Close the unused ends of the pipesz
+			// Close the unused ends of the pipes
 			if (i != 0)
 				close(structure->fds_pipes[i - 1][1]);
 			if (i != structure->number_commands - 1)
 				close(structure->fds_pipes[i][0]);
-            execve(structure->path_commands[i], structure->table->arr, structure->envp);
-			exit(0);
-                      
+			
+			execve(structure->path_commands[i], structure->table->arr, structure->envp);
+			exit(0);//ensure the child process ends after execve
 		}
-		else
+		else // This is the parent process
 		{
 			if (i != 0)
 				close(structure->fds_pipes[i - 1][1]);
-			if (i != structure-> number_commands - 1)
+			if (i != structure->number_commands - 1)
 				close(structure->fds_pipes[i][0]);
 		}
-		i++;
+
+
+		
+	
 		structure->table = structure->table->next;
-
-
-
-
-
-
+		i++;
 
 
 
