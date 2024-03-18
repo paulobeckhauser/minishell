@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 20:53:26 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:14:39 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 # include <stdbool.h>
 
 // Store variables to handle input (SZYMON)
-typedef struct s_input
+typedef struct s_prompt
 {
 	char	*buf;
-	char	*input;
+	char	*msg;
 	char	*start_ptr_save;
 	char	*curr_ptr_save;
 	char	*symbols;
@@ -48,7 +48,7 @@ typedef struct s_input
 	int		word_count;
 	int		pipe_count;
 	int		token_count;
-}	t_input;
+}	t_prompt;
 
 typedef enum s_type
 {
@@ -150,44 +150,44 @@ typedef struct s_token_node
 }	t_token_node;
 
 // default_display.c
-void			default_display_with_history(t_input *input);
+void			default_display_with_history(t_prompt *prompt);
 
 // free.c
-void			free_input(t_input *input);
+void			free_prompt(t_prompt *prompt);
 void			free_double_arr(char **arr);
 
 // init_input.c
-void			init_input(t_input *input);
+void			init_prompt(t_prompt *prompt);
 
 // lex_init_single_token.c lex_init_single_token_2.c
 t_token			init_error_token(void);
-t_token			init_pipe_token(t_input *input);
-t_token			init_redirection_token(t_input *input);
-t_token			init_cmd_token(t_input *input);
-t_token			init_simple_cmd_token(t_input *input);
-t_token			init_builtin_cmd_token(t_input *input);
+t_token			init_pipe_token(t_prompt *prompt);
+t_token			init_redirection_token(t_prompt *prompt);
+t_token			init_cmd_token(t_prompt *prompt);
+t_token			init_simple_cmd_token(t_prompt *prompt);
+t_token			init_builtin_cmd_token(t_prompt *prompt);
 
 // lex_init_token_list.c
-t_token_node	*init_token_list(t_input *input);
-t_token_node	*init_token_node(t_input *input, int index);
+t_token_node	*init_token_list(t_prompt *prompt);
+t_token_node	*init_token_node(t_prompt *prompt, int index);
 void			add_node_to_list(t_token_node **head, t_token_node **current, t_token_node *new_node);
-t_token			init_token_struct(t_input *input);
-t_type			find_token(t_input *input);
+t_token			init_token_struct(t_prompt *prompt);
+t_type			find_token(t_prompt *prompt);
 
 // parser.c
 void			parser(t_info *structure);
-t_token_node	*lex(t_input *input);
-t_cmd			*parse(t_token_node *tokens, t_input *input);
+t_token_node	*lex(t_prompt *prompt);
+t_cmd			*parse(t_token_node *tokens, t_prompt *prompt);
 
 // lex_utils.c lex_utils_2.c
-char			*verify_redirection(t_input *input);
-void			count_words(t_input *input);
-void			init_words_arr(t_input *input);
+char			*verify_redirection(t_prompt *prompt);
+void			count_words(t_prompt *prompt);
+void			init_words_arr(t_prompt *prompt);
 int				if_builtin_cmd(char *str);
-void			skip_whitespaces(t_input *input);
-int				get_word_length(t_input *input);
-char			*fetch_file_name(t_input *input);
-char			*find_next_token_to_print_in_err(t_input *input);
+void			skip_whitespaces(t_prompt *prompt);
+int				get_word_length(t_prompt *prompt);
+char			*fetch_file_name(t_prompt *prompt);
+char			*find_next_token_to_print_in_err(t_prompt *prompt);
 
 // parse_init_tree_node.c
 bool			init_cmd_tree_branch(t_token_node **token, t_token_node **previous_token);
@@ -195,8 +195,8 @@ bool			init_pipe_tree_branch(t_token_node **token, t_token_node **previous_token
 
 // parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);
-void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_input *input);
-t_cmd			*init_cmd(t_token_node *node, t_input *input);
+void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_prompt *prompt);
+t_cmd			*init_cmd(t_token_node *node, t_prompt *prompt);
 
 // print.c
 void 			print_tree(t_token_node *node, int depth, char *left_right);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_input.c                                       :+:      :+:    :+:   */
+/*   init_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,9 @@
 
 #include "../../inc/minishell.h"
 
-void	init_input(t_input *input)
+void	init_prompt(t_prompt *prompt)
 {
-	input = ft_memset(input, 0, sizeof(t_input));
-	input->symbols = "|<>";
-	input->whitespace = " \t\r\n\v";
+	prompt = ft_memset(prompt, 0, sizeof(t_prompt));
+	prompt->symbols = "|<>";
+	prompt->whitespace = " \t\r\n\v";
 }

@@ -6,17 +6,17 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 15:39:57 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:14:15 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	free_input(t_input *input)
+void	free_prompt(t_prompt *prompt)
 {
-	input->input = input->start_ptr_save;
-	free(input->buf);
-	free(input->input);
+	prompt->msg = prompt->start_ptr_save;
+	free(prompt->buf);
+	free(prompt->msg);
 }
 
 void	free_double_arr(char **arr)

@@ -6,13 +6,13 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/17 20:55:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:05:10 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-t_token_node	*init_token_list(t_input *input)
+t_token_node	*init_token_list(t_prompt *prompt)
 {
 	t_token_node	*list;
 	t_token_node	*head;
@@ -24,7 +24,7 @@ t_token_node	*init_token_list(t_input *input)
 	i = 0;
 	while (1)
 	{
-		list = init_token_node(input, i++);
+		list = init_token_node(prompt, i++);
 		if (!list)
 			return (NULL);
 		if (list->token.type == END)
@@ -40,18 +40,18 @@ t_token_node	*init_token_list(t_input *input)
 		else
 			add_node_to_list(&head, &current, list);
 	}
-	input->token_count = i;
+	prompt->token_count = i;
 	return (head);
 }
 
-t_token_node	*init_token_node(t_input *input, int index)
+t_token_node	*init_token_node(t_prompt *prompt, int index)
 {
 	t_token_node	*node;
 
 	node = ft_calloc(1, sizeof(t_token_node));
 	if (!node)
 		return (NULL);
-	node->token = init_token_struct(input);
+	node->token = init_token_struct(prompt);
 	node->next = NULL;
 	node->index = index;
 	return (node);
@@ -72,40 +72,40 @@ void	add_node_to_list(t_token_node **head, t_token_node **current,
 	}
 }
 
-t_token	init_token_struct(t_input *input)
+t_token	init_token_struct(t_prompt *prompt)
 {
 	t_type	type;
 	t_token	token;
 
-	type = find_token(input);
+	type = find_token(prompt);
 	if (type == PIPE)
-		token = init_pipe_token(input);
+		token = init_pipe_token(prompt);
 	else if (type == REDIRECTION)
-		token = init_redirection_token(input);
+		token = init_redirection_token(prompt);
 	else if (type == WORD)
-		token = init_cmd_token(input);
+		token = init_cmd_token(prompt);
 	else
 		token = init_error_token();
 	if (type != WORD && type != REDIRECTION)
-		input->input++;
+		prompt->msg++;
 	return (token);
 }
 
-t_type	find_token(t_input *input)
+t_type	find_token(t_prompt *prompt)
 {
 	t_type	type;
 
-	if (input->start_ptr_save == NULL)
-		input->start_ptr_save = input->input;
-	input->word_count = 0;
-	skip_whitespaces(input);
-	if (*input->input == 0)
+	if (prompt->start_ptr_save == NULL)
+		prompt->start_ptr_save = prompt->msg;
+	prompt->word_count = 0;
+	skip_whitespaces(prompt);
+	if (*prompt->msg == 0)
 		type = END;
-	if (ft_strchr(input->symbols, *input->input))
+	if (ft_strchr(prompt->symbols, *prompt->msg))
 	{
-		if (*input->input == '|' && *(input->input + 1) != '|')
+		if (*prompt->msg == '|' && *(prompt->msg + 1) != '|')
 			type = PIPE;
-		else if (*input->input == '<' || *input->input == '>')
+		else if (*prompt->msg == '<' || *prompt->msg == '>')
 			type = REDIRECTION;
 	}
 	else
