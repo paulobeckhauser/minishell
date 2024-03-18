@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 15:40:00 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:37:08 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ void	default_display_with_history(t_input *input)
 		perror("getcwd() error");
 		return ;
 	}
-	input->buf = ft_strjoin(input->buf, "$ ");
-	input->input = readline(input->buf);
+	//ADDING SOME COLOR JUST TO HELP
+	char *color_prompt = ft_strjoin("\001\033[1;32m\002", input->buf);
+	color_prompt = ft_strjoin(color_prompt, "\001\033[0m\002");
+	color_prompt = ft_strjoin(color_prompt, "$> ");
+	input->input = readline(color_prompt);
+	//ADDING SOME COLOR JUST TO HELP
+	// input->buf = ft_strjoin(input->buf, "$ ");
+	// input->input = readline(input->buf);
 	add_history(input->input);
 }

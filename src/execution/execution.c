@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 14:49:55 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:04:42 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,98 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 	get_number_commands(structure);
 	store_commands(structure);
 	store_path_commands(structure);
+	// // CREATE PIPES
+	// structure->fds_pipes = (int **)ft_calloc((structure->number_commands), sizeof(int *));
+	// if (structure->fds_pipes == NULL)
+	// {
+	// 	perror("Memory allocation failed");
+	// 	return ;
+	// }
 
-	
+	// i = 0;
+	// while (i < structure->number_commands - 1)
+	// {
+	// 	structure->fds_pipes[i] = (int *)ft_calloc(2 + 1, sizeof(int));
+	// 	if (structure->fds_pipes[i] == NULL)
+	// 	{
+	// 		perror("Memory allocation failed");
+	// 		return ;
+	// 	}
+	// 	if (pipe(structure->fds_pipes[i]) == -1)
+	// 		perror("Pipe creation failed");
+	// 	i++;
+	// }
+	// structure->fds_pipes[i] = NULL;
+	create_pipes(structure);
 
+	//CREATE CHILD PROCESSES
+	// create_child_processes(structure);
+	structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1),
+			sizeof(pid_t));
 	i = 0;
-	while (structure->path_commands[i])
+	// while(i < structure->number_commands)
+	while(structure->table)
 	{
-		printf("%s\n", structure->path_commands[i]);
+		structure->pid[i] = fork();
+
+
+		
+		if (structure->pid[i] == 0)
+		{
+			
+			if (i != 0)
+			{
+				dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+				close(structure->fds_pipes[i - 1][0]);
+			}
+
+			if (i != structure->number_commands - 1)
+			{
+				dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+				close(structure->fds_pipes[i][1]);
+			}
+
+			// Close the unused ends of the pipesz
+			if (i != 0)
+				close(structure->fds_pipes[i - 1][1]);
+			if (i != structure->number_commands - 1)
+				close(structure->fds_pipes[i][0]);
+            execve(structure->path_commands[i], structure->table->arr, structure->envp);
+			exit(0);
+                      
+		}
+		else
+		{
+			if (i != 0)
+				close(structure->fds_pipes[i - 1][1]);
+			if (i != structure-> number_commands - 1)
+				close(structure->fds_pipes[i][0]);
+		}
+		i++;
+		structure->table = structure->table->next;
+
+
+
+
+
+
+
+
+
+		
+	}	
+	// WAIT CHILD PROCESSES
+	i = 0;
+	while (i < structure->number_commands)
+	{
+		waitpid(structure->pid[i], NULL, 0);
 		i++;
 	}
+	// WAIT CHILD PROCESSES
+
+		
+
+	// //
 
 
 	// allocate_memory_commands

@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/17 14:21:14 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/18 09:14:13 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,8 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_number_commands.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_path_commands.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_commands.c \
+						$(SRC_DIR)$(EXECUTION_DIR)create_pipes.c \
+						$(SRC_DIR)$(EXECUTION_DIR)create_child_processes.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \

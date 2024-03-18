@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 14:20:32 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:13:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,12 @@ typedef struct s_info
 	char **envp; // maybe we don't need to restore, since use only once
     int is_builtin;
     char *path_env;
-
-
+	int		number_commands;
 	char **commands;
     char **possible_paths;
-
-	
     char **path_commands;
-
-	int		number_commands;
 	int **fds_pipes;
+	pid_t	*pid;
 	
 
     t_cmd	*table;
@@ -103,6 +99,8 @@ void	get_path_env(t_info *structure);
 void get_number_commands(t_info *structure);
 void store_path_commands(t_info *structure);
 void	store_commands(t_info *structure);
+void	create_pipes(t_info *structure);
+void	create_child_processes(t_info *structure);
 
 
 
