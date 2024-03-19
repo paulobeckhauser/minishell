@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/18 19:43:29 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:43:48 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_token_node	*init_binary_tree(t_token_node **token)
 	previous_token = NULL;
 	while ((*token)->next)
 	{
+		if (init_redirection_tree_branch(token, &previous_token))
+			continue ;
 		if (init_cmd_tree_branch(token, &previous_token))
 			continue ;
 		else if (init_pipe_tree_branch(token, &previous_token))

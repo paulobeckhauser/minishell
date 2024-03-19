@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/18 14:13:50 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/19 20:14:48 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,9 +92,10 @@ LIBFT			:= ./libs/libft/libft.a
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)free.c \
 						$(SRC_DIR)$(PARSING_DIR)init_prompt.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_single_token_2.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_single_token.c \
+						$(SRC_DIR)$(PARSING_DIR)init_redirection.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_init_token_list.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_init_token_type_2.c \
+						$(SRC_DIR)$(PARSING_DIR)lex_init_token_type.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_utils_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_utils.c \
 						$(SRC_DIR)$(PARSING_DIR)parse_init_tree_node.c \

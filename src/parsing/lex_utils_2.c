@@ -6,11 +6,18 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/18 14:07:34 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:36:08 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	skip_whitespaces(t_prompt *prompt)
+{
+	while (ft_strchr(prompt->whitespace, *prompt->msg)
+		&& *prompt->msg)
+		prompt->msg++;
+}
 
 int	get_word_length(t_prompt *prompt)
 {
@@ -39,11 +46,8 @@ char	*fetch_file_name(t_prompt *prompt)
 	if (!file_name)
 		return (NULL);
 	start_ptr_save = file_name;
-	while (!ft_strchr(prompt->whitespace, *prompt->msg
-	) && !ft_strchr(prompt->symbols, *prompt->msg
-	))
-		*file_name++ = *prompt->msg
-		++;
+	while (!ft_strchr(prompt->whitespace, *prompt->msg) && !ft_strchr(prompt->symbols, *prompt->msg))
+		*file_name++ = *prompt->msg++;
 	return (start_ptr_save);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/18 14:18:40 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:43:26 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	parser(t_info *structure)
 	tokens = lex(&prompt);
 	if (!tokens)
 		return ;
+	print_token_list(tokens);
 	structure->table = parse(tokens, &prompt);
 	if (!structure->table)
 		return ;
@@ -46,6 +47,7 @@ t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 	t_cmd			*head;
 	
 	tree = init_binary_tree(&tokens);
+	print_tree(tree, 0, "(ROOT)");
 	head = NULL;
 	init_cmd_table(tree, &table, &head, prompt);
 	return (head);

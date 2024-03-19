@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/18 15:02:35 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:12:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_token_node	*init_token_list(t_prompt *prompt)
 		}
 		add_node_to_list(&head, &current, list);
 	}
+	if (prompt->heredoc_count > 0)
+		init_heredoc_arr(prompt, head);
 	prompt->token_count = i;
 	return (head);
 }
@@ -79,7 +81,7 @@ t_token	init_token_struct(t_prompt *prompt)
 	else if (type == WORD)
 		token = init_cmd_token(prompt);
 	else
-		token = init_error_token();
+		token = init_end_token();
 	if (type != WORD && type != REDIRECTION)
 		prompt->msg++;
 	return (token);

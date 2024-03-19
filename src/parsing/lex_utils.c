@@ -6,11 +6,24 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/18 14:06:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:08:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	init_heredoc_arr(t_prompt *prompt, t_token_node *list)
+{
+	prompt->heredoc = malloc(prompt->heredoc_count * sizeof(char *));
+	if (!prompt->heredoc)
+		return ;
+	while (list)
+	{
+		if (list->token.in.heredoc)
+			*prompt->heredoc++ = list->token.out.file_name;
+		list = list->next;
+	}
+}
 
 char	*verify_redirection(t_prompt *prompt)
 {
@@ -27,6 +40,7 @@ char	*verify_redirection(t_prompt *prompt)
 	else if (*prompt->msg == '<' && *prompt->msg == *(prompt->msg + 1))
 	{
 		prompt->msg += 2;
+		prompt->heredoc_count++;
 		return ("<<");
 	}
 	else if (*prompt->msg == '>' && *prompt->msg == *(prompt->msg + 1))
@@ -123,11 +137,4 @@ int	if_builtin_cmd(char *str)
 	}
 	free(builtins);
 	return (0);
-}
-
-void	skip_whitespaces(t_prompt *prompt)
-{
-	while (ft_strchr(prompt->whitespace, *prompt->msg)
-		&& *prompt->msg)
-		prompt->msg++;
 }
