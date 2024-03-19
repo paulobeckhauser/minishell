@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/19 13:50:27 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:20:26 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,149 +53,106 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 	// 	i++;
 	// }
 	// structure->fds_pipes[i] = NULL;
-	create_pipes(structure);
 	
-	structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1), sizeof(pid_t));
-	i = 0;
-
-	while(structure->table)
+	// if (structure->number_commands == 1 && )
+	
+	
+	if (structure->table->type == BUILTIN_CMD && structure->number_commands == 1)
 	{
-		structure->pid[i] = fork();
+		if (is_cd_command(structure->table->arr))
+			execute_cd_command(structure->table->arr); // cd with only a relative or absolute path
+		if (is_pwd_command(structure->table->arr))
+			execute_pwd_command(structure->table->arr);
+		if (is_echo_command(structure->table->arr))
+			execute_echo_command(structure->table->arr, 1); // need to implement reedirection
+		if (is_export_command(structure->table->arr))
+			execute_export_command(structure->table->arr, envp);
+		if (is_unset_command(structure->table->arr))
+			execute_unset_command(structure->table->arr);
+		if (is_env_command(structure->table->arr))
+			execute_env_command(structure->table->arr);
+		if (is_exit_command(structure->table->arr))
+			execute_exit_command(structure->table->arr);
+	}
+	
+	else
+	{
+		create_pipes(structure);
+		structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1), sizeof(pid_t));
+		i = 0;
 
-		if (structure->pid[i] == 0)
-		{ 
-			// if (structure->table->redirection)
-			if (i != 0)
-			{
-				dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
-				close(structure->fds_pipes[i - 1][0]);
-			}
-			
-			if (structure->table->next != NULL)
-			{
-				dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
-				close(structure->fds_pipes[i][1]);
-			}
-
-
-			// HANDLE REDIRECTIONS
-			// -> Pseudocode
-			// if (structure->table->redirection)
-			// {
-			// 	int fd;
-				
-			// 	if (structure->table->redirection_type == REDIRECT_OUT)
-			// 	{
-			// 		int fd_out
-			// 		fd_out = open(structure->table->redirection_file, O_WRONLY | O_CREAT, 0644);
-			// 		dup2(fd_out, STDOUT_FILENO);
-					// close(fd_out) // Close the file descriptor after it's duplicated
-			// 	}
-			// 	if (structure->table->redirection_type == REDIRECT_IN)
-			// 	{
-			// 		int fd_in = open(structure->table->redirection_file, O_RDONLY);
-			// 		dup2(fd_in, STDIN_FILENO);
-			// 		close(fd_in); // Close the file descriptor after it's duplicated
-			// 	}
-			// }
-
-			// HANDLE REDIRECTIONS
-
-
-			
-			// Execute the command
-        	execve(structure->path_commands[i], structure->table->arr, structure->envp);
-		}
-
-		else
+		while(structure->table)
 		{
-			if (i != 0)
-				close(structure->fds_pipes[i - 1][0]);
-			if (structure->table->next != NULL)
-				close(structure->fds_pipes[i][1]);
+			structure->pid[i] = fork();
+
+			if (structure->pid[i] == 0)
+			{ 
+				// if (structure->table->redirection)
+				if (i != 0)
+				{
+					dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+					close(structure->fds_pipes[i - 1][0]);
+				}
+				
+				if (structure->table->next != NULL)
+				{
+					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+					close(structure->fds_pipes[i][1]);
+				}
+
+
+				// HANDLE REDIRECTIONS
+				// -> Pseudocode
+				// if (structure->table->redirection)
+				// {
+				// 	int fd;
+					
+				// 	if (structure->table->redirection_type == REDIRECT_OUT)
+				// 	{
+				// 		int fd_out
+				// 		fd_out = open(structure->table->redirection_file, O_WRONLY | O_CREAT, 0644);
+				// 		dup2(fd_out, STDOUT_FILENO);
+						// close(fd_out) // Close the file descriptor after it's duplicated
+				// 	}
+				// 	if (structure->table->redirection_type == REDIRECT_IN)
+				// 	{
+				// 		int fd_in = open(structure->table->redirection_file, O_RDONLY);
+				// 		dup2(fd_in, STDIN_FILENO);
+				// 		close(fd_in); // Close the file descriptor after it's duplicated
+				// 	}
+				// }
+
+				// HANDLE REDIRECTIONS
+
+
+				
+				// Execute the command
+				execve(structure->path_commands[i], structure->table->arr, structure->envp);
+			}
+
+			else
+			{
+				if (i != 0)
+					close(structure->fds_pipes[i - 1][0]);
+				if (structure->table->next != NULL)
+					close(structure->fds_pipes[i][1]);
+			}
+
+			i++;
+			structure->table = structure->table->next;
+
 		}
 
-		i++;
-		structure->table = structure->table->next;
 
+
+		// // WAIT CHILD PROCESSES
+		i = 0;
+		while (i < structure->number_commands)
+		{
+			waitpid(structure->pid[i], NULL, 0);
+			i++;
+		}
+		// WAIT CHILD PROCESSES
 	}
-
-
-
-	// // WAIT CHILD PROCESSES
-	i = 0;
-	while (i < structure->number_commands)
-	{
-		waitpid(structure->pid[i], NULL, 0);
-		i++;
-	}
-	// WAIT CHILD PROCESSES
-
-
-	// while(structure->table)
-	// {
-	// 	if (structure->table->type == BUILTIN_CMD)
-	// 	{
-	// 		if (is_cd_command(structure->table->arr))
-	// 			execute_cd_command(structure->table->arr); // cd with only a relative or absolute path
-	// 		if (is_pwd_command(structure->table->arr))
-	// 			execute_pwd_command(structure->table->arr);
-	// 		if (is_echo_command(structure->table->arr))
-	// 			execute_echo_command(structure->table->arr, 1); // need to implement reedirection
-	// 		if (is_export_command(structure->table->arr))
-	// 			execute_export_command(structure->table->arr, envp);
-	// 		if (is_unset_command(structure->table->arr))
-	// 			execute_unset_command(structure->table->arr);
-	// 		if (is_env_command(structure->table->arr))
-	// 			execute_env_command(structure->table->arr);
-	// 		if (is_exit_command(structure->table->arr))
-	// 			execute_exit_command(structure->table->arr);
-	// 	}
-	// 	else
-	// 	{
-			
-
-
-			
-	// 		structure->possible_paths = split_concat_command(structure->path_env,
-	// 				':', structure->table->arr[0]);
-
-	// 		i = 0;
-	// 		while (structure->possible_paths[i])
-	// 		{
-	// 			if (access(structure->possible_paths[i], X_OK) == 0)
-	// 				break ;
-
-	// 			i++;
-	// 		}
-	// 		if (!structure->possible_paths[i])
-	// 			i--;
-	// 		structure->path_command = ft_strdup(structure->possible_paths[i]);
-	// 		free_2d_array(structure->possible_paths);
-
-	// 		child_pid = fork();
-	// 		if (child_pid < 0)
-	// 		{
-	// 			perror("Fork failed");
-	// 			exit(1);
-	// 		}
-
-	// 		if (child_pid == 0)
-	// 		{
-	// 			if (execve(structure->path_command, structure->table->arr,
-	// 					envp) < 0)
-	// 			{
-	// 				perror(structure->table->arr[0]);
-	// 				exit(1);
-	// 			}
-	// 			printf("This won't be printed if execvp is successful\n");
-	// 		}
-	// 		else
-	// 			waitpid(child_pid, NULL, 0);
-	// 	}
-			
-
-	// 	structure->table = structure->table->next;
-	// }
 
 }
