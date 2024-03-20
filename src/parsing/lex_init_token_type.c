@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/19 23:20:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:23:07 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token	init_end_token(void)
 	token.in.file_name = NULL;
 	token.in.heredoc = false;
 	token.out.fd = 1;
-	token.in.file_name = NULL;
+	token.out.file_name = NULL;
 	token.type = END;
 	token.t_value.single_ptr = NULL;
 	return (token);
@@ -34,7 +34,7 @@ t_token init_pipe_token(t_prompt *prompt)
 	token.in.file_name = NULL;
 	token.in.heredoc = false;
 	token.out.fd = 1;
-	token.in.file_name = NULL;
+	token.out.file_name = NULL;
 	token.type = PIPE;
 	token.t_value.single_ptr = "|";
 	++prompt->pipe_count;
@@ -50,7 +50,7 @@ t_token	init_redirection_token(t_prompt *prompt)
 	token.in.file_name = NULL;
 	token.in.heredoc = false;
 	token.out.fd = 1;
-	token.in.file_name = NULL;
+	token.out.file_name = NULL;
 	token.t_value.single_ptr = verify_redirection(prompt);
 	file_name = fetch_file_name(prompt);
 	if (!file_name)
@@ -90,7 +90,7 @@ t_token init_builtin_cmd_token(t_prompt *prompt)
 	token.in.file_name = NULL;
 	token.in.heredoc = false;
 	token.out.fd = 1;
-	token.in.file_name = NULL;
+	token.out.file_name = NULL;
 	token.type = BUILTIN_CMD;
 	token.t_value.double_ptr = prompt->arr;
 	return (token);

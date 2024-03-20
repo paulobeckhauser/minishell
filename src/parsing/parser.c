@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/19 20:43:26 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:52:55 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	parser(t_info *structure)
 	tokens = lex(&prompt);
 	if (!tokens)
 		return ;
-	print_token_list(tokens);
 	structure->table = parse(tokens, &prompt);
 	if (!structure->table)
 		return ;

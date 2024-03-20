@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/19 20:42:05 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:18:20 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,12 @@ char			*find_next_token_to_print_in_err(t_prompt *prompt);
 // parse_init_tree_node.c
 bool			init_redirection_tree_branch(t_token_node **token, t_token_node **previous_token);
 bool			init_cmd_tree_branch(t_token_node **token, t_token_node **previous_token);
-bool			init_pipe_tree_branch(t_token_node **token, t_token_node **previous_token);
+bool			init_pipe_tree_branch(t_token_node **token, t_token_node **previous_token, t_prompt *prompt);
+bool	mark_redirection_as_previous(t_token_node **token, t_token_node **previous_token);
+bool	join_redirection_to_cmd(t_token_node **token, t_token_node **previous_token);
+bool	mark_cmd_as_previous(t_token_node **token, t_token_node **previous_token);
+bool	join_cmd_to_pipe(t_token_node **token, t_token_node **previous_token);
+void	find_first_cmd_token(t_token_node *token, t_token_node **head);
 
 // parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);
