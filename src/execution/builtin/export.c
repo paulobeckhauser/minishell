@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/16 18:22:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:40:04 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ int is_export_command(char **command)
 void    execute_export_command(char **command, char **envp)
 {
     int i;
+    char **array;
 
     if (command[1] == NULL)
     {
         i = 0;
         while(envp[i])
         {
-            printf("declare -x %s\n", envp[i]);
+            
+            array = ft_split(envp[i], '=');
+            printf("declare -x %s=\"%s\"\n", array[0], array[1]);
+            free_2d_array(array);
             i++;
         }
 
@@ -34,12 +38,55 @@ void    execute_export_command(char **command, char **envp)
     else
     {
         
-        char **name;
+        // char **array;
+        char *str;
+        char *sig = "=";
+        char *quote = "\"";
 
-        name = ft_split(command[1], '=');
+        array = ft_split(command[1], '=');
 
-        printf("%s\n", name[0]);
-        printf("%s\n", name[1]);
+        // printf("%s\n", array[0]);
+        // printf("%s\n", array[1]);
+
+
+        i = 0;
+        while(envp[i])
+        {
+            i++;
+        }
+
+        // printf("%d\n", i);
+
+
+        if (!array[1])
+        {
+            envp[i] = array[0];
+            i++;
+            envp[i] = NULL;
+        }
+
+        if (array[1])
+        {
+            // str = (char *)malloc((ft_strlen(array[0]) + ft_strlen(sig) + ft_strlen(array[1]) + ft_strlen(quote) + ft_strlen(quote) + 1) * sizeof(char));
+            // ft_strlcpy(str, array[0], ft_strlen(array[0]) + 1);
+            // ft_strlcat(str, sig, ft_strlen(str) + ft_strlen(sig) + 1);
+            // ft_strlcat(str, quote, ft_strlen(str) + ft_strlen(quote) + 1);
+            // ft_strlcat(str, array[1], ft_strlen(str) + ft_strlen(array[1]) + 1);
+            // ft_strlcat(str, quote, ft_strlen(str) + ft_strlen(quote) + 1);
+
+
+            // envp[i] = ft_strdup(str);
+            envp[i] = ft_strdup(command[1]);
+            i++;
+            envp[i] = NULL;
+        //     // envp[i] = ft_strl
+
+        //     new_string = (char *)malloc((ft_strlen(array[1]) + ft_strlen(sig) + ft_strlen(value) + ft_strlen(quote) + ft_strlen(quote) + 1)  * sizeof(char));
+            
+        //     envp[i] = command[1] ;
+        //     i++;
+        //     envp[i] = NULL;
+        }
 
         
         

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/19 16:20:26 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:43:34 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,6 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 	get_number_commands(structure);
 	store_commands(structure);
 	store_path_commands(structure);
-	// // CREATE PIPES
-	// structure->fds_pipes = (int **)ft_calloc((structure->number_commands), sizeof(int *));
-	// if (structure->fds_pipes == NULL)
-	// {
-	// 	perror("Memory allocation failed");
-	// 	return ;
-	// }
-
-	// i = 0;
-	// while (i < structure->number_commands - 1)
-	// {
-	// 	structure->fds_pipes[i] = (int *)ft_calloc(2 + 1, sizeof(int));
-	// 	if (structure->fds_pipes[i] == NULL)
-	// 	{
-	// 		perror("Memory allocation failed");
-	// 		return ;
-	// 	}
-	// 	if (pipe(structure->fds_pipes[i]) == -1)
-	// 		perror("Pipe creation failed");
-	// 	i++;
-	// }
-	// structure->fds_pipes[i] = NULL;
-	
-	// if (structure->number_commands == 1 && )
-	
-	
 	if (structure->table->type == BUILTIN_CMD && structure->number_commands == 1)
 	{
 		if (is_cd_command(structure->table->arr))
@@ -74,7 +48,6 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 		if (is_exit_command(structure->table->arr))
 			execute_exit_command(structure->table->arr);
 	}
-	
 	else
 	{
 		create_pipes(structure);
