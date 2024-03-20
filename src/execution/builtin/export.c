@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/20 11:40:04 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:50:13 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,54 @@ int is_export_command(char **command)
     return(ft_strcmp(command[0], "export") == 0);
 }
 
+static void sort_env_variables(char **envp)
+{
+    int length;
+    int i;
+    int j;
+    int j_min;
+    char *temp;
+    
+    length = 0;
+    while(envp[length])
+        length++;
+        
+    i = 0;
+    while(i < length - 1)
+    {
+        j_min = i;
+        j = i + 1;
+        while(j < length)
+        {
+            if (strcmp(envp[j], envp[j_min]) < 0)
+            {
+                j_min = j;
+            }
+            j++;
+        }
+        if (j_min != i)
+        {
+            temp = envp[i];
+            envp[i] = envp[j_min];
+            envp[j_min] = temp;
+        }
+        
+        i++;
+    }
+}
+
 void    execute_export_command(char **command, char **envp)
 {
+    int length;
     int i;
     char **array;
-
+    int j;
+    int j_min;
+    char *temp;
+    
     if (command[1] == NULL)
     {
+        sort_env_variables(envp);             
         i = 0;
         while(envp[i])
         {

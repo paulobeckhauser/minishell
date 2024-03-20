@@ -17,3 +17,8 @@ file3
 test
 
 test2
+
+*.c
+
+a.out
+file*
