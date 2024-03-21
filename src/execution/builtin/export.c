@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 11:47:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:42:49 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ int	is_export_command(char **command)
 	return (ft_strcmp(command[0], "export") == 0);
 }
 
-static void	execution_without_args(char **envp, int i, char **array)
+static void	export_without_args(char **envp, char **array)
 {
+	int	i;
+
 	selectiton_sort_variables(envp);
 	i = 0;
 	while (envp[i])
@@ -33,31 +35,66 @@ static void	execution_without_args(char **envp, int i, char **array)
 	}
 }
 
+//check if env variable already exists
+// static int check_env_variable()
+// {
+	
+// }
+
+static void	export_with_args(char **array, char **command, char **envp)
+{
+	int	i;
+
+
+
+	// printf("%s\n", command[0]);
+	// printf("%s\n", command[1]);
+	// int iter;
+
+	// iter = 0;
+
+	// while (envp[iter])
+	// {
+		
+		
+	// 	printf("%s\n", envp[iter]);
+	// 	iter++;
+	// }
+	
+
+	
+	
+
+
+	
+
+	// array = ft_split(command[1], '=');
+	// i = 0;
+	// while (envp[i])
+	// 	i++;
+	// if (array[1])
+	// {
+	// 	envp[i] = ft_strdup(command[1]);
+	// 	i++;
+	// 	envp[i] = NULL;
+	// }
+	// else
+	// {
+	// 	envp[i] = ft_strdup(array[0]);
+	// 	i++;
+	// 	envp[i] = NULL;
+	// }
+}
+
 void	execute_export_command(char **command, char **envp)
 {
-	int		length;
-	int		i;
 	char	**array;
 
 	if (command[1] == NULL)
-		execution_without_args(envp, i, array);
+		export_without_args(envp, array);
 	else
-	{
-		array = ft_split(command[1], '=');
-		i = 0;
-		while (envp[i])
-			i++;
-		if (array[1])
-		{
-			envp[i] = ft_strdup(command[1]);
-			i++;
-			envp[i] = NULL;
-		}
-		else
-		{
-			envp[i] = ft_strdup(array[0]);
-			i++;
-			envp[i] = NULL;
-		}
-	}
+		export_with_args(array, command, envp);
+
+	
+	
 }
