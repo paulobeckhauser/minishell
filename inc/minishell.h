@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/20 19:18:20 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:51:16 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,17 +200,15 @@ char			*fetch_file_name(t_prompt *prompt);
 char			*find_next_token_to_print_in_err(t_prompt *prompt);
 
 // parse_init_tree_node.c
-bool			init_redirection_tree_branch(t_token_node **token, t_token_node **previous_token);
-bool			init_cmd_tree_branch(t_token_node **token, t_token_node **previous_token);
-bool			init_pipe_tree_branch(t_token_node **token, t_token_node **previous_token, t_prompt *prompt);
-bool	mark_redirection_as_previous(t_token_node **token, t_token_node **previous_token);
-bool	join_redirection_to_cmd(t_token_node **token, t_token_node **previous_token);
-bool	mark_cmd_as_previous(t_token_node **token, t_token_node **previous_token);
-bool	join_cmd_to_pipe(t_token_node **token, t_token_node **previous_token);
-void	find_first_cmd_token(t_token_node *token, t_token_node **head);
+bool			mark_redirection_as_previous(t_token_node **token, t_token_node **previous_token);
+bool			join_redirection_to_cmd(t_token_node **token, t_token_node **previous_token);
+bool			mark_cmd_as_previous(t_token_node **token, t_token_node **previous_token);
+bool			join_cmd_to_pipe(t_token_node **token, t_token_node **previous_token);
 
 // parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);
+void			find_first_cmd_token(t_token_node *token, t_token_node **head);
+void			delete_redirection_tokens_from_list(t_token_node **token, t_token_node **head);
 void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_prompt *prompt);
 t_cmd			*init_cmd(t_token_node *node, t_prompt *prompt);
 

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/20 18:52:55 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:52:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 	t_cmd			*head;
 	
 	tree = init_binary_tree(&tokens);
-	print_tree(tree, 0, "(ROOT)");
 	head = NULL;
 	init_cmd_table(tree, &table, &head, prompt);
+	print_table(head);
 	return (head);
 }
