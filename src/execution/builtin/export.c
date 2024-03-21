@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 15:42:49 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:50:23 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,22 @@ static void	export_with_args(char **array, char **command, char **envp)
 
 	
 
-	// array = ft_split(command[1], '=');
-	// i = 0;
-	// while (envp[i])
-	// 	i++;
-	// if (array[1])
-	// {
-	// 	envp[i] = ft_strdup(command[1]);
-	// 	i++;
-	// 	envp[i] = NULL;
-	// }
-	// else
-	// {
-	// 	envp[i] = ft_strdup(array[0]);
-	// 	i++;
-	// 	envp[i] = NULL;
-	// }
+	array = ft_split(command[1], '=');
+	i = 0;
+	while (envp[i])
+		i++;
+	if (array[1])
+	{
+		envp[i] = ft_strdup(command[1]);
+		i++;
+		envp[i] = NULL;
+	}
+	else
+	{
+		envp[i] = ft_strdup(array[0]);
+		i++;
+		envp[i] = NULL;
+	}
 }
 
 void	execute_export_command(char **command, char **envp)
