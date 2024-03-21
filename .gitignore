@@ -18,7 +18,10 @@ test
 
 test2
 
-*.c
+
 
 a.out
 file*
+
+test.c
+concat.c
