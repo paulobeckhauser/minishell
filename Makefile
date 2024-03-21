@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/18 09:14:13 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/21 10:51:44 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)pwd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)unset.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_utils.c \
 
 
 
