@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 23:12:03 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:22:19 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t
 t_cmd			*init_cmd(t_token_node *node, t_prompt *prompt);
 
 // parser.c
-void			parser(t_info *structure);
+bool			parser(t_info *structure);
 t_token_node	*lex(t_prompt *prompt);
 t_cmd			*parse(t_token_node *tokens, t_prompt *prompt);
 

@@ -31,8 +31,10 @@ int	main(int argc, char **argv, char **envp)
 	get_path_env(&structure);
 	while (1)
 	{ 
-		parser(&structure);
-		execution(argc, argv, envp, &structure);
+		if (!parser(&structure))
+			break ;
+		else
+			execution(argc, argv, envp, &structure);
 	}
 	return (0);
 }
