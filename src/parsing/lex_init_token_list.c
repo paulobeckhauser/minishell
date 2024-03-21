@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/21 23:33:53 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:36:50 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ t_token_node	*init_token_list(t_prompt *prompt)
 		{
 			free(list);
 			break ;
+		}
+		if (list->token.type == ERROR)
+		{
+			free(list);
+			return (NULL);
 		}
 		add_node_to_list(&head, &current, list);
 	}

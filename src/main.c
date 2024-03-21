@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{ 
 		if (!parser(&structure))
-			break ;
+			continue ;
 		else
 			execution(argc, argv, envp, &structure);
 	}

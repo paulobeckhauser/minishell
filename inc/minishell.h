@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 23:22:19 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:38:47 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ typedef struct s_prompt
 typedef enum s_type
 {
 	END = 0,
-	PIPE = 1,
-	REDIRECTION = 2,
-	WORD = 3,
-	SIMPLE_CMD = 4,
-	BUILTIN_CMD = 5,
-	ARGUMENT = 6,
+	ERROR = 1,
+	PIPE = 2,
+	REDIRECTION = 3,
+	WORD = 4,
+	SIMPLE_CMD = 5,
+	BUILTIN_CMD = 6,
+	ARGUMENT = 7,
 }	t_type;
 
 typedef struct s_in
@@ -195,6 +196,7 @@ t_type			find_token(t_prompt *prompt);
 t_token			init_end_token(void);
 t_token			init_pipe_token(t_prompt *prompt);
 t_token			init_redirection_token(t_prompt *prompt);
+t_token	init_error_token(void);
 t_token			init_cmd_token(t_prompt *prompt);
 t_token			init_simple_cmd_token(t_prompt *prompt);
 t_token			init_builtin_cmd_token(t_prompt *prompt);
