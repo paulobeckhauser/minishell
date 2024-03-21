@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 12:51:16 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:12:03 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,13 @@ typedef struct s_info
 	char **envp; // maybe we don't need to restore, since use only once
     int is_builtin;
     char *path_env;
-
+	int		number_commands;
+	char **commands;
     char **possible_paths;
-    char *path_command;
+    char **path_commands;
+	int **fds_pipes;
+	pid_t	*pid;
+	
 
     t_cmd	*table;
 }   t_info;
@@ -126,6 +130,12 @@ void execution(int argc, char *argv[], char *envp[], t_info *structure);
 int	ft_strcmp(const char *s1, const char *s2);
 void check_builtin(t_info *structure, char *str);
 void	get_path_env(t_info *structure);
+void get_number_commands(t_info *structure);
+void store_path_commands(t_info *structure);
+void	store_commands(t_info *structure);
+void	create_pipes(t_info *structure);
+void	create_child_processes(t_info *structure);
+
 
 
 
@@ -154,8 +164,9 @@ int is_env_command(char **command);
 void    execute_env_command(char **command);
 int is_exit_command(char **command);
 void    execute_exit_command(char **command);
-int ft_setenv(const char *name, const char *value, int overwrite);
-int ft_putenv(char *string);
+void	selectiton_sort_variables(char **envp);
+
+
 
 // default_display.c
 void			default_display_with_history(t_prompt *prompt);
