@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* **************ioctl************************************************************ */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:32 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 11:52:48 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:03:38 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,27 @@ int	main(int argc, char **argv, char **envp)
 
 	store_main_arguments(argc, argv, envp, &structure);
 	get_path_env(&structure);
-	int l;
 	while (1)
 	{ 
-		parser(&structure);
-		execution(argc, argv, envp, &structure);
+		if (!parser(&structure))
+			continue ;
+		else
+			execution(argc, argv, envp, &structure);
 	}
 	return (0);
 }
+
+// #include "../inc/minishell.h"
+
+// int	main(void)
+// {
+// 	t_info	structure;
+
+// 	store_main_arguments(argc, argv, envp, &structure);
+// 	get_path_env(&structure);
+// 	while (1)
+// 	{ 
+// 		parser(&structure);
+// 	}
+// 	return (0);
+// }

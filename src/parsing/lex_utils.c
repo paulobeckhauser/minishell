@@ -1,100 +1,114 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   lex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 14:44:47 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:08:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*verify_redirection(t_input *input)
+void	init_heredoc_arr(t_prompt *prompt, t_token_node *list)
 {
-	if (*input->input == '<' && *input->input != *(input->input + 1))
+	prompt->heredoc = malloc(prompt->heredoc_count * sizeof(char *));
+	if (!prompt->heredoc)
+		return ;
+	while (list)
 	{
-		input->input++;
+		if (list->token.in.heredoc)
+			*prompt->heredoc++ = list->token.out.file_name;
+		list = list->next;
+	}
+}
+
+char	*verify_redirection(t_prompt *prompt)
+{
+	if (*prompt->msg == '<' && *prompt->msg != *(prompt->msg + 1))
+	{
+		prompt->msg++;
 		return ("<");		
 	}
-	else if (*input->input == '>' && *input->input != *(input->input + 1))
+	else if (*prompt->msg == '>' && *prompt->msg != *(prompt->msg + 1))
 	{
-		input->input++;
+		prompt->msg++;
 		return (">");
 	}
-	else if (*input->input == '<' && *input->input == *(input->input + 1))
+	else if (*prompt->msg == '<' && *prompt->msg == *(prompt->msg + 1))
 	{
-		input->input += 2;
+		prompt->msg += 2;
+		prompt->heredoc_count++;
 		return ("<<");
 	}
-	else if (*input->input == '>' && *input->input == *(input->input + 1))
+	else if (*prompt->msg == '>' && *prompt->msg == *(prompt->msg + 1))
 	{
-		input->input += 2;
+		prompt->msg += 2;
 		return (">>");
 	}
 	else
 		return (NULL);
 }
 
-void	count_words(t_input *input)
+void	count_words(t_prompt *prompt)
 {
 	char	*start_ptr_save;
 
-	start_ptr_save = input->input;
-	input->word_count = 0;
-	while (!ft_strchr(input->symbols, *input->input)
-		&& *input->input)
+	start_ptr_save = prompt->msg;
+	prompt->word_count = 0;
+	while (!ft_strchr(prompt->symbols, *prompt->msg)
+		&& *prompt->msg)
 	{
-		if (ft_strchr(input->whitespace, *input->input))
+		if (ft_strchr(prompt->whitespace, *prompt->msg))
 		{
-			skip_whitespaces(input);
-			if (*input->input)
-				input->word_count++;
+			skip_whitespaces(prompt);
+			if (*prompt->msg)
+				prompt->word_count++;
 		}
 		else
-			input->input++;
+			prompt->msg++;
 	}
-	if (*input->input == 0)
-		input->word_count++;
-	input->input = start_ptr_save;
+	if (*prompt->msg == 0)
+		prompt->word_count++;
+	prompt->msg = start_ptr_save;
 }
 
-void	init_words_arr(t_input *input)
+void	init_words_arr(t_prompt *prompt)
 {
 	int		i;
 	int		y;
 
 	i = 0;
 	y = 0;
-	input->arr = malloc((input->word_count + 1) * sizeof(char *));
-	if (!input->arr)
+	prompt->arr = malloc((prompt->word_count + 1) * sizeof(char *));
+	if (!prompt->arr)
 		return ;
-	input->arr[i] = malloc(get_word_length(input) + 1);
-	if (!input->arr[i])
+	prompt->arr[i] = malloc(get_word_length(prompt) + 1);
+	if (!prompt->arr[i])
 		return ;
-	while (!ft_strchr(input->symbols, *input->input)
-		&& *input->input)
+	while (!ft_strchr(prompt->symbols, *prompt->msg)
+		&& *prompt->msg)
 	{
-		if (ft_strchr(input->whitespace, *input->input))
+		if (ft_strchr(prompt->whitespace, *prompt->msg))
 		{
-			skip_whitespaces(input);
-			input->arr[i][y] = 0;
-			if (*input->input == 0
-				|| ft_strchr(input->symbols, *input->input))
+			skip_whitespaces(prompt);
+			prompt->arr[i][y] = 0;
+			if (*prompt->msg == 0
+				|| ft_strchr(prompt->symbols, *prompt->msg))
 				break ;
 			i++;
-			input->arr[i] = malloc(get_word_length(input) + 1);
-			if (!input->arr[i])
+			prompt->arr[i] = malloc(get_word_length(prompt) + 1);
+			if (!prompt->arr[i])
 				return ;
 			y = 0;
 		}
 		else
-			input->arr[i][y++] = *input->input++;
+			prompt->arr[i][y++] = *prompt->msg++;
 	}
-	input->arr[i][y] = 0;
-	input->arr[i + 1] = NULL;
+	prompt->arr[i][y] = 0;
+	prompt->arr[i + 1] = NULL;
 }
 
 int	if_builtin_cmd(char *str)
@@ -123,11 +137,4 @@ int	if_builtin_cmd(char *str)
 	}
 	free(builtins);
 	return (0);
-}
-
-void	skip_whitespaces(t_input *input)
-{
-	while (ft_strchr(input->whitespace, *input->input)
-		&& *input->input)
-		input->input++;
 }

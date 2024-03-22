@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/19 18:43:34 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:16:23 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 // char *user = getenv("USER")
 
-void	execution(int argc, char *argv[], char *envp[], t_info *structure)
+void	
+execution(int argc, char *argv[], char *envp[], t_info *structure)
 {
 	pid_t child_pid;
 	// char **possible_paths;
