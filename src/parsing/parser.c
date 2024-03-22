@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/21 23:36:25 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:03:36 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ bool	parser(t_info *structure)
 	structure->table = parse(tokens, &prompt);
 	if (!structure->table)
 		return (false); 
-	// print_table(*table);
 	free_prompt(&prompt);
 	return (true);
 }
@@ -45,10 +44,12 @@ t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 	t_token_node	*tree;
 	t_cmd			*table;
 	t_cmd			*head;
-	
+
+	// delete_repeating_redirection_tokens(&tokens);
 	tree = init_binary_tree(&tokens);
 	head = NULL;
 	init_cmd_table(tree, &table, &head, prompt);
-	// print_table(head);
+	// print_redirection_file(head);
+
 	return (head);
 }

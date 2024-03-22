@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/19 20:42:52 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:56:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ void	print_table(t_cmd *table)
 	}
 }
 
+void	print_redirection_file(t_cmd *table)
+{
+	if (!table)
+		printf("Error: empty command table.\n");
+	while (table)
+	{
+		if (table->in.file_name)
+			printf("%s\n", table->in.file_name);
+		else if (table->out.file_name)
+			printf("%s\n", table->out.file_name);
+		else
+			printf("no_redirection\n");
+		table = table->next;
+	}
+}
+
 void	print_syntax_token_error(t_prompt *prompt)
 {
 	if (!*prompt->msg)
@@ -58,12 +74,12 @@ const char	*type_to_string(t_type type)
 {
     switch (type) {
         case END: return "END";
+		case ERROR: return "ERROR";
         case PIPE: return "PIPE";
         case REDIRECTION: return "REDIRECTION";
         case WORD: return "WORD";
         case SIMPLE_CMD: return "SIMPLE_CMD";
         case BUILTIN_CMD: return "BUILTIN_CMD";
-        case ARGUMENT: return "ARGUMENT";
         default: return "UNKNOWN";
     }
 }

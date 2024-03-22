@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/21 23:39:15 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:37:24 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ t_token	init_end_token(void)
 	token.out.fd = 1;
 	token.out.file_name = NULL;
 	token.type = END;
+	token.t_value.single_ptr = NULL;
+	return (token);
+}
+
+t_token	init_error_token(void)
+{
+	t_token	token;
+
+	token.in.fd = 0;
+	token.in.file_name = NULL;
+	token.in.heredoc = false;
+	token.out.fd = 1;
+	token.out.file_name = NULL;
+	token.type = ERROR;
 	token.t_value.single_ptr = NULL;
 	return (token);
 }
@@ -70,20 +84,6 @@ t_token	init_redirection_token(t_prompt *prompt)
 
 }
 
-t_token	init_error_token(void)
-{
-	t_token	token;
-
-	token.in.fd = 0;
-	token.in.file_name = NULL;
-	token.in.heredoc = false;
-	token.out.fd = 1;
-	token.out.file_name = NULL;
-	token.type = ERROR;
-	token.t_value.single_ptr = NULL;
-	return (token);
-}
-
 t_token	init_cmd_token(t_prompt *prompt)
 {
 	t_token	token;
@@ -96,18 +96,3 @@ t_token	init_cmd_token(t_prompt *prompt)
 		token = init_builtin_cmd_token(prompt);
 	return (token);
 }
-
-t_token init_builtin_cmd_token(t_prompt *prompt)
-{
-	t_token	token;
-
-	token.in.fd = 0;
-	token.in.file_name = NULL;
-	token.in.heredoc = false;
-	token.out.fd = 1;
-	token.out.file_name = NULL;
-	token.type = BUILTIN_CMD;
-	token.t_value.double_ptr = prompt->arr;
-	return (token);
-}
-

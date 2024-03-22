@@ -23,25 +23,7 @@
 
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_info	structure;
-
-	store_main_arguments(argc, argv, envp, &structure);
-	get_path_env(&structure);
-	while (1)
-	{ 
-		if (!parser(&structure))
-			continue ;
-		else
-			execution(argc, argv, envp, &structure);
-	}
-	return (0);
-}
-
-// #include "../inc/minishell.h"
-
-// int	main(void)
+// int	main(int argc, char **argv, char **envp)
 // {
 // 	t_info	structure;
 
@@ -49,7 +31,25 @@ int	main(int argc, char **argv, char **envp)
 // 	get_path_env(&structure);
 // 	while (1)
 // 	{ 
-// 		parser(&structure);
+// 		if (!parser(&structure))
+// 			continue ;
+// 		else
+// 			execution(argc, argv, envp, &structure);
 // 	}
 // 	return (0);
 // }
+
+#include "../inc/minishell.h"
+
+int	main(void)
+{
+	t_info	structure;
+
+	// store_main_arguments(argc, argv, envp, &structure);
+	// get_path_env(&structure);
+	while (1)
+	{ 
+		parser(&structure);
+	}
+	return (0);
+}

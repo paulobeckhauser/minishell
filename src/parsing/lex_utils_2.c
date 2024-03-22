@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/21 17:00:43 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:38:50 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*fetch_file_name(t_prompt *prompt)
 	while (!ft_strchr(prompt->whitespace, *prompt->msg)
 		&& !ft_strchr(prompt->symbols, *prompt->msg))
 		*file_name++ = *prompt->msg++;
+	*file_name = 0;
 	return (start_ptr_save);
 }
 

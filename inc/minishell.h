@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 23:38:47 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:45:27 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef enum s_type
 	WORD = 4,
 	SIMPLE_CMD = 5,
 	BUILTIN_CMD = 6,
-	ARGUMENT = 7,
 }	t_type;
 
 typedef struct s_in
@@ -194,12 +193,12 @@ t_type			find_token(t_prompt *prompt);
 
 // lex_init_token_type.c lex_init_token_type_2.c
 t_token			init_end_token(void);
+t_token			init_error_token(void);
 t_token			init_pipe_token(t_prompt *prompt);
 t_token			init_redirection_token(t_prompt *prompt);
-t_token	init_error_token(void);
 t_token			init_cmd_token(t_prompt *prompt);
-t_token			init_simple_cmd_token(t_prompt *prompt);
 t_token			init_builtin_cmd_token(t_prompt *prompt);
+t_token			init_simple_cmd_token(t_prompt *prompt);
 
 // lex_utils.c lex_utils_2.c
 void			init_heredoc_arr(t_prompt *prompt, t_token_node *list);
@@ -212,18 +211,22 @@ int				get_word_length(t_prompt *prompt);
 char			*fetch_file_name(t_prompt *prompt);
 char			*find_next_token_to_print_in_err(t_prompt *prompt);
 
-// parse_init_tree_node.c
-bool			mark_redirection_as_previous(t_token_node **token, t_token_node **previous_token);
-bool			join_redirection_to_cmd(t_token_node **token, t_token_node **previous_token);
-bool			mark_cmd_as_previous(t_token_node **token, t_token_node **previous_token);
-bool			join_cmd_to_pipe(t_token_node **token, t_token_node **previous_token);
-
 // parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);
 void			find_first_cmd_token(t_token_node *token, t_token_node **head);
 void			delete_redirection_tokens_from_list(t_token_node **token, t_token_node **head);
 void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_prompt *prompt);
 t_cmd			*init_cmd(t_token_node *node, t_prompt *prompt);
+
+// parse_init_tree_node.c
+bool			mark_redirection_as_previous(t_token_node **token, t_token_node **previous_token);
+bool			join_redirection_to_cmd(t_token_node **token, t_token_node **previous_token);
+bool			mark_cmd_as_previous(t_token_node **token, t_token_node **previous_token);
+bool			join_cmd_to_pipe(t_token_node **token, t_token_node **previous_token);
+
+// parse_utils.c
+void			delete_repeating_redirection_tokens(t_token_node **tokens);
+void			close_token_fd(t_token_node *tokens);
 
 // parser.c
 bool			parser(t_info *structure);
@@ -234,6 +237,7 @@ t_cmd			*parse(t_token_node *tokens, t_prompt *prompt);
 void			print_token_list(t_token_node *token);
 void 			print_tree(t_token_node *node, int depth, char *left_right);
 void			print_table(t_cmd *table);
+void			print_redirection_file(t_cmd *table);
 void			print_syntax_token_error(t_prompt *prompt);
 const char		*type_to_string(t_type type);
 
