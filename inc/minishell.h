@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/22 13:45:27 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:33:12 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_token
 		char	*single_ptr;
 		char	**double_ptr;
 	} t_value;
+	bool	last_redirection;
 }	t_token;
 
 typedef struct s_cmd

@@ -6,11 +6,13 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:56 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 15:02:33 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:32:41 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	mark_last_redirection(t_token)
 
 void	delete_repeating_redirection_tokens(t_token_node **tokens)
 {

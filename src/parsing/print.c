@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 13:56:28 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:30:16 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	print_redirection_file(t_cmd *table)
 void	print_syntax_token_error(t_prompt *prompt)
 {
 	if (!*prompt->msg)
-			ft_printf("bash: syntax error near unexpected token `newline'\n");
+		ft_printf("bash: syntax error near unexpected token `newline'\n");
 	else
 		ft_printf("bash: syntax error near unexpected token `%s'\n",
 			find_next_token_to_print_in_err(prompt));
