@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 23:16:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:27:59 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 
 // char *user = getenv("USER")
 
-void	
-execution(int argc, char *argv[], char *envp[], t_info *structure)
+void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 {
 	pid_t child_pid;
 	// char **possible_paths;
@@ -60,50 +59,31 @@ execution(int argc, char *argv[], char *envp[], t_info *structure)
 			structure->pid[i] = fork();
 
 			if (structure->pid[i] == 0)
-			{ 
-				// if (structure->table->redirection)
-				if (i != 0)
+			{	
+				if (structure->table->in.file_name)
+				{
+					dup2(structure->table->in.fd, STDIN_FILENO);
+					close(structure->table->in.fd);
+				}
+				else if (i != 0)
 				{
 					dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
 					close(structure->fds_pipes[i - 1][0]);
 				}
 				
-				if (structure->table->next != NULL)
+				if (structure->table->out.file_name)
+				{
+					dup2(structure->table->out.fd, STDOUT_FILENO);
+					close(structure->table->out.fd);
+				}
+
+				else if (structure->table->next != NULL)
 				{
 					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
 					close(structure->fds_pipes[i][1]);
 				}
-
-
-				// HANDLE REDIRECTIONS
-				// -> Pseudocode
-				// if (structure->table->redirection)
-				// {
-				// 	int fd;
-					
-				// 	if (structure->table->redirection_type == REDIRECT_OUT)
-				// 	{
-				// 		int fd_out
-				// 		fd_out = open(structure->table->redirection_file, O_WRONLY | O_CREAT, 0644);
-				// 		dup2(fd_out, STDOUT_FILENO);
-						// close(fd_out) // Close the file descriptor after it's duplicated
-				// 	}
-				// 	if (structure->table->redirection_type == REDIRECT_IN)
-				// 	{
-				// 		int fd_in = open(structure->table->redirection_file, O_RDONLY);
-				// 		dup2(fd_in, STDIN_FILENO);
-				// 		close(fd_in); // Close the file descriptor after it's duplicated
-				// 	}
-				// }
-
-				// HANDLE REDIRECTIONS
-
-
-				
-				// Execute the command
 				execve(structure->path_commands[i], structure->table->arr, structure->envp);
 			}
-
 			else
 			{
 				if (i != 0)
@@ -111,22 +91,17 @@ execution(int argc, char *argv[], char *envp[], t_info *structure)
 				if (structure->table->next != NULL)
 					close(structure->fds_pipes[i][1]);
 			}
-
 			i++;
 			structure->table = structure->table->next;
 
 		}
-
-
-
-		// // WAIT CHILD PROCESSES
+		// WAIT CHILD PROCESSES
 		i = 0;
 		while (i < structure->number_commands)
 		{
 			waitpid(structure->pid[i], NULL, 0);
 			i++;
 		}
-		// WAIT CHILD PROCESSES
 	}
 
 }

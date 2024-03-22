@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 14:18:55 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:14:12 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_out	init_truncate_out_redirection(t_token *token, char *file_name)
 {
 	t_out	out;
 
-	out.fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	out.fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	out.file_name = file_name;
 	if (out.fd == -1)
 	{
@@ -64,7 +64,7 @@ t_out	init_append_out_redirection(t_token *token, char *file_name)
 {
 	t_out	out;
 
-	out.fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
+	out.fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	out.file_name = file_name;
 	if (out.fd == -1)
 	{
