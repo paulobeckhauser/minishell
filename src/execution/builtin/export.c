@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 22:50:23 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:07:42 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,25 @@ static void	export_without_args(char **envp, char **array)
 	}
 }
 
-//check if env variable already exists
+// check if env variable already exists
 // static int check_env_variable()
 // {
-	
+
 // }
 
 static void	export_with_args(char **array, char **command, char **envp)
 {
 	int	i;
 
-
-
 	// printf("%s\n", command[0]);
 	// printf("%s\n", command[1]);
 	// int iter;
-
 	// iter = 0;
-
 	// while (envp[iter])
 	// {
-		
-		
 	// 	printf("%s\n", envp[iter]);
 	// 	iter++;
 	// }
-	
-
-	
-	
-
-
-	
-
 	array = ft_split(command[1], '=');
 	i = 0;
 	while (envp[i])
@@ -94,7 +80,4 @@ void	execute_export_command(char **command, char **envp)
 		export_without_args(envp, array);
 	else
 		export_with_args(array, command, envp);
-
-	
-	
 }

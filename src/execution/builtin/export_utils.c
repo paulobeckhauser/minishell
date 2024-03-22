@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 20:43:33 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:07:37 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,3 @@ void	selectiton_sort_variables(char **envp)
 		i++;
 	}
 }
-
-
