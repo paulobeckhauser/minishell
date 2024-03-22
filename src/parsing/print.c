@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 16:30:16 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:43:09 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ void	print_redirection_file(t_cmd *table)
 		printf("Error: empty command table.\n");
 	while (table)
 	{
-		if (table->in.file_name)
-			printf("%s\n", table->in.file_name);
-		else if (table->out.file_name)
-			printf("%s\n", table->out.file_name);
+		if (table->in.file_name || table->out.file_name)
+		{
+			if (table->in.file_name)
+				printf("R: %s\n", table->in.file_name);
+			if (table->out.file_name)
+				printf("R: %s\n", table->out.file_name);	
+		}
 		else
-			printf("no_redirection\n");
+			printf("R: no_redirection\n");
 		table = table->next;
 	}
 }

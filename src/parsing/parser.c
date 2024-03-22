@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 15:03:36 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 19:26:12 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 	t_cmd			*table;
 	t_cmd			*head;
 
-	// delete_repeating_redirection_tokens(&tokens);
+	delete_repeating_redirection_tokens(&tokens);
 	tree = init_binary_tree(&tokens);
 	head = NULL;
 	init_cmd_table(tree, &table, &head, prompt);
-	// print_redirection_file(head);
 
 	return (head);
 }

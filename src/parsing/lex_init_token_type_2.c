@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:35:11 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 10:37:36 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:18:25 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token init_builtin_cmd_token(t_prompt *prompt)
 	token.out.file_name = NULL;
 	token.type = BUILTIN_CMD;
 	token.t_value.double_ptr = prompt->arr;
+	token.last_redirection = false;
 	return (token);
 }
 
@@ -37,5 +38,6 @@ t_token	init_simple_cmd_token(t_prompt *prompt)
 	token.out.file_name = NULL;
 	token.type = SIMPLE_CMD;
 	token.t_value.double_ptr = prompt->arr;
+	token.last_redirection = false;
 	return (token);
 }

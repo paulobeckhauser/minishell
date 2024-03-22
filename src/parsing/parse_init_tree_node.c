@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:47:52 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/21 12:50:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 19:23:09 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ bool	mark_redirection_as_previous(t_token_node **token, t_token_node **previous_
 	{
 		if (!*previous_token)
 			(*token)->left = NULL;
+		else if (*previous_token && (*previous_token)->token.type == REDIRECTION)
+			(*token)->left = *previous_token;
 		*previous_token = *token;
 		*token = (*token)->next;
 		return (true);
@@ -32,6 +34,8 @@ bool	join_redirection_to_cmd(t_token_node **token, t_token_node **previous_token
 		if (*previous_token && (*previous_token)->token.type == REDIRECTION)
 		{
 			(*token)->left = *previous_token;
+			if ((*previous_token)->left)
+				(*token)->right = (*previous_token)->left;
 			*previous_token = NULL;
 		}
 		else
@@ -42,10 +46,14 @@ bool	join_redirection_to_cmd(t_token_node **token, t_token_node **previous_token
 			{
 				(*token)->left = (*token)->next;
 				(*token)->right = NULL;
+				if ((*token)->next->next && (*token)->next->next->token.type == REDIRECTION)
+					(*token)->right = (*token)->next->next;
 			}
 			else
+			{
 				(*token)->right = (*token)->next;
-			if ((*token)->next->next)
+			}
+			if ((*token)->next->next && (*token)->next->next->token.type != REDIRECTION)
 			{
 				*previous_token = *token;
 				*token = (*token)->next->next;

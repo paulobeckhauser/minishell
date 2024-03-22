@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 15:14:12 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 20:23:50 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@ t_in	init_in_redirection(t_token *token, char *file_name)
 	t_in	in;
 
 	in.heredoc = false;
-	in.fd = open(file_name, O_RDONLY);
-	if (in.fd == -1)
+	if ((in.fd = open(file_name, O_RDONLY)) == -1)
 	{
-		in.file_name = NULL;
-		ft_printf("bash: %s: No such file or directory\n", file_name);
+		file_name = ft_strjoin("bash: ", file_name);
+		perror(file_name);
 	}
+	
+		// perror(file_name);
+	// if (in.fd == -1)
+	// {
+	// 	in.file_name = NULL;
+	// 	ft_printf("bash: %s: No such file or directory\n", file_name);
+	// }
 	else
 		in.file_name = file_name;
 	token->in = in;

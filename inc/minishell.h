@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/22 16:33:12 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:06:54 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,8 +225,11 @@ bool			join_redirection_to_cmd(t_token_node **token, t_token_node **previous_tok
 bool			mark_cmd_as_previous(t_token_node **token, t_token_node **previous_token);
 bool			join_cmd_to_pipe(t_token_node **token, t_token_node **previous_token);
 
-// parse_utils.c
+// parse_set_redirection_priority.c
 void			delete_repeating_redirection_tokens(t_token_node **tokens);
+void			delete_and_close_not_used_redirections(t_token_node **tokens, t_token_node **head);
+void			mark_last_in_redirection(t_token_node *tokens);
+void			mark_last_out_redirection(t_token_node *tokens);
 void			close_token_fd(t_token_node *tokens);
 
 // parser.c
