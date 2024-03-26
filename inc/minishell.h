@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 20:47:22 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:51:46 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void    execute_exit_command(char **command);
 void	selectiton_sort_variables(char **envp);
 // char **delete_string(char *str_delete, char **array);
 void delete_string(t_info *structure);
+void add_to_envp(t_info *structure);
 
 
 // int check_env_variable(char **envp, char **command);

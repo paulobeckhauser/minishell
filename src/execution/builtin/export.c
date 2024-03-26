@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 20:50:14 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:51:32 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,85 +91,105 @@ static void	export_with_args(t_info *structure)
 	int	i;
 	int j;
 	int check;
+	char **array;
 
-	// check = 0;
-	// j = 0;
+	check = 0;
+	j = 0;
 	// while(command[1][j])
-	// {
-	// 	if (command[1][j] == '=')
-	// 	{
-	// 		check++;
-	// 		break;
-	// 	}
-	// 	j++;		
-	// }
-	// // printf("%d\n", check);
+	while(structure->table->arr[1][j])
+	{
+		// if (command[1][j] == '=')
+		if (structure->table->arr[1][j] == '=')
+		{
+			check++;
+			break;
+		}
+		j++;		
+	}
+
+	if (check == 1)
+	{
+		printf("Will add value\n");
+	}
+
+	// printf("%d\n", check);
 
 	// if (check == 1)
 	// {
-	// 	// execute_unset_command(command, &envp);
-	// 	// delete_string(char *str_delete, char **array)
-	// 	// printf("%s\n", array[0]);
-	// 	// execute_unset_command(array[0], &envp);
+	// 	execute_unset_command(structure);
+		// delete_string(char *str_delete, char **array)
+		// printf("%s\n", array[0]);
+		// execute_unset_command(array[0], &envp);
 
 		
 		
-	// 	array = ft_split(command[1], '=');
+		// array = ft_split(arr[1], '=');
 
-	// 	// if (check_env_variable(envp, array[0]))
-	// 	// if (check_env_variable(envp, command))
-	// 	// {
-	// 	// 	// execute_unset_command(command, &envp);
-	// 	// 	// delete_string(array[0], char **array)
-	// 	// 	printf("env exist\n");
-	// 	// }
+		// if (check_env_variable(envp, array[0]))
+		// if (check_env_variable(envp, command))
+		// {
+		// 	// execute_unset_command(command, &envp);
+		// 	// delete_string(array[0], char **array)
+		// 	printf("env exist\n");
+		// }
 
 		
 		
-	// 	// i = 0;
-	// 	// while (envp[i])
-	// 	// 	i++;
-	// 	// if (array[1])
-	// 	// {
-	// 	// 	envp[i] = ft_strdup(command[1]);
-	// 	// 	i++;
-	// 	// 	envp[i] = NULL;
-	// 	// }
-	// 	// else
-	// 	// {
-	// 	// 	envp[i] = ft_strdup(array[0]);
-	// 	// 	i++;
-	// 	// 	envp[i] = NULL;
-	// 	// }	
+		// i = 0;
+		// while (envp[i])
+		// 	i++;
+		// if (array[1])
+		// {
+		// 	envp[i] = ft_strdup(command[1]);
+		// 	i++;
+		// 	envp[i] = NULL;
+		// }
+		// else
+		// {
+		// 	envp[i] = ft_strdup(array[0]);
+		// 	i++;
+		// 	envp[i] = NULL;
+		// }	
 		
 	// }
+	else
+	{
+		
 
+		// printf("will only add the name\n");
 	// else
 	// {
-	// 	// if (check_env_variable(envp, command))
-	// 	// {
-	// 	// 	// printf("env exist\n");
-	// 	// 	return;
-	// 	// }
-	// 	// else
-	// 	// {
-	// 		array = ft_split(command[1], '=');
-	// 		i = 0;
-	// 		while (envp[i])
-	// 			i++;
-	// 		if (array[1])
-	// 		{
-	// 			envp[i] = ft_strdup(command[1]);
-	// 			i++;
-	// 			envp[i] = NULL;
-	// 		}
-	// 		else
-	// 		{
-	// 			envp[i] = ft_strdup(array[0]);
-	// 			i++;
-	// 			envp[i] = NULL;
-	// 		}	
-	// 	// }
+		if (check_env_variable(structure))
+		{
+			// printf("env exist\n");
+			return;
+		}
+		else
+		{
+			add_to_envp(structure);
+		}
+	}
+	// 	else
+	// 	{
+		
+		
+	// 		// array = ft_split(command[1], '=');
+	// 		// i = 0;
+	// 		// while (structure->envp[i])
+	// 		// 	i++;
+	// 		// if (array[1])
+	// 		// {
+	// 		// 	structure->envp[i] = ft_strdup(command[1]);
+	// 		// 	i++;
+	// 		// 	structure->envp[i] = NULL;
+	// 		// }
+	// 		// else
+	// 		// {
+	// 		// 	structure->envp[i] = ft_strdup(array[0]);
+	// 		// 	i++;
+	// 		// 	structure->envp[i] = NULL;
+	// 		// }	
+	// 	}
 	// }
 	
 	// array = ft_split(command[1], '=');
