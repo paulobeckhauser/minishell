@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 15:31:39 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:43:38 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	execution(int argc, char *argv[], char ***envp, t_info *structure)
 			execute_env_command(structure->table->arr);
 		if (is_exit_command(structure->table->arr))
 			execute_exit_command(structure->table->arr);
+
+
+
+			
 	}
 	else
 	{

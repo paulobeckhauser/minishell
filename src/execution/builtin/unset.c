@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 15:47:11 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:29:29 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	execute_unset_command(char **command, char ***envp)
 	else
 	{
 		if (check_env_variable(*envp, command) == 1)
+        {
+            printf("%s\n", command[1]);
 			*envp = delete_string(command[1], *envp);
+        }
 		else
 			return ;
 	
