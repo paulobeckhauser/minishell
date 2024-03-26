@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!parser(&structure))
 			continue ;
 		else
-			execution(argc, argv, envp, &structure);
+			execution(argc, argv, &envp, &structure);
 	}
 	return (0);
 }

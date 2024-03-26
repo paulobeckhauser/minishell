@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/22 14:27:59 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:31:39 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // char *user = getenv("USER")
 
-void	execution(int argc, char *argv[], char *envp[], t_info *structure)
+void	execution(int argc, char *argv[], char ***envp, t_info *structure)
 {
 	pid_t child_pid;
 	// char **possible_paths;
@@ -42,7 +42,7 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 		if (is_export_command(structure->table->arr))
 			execute_export_command(structure->table->arr, envp);
 		if (is_unset_command(structure->table->arr))
-			execute_unset_command(structure->table->arr);
+			execute_unset_command(structure->table->arr, envp);
 		if (is_env_command(structure->table->arr))
 			execute_env_command(structure->table->arr);
 		if (is_exit_command(structure->table->arr))
