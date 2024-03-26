@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/22 17:06:54 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:16:49 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,9 @@ void			skip_whitespaces(t_prompt *prompt);
 int				get_word_length(t_prompt *prompt);
 char			*fetch_file_name(t_prompt *prompt);
 char			*find_next_token_to_print_in_err(t_prompt *prompt);
+
+// parse_if_no_cmd_tokens.c
+bool	if_no_cmd_tokens(t_token_node *tokens);
 
 // parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);
