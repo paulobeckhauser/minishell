@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 16:29:47 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:50:14 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,33 @@ int	is_export_command(char **command)
 	return (ft_strcmp(command[0], "export") == 0);
 }
 
-static void	export_without_args(char **envp, char **array)
+static void	export_without_args(t_info *structure)
 {
 	int	i;
+	char **array;
 
-	selectiton_sort_variables(envp);
+	// selectiton_sort_variables(envp);
+	// i = 0;
+	// while (envp[i])
+	// {
+	// 	array = ft_split(envp[i], '=');
+	// 	if (array[1])
+	// 		printf("declare -x %s=\"%s\"\n", array[0], array[1]);
+	// 	else
+	// 		printf("declare -x %s\n", envp[i]);
+	// 	free_2d_array(array);
+	// 	i++;
+	// }
+
+	selectiton_sort_variables(structure->envp);
 	i = 0;
-	while (envp[i])
+	while (structure->envp[i])
 	{
-		array = ft_split(envp[i], '=');
+		array = ft_split(structure->envp[i], '=');
 		if (array[1])
 			printf("declare -x %s=\"%s\"\n", array[0], array[1]);
 		else
-			printf("declare -x %s\n", envp[i]);
+			printf("declare -x %s\n", structure->envp[i]);
 		free_2d_array(array);
 		i++;
 	}
@@ -72,91 +86,91 @@ static void	export_without_args(char **envp, char **array)
 // 	return (check_exist);
 // }
 
-static void	export_with_args(char **array, char **command, char **envp)
+static void	export_with_args(t_info *structure)
 {
 	int	i;
 	int j;
 	int check;
 
-	check = 0;
-	j = 0;
-	while(command[1][j])
-	{
-		if (command[1][j] == '=')
-		{
-			check++;
-			break;
-		}
-		j++;		
-	}
-	// printf("%d\n", check);
+	// check = 0;
+	// j = 0;
+	// while(command[1][j])
+	// {
+	// 	if (command[1][j] == '=')
+	// 	{
+	// 		check++;
+	// 		break;
+	// 	}
+	// 	j++;		
+	// }
+	// // printf("%d\n", check);
 
-	if (check == 1)
-	{
-		// execute_unset_command(command, &envp);
-		// delete_string(char *str_delete, char **array)
-		// printf("%s\n", array[0]);
-		// execute_unset_command(array[0], &envp);
-
-		
-		
-		array = ft_split(command[1], '=');
-
-		// if (check_env_variable(envp, array[0]))
-		if (check_env_variable(envp, command))
-		{
-			// execute_unset_command(command, &envp);
-			// delete_string(array[0], char **array)
-			printf("env exist\n");
-		}
+	// if (check == 1)
+	// {
+	// 	// execute_unset_command(command, &envp);
+	// 	// delete_string(char *str_delete, char **array)
+	// 	// printf("%s\n", array[0]);
+	// 	// execute_unset_command(array[0], &envp);
 
 		
 		
-		// i = 0;
-		// while (envp[i])
-		// 	i++;
-		// if (array[1])
-		// {
-		// 	envp[i] = ft_strdup(command[1]);
-		// 	i++;
-		// 	envp[i] = NULL;
-		// }
-		// else
-		// {
-		// 	envp[i] = ft_strdup(array[0]);
-		// 	i++;
-		// 	envp[i] = NULL;
-		// }	
-		
-	}
+	// 	array = ft_split(command[1], '=');
 
-	else
-	{
-		if (check_env_variable(envp, command))
-		{
-			// printf("env exist\n");
-			return;
-		}
-		else
-		{
-			array = ft_split(command[1], '=');
-			i = 0;
-			while (envp[i])
-				i++;
-			if (array[1])
-			{
-				envp[i] = ft_strdup(command[1]);
-				i++;
-				envp[i] = NULL;
-			}
-			else
-			{
-				envp[i] = ft_strdup(array[0]);
-				i++;
-				envp[i] = NULL;
-			}	
-		}
-	}
+	// 	// if (check_env_variable(envp, array[0]))
+	// 	// if (check_env_variable(envp, command))
+	// 	// {
+	// 	// 	// execute_unset_command(command, &envp);
+	// 	// 	// delete_string(array[0], char **array)
+	// 	// 	printf("env exist\n");
+	// 	// }
+
+		
+		
+	// 	// i = 0;
+	// 	// while (envp[i])
+	// 	// 	i++;
+	// 	// if (array[1])
+	// 	// {
+	// 	// 	envp[i] = ft_strdup(command[1]);
+	// 	// 	i++;
+	// 	// 	envp[i] = NULL;
+	// 	// }
+	// 	// else
+	// 	// {
+	// 	// 	envp[i] = ft_strdup(array[0]);
+	// 	// 	i++;
+	// 	// 	envp[i] = NULL;
+	// 	// }	
+		
+	// }
+
+	// else
+	// {
+	// 	// if (check_env_variable(envp, command))
+	// 	// {
+	// 	// 	// printf("env exist\n");
+	// 	// 	return;
+	// 	// }
+	// 	// else
+	// 	// {
+	// 		array = ft_split(command[1], '=');
+	// 		i = 0;
+	// 		while (envp[i])
+	// 			i++;
+	// 		if (array[1])
+	// 		{
+	// 			envp[i] = ft_strdup(command[1]);
+	// 			i++;
+	// 			envp[i] = NULL;
+	// 		}
+	// 		else
+	// 		{
+	// 			envp[i] = ft_strdup(array[0]);
+	// 			i++;
+	// 			envp[i] = NULL;
+	// 		}	
+	// 	// }
+	// }
 	
 	// array = ft_split(command[1], '=');
 
@@ -191,14 +205,17 @@ static void	export_with_args(char **array, char **command, char **envp)
 	// }
 }
 
-void	execute_export_command(char **command, char ***envp)
+void	execute_export_command(t_info *structure)
 {
 	char	**array;
 
-	if (command[1] == NULL)
-		export_without_args(*envp, array);
+	if (structure->table->arr[1] == NULL)
+		export_without_args(structure);
+		// export_without_args(*envp, array);
+	// if (command[1] == NULL)
+	// 	export_without_args(*envp, array);
 		// printf("export without argcs\n");
 	else
-		export_with_args(array, command, *envp);
+		export_with_args(structure);
 		// printf("export with argcs\n");
 }

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 16:40:46 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:47:22 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_token_node
 }	t_token_node;
 
 void store_main_arguments(int argc, char **argv, char **envp, t_info *structure);
-void execution(int argc, char *argv[], char ***envp, t_info *structure);
+void execution(t_info *structure);
 int	ft_strcmp(const char *s1, const char *s2);
 void check_builtin(t_info *structure, char *str);
 void	get_path_env(t_info *structure);
@@ -157,18 +157,22 @@ void execute_pwd_command(char **command);
 int is_echo_command(char **command);
 void    execute_echo_command(char **command, int fd);
 int is_export_command(char **command);
-void    execute_export_command(char **command, char ***envp);
+// void    execute_export_command(char **command, char ***envp);
+void	execute_export_command(t_info *structure);
 int is_unset_command(char **command);
-void    execute_unset_command(char **command, char ***envp);
+// void    execute_unset_command(char **command, char ***envp);
+void	execute_unset_command(t_info *structure);
 int is_env_command(char **command);
 void    execute_env_command(char **command);
 int is_exit_command(char **command);
 void    execute_exit_command(char **command);
 void	selectiton_sort_variables(char **envp);
-char **delete_string(char *str_delete, char **array);
+// char **delete_string(char *str_delete, char **array);
+void delete_string(t_info *structure);
 
 
-int check_env_variable(char **envp, char **command);
+// int check_env_variable(char **envp, char **command);
+int check_env_variable(t_info *structure);
 
 
 
