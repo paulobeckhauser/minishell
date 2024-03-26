@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 10:16:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:07:26 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void	selectiton_sort_variables(char **envp);
 
 // default_display.c
 void			default_display_with_history(t_prompt *prompt);
+int				count_quotes(t_prompt *prompt);
 
 // free.c
 void			free_prompt(t_prompt *prompt);

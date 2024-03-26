@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/26 10:18:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:27:05 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ t_token_node	*lex(t_prompt *prompt)
 	tokens = init_token_list(prompt);
 	if (!tokens)
 		return (NULL);
+	if (tokens && tokens->token.type == PIPE)
+	{
+		ft_printf("bash: syntax error near unexpected token `|'\n");
+		return (NULL);
+	}
 	return (tokens);
 }
 
