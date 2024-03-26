@@ -6,11 +6,26 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:35:11 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/19 23:20:56 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:18:25 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+t_token init_builtin_cmd_token(t_prompt *prompt)
+{
+	t_token	token;
+
+	token.in.fd = 0;
+	token.in.file_name = NULL;
+	token.in.heredoc = false;
+	token.out.fd = 1;
+	token.out.file_name = NULL;
+	token.type = BUILTIN_CMD;
+	token.t_value.double_ptr = prompt->arr;
+	token.last_redirection = false;
+	return (token);
+}
 
 t_token	init_simple_cmd_token(t_prompt *prompt)
 {
@@ -20,8 +35,9 @@ t_token	init_simple_cmd_token(t_prompt *prompt)
 	token.in.file_name = NULL;
 	token.in.heredoc = false;
 	token.out.fd = 1;
-	token.in.file_name = NULL;
+	token.out.file_name = NULL;
 	token.type = SIMPLE_CMD;
 	token.t_value.double_ptr = prompt->arr;
+	token.last_redirection = false;
 	return (token);
 }

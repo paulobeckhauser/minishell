@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/19 23:20:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:17:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,25 @@ t_token	init_end_token(void)
 	token.in.file_name = NULL;
 	token.in.heredoc = false;
 	token.out.fd = 1;
-	token.in.file_name = NULL;
+	token.out.file_name = NULL;
 	token.type = END;
 	token.t_value.single_ptr = NULL;
+	token.last_redirection = false;
+	return (token);
+}
+
+t_token	init_error_token(void)
+{
+	t_token	token;
+
+	token.in.fd = 0;
+	token.in.file_name = NULL;
+	token.in.heredoc = false;
+	token.out.fd = 1;
+	token.out.file_name = NULL;
+	token.type = ERROR;
+	token.t_value.single_ptr = NULL;
+	token.last_redirection = false;
 	return (token);
 }
 
@@ -34,9 +50,10 @@ t_token init_pipe_token(t_prompt *prompt)
 	token.in.file_name = NULL;
 	token.in.heredoc = false;
 	token.out.fd = 1;
-	token.in.file_name = NULL;
+	token.out.file_name = NULL;
 	token.type = PIPE;
 	token.t_value.single_ptr = "|";
+	token.last_redirection = false;
 	++prompt->pipe_count;
 	return (token);
 }
@@ -50,12 +67,13 @@ t_token	init_redirection_token(t_prompt *prompt)
 	token.in.file_name = NULL;
 	token.in.heredoc = false;
 	token.out.fd = 1;
-	token.in.file_name = NULL;
+	token.out.file_name = NULL;
 	token.t_value.single_ptr = verify_redirection(prompt);
+	token.last_redirection = false;
 	file_name = fetch_file_name(prompt);
 	if (!file_name)
 	{
-		token = init_end_token();
+		token = init_error_token();
 		print_syntax_token_error(prompt);
 	}
 	else if (token.t_value.single_ptr[0] == '<' && ft_strlen(token.t_value.single_ptr) == 1)
@@ -69,6 +87,7 @@ t_token	init_redirection_token(t_prompt *prompt)
 	return (token);
 
 }
+
 t_token	init_cmd_token(t_prompt *prompt)
 {
 	t_token	token;
@@ -81,18 +100,3 @@ t_token	init_cmd_token(t_prompt *prompt)
 		token = init_builtin_cmd_token(prompt);
 	return (token);
 }
-
-t_token init_builtin_cmd_token(t_prompt *prompt)
-{
-	t_token	token;
-
-	token.in.fd = 0;
-	token.in.file_name = NULL;
-	token.in.heredoc = false;
-	token.out.fd = 1;
-	token.in.file_name = NULL;
-	token.type = BUILTIN_CMD;
-	token.t_value.double_ptr = prompt->arr;
-	return (token);
-}
-

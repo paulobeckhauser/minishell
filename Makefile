@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/19 20:14:48 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/22 17:07:14 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,27 +59,27 @@ BUILTIN_DIR		:= builtin/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= -Wall -Wextra -Werror
+CFLAGS			:= #-Wall -Wextra -Werror
 LREADLINE		:= -lreadline
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
-DEBUG			:= -g
 
 # Libraries
 LIBFT			:= ./libs/libft/libft.a
 
 					
-#BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
+BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)env.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)exit.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)pwd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)unset.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_utils.c \
 
 
 
-#EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
+EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
@@ -87,6 +87,11 @@ LIBFT			:= ./libs/libft/libft.a
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_main_variables.c \
+						$(SRC_DIR)$(EXECUTION_DIR)get_number_commands.c \
+						$(SRC_DIR)$(EXECUTION_DIR)store_path_commands.c \
+						$(SRC_DIR)$(EXECUTION_DIR)store_commands.c \
+						$(SRC_DIR)$(EXECUTION_DIR)create_pipes.c \
+						$(SRC_DIR)$(EXECUTION_DIR)create_child_processes.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
@@ -100,6 +105,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)lex_utils.c \
 						$(SRC_DIR)$(PARSING_DIR)parse_init_tree_node.c \
 						$(SRC_DIR)$(PARSING_DIR)parse_init_cmd_table.c \
+						$(SRC_DIR)$(PARSING_DIR)parse_set_redirection_priority.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
 						$(SRC_DIR)$(PARSING_DIR)print.c \
 

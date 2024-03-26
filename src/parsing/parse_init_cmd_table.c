@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/19 18:43:48 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:24:13 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_token_node	*init_binary_tree(t_token_node **token)
 {
 	t_token_node	*previous_token;
+	t_token_node	*head;
 
 	if ((*token)->token.type == PIPE)
 	{
@@ -22,18 +23,57 @@ t_token_node	*init_binary_tree(t_token_node **token)
 		return (NULL);
 	}
 	previous_token = NULL;
+	head = NULL;
+	find_first_cmd_token(*token, &head);
+	while (*token)
+	{
+		if (mark_redirection_as_previous(token, &previous_token))
+			continue ;
+		else if (join_redirection_to_cmd(token, &previous_token))
+			continue ;
+		else
+			*token = (*token)->next;
+	}
+	*token = head;
+	delete_redirection_tokens_from_list(token, &head);
+	*token = head;
 	while ((*token)->next)
 	{
-		if (init_redirection_tree_branch(token, &previous_token))
+		if (mark_cmd_as_previous(token, &previous_token))
 			continue ;
-		if (init_cmd_tree_branch(token, &previous_token))
-			continue ;
-		else if (init_pipe_tree_branch(token, &previous_token))
+		else if (join_cmd_to_pipe(token, &previous_token))
 			continue ;
 		else
 			*token = (*token)->next;
 	}
 	return (*token);
+}
+
+void	find_first_cmd_token(t_token_node *token, t_token_node **head)
+{
+	while (token)
+	{
+		if (token->token.type == BUILTIN_CMD || token->token.type == SIMPLE_CMD)
+		{
+			*head = token;
+			return ;
+		}
+		token = token->next;
+	}
+}
+
+void	delete_redirection_tokens_from_list(t_token_node **token, t_token_node **head)
+{
+	while (*token && (*token)->token.type == REDIRECTION)
+		*token = (*token)->next;
+	*head = *token;
+	while (*token)
+	{
+		if ((*token)->next && (*token)->next->token.type == REDIRECTION)
+			(*token)->next = (*token)->next->next;
+		else
+			*token = (*token)->next;
+	}
 }
 
 void	init_cmd_table(t_token_node *node, t_cmd **table, t_cmd **head, t_prompt *prompt)
@@ -43,9 +83,13 @@ void	init_cmd_table(t_token_node *node, t_cmd **table, t_cmd **head, t_prompt *p
 	if (!node)
 		return ;
 	new_cmd = NULL;
-	if (node && !node->left && !node->right)
-		*head = init_cmd(node, prompt);
-	if (node && node->left && node->left->right)
+	if (prompt->pipe_count == 0)
+	{
+		new_cmd = init_cmd(node, prompt);
+		*head = new_cmd;
+		return ;
+	}
+	if (node && node->left && node->left->right && node->left->right->token.type != REDIRECTION)
 		init_cmd_table(node->left, table, head, prompt);
 	if (node->token.type != PIPE)
 		return ;
@@ -78,6 +122,26 @@ t_cmd	*init_cmd(t_token_node *node, t_prompt *prompt)
 		return (NULL);
 	cmd->type = node->token.type;
 	cmd->arr = node->token.t_value.double_ptr;
+	if (node->left)
+	{
+		if ((node->left->token.t_value.single_ptr[0] == '<'
+			&& ft_strlen(node->left->token.t_value.single_ptr) == 1)
+			|| (node->left->token.t_value.single_ptr[0] == '<'
+			&& node->left->token.t_value.single_ptr[1] == '<'))
+			cmd->in = node->left->token.in;
+		else
+			cmd->out = node->left->token.out;
+	}
+	if (node->right)
+	{
+		if ((node->right->token.t_value.single_ptr[0] == '<'
+			&& ft_strlen(node->right->token.t_value.single_ptr) == 1)
+			|| (node->right->token.t_value.single_ptr[0] == '<'
+			&& node->right->token.t_value.single_ptr[1] == '<'))
+			cmd->in = node->right->token.in;
+		else
+			cmd->out = node->right->token.out;
+	}
 	if (node->index == prompt->token_count - 1)
 		cmd->next = NULL;
 	return (cmd);

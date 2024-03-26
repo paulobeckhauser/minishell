@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/19 20:42:05 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:06:54 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ typedef struct s_prompt
 typedef enum s_type
 {
 	END = 0,
-	PIPE = 1,
-	REDIRECTION = 2,
-	WORD = 3,
-	SIMPLE_CMD = 4,
-	BUILTIN_CMD = 5,
-	ARGUMENT = 6,
+	ERROR = 1,
+	PIPE = 2,
+	REDIRECTION = 3,
+	WORD = 4,
+	SIMPLE_CMD = 5,
+	BUILTIN_CMD = 6,
 }	t_type;
 
 typedef struct s_in
@@ -86,6 +86,7 @@ typedef struct s_token
 		char	*single_ptr;
 		char	**double_ptr;
 	} t_value;
+	bool	last_redirection;
 }	t_token;
 
 typedef struct s_cmd
@@ -104,9 +105,13 @@ typedef struct s_info
 	char **envp; // maybe we don't need to restore, since use only once
     int is_builtin;
     char *path_env;
-
+	int		number_commands;
+	char **commands;
     char **possible_paths;
-    char *path_command;
+    char **path_commands;
+	int **fds_pipes;
+	pid_t	*pid;
+	
 
     t_cmd	*table;
 }   t_info;
@@ -126,6 +131,12 @@ void execution(int argc, char *argv[], char *envp[], t_info *structure);
 int	ft_strcmp(const char *s1, const char *s2);
 void check_builtin(t_info *structure, char *str);
 void	get_path_env(t_info *structure);
+void get_number_commands(t_info *structure);
+void store_path_commands(t_info *structure);
+void	store_commands(t_info *structure);
+void	create_pipes(t_info *structure);
+void	create_child_processes(t_info *structure);
+
 
 
 
@@ -154,8 +165,9 @@ int is_env_command(char **command);
 void    execute_env_command(char **command);
 int is_exit_command(char **command);
 void    execute_exit_command(char **command);
-int ft_setenv(const char *name, const char *value, int overwrite);
-int ft_putenv(char *string);
+void	selectiton_sort_variables(char **envp);
+
+
 
 // default_display.c
 void			default_display_with_history(t_prompt *prompt);
@@ -182,11 +194,12 @@ t_type			find_token(t_prompt *prompt);
 
 // lex_init_token_type.c lex_init_token_type_2.c
 t_token			init_end_token(void);
+t_token			init_error_token(void);
 t_token			init_pipe_token(t_prompt *prompt);
 t_token			init_redirection_token(t_prompt *prompt);
 t_token			init_cmd_token(t_prompt *prompt);
-t_token			init_simple_cmd_token(t_prompt *prompt);
 t_token			init_builtin_cmd_token(t_prompt *prompt);
+t_token			init_simple_cmd_token(t_prompt *prompt);
 
 // lex_utils.c lex_utils_2.c
 void			init_heredoc_arr(t_prompt *prompt, t_token_node *list);
@@ -199,18 +212,28 @@ int				get_word_length(t_prompt *prompt);
 char			*fetch_file_name(t_prompt *prompt);
 char			*find_next_token_to_print_in_err(t_prompt *prompt);
 
-// parse_init_tree_node.c
-bool			init_redirection_tree_branch(t_token_node **token, t_token_node **previous_token);
-bool			init_cmd_tree_branch(t_token_node **token, t_token_node **previous_token);
-bool			init_pipe_tree_branch(t_token_node **token, t_token_node **previous_token);
-
 // parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);
+void			find_first_cmd_token(t_token_node *token, t_token_node **head);
+void			delete_redirection_tokens_from_list(t_token_node **token, t_token_node **head);
 void			init_cmd_table(t_token_node *node, t_cmd **cmd, t_cmd **start_ptr_save, t_prompt *prompt);
 t_cmd			*init_cmd(t_token_node *node, t_prompt *prompt);
 
+// parse_init_tree_node.c
+bool			mark_redirection_as_previous(t_token_node **token, t_token_node **previous_token);
+bool			join_redirection_to_cmd(t_token_node **token, t_token_node **previous_token);
+bool			mark_cmd_as_previous(t_token_node **token, t_token_node **previous_token);
+bool			join_cmd_to_pipe(t_token_node **token, t_token_node **previous_token);
+
+// parse_set_redirection_priority.c
+void			delete_repeating_redirection_tokens(t_token_node **tokens);
+void			delete_and_close_not_used_redirections(t_token_node **tokens, t_token_node **head);
+void			mark_last_in_redirection(t_token_node *tokens);
+void			mark_last_out_redirection(t_token_node *tokens);
+void			close_token_fd(t_token_node *tokens);
+
 // parser.c
-void			parser(t_info *structure);
+bool			parser(t_info *structure);
 t_token_node	*lex(t_prompt *prompt);
 t_cmd			*parse(t_token_node *tokens, t_prompt *prompt);
 
@@ -218,6 +241,7 @@ t_cmd			*parse(t_token_node *tokens, t_prompt *prompt);
 void			print_token_list(t_token_node *token);
 void 			print_tree(t_token_node *node, int depth, char *left_right);
 void			print_table(t_cmd *table);
+void			print_redirection_file(t_cmd *table);
 void			print_syntax_token_error(t_prompt *prompt);
 const char		*type_to_string(t_type type);
 
