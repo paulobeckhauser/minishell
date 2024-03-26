@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 19:26:12 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:56:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	parser(t_info *structure)
 	if (!tokens)
 		return (false);
 	structure->table = parse(tokens, &prompt);
-	if (!structure->table)
+	if (!structure->table || (structure->table && !structure->table->next))
 		return (false); 
 	free_prompt(&prompt);
 	return (true);

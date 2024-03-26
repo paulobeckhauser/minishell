@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 10:24:13 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:39:16 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_token_node	*init_binary_tree(t_token_node **token)
 		perror("bash: syntax error near unexpected token `|'");
 		return (NULL);
 	}
+	if (!(*token)->next)
+		return (*token);
 	previous_token = NULL;
 	head = NULL;
 	find_first_cmd_token(*token, &head);
