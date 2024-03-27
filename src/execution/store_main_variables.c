@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:44:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 19:56:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:24:51 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void store_main_arguments(int argc, char **argv, char **envp, t_info *structure)
     int j;
     int len;
     
+    j = 0;
     while (envp[j])
     {
         structure->envp[j] = (char *)malloc((ft_strlen(envp[j]) + 1) * sizeof(char));

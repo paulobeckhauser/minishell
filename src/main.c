@@ -28,6 +28,8 @@ int	main(int argc, char **argv, char **envp)
 	t_prompt	prompt;
 	t_info		structure;
 
+	int i;
+
 	store_main_arguments(argc, argv, envp, &structure);
 	get_path_env(&structure);
 	while (1)
@@ -35,7 +37,17 @@ int	main(int argc, char **argv, char **envp)
 		if (!parser(&structure, &prompt))
 			continue ;
 		else
+		{
+			
+
+	// 		// i = 0;
+	// 		// while(structure.envp[i])
+	// 		// {
+	// 		// 	printf("%s\n", structure.envp[i]);
+	// 		// 	i++;
+	// 		// }
 			execution(&structure, &prompt);
+		}
 	}
 	return (0);
 }
