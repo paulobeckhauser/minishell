@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 14:59:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:49:05 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	execution(t_info *structure, t_prompt *prompt)
 
 				if (structure->table->type == BUILTIN_CMD)
 				{
-					printf("Builtin\n");
+					// printf("Builtin\n");
 					if (is_cd_command(structure->table->arr))
 						execute_cd_command(structure->table->arr); // cd with only a relative or absolute path
 					if (is_pwd_command(structure->table->arr))

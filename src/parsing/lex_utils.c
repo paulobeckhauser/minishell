@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/27 14:27:30 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/27 23:07:33 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,21 @@ char	*verify_redirection(t_prompt *prompt)
 void	count_words(t_prompt *prompt)
 {
 	char	*start_ptr_save;
+	char	curr_quote;
 
 	start_ptr_save = prompt->msg;
 	prompt->word_count = 0;
-	while (!ft_strchr(prompt->symbols, *prompt->msg)
-		&& *prompt->msg)
+	curr_quote = 0;
+	while (!ft_strchr(prompt->symbols, *prompt->msg) && *prompt->msg)
 	{
+		if (ft_strchr(prompt->quotes, *prompt->msg))
+		{
+			curr_quote = *prompt->msg++;
+			while (*prompt->msg && *prompt->msg != curr_quote)
+				prompt->msg++;
+			if (*prompt->msg)
+				prompt->word_count++;
+		}
 		if (ft_strchr(prompt->whitespace, *prompt->msg))
 		{
 			skip_whitespaces(prompt);
