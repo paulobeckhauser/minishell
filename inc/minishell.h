@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 14:49:21 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:52:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_token_node
 }	t_token_node;
 
 void store_main_arguments(int argc, char **argv, char **envp, t_info *structure);
-void execution(t_info *structure);
+void execution(t_info *structure, t_prompt *prompt);
 int	ft_strcmp(const char *s1, const char *s2);
 void check_builtin(t_info *structure, char *str);
 void	get_path_env(t_info *structure);
@@ -250,7 +250,7 @@ void			mark_last_out_redirection(t_token_node *tokens);
 void			close_token_fd(t_token_node *tokens);
 
 // parser.c
-bool			parser(t_info *structure);
+bool			parser(t_info *structure, t_prompt *prompt);
 t_token_node	*lex(t_prompt *prompt);
 t_cmd			*parse(t_token_node *tokens, t_prompt *prompt);
 

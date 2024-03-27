@@ -6,26 +6,25 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/26 16:27:05 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:52:22 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-bool	parser(t_info *structure)
+bool	parser(t_info *structure, t_prompt *prompt)
 {
-	t_prompt		prompt;
 	t_token_node	*tokens;
 
-	init_prompt(&prompt);
-	default_display_with_history(&prompt);
-	tokens = lex(&prompt);
+	init_prompt(prompt);
+	default_display_with_history(prompt);
+	tokens = lex(prompt);
 	if (!tokens || if_no_cmd_tokens(tokens))
 		return (false);
-	structure->table = parse(tokens, &prompt);
+	structure->table = parse(tokens, prompt);
 	if (!structure->table)
 		return (false); 
-	free_prompt(&prompt);
+	free_prompt(prompt);
 	return (true);
 }
 

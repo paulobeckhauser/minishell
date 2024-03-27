@@ -25,16 +25,17 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_info	structure;
+	t_prompt	prompt;
+	t_info		structure;
 
 	store_main_arguments(argc, argv, envp, &structure);
 	get_path_env(&structure);
 	while (1)
 	{ 
-		if (!parser(&structure))
+		if (!parser(&structure, &prompt))
 			continue ;
 		else
-			execution(&structure);
+			execution(&structure, &prompt);
 	}
 	return (0);
 }
