@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/19 20:08:21 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:27:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	init_heredoc_arr(t_prompt *prompt, t_token_node *list)
 {
+	char	**start_ptr_save;
+
 	prompt->heredoc = malloc(prompt->heredoc_count * sizeof(char *));
 	if (!prompt->heredoc)
 		return ;
+	start_ptr_save = prompt->heredoc;
 	while (list)
 	{
 		if (list->token.in.heredoc)
-			*prompt->heredoc++ = list->token.out.file_name;
+			*prompt->heredoc++ = list->token.in.file_name;
 		list = list->next;
 	}
+	prompt->heredoc = start_ptr_save;
 }
 
 char	*verify_redirection(t_prompt *prompt)
