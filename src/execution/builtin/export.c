@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 21:51:32 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/27 10:29:45 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,13 @@ static void	export_with_args(t_info *structure)
 	if (check == 1)
 	{
 		printf("Will add value\n");
+		printf("%s\n", structure->table->arr[1]);
+		array = ft_split(structure->table->arr[1], '=');
+		printf("%s\n", array[0]);
+		delete_string(structure, array[0]);
+
+		
+		
 	}
 
 	// printf("%d\n", check);
