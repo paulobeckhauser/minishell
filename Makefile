@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/26 10:17:21 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/27 14:48:55 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)pwd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)unset.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_utils.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)builtin_utils.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)add_to_envp.c \
 
 
 

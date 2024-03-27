@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/22 14:27:59 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:52:45 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // char *user = getenv("USER")
 
-void	execution(int argc, char *argv[], char *envp[], t_info *structure)
+void	execution(t_info *structure)
 {
 	pid_t child_pid;
 	// char **possible_paths;
@@ -38,15 +38,17 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 		if (is_pwd_command(structure->table->arr))
 			execute_pwd_command(structure->table->arr);
 		if (is_echo_command(structure->table->arr))
-			execute_echo_command(structure->table->arr, 1); // need to implement reedirection
+			execute_echo_command(structure->table->arr, 1, structure); // need to implement reedirection
 		if (is_export_command(structure->table->arr))
-			execute_export_command(structure->table->arr, envp);
+			execute_export_command(structure);
 		if (is_unset_command(structure->table->arr))
-			execute_unset_command(structure->table->arr);
+			execute_unset_command(structure);
+			// execute_unset_command(structure->table->arr, envp);
 		if (is_env_command(structure->table->arr))
 			execute_env_command(structure->table->arr);
 		if (is_exit_command(structure->table->arr))
 			execute_exit_command(structure->table->arr);
+				
 	}
 	else
 	{
@@ -59,7 +61,7 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 			structure->pid[i] = fork();
 
 			if (structure->pid[i] == 0)
-			{	
+			{
 				if (structure->table->in.file_name)
 				{
 					dup2(structure->table->in.fd, STDIN_FILENO);
@@ -82,7 +84,40 @@ void	execution(int argc, char *argv[], char *envp[], t_info *structure)
 					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
 					close(structure->fds_pipes[i][1]);
 				}
-				execve(structure->path_commands[i], structure->table->arr, structure->envp);
+
+				/// test addition
+
+
+				if (structure->table->type == BUILTIN_CMD)
+				{
+					printf("Builtin\n");
+					if (is_cd_command(structure->table->arr))
+						execute_cd_command(structure->table->arr); // cd with only a relative or absolute path
+					if (is_pwd_command(structure->table->arr))
+						execute_pwd_command(structure->table->arr);
+					if (is_echo_command(structure->table->arr))
+						execute_echo_command(structure->table->arr, 1, structure); // need to implement reedirection
+					if (is_export_command(structure->table->arr))
+						execute_export_command(structure);
+					if (is_unset_command(structure->table->arr))
+						execute_unset_command(structure);
+						// execute_unset_command(structure->table->arr, &structure->envp);
+					if (is_env_command(structure->table->arr))
+						execute_env_command(structure->table->arr);
+					if (is_exit_command(structure->table->arr))
+						execute_exit_command(structure->table->arr);
+					
+					exit(0);
+							
+				}
+
+				////
+
+
+				else
+				{
+					execve(structure->path_commands[i], structure->table->arr, structure->envp);
+				}
 			}
 			else
 			{

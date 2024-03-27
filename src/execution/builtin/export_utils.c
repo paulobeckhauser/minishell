@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/21 20:43:33 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:06:52 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,12 @@ void	selectiton_sort_variables(char **envp)
 	}
 }
 
+void	replace_value_envp(t_info *structure)
+{
+	char	**array;
 
+	array = ft_split(structure->table->arr[1], '=');
+	delete_string(structure, array[0]);
+	add_to_envp(structure, structure->table->arr[1]);
+	free_2d_array(array);
+}
