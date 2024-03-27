@@ -6,13 +6,13 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:38:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/26 21:56:38 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:45:24 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-void add_to_envp(t_info *structure)
+void add_to_envp(t_info *structure, char *str_add)
 {
     char **backup_array;
     int i;
@@ -45,7 +45,8 @@ void add_to_envp(t_info *structure)
         k++;
     }
 
-    structure->envp[k] = ft_strdup(structure->table->arr[1]);
+    // structure->envp[k] = ft_strdup(structure->table->arr[1]);
+    structure->envp[k] = ft_strdup(str_add);
     k++;
     structure->envp[k] = NULL;
 

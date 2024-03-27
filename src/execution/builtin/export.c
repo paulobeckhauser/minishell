@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 10:29:45 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:59:24 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,8 @@ static void	export_with_args(t_info *structure)
 
 	check = 0;
 	j = 0;
-	// while(command[1][j])
 	while(structure->table->arr[1][j])
 	{
-		// if (command[1][j] == '=')
 		if (structure->table->arr[1][j] == '=')
 		{
 			check++;
@@ -109,140 +107,24 @@ static void	export_with_args(t_info *structure)
 
 	if (check == 1)
 	{
-		printf("Will add value\n");
-		printf("%s\n", structure->table->arr[1]);
 		array = ft_split(structure->table->arr[1], '=');
-		printf("%s\n", array[0]);
 		delete_string(structure, array[0]);
-
-		
-		
+		add_to_envp(structure, structure->table->arr[1]);
+		free_2d_array(array);
 	}
-
-	// printf("%d\n", check);
-
-	// if (check == 1)
-	// {
-	// 	execute_unset_command(structure);
-		// delete_string(char *str_delete, char **array)
-		// printf("%s\n", array[0]);
-		// execute_unset_command(array[0], &envp);
-
-		
-		
-		// array = ft_split(arr[1], '=');
-
-		// if (check_env_variable(envp, array[0]))
-		// if (check_env_variable(envp, command))
-		// {
-		// 	// execute_unset_command(command, &envp);
-		// 	// delete_string(array[0], char **array)
-		// 	printf("env exist\n");
-		// }
-
-		
-		
-		// i = 0;
-		// while (envp[i])
-		// 	i++;
-		// if (array[1])
-		// {
-		// 	envp[i] = ft_strdup(command[1]);
-		// 	i++;
-		// 	envp[i] = NULL;
-		// }
-		// else
-		// {
-		// 	envp[i] = ft_strdup(array[0]);
-		// 	i++;
-		// 	envp[i] = NULL;
-		// }	
-		
-	// }
 	else
 	{
-		
-
-		// printf("will only add the name\n");
-	// else
-	// {
 		if (check_env_variable(structure))
-		{
-			// printf("env exist\n");
 			return;
-		}
 		else
-		{
-			add_to_envp(structure);
-		}
+			add_to_envp(structure, structure->table->arr[1]);
 	}
-	// 	else
-	// 	{
-		
-		
-	// 		// array = ft_split(command[1], '=');
-	// 		// i = 0;
-	// 		// while (structure->envp[i])
-	// 		// 	i++;
-	// 		// if (array[1])
-	// 		// {
-	// 		// 	structure->envp[i] = ft_strdup(command[1]);
-	// 		// 	i++;
-	// 		// 	structure->envp[i] = NULL;
-	// 		// }
-	// 		// else
-	// 		// {
-	// 		// 	structure->envp[i] = ft_strdup(array[0]);
-	// 		// 	i++;
-	// 		// 	structure->envp[i] = NULL;
-	// 		// }	
-	// 	}
-	// }
-	
-	// array = ft_split(command[1], '=');
-
-	
-	// if (check_env_variable(envp, command))
-	// {
-	// 	printf("Variable already exist!\n");
-	// 	printf("%s\n", command[1]);
-		
-		
-	// }
-		
-	// else
-	// 	printf("Variable does not existe\n");
-
-
-	// array = ft_split(command[1], '=');
-	// i = 0;
-	// while (envp[i])
-	// 	i++;
-	// if (array[1])
-	// {
-	// 	envp[i] = ft_strdup(command[1]);
-	// 	i++;
-	// 	envp[i] = NULL;
-	// }
-	// else
-	// {
-	// 	envp[i] = ft_strdup(array[0]);
-	// 	i++;
-	// 	envp[i] = NULL;
-	// }
 }
 
 void	execute_export_command(t_info *structure)
 {
-	char	**array;
-
 	if (structure->table->arr[1] == NULL)
 		export_without_args(structure);
-		// export_without_args(*envp, array);
-	// if (command[1] == NULL)
-	// 	export_without_args(*envp, array);
-		// printf("export without argcs\n");
 	else
 		export_with_args(structure);
-		// printf("export with argcs\n");
 }
