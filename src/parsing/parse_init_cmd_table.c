@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/26 09:39:16 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:30:23 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ void	init_cmd_table(t_token_node *node, t_cmd **table, t_cmd **head, t_prompt *p
 	}
 	if (node && node->left && node->left->right && node->left->right->token.type != REDIRECTION)
 		init_cmd_table(node->left, table, head, prompt);
-	if (node->token.type != PIPE)
+	if (!node || (node && node->token.type != PIPE))
 		return ;
-	if (node->left->token.type != PIPE)
+	if (node->left && node->left->token.type != PIPE)
 	{
 		new_cmd = init_cmd(node->left, prompt);
 		if (!*head)

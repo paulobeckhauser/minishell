@@ -28,14 +28,14 @@ int	main(int argc, char **argv, char **envp)
 	t_prompt	prompt;
 	t_info		structure;
 
-	store_main_arguments(argc, argv, envp, &structure);
-	get_path_env(&structure);
+	// store_main_arguments(argc, argv, envp, &structure);
+	// get_path_env(&structure);
 	while (1)
 	{ 
 		if (!parser(&structure, &prompt))
 			continue ;
-		else
-			execution(&structure, &prompt);
+		// else
+		// 	execution(&structure, &prompt);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 22:59:24 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:58:42 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ void			init_heredoc_arr(t_prompt *prompt, t_token_node *list);
 char			*verify_redirection(t_prompt *prompt);
 void			count_words(t_prompt *prompt);
 void			init_words_arr(t_prompt *prompt);
+bool			if_no_space_quotes(t_prompt *prompt, char quote);
 int				if_builtin_cmd(char *str);
 void			skip_whitespaces(t_prompt *prompt);
 int				get_word_length(t_prompt *prompt);

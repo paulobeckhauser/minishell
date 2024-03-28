@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 14:38:50 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:27:54 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,22 @@ void	skip_whitespaces(t_prompt *prompt)
 
 int	get_word_length(t_prompt *prompt)
 {
-	int	len;
-
+	int		len;
+	char	curr_quote;
 	len = 0;
-	while (!ft_strchr(prompt->symbols, prompt->msg[len])
-		&& prompt->msg[len])
-		len++;
+	curr_quote = 0;
+	if (ft_strchr(prompt->quotes, prompt->msg[len]))
+	{
+		curr_quote = prompt->msg[len++];
+		while (prompt->msg[len] && prompt->msg[len] != curr_quote)
+			len++;
+	}
+	else
+	{
+		while (!ft_strchr(prompt->symbols, prompt->msg[len])
+			&& prompt->msg[len])
+			len++;
+	}
 	return (len);
 }
 
