@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 19:38:42 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:10:00 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,8 @@ int is_pwd_command(char **command);
 void execute_pwd_command(char **command);
 int is_echo_command(char **command);
 // void    execute_echo_command(char **command, int fd);
-void	execute_echo_command(char **command, int fd, t_info* structure);
+// void	execute_echo_command(char **command, int fd, t_info* structure);
+void	execute_echo_command(t_info* structure);
 int is_export_command(char **command);
 // void    execute_export_command(char **command, char ***envp);
 void	execute_export_command(t_info *structure);

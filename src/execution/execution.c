@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/28 15:00:19 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:14:58 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	execution(t_info *structure, t_prompt *prompt)
 		if (is_pwd_command(structure->table->arr))
 			execute_pwd_command(structure->table->arr);
 		if (is_echo_command(structure->table->arr))
-			execute_echo_command(structure->table->arr, 1, structure); // need to implement reedirection
+			execute_echo_command(structure); // need to implement reedirection
 		if (is_export_command(structure->table->arr))
 			execute_export_command(structure);
 		if (is_unset_command(structure->table->arr))
@@ -87,7 +87,7 @@ void	execution(t_info *structure, t_prompt *prompt)
 					if (is_pwd_command(structure->table->arr))
 						execute_pwd_command(structure->table->arr);
 					if (is_echo_command(structure->table->arr))
-						execute_echo_command(structure->table->arr, 1, structure); // need to implement reedirection
+						execute_echo_command(structure); // need to implement reedirection
 					if (is_export_command(structure->table->arr))
 						execute_export_command(structure);
 					if (is_unset_command(structure->table->arr))
