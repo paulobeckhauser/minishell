@@ -3,30 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 14:59:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:00:19 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-// cur_path = getcwd(buf, size);
-// printf("HERE!!!: %s\n", cur_path);
-// char *cur_path;
-// char *buf;
-// size_t size;
-
-// char *user = getenv("USER")
-
 void	execution(t_info *structure, t_prompt *prompt)
 {
-	pid_t child_pid;
-	// char **possible_paths;
 
+
+
+	pid_t child_pid;
 	int i;
-	// int k;
+
+
+	
 
 	get_number_commands(structure);
 	store_commands(structure);
@@ -43,7 +38,6 @@ void	execution(t_info *structure, t_prompt *prompt)
 			execute_export_command(structure);
 		if (is_unset_command(structure->table->arr))
 			execute_unset_command(structure);
-			// execute_unset_command(structure->table->arr, envp);
 		if (is_env_command(structure->table->arr))
 			execute_env_command(structure->table->arr);
 		if (is_exit_command(structure->table->arr))
@@ -85,12 +79,9 @@ void	execution(t_info *structure, t_prompt *prompt)
 					close(structure->fds_pipes[i][1]);
 				}
 
-				/// test addition
-
-
+		
 				if (structure->table->type == BUILTIN_CMD)
 				{
-					printf("Builtin\n");
 					if (is_cd_command(structure->table->arr))
 						execute_cd_command(structure->table->arr); // cd with only a relative or absolute path
 					if (is_pwd_command(structure->table->arr))
@@ -101,7 +92,6 @@ void	execution(t_info *structure, t_prompt *prompt)
 						execute_export_command(structure);
 					if (is_unset_command(structure->table->arr))
 						execute_unset_command(structure);
-						// execute_unset_command(structure->table->arr, &structure->envp);
 					if (is_env_command(structure->table->arr))
 						execute_env_command(structure->table->arr);
 					if (is_exit_command(structure->table->arr))
@@ -111,7 +101,7 @@ void	execution(t_info *structure, t_prompt *prompt)
 							
 				}
 
-				////
+		
 
 
 				else
@@ -130,7 +120,7 @@ void	execution(t_info *structure, t_prompt *prompt)
 			structure->table = structure->table->next;
 
 		}
-		// WAIT CHILD PROCESSES
+
 		i = 0;
 		while (i < structure->number_commands)
 		{

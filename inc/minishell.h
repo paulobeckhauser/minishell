@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 14:52:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:38:42 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void store_path_commands(t_info *structure);
 void	store_commands(t_info *structure);
 void	create_pipes(t_info *structure);
 void	create_child_processes(t_info *structure);
+void here_doc_structure(t_info *structure, t_prompt *prompt);
 
 
 
@@ -149,8 +150,6 @@ void	*ft_free(char **strs, int count);
 void free_2d_array(char **array);
 
 // BUILTIN FUNCTIONS
-// int cd(char *path);
-// int check_cd_command(char **command);
 int is_cd_command(char **command);
 void execute_cd_command(char **command);
 int is_pwd_command(char **command);
