@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/28 21:58:34 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:16:22 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	count_words(t_prompt *prompt)
 	}
 	if (*prompt->msg == 0)
 		prompt->word_count++;
-	printf("%i\n", prompt->word_count);
+	// printf("%i\n", prompt->word_count);
 	prompt->msg = start_ptr_save;
 }
 
@@ -140,9 +140,9 @@ void	init_words_arr(t_prompt *prompt)
 	}
 	prompt->arr[i][y] = 0;
 	prompt->arr[i + 1] = NULL;
-	int x = 0;
-	while (prompt->arr[x])
-		printf("%s\n", prompt->arr[x++]);
+	// int x = 0;
+	// while (prompt->arr[x])
+	// 	printf("%s\n", prompt->arr[x++]);
 }
 
 bool	if_no_space_quotes(t_prompt *prompt, char quote)

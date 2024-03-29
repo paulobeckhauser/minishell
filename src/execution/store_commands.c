@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_commands.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:17:51 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 14:40:12 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:11:52 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
