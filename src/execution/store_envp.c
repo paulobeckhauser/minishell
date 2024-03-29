@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   store_main_variables.c                             :+:      :+:    :+:   */
+/*   store_envp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:44:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/28 16:12:58 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:00:01 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	store_envp(char **envp, t_info *structure)
+static char	**store_array(char **envp)
 {
-	int	i;
+	int		i;
+	char	**array;
 
 	i = 0;
 	while (envp[i])
 		i++;
-	structure->envp = (char **)malloc((i + 1) * sizeof(char *));
-	if (structure->envp == NULL)
+	array = (char **)malloc((i + 1) * sizeof(char *));
+	if (array == NULL)
 	{
 		perror("Memory allocation failed!\n");
 		exit(EXIT_FAILURE);
@@ -28,14 +29,20 @@ void	store_envp(char **envp, t_info *structure)
 	i = 0;
 	while (envp[i])
 	{
-		structure->envp[i] = (char *)malloc((ft_strlen(envp[i]) + 1)
-				* sizeof(char));
-		if (structure->envp[i] == NULL)
+		array[i] = (char *)malloc((ft_strlen(envp[i]) + 1) * sizeof(char));
+		if (array[i] == NULL)
 		{
 			perror("Memory allocation failed!\n");
 			exit(EXIT_FAILURE);
 		}
-		structure->envp[i] = ft_strdup(envp[i]);
+		array[i] = ft_strdup(envp[i]);
 		i++;
 	}
+	return (array);
+}
+
+void	store_envp(char **envp, t_info *structure)
+{
+	structure->envp = store_array(envp);
+	structure->envp_export = store_array(envp);
 }

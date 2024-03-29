@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 15:20:11 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:56:18 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,8 @@ typedef struct s_cmd
 
 typedef struct s_info
 {
-    // int argc;
-	// char **argv;
-	char **envp; // maybe we don't need to restore, since use only once
+	char **envp;
+	char **envp_export;
     int is_builtin;
     char *path_env;
 	int		number_commands;
@@ -128,8 +127,7 @@ typedef struct s_token_node
 	
 }	t_token_node;
 
-// void store_main_arguments(int argc, char **argv, char **envp, t_info *structure);
-// void	store_main_arguments(char **envp, t_info *structure);
+
 void	store_envp(char **envp, t_info *structure);
 void execution(t_info *structure, t_prompt *prompt);
 int	ft_strcmp(const char *s1, const char *s2);
@@ -160,33 +158,23 @@ void execute_cd_command(char **command);
 int is_pwd_command(char **command);
 void execute_pwd_command(char **command);
 int is_echo_command(char **command);
-// void    execute_echo_command(char **command, int fd);
-// void	execute_echo_command(char **command, int fd, t_info* structure);
 void	execute_echo_command(t_info* structure);
 int is_export_command(char **command);
-// void    execute_export_command(char **command, char ***envp);
 void	execute_export_command(t_info *structure);
 int is_unset_command(char **command);
-// void    execute_unset_command(char **command, char ***envp);
 void	execute_unset_command(t_info *structure);
 int is_env_command(char **command);
-// void    execute_env_command(char **command);
 void	execute_env_command(t_info *structure);
 int is_exit_command(char **command);
 void    execute_exit_command(char **command);
 void	selectiton_sort_variables(char **envp);
-// char **delete_string(char *str_delete, char **array);
-// void delete_string(t_info *structure);
 void delete_string(t_info *structure, char *str_delete);
-// void add_to_envp(t_info *structure);
-void add_to_envp(t_info *structure, char *str_add);
-void replace_value_envp(t_info *structure);
-
-
-// int check_env_variable(char **envp, char **command);
-int check_env_variable(t_info *structure);
-
-
+// void add_to_envp(t_info *structure, char *str_add);
+void add_to_envp(t_info *structure, char *str_add, int check_equal_sign);
+// void replace_value_envp(t_info *structure);
+void	replace_value_envp(t_info *structure, int check_equal_sign);
+// int check_env_variable(t_info *structure);
+int check_env_variable(char **array, t_info *structure);
 
 // default_display.c
 void			default_display_with_history(t_prompt *prompt);

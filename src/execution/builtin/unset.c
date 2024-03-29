@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 10:27:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:03:52 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,62 +18,7 @@ int	is_unset_command(char **command)
 }
 
 
-// void delete_string(t_info *structure)
-// {
-//     char **array_backup;
-//     char **env_var;
-
-//     int i;
-//     int count;
-//     i = 0;
-//     count = 0;
-//     while(structure->envp[i])
-//     {
-//         env_var = ft_split(structure->envp[i], '=');
-//         if (ft_strcmp(structure->table->arr[1], env_var[0]) == 0)
-//             count++;            
-//         i++;
-//         free_2d_array(env_var);
-//     }
-//     array_backup = (char **)malloc((i - count + 1) * sizeof(char *));
-
-//     int j;
-//     j = 0;
-//     int g;
-//     g = 0;
-
-//     while (structure->envp[j])
-//     {
-//         env_var = ft_split(structure->envp[j], '=');
-
-//         if (ft_strcmp(structure->table->arr[1], env_var[0]) != 0)
-//         {
-//             array_backup[g] = ft_strdup(structure->envp[j]);
-//             g++;
-//         }
-//         j++;
-//     }
-//     array_backup[g] = NULL;
-//     free_2d_array(structure->envp);
-
-//     int u = 0;
-
-//     while (array_backup[u])
-//         u++;
-
-//     structure->envp = (char **)malloc((u + 1) * sizeof(char *));
-//     int f = 0;
-
-//     while (array_backup[f])
-//     {
-//         structure->envp[f] = ft_strdup(array_backup[f]);
-//         f++;
-//     }
-//     structure->envp[f] = NULL;
-    
-// }
-
-void delete_string(t_info *structure, char *str_delete)
+static char **delete_string_array(char **array, char *str_delete)
 {
     char **array_backup;
     char **env_var;
@@ -82,9 +27,9 @@ void delete_string(t_info *structure, char *str_delete)
     int count;
     i = 0;
     count = 0;
-    while(structure->envp[i])
+    while(array[i])
     {
-        env_var = ft_split(structure->envp[i], '=');
+        env_var = ft_split(array[i], '=');
         if (ft_strcmp(str_delete, env_var[0]) == 0)
             count++;            
         i++;
@@ -97,35 +42,41 @@ void delete_string(t_info *structure, char *str_delete)
     int g;
     g = 0;
 
-    while (structure->envp[j])
+    while (array[j])
     {
-        env_var = ft_split(structure->envp[j], '=');
+        env_var = ft_split(array[j], '=');
 
         if (ft_strcmp(str_delete, env_var[0]) != 0)
         {
-            array_backup[g] = ft_strdup(structure->envp[j]);
+            array_backup[g] = ft_strdup(array[j]);
             g++;
         }
         j++;
     }
     array_backup[g] = NULL;
-    free_2d_array(structure->envp);
+    free_2d_array(array);
 
     int u = 0;
 
     while (array_backup[u])
         u++;
 
-    structure->envp = (char **)malloc((u + 1) * sizeof(char *));
+    array = (char **)malloc((u + 1) * sizeof(char *));
     int f = 0;
 
     while (array_backup[f])
     {
-        structure->envp[f] = ft_strdup(array_backup[f]);
+        array[f] = ft_strdup(array_backup[f]);
         f++;
     }
-    structure->envp[f] = NULL;
-    
+    array[f] = NULL;
+    return (array);
+}
+
+void delete_string(t_info *structure, char *str_delete)
+{
+    structure->envp = delete_string_array(structure->envp, str_delete);
+    structure->envp_export = delete_string_array(structure->envp_export, str_delete);
 }
 
 
@@ -140,9 +91,11 @@ void	execute_unset_command(t_info *structure)
         return;
 	else
 	{
-        if (check_env_variable(structure) == 1)
+        
+        if (check_env_variable(structure->envp ,structure) == 1)
             delete_string(structure, structure->table->arr[1]);
-            // delete_string(structure);  
+        else if(check_env_variable(structure->envp_export ,structure) == 1)
+            structure->envp_export = delete_string_array(structure->envp_export, structure->table->arr[1]);
 		else
 			return ;
 	
