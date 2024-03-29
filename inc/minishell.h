@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 19:37:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:49:35 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_in
 	bool	heredoc;
 	int		fd;
 	char	*file_name;
-	char	*heredoc_in;
 }	t_in;
 
 typedef struct s_out

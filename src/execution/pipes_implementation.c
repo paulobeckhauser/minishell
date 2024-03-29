@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 09:17:20 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 20:20:17 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@ void pipes_implementation(t_info *structure)
     {
         structure->pid[i] = fork();
 
+        // printf("%d\n", i);
+
         if (structure->pid[i] == 0)
-        {
+        {          
+            
             if (structure->table->in.file_name)
             {
+           
+            
                 dup2(structure->table->in.fd, STDIN_FILENO);
                 close(structure->table->in.fd);
             }
@@ -39,12 +44,14 @@ void pipes_implementation(t_info *structure)
             
             if (structure->table->out.file_name)
             {
+        
                 dup2(structure->table->out.fd, STDOUT_FILENO);
                 close(structure->table->out.fd);
             }
 
             else if (structure->table->next != NULL)
             {
+          
                 dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
                 close(structure->fds_pipes[i][1]);
             }
@@ -53,7 +60,9 @@ void pipes_implementation(t_info *structure)
             if (structure->table->type == BUILTIN_CMD)
                 builtin_execution(structure);				
             else
+            {
                 execve(structure->path_commands[i], structure->table->arr, structure->envp);
+            }
         }
         else
         {
