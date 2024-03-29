@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/29 09:09:10 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/29 11:14:13 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,8 +76,9 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)pwd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)unset.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_utils.c \
-						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)builtin_utils.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)check_env_var_exist.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)add_to_envp.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)delete_string_in_array.c \
 
 
 

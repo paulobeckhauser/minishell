@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 15:26:24 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:14:34 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	export_with_args(t_info *structure)
 		replace_value_envp(structure);
 	else
 	{
-		if (check_env_variable(structure))
+		if (check_env_var_exist(structure))
 			return ;
 		else
 			add_to_envp(structure, structure->table->arr[1]);
