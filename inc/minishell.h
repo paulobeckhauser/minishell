@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 11:30:01 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:32:56 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_prompt
 	char	*curr_ptr_save;
 	char	*symbols;
 	char	*whitespace;
+	char	*quotes;
 	char	**arr;
 	int		word_count;
 	int		pipe_count;
@@ -189,6 +190,7 @@ int	check_env_var_exist(t_info *structure);
 
 // default_display.c
 void			default_display_with_history(t_prompt *prompt);
+void				check_quotes(t_prompt *prompt);
 int				count_quotes(t_prompt *prompt);
 
 // free.c
@@ -199,10 +201,10 @@ void			free_double_arr(char **arr);
 void			init_prompt(t_prompt *prompt);
 
 // init_redirection.c
-t_in			init_in_redirection(t_token *token, char *file_name);
-t_in			init_heredoc_in_redirection(t_token *token, char *file_name);
-t_out			init_truncate_out_redirection(t_token *token, char *file_name);
-t_out			init_append_out_redirection(t_token *token, char *file_name);
+void			init_in_redirection(t_token *token, char *file_name);
+void			init_heredoc_in_redirection(t_token *token, char *delimiter);
+void			init_truncate_out_redirection(t_token *token, char *file_name);
+void			init_append_out_redirection(t_token *token, char *file_name);
 
 // lex_init_token_list.c
 t_token_node	*init_token_list(t_prompt *prompt);
@@ -225,6 +227,7 @@ void			init_heredoc_arr(t_prompt *prompt, t_token_node *list);
 char			*verify_redirection(t_prompt *prompt);
 void			count_words(t_prompt *prompt);
 void			init_words_arr(t_prompt *prompt);
+bool			if_no_space_quotes(t_prompt *prompt, char quote);
 int				if_builtin_cmd(char *str);
 void			skip_whitespaces(t_prompt *prompt);
 int				get_word_length(t_prompt *prompt);
@@ -232,7 +235,7 @@ char			*fetch_file_name(t_prompt *prompt);
 char			*find_next_token_to_print_in_err(t_prompt *prompt);
 
 // parse_if_no_cmd_tokens.c
-bool	if_no_cmd_tokens(t_token_node *tokens);
+bool			if_no_cmd_tokens(t_token_node *tokens);
 
 // parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);

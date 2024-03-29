@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/29 11:14:13 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/29 12:33:42 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ PARSING_DIR		:= parsing/
 BUILTIN_DIR		:= builtin/
 
 # Compiler and Flags
-CC				:= cc
+CC				:= gcc
 RM				:= rm -f
 CFLAGS			:= #-Wall -Wextra -Werror
 LREADLINE		:= -lreadline
