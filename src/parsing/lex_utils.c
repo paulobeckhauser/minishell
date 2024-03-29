@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/29 19:30:57 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:32:59 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,9 @@ void	count_words(t_prompt *prompt)
 {
 	char	*start_ptr_save;
 	char	curr_quote;
-	char	curr_quote;
 
 	start_ptr_save = prompt->msg;
 	prompt->word_count = 0;
-	curr_quote = 0;
-	while (!ft_strchr(prompt->symbols, *prompt->msg) && *prompt->msg)
 	curr_quote = 0;
 	while (!ft_strchr(prompt->symbols, *prompt->msg) && *prompt->msg)
 	{
@@ -102,11 +99,9 @@ void	init_words_arr(t_prompt *prompt)
 	int		i;
 	int		y;
 	char	curr_quote;
-	char	curr_quote;
 
 	i = 0;
 	y = 0;
-	curr_quote = 0;
 	curr_quote = 0;
 	prompt->arr = malloc((prompt->word_count + 1) * sizeof(char *));
 	if (!prompt->arr)
@@ -172,23 +167,6 @@ void	init_words_arr(t_prompt *prompt)
 	}
 	prompt->arr[i][y] = 0;
 	prompt->arr[i + 1] = NULL;
-	// int x = 0;
-	// while (prompt->arr[x])
-	// 	printf("%s\n", prompt->arr[x++]);
-}
-
-bool	if_no_space_quotes(t_prompt *prompt, char quote)
-{
-	int	i;
-
-	i = 0;
-	while (prompt->msg[i] && !ft_strchr(prompt->whitespace, prompt->msg[i]))
-	{
-		if (prompt->msg[i] == quote)
-			return (true);
-		i++;
-	}
-	return (false);
 	// int x = 0;
 	// while (prompt->arr[x])
 	// 	printf("%s\n", prompt->arr[x++]);
