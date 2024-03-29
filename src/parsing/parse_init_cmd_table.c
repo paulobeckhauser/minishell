@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/28 17:32:57 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:14:42 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_token_node	*init_binary_tree(t_token_node **token)
 		else
 			*token = (*token)->next;
 	}
-	*token = head;
 	return (*token);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/28 21:04:03 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:15:14 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,47 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 		perror("open");
 		return ;
 	}
-	if (write(in.fd, heredoc_msg, ft_strlen(heredoc_msg)) == -1)
+	if (heredoc_msg)
 	{
-		perror("write");
-		return ;
+		if (write(in.fd, heredoc_msg, ft_strlen(heredoc_msg)) == -1)
+		{
+			perror("write");
+			return ;
+		}
 	}
 	token->in = in;
 	token->type = REDIRECTION;
 }
 
+void	create_tmp_folder(void)
+{
+	char	**create_tmp_folder;
+	pid_t	pid;
+
+	create_tmp_folder = malloc(4 * sizeof(char *));
+	if (!create_tmp_folder)
+		return ;
+	create_tmp_folder[0] = "/bin/mkdir";
+	create_tmp_folder[1] = "-p";
+	create_tmp_folder[2] = "tmp";
+	create_tmp_folder[3] = NULL;
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+	{
+		if (execve(create_tmp_folder[0], create_tmp_folder, NULL) == -1)
+		{
+			perror("execve");
+			exit(EXIT_FAILURE);
+		}
+	}
+	waitpid(pid, NULL, 0);
+	free(create_tmp_folder);
+}
 
 void	init_truncate_out_redirection(t_token *token, char *file_name)
 {
