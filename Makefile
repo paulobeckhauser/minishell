@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/27 19:39:02 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/29 08:49:47 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
-						$(SRC_DIR)$(EXECUTION_DIR)store_main_variables.c \
+						$(SRC_DIR)$(EXECUTION_DIR)store_envp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_number_commands.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_path_commands.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_commands.c \

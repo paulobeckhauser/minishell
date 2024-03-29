@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/28 15:10:00 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:09:25 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ typedef struct s_cmd
 
 typedef struct s_info
 {
-    int argc;
-	char **argv;
+    // int argc;
+	// char **argv;
 	char **envp; // maybe we don't need to restore, since use only once
     int is_builtin;
     char *path_env;
@@ -126,7 +126,9 @@ typedef struct s_token_node
 	
 }	t_token_node;
 
-void store_main_arguments(int argc, char **argv, char **envp, t_info *structure);
+// void store_main_arguments(int argc, char **argv, char **envp, t_info *structure);
+// void	store_main_arguments(char **envp, t_info *structure);
+void	store_envp(char **envp, t_info *structure);
 void execution(t_info *structure, t_prompt *prompt);
 int	ft_strcmp(const char *s1, const char *s2);
 void check_builtin(t_info *structure, char *str);
