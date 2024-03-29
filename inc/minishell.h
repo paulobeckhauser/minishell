@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 14:14:24 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:20:11 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,8 @@ int is_unset_command(char **command);
 // void    execute_unset_command(char **command, char ***envp);
 void	execute_unset_command(t_info *structure);
 int is_env_command(char **command);
-void    execute_env_command(char **command);
+// void    execute_env_command(char **command);
+void	execute_env_command(t_info *structure);
 int is_exit_command(char **command);
 void    execute_exit_command(char **command);
 void	selectiton_sort_variables(char **envp);
