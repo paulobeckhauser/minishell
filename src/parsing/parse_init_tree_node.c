@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:47:52 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 19:23:09 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:33:05 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ bool	join_cmd_to_pipe(t_token_node **token, t_token_node **previous_token)
 	{
 		if (*previous_token)
 			(*token)->left = *previous_token;
-		if ((*token)->next && (*token))
+		if (*token && (*token)->next)
 			(*token)->right = (*token)->next;
-		if ((*token)->next->next)
+		if (*token && (*token)->next && (*token)->next->next)
 		{
 			*previous_token = *token;
 			*token = (*token)->next->next;
