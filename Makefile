@@ -6,9 +6,10 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/29 09:09:10 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/03/29 19:33:52 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 # ar rcs $@ $^ is the recipe or command to build the target. 
 # ar: Archive command used for creating static libraries.

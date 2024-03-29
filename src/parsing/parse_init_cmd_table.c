@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_init_cmd_table.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/28 16:30:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:20:23 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,13 @@ void	init_cmd_table(t_token_node *node, t_cmd **table, t_cmd **head, t_prompt *p
 		}
 		node->left = NULL;
 	}
-	new_cmd = init_cmd(node->right, prompt);
-	(*table)->next = new_cmd;
-	*table = (*table)->next;
-	node->right = NULL;
+	if (node->right && node->right->token.type != PIPE)
+	{
+		new_cmd = init_cmd(node->right, prompt);
+		(*table)->next = new_cmd;
+		*table = (*table)->next;
+		node->right = NULL;
+	}
 }
 
 t_cmd	*init_cmd(t_token_node *node, t_prompt *prompt)
