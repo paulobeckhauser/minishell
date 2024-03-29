@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/27 21:33:21 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:07:22 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ t_in	init_heredoc_in_redirection(t_token *token, char *file_name)
 		else
 			in.heredoc_in = ft_strjoin(in.heredoc_in, "\n");
 		in.heredoc_in = ft_strjoin(in.heredoc_in, delimiter);
-		free(delimiter);
 		delimiter = readline("> ");
 	}
-	if (delimiter)
-		free(delimiter);
 	in.fd = -1;
 	in.file_name = file_name;
 	token->in = in;
