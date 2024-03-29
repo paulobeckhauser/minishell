@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/28 15:14:58 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 09:02:41 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,14 @@
 
 void	execution(t_info *structure, t_prompt *prompt)
 {
-
-
-
 	pid_t child_pid;
 	int i;
-
-
-	
 
 	get_number_commands(structure);
 	store_commands(structure);
 	store_path_commands(structure);
 	if (structure->table->type == BUILTIN_CMD && structure->number_commands == 1)
-	{
-		if (is_cd_command(structure->table->arr))
-			execute_cd_command(structure->table->arr); // cd with only a relative or absolute path
-		if (is_pwd_command(structure->table->arr))
-			execute_pwd_command(structure->table->arr);
-		if (is_echo_command(structure->table->arr))
-			execute_echo_command(structure); // need to implement reedirection
-		if (is_export_command(structure->table->arr))
-			execute_export_command(structure);
-		if (is_unset_command(structure->table->arr))
-			execute_unset_command(structure);
-		if (is_env_command(structure->table->arr))
-			execute_env_command(structure->table->arr);
-		if (is_exit_command(structure->table->arr))
-			execute_exit_command(structure->table->arr);
-				
-	}
+		builtin_execution(structure);
 	else
 	{
 		create_pipes(structure);
@@ -81,33 +59,9 @@ void	execution(t_info *structure, t_prompt *prompt)
 
 		
 				if (structure->table->type == BUILTIN_CMD)
-				{
-					if (is_cd_command(structure->table->arr))
-						execute_cd_command(structure->table->arr); // cd with only a relative or absolute path
-					if (is_pwd_command(structure->table->arr))
-						execute_pwd_command(structure->table->arr);
-					if (is_echo_command(structure->table->arr))
-						execute_echo_command(structure); // need to implement reedirection
-					if (is_export_command(structure->table->arr))
-						execute_export_command(structure);
-					if (is_unset_command(structure->table->arr))
-						execute_unset_command(structure);
-					if (is_env_command(structure->table->arr))
-						execute_env_command(structure->table->arr);
-					if (is_exit_command(structure->table->arr))
-						execute_exit_command(structure->table->arr);
-					
-					exit(0);
-							
-				}
-
-		
-
-
+					builtin_execution(structure);				
 				else
-				{
 					execve(structure->path_commands[i], structure->table->arr, structure->envp);
-				}
 			}
 			else
 			{

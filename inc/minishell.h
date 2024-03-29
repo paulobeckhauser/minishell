@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/28 16:09:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 09:00:46 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	store_commands(t_info *structure);
 void	create_pipes(t_info *structure);
 void	create_child_processes(t_info *structure);
 void here_doc_structure(t_info *structure, t_prompt *prompt);
-
+void builtin_execution(t_info *structure);
 
 
 
