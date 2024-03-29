@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 16:56:18 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:10:53 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,13 +168,10 @@ void	execute_env_command(t_info *structure);
 int is_exit_command(char **command);
 void    execute_exit_command(char **command);
 void	selectiton_sort_variables(char **envp);
-void delete_string(t_info *structure, char *str_delete);
-// void add_to_envp(t_info *structure, char *str_add);
 void add_to_envp(t_info *structure, char *str_add, int check_equal_sign);
-// void replace_value_envp(t_info *structure);
 void	replace_value_envp(t_info *structure, int check_equal_sign);
-// int check_env_variable(t_info *structure);
 int check_env_variable(char **array, t_info *structure);
+char **delete_string_array(char **array, char *str_delete);
 
 // default_display.c
 void			default_display_with_history(t_prompt *prompt);
