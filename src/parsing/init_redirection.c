@@ -6,13 +6,13 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/27 15:02:46 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 21:04:03 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-t_in	init_in_redirection(t_token *token, char *file_name)
+void	init_in_redirection(t_token *token, char *file_name)
 {
 	t_in	in;
 
@@ -26,23 +26,46 @@ t_in	init_in_redirection(t_token *token, char *file_name)
 		in.file_name = file_name;
 	token->in = in;
 	token->type = REDIRECTION;
-	return (in);
 }
 
-t_in	init_heredoc_in_redirection(t_token *token, char *file_name)
+void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 {
 	t_in	in;
+	char	*heredoc_newline;
+	char	*heredoc_msg;
 
 	in.heredoc = true;
-	in.fd = -1;
-	in.file_name = file_name;
+	in.file_name = "tmp/heredoc_tmp";
+	heredoc_newline = readline("> ");
+	heredoc_msg = NULL;
+	while (ft_strcmp(heredoc_newline, delimiter) != 0)
+	{
+		if (!heredoc_msg)
+			heredoc_msg = "";
+		else
+			heredoc_msg = ft_strjoin(heredoc_msg, "\n");
+		heredoc_msg = ft_strjoin(heredoc_msg, heredoc_newline);
+		free(heredoc_newline);
+		heredoc_newline = readline("> ");
+	}
+	free(heredoc_newline);
+	in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	if (in.fd == -1)
+	{
+		perror("open");
+		return ;
+	}
+	if (write(in.fd, heredoc_msg, ft_strlen(heredoc_msg)) == -1)
+	{
+		perror("write");
+		return ;
+	}
 	token->in = in;
 	token->type = REDIRECTION;
-	return (in);
 }
 
 
-t_out	init_truncate_out_redirection(t_token *token, char *file_name)
+void	init_truncate_out_redirection(t_token *token, char *file_name)
 {
 	t_out	out;
 
@@ -52,14 +75,13 @@ t_out	init_truncate_out_redirection(t_token *token, char *file_name)
 	{
 		ft_printf("bash: error creating file `%s'\n", out.file_name);
 		token->type = END;
-		return (out);
+		return ;
 	}
 	token->out = out;
 	token->type = REDIRECTION;
-	return (out);
 }
 
-t_out	init_append_out_redirection(t_token *token, char *file_name)
+void	init_append_out_redirection(t_token *token, char *file_name)
 {
 	t_out	out;
 
@@ -69,9 +91,8 @@ t_out	init_append_out_redirection(t_token *token, char *file_name)
 	{
 		ft_printf("bash: error creating file `%s'\n", out.file_name);
 		token->type = END;
-		return (out);
+		return ;
 	}
 	token->out = out;
 	token->type = REDIRECTION;
-	return (out);
 }
