@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/26 18:06:46 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/27 19:56:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,27 @@ void	default_display_with_history(t_prompt *prompt)
 	// prompt->buf = ft_strjoin(prompt->buf, "$ ");
 	// prompt->msg = readline(prompt->buf);
 	prompt->msg = readline(color_prompt);
+	check_quotes(prompt);
 	add_history(prompt->msg);
+}
+
+void	check_quotes(t_prompt *prompt)
+{
+	while (count_quotes(prompt) % 2 != 0)
+	{
+		prompt->msg = ft_strjoin(prompt->msg, "\n");
+		prompt->msg = ft_strjoin(prompt->msg, readline("> "));
+	}
 }
 
 int	count_quotes(t_prompt *prompt)
 {
 	int		i;
+	int		count;
 	char	start_quote;
 
 	i = 0;
+	count = 0;
 	start_quote = 0;
 	while (prompt->msg[i])
 	{
@@ -45,6 +57,7 @@ int	count_quotes(t_prompt *prompt)
 		{
 			start_quote = prompt->msg[i];
 			i++;
+			count++;
 			break ;
 		}
 		i++;
@@ -52,7 +65,8 @@ int	count_quotes(t_prompt *prompt)
 	while (prompt->msg[i])
 	{
 		if (prompt->msg[i] == start_quote)
-			i++;
+			count++;
+		i++;
 	}
-	return (i);
+	return (count);
 }

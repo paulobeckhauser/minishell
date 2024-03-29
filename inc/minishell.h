@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 09:09:27 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:10:58 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_prompt
 	char	*curr_ptr_save;
 	char	*symbols;
 	char	*whitespace;
+	char	*quotes;
 	char	**arr;
 	int		word_count;
 	int		pipe_count;
@@ -68,6 +69,7 @@ typedef struct s_in
 	bool	heredoc;
 	int		fd;
 	char	*file_name;
+	char	*heredoc_in;
 }	t_in;
 
 typedef struct s_out
@@ -187,6 +189,7 @@ int check_env_variable(t_info *structure);
 
 // default_display.c
 void			default_display_with_history(t_prompt *prompt);
+void				check_quotes(t_prompt *prompt);
 int				count_quotes(t_prompt *prompt);
 
 // free.c
