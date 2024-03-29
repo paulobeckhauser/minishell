@@ -6,13 +6,13 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:38:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 11:45:24 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:42:10 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-void add_to_envp(t_info *structure, char *str_add)
+static char **add_variable_to_array(char *str_add, char **array)
 {
     char **backup_array;
     int i;
@@ -20,39 +20,43 @@ void add_to_envp(t_info *structure, char *str_add)
 
     i = 0;
 
-    while(structure->envp[i])
+    while(array[i])
         i++;
     backup_array = (char **)malloc((i + 1) * sizeof(char *));
     
     j = 0;
 
-    while(structure->envp[j])
+    while(array[j])
     {
-        backup_array[j] = ft_strdup(structure->envp[j]);
+        backup_array[j] = ft_strdup(array[j]);
         j++;
     }
 
-    free_2d_array(structure->envp);
+    free_2d_array(array);
 
-    structure->envp = (char **)malloc((i + 2) * sizeof(char *));
+    array = (char **)malloc((i + 2) * sizeof(char *));
 
     int k;
     k = 0;
 
     while (backup_array[k])
     {
-        structure->envp[k] = ft_strdup(backup_array[k]);
+        array[k] = ft_strdup(backup_array[k]);
         k++;
     }
-
-    // structure->envp[k] = ft_strdup(structure->table->arr[1]);
-    structure->envp[k] = ft_strdup(str_add);
+    array[k] = ft_strdup(str_add);
     k++;
-    structure->envp[k] = NULL;
+    array[k] = NULL;
+
 
     free_2d_array(backup_array);
-    
-    
-    
+    return (array);
+}
 
+
+void add_to_envp(t_info *structure, char *str_add, int check_equal_sign)
+{   
+    if (check_equal_sign == 1)
+        structure->envp = add_variable_to_array(str_add, structure->envp);
+    structure->envp_export = add_variable_to_array(str_add, structure->envp_export);
 }

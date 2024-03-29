@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/28 19:54:37 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/29 19:29:37 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,12 +88,15 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
-						$(SRC_DIR)$(EXECUTION_DIR)store_main_variables.c \
+						$(SRC_DIR)$(EXECUTION_DIR)store_envp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_number_commands.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_path_commands.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_commands.c \
 						$(SRC_DIR)$(EXECUTION_DIR)create_pipes.c \
 						$(SRC_DIR)$(EXECUTION_DIR)create_child_processes.c \
+						$(SRC_DIR)$(EXECUTION_DIR)here_doc.c \
+						$(SRC_DIR)$(EXECUTION_DIR)builtin_execution.c \
+						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \

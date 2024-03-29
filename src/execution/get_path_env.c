@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:27:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 17:17:28 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:20:17 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	get_path_env(t_info *structure)
 	int		len_path;
 	char	*default_path;
 
-	default_path = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin";
+	default_path = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:"
+					"/sbin:/bin:/usr/games:/usr/local/games:/snap/bin";
 	i = 0;
 	len_path = 0;
 	while (structure->envp[i])

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/29 17:15:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:30:44 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_in_redirection(t_token *token, char *file_name)
 	t_in	in;
 
 	in.heredoc = false;
+	in.heredoc_in = NULL;
 	if ((in.fd = open(file_name, O_RDONLY)) == -1)
 	{
 		file_name = ft_strjoin("bash: ", file_name);
