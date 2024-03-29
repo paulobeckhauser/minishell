@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 09:02:41 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 09:15:30 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,73 +14,14 @@
 
 void	execution(t_info *structure, t_prompt *prompt)
 {
-	pid_t child_pid;
-	int i;
-
+	pid_t	child_pid;
+	
 	get_number_commands(structure);
 	store_commands(structure);
 	store_path_commands(structure);
-	if (structure->table->type == BUILTIN_CMD && structure->number_commands == 1)
+	if (structure->table->type == BUILTIN_CMD
+		&& structure->number_commands == 1)
 		builtin_execution(structure);
 	else
-	{
-		create_pipes(structure);
-		structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1), sizeof(pid_t));
-		i = 0;
-
-		while(structure->table)
-		{
-			structure->pid[i] = fork();
-
-			if (structure->pid[i] == 0)
-			{
-				if (structure->table->in.file_name)
-				{
-					dup2(structure->table->in.fd, STDIN_FILENO);
-					close(structure->table->in.fd);
-				}
-				else if (i != 0)
-				{
-					dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
-					close(structure->fds_pipes[i - 1][0]);
-				}
-				
-				if (structure->table->out.file_name)
-				{
-					dup2(structure->table->out.fd, STDOUT_FILENO);
-					close(structure->table->out.fd);
-				}
-
-				else if (structure->table->next != NULL)
-				{
-					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
-					close(structure->fds_pipes[i][1]);
-				}
-
-		
-				if (structure->table->type == BUILTIN_CMD)
-					builtin_execution(structure);				
-				else
-					execve(structure->path_commands[i], structure->table->arr, structure->envp);
-			}
-			else
-			{
-				if (i != 0)
-					close(structure->fds_pipes[i - 1][0]);
-				if (structure->table->next != NULL)
-					close(structure->fds_pipes[i][1]);
-			}
-			i++;
-			structure->table = structure->table->next;
-
-		}
-
-		i = 0;
-		while (i < structure->number_commands)
-		{
-			waitpid(structure->pid[i], NULL, 0);
-			i++;
-		}
-	}
-
+		pipes_implementation(structure);
 }
