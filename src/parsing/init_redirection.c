@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/29 19:37:07 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 20:01:59 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	init_in_redirection(t_token *token, char *file_name)
 	t_in	in;
 
 	in.heredoc = false;
-	in.heredoc_in = NULL;
 	if ((in.fd = open(file_name, O_RDONLY)) == -1)
 	{
 		file_name = ft_strjoin("bash: ", file_name);
@@ -51,7 +50,7 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 		heredoc_newline = readline("> ");
 	}
 	free(heredoc_newline);
-	in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (in.fd == -1)
 	{
 		perror("open");
