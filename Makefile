@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/27 14:48:55 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/03/28 19:54:37 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ PARSING_DIR		:= parsing/
 BUILTIN_DIR		:= builtin/
 
 # Compiler and Flags
-CC				:= cc
+CC				:= gcc
 RM				:= rm -f
 CFLAGS			:= #-Wall -Wextra -Werror
 LREADLINE		:= -lreadline

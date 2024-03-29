@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/28 12:58:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 21:00:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_in
 	bool	heredoc;
 	int		fd;
 	char	*file_name;
-	char	*heredoc_in;
 }	t_in;
 
 typedef struct s_out
@@ -197,10 +196,10 @@ void			free_double_arr(char **arr);
 void			init_prompt(t_prompt *prompt);
 
 // init_redirection.c
-t_in			init_in_redirection(t_token *token, char *file_name);
-t_in			init_heredoc_in_redirection(t_token *token, char *file_name);
-t_out			init_truncate_out_redirection(t_token *token, char *file_name);
-t_out			init_append_out_redirection(t_token *token, char *file_name);
+void			init_in_redirection(t_token *token, char *file_name);
+void			init_heredoc_in_redirection(t_token *token, char *delimiter);
+void			init_truncate_out_redirection(t_token *token, char *file_name);
+void			init_append_out_redirection(t_token *token, char *file_name);
 
 // lex_init_token_list.c
 t_token_node	*init_token_list(t_prompt *prompt);
@@ -231,7 +230,7 @@ char			*fetch_file_name(t_prompt *prompt);
 char			*find_next_token_to_print_in_err(t_prompt *prompt);
 
 // parse_if_no_cmd_tokens.c
-bool	if_no_cmd_tokens(t_token_node *tokens);
+bool			if_no_cmd_tokens(t_token_node *tokens);
 
 // parse_init_cmd_table.c
 t_token_node	*init_binary_tree(t_token_node **token_node);

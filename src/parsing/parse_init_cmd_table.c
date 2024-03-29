@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/28 16:30:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:32:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_token_node	*init_binary_tree(t_token_node **token)
 		else
 			*token = (*token)->next;
 	}
+	*token = head;
 	return (*token);
 }
 
@@ -109,10 +110,13 @@ void	init_cmd_table(t_token_node *node, t_cmd **table, t_cmd **head, t_prompt *p
 		}
 		node->left = NULL;
 	}
-	new_cmd = init_cmd(node->right, prompt);
-	(*table)->next = new_cmd;
-	*table = (*table)->next;
-	node->right = NULL;
+	if (node->right && node->right->token.type != PIPE)
+	{
+		new_cmd = init_cmd(node->right, prompt);
+		(*table)->next = new_cmd;
+		*table = (*table)->next;
+		node->right = NULL;
+	}
 }
 
 t_cmd	*init_cmd(t_token_node *node, t_prompt *prompt)
