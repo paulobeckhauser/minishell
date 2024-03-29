@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 13:55:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:17:21 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,35 @@ int	is_echo_command(char **command)
 	return (ft_strcmp(command[0], "echo") == 0);
 }
 
-void	execute_echo_command(char **command, int fd, t_info* structure)
+void	execute_echo_command(t_info* structure)
 {
 	char *string;
-
 	int i;
+	
 
-	i = 0;
-	while(structure->table->arr[i])
+	if (structure->table->arr[1])
 	{
-		printf("%s\n", structure->table->arr[i]);
-		i++;
-		
-	}
-	// string = ft_strdup(command[1]);
+		string = ft_strdup(structure->table->arr[1]);
+		i = 2;
+		while(structure->table->arr[i])
+		{
 
-	// ft_strlcat(string, "\n", ft_strlen(string) + 2);
+			string = ft_strjoin(string, " ");
+			string = ft_strjoin(string, structure->table->arr[i]);
+			i++;
+		}
+		string = ft_strjoin(string, "\n");
+	}
+	else
+		string = ft_strdup("\n");
 	// ft_putstr_fd(string, fd);
+
+	if (structure->table->out.file_name)
+		ft_putstr_fd(string, structure->table->out.fd);
+	else
+		ft_putstr_fd(string, STDOUT_FILENO);
+
+	
+
+
 }

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 08:30:39 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/18 08:31:53 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 09:18:20 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	create_pipes(t_info *structure)
 		if (structure->fds_pipes[i] == NULL)
 		{
 			perror("Memory allocation failed");
-			// free_variables(structure);
 			return ;
 		}
 		if (pipe(structure->fds_pipes[i]) == -1)

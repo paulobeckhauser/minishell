@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/27 12:06:06 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:00:21 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,46 +21,60 @@ static void	export_without_args(t_info *structure)
 {
 	int		i;
 	char	**array;
-
-	selectiton_sort_variables(structure->envp);
+	char 	**envp_sorted;
+	int len;
+	
+	len = 0;
+	while (structure->envp_export[len])
+		len++;
+	envp_sorted = (char **)malloc((len + 1) * sizeof(char *));
 	i = 0;
-	while (structure->envp[i])
+	while(structure->envp_export[i])
 	{
-		array = ft_split(structure->envp[i], '=');
+		envp_sorted[i] = ft_strdup(structure->envp_export[i]);
+		i++;
+	}
+	envp_sorted[i] = NULL;
+	selectiton_sort_variables(envp_sorted);
+	i = 0;
+	while (envp_sorted[i])
+	{
+		array = ft_split(envp_sorted[i], '=');
 		if (array[1])
 			printf("declare -x %s=\"%s\"\n", array[0], array[1]);
 		else
-			printf("declare -x %s\n", structure->envp[i]);
+			printf("declare -x %s\n", envp_sorted[i]);
 		free_2d_array(array);
 		i++;
 	}
+	free_2d_array(envp_sorted);
 }
 
 static void	export_with_args(t_info *structure)
 {
 	int		i;
 	int		j;
-	int		check;
+	int		check_equal_sign;
 
-	check = 0;
+	check_equal_sign = 0;
 	j = 0;
 	while (structure->table->arr[1][j])
 	{
 		if (structure->table->arr[1][j] == '=')
 		{
-			check++;
+			check_equal_sign++;
 			break ;
 		}
 		j++;
 	}
-	if (check == 1)
-		replace_value_envp(structure);
+	if (check_equal_sign == 1)
+		replace_value_envp(structure, check_equal_sign);
 	else
 	{
-		if (check_env_variable(structure))
+		if (check_env_variable(structure->envp, structure))
 			return ;
 		else
-			add_to_envp(structure, structure->table->arr[1]);
+			add_to_envp(structure, structure->table->arr[1], check_equal_sign);
 	}
 }
 

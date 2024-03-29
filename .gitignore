@@ -27,3 +27,5 @@ file*
 
 test.c
 concat.c
+
+tmp/
