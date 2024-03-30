@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/29 19:20:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:56:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,32 @@ void	count_words(t_prompt *prompt)
 	start_ptr_save = prompt->msg;
 	prompt->word_count = 0;
 	curr_quote = 0;
-	while (!ft_strchr(prompt->symbols, *prompt->msg) && *prompt->msg)
+	while (*prompt->msg)
 	{
-		if (ft_strchr(prompt->quotes, *prompt->msg))
+		if (ft_strchr(prompt->symbols, *prompt->msg))
+			break ;
+		else if (ft_strchr(prompt->quotes, *prompt->msg))
 		{
-			curr_quote = *prompt->msg++;
+			curr_quote = *prompt->msg;
+			if (prompt->msg == start_ptr_save || ft_strchr(prompt->symbols, *(prompt->msg - 1))
+				|| ft_strchr(prompt->whitespace, *(prompt->msg - 1)))
+					prompt->word_count++;
+			prompt->msg++;
 			while (*prompt->msg && *prompt->msg != curr_quote)
 				prompt->msg++;
-		}
-		if (ft_strchr(prompt->whitespace, *prompt->msg))
-		{
-			skip_whitespaces(prompt);
-			if (*prompt->msg)
-				prompt->word_count++;
-		}
-		else
 			prompt->msg++;
+		}
+		else if (ft_strchr(prompt->whitespace, *prompt->msg))
+			skip_whitespaces(prompt);
+		else
+		{
+			if (!*(prompt->msg - 1) || (*(prompt->msg - 1) && !ft_strchr(prompt->quotes, *(prompt->msg - 1))))
+				prompt->word_count++;
+			while (*prompt->msg && !ft_strchr(prompt->symbols, *prompt->msg)
+				&& !ft_strchr(prompt->quotes, *prompt->msg) && !ft_strchr(prompt->whitespace, *prompt->msg))
+				prompt->msg++;
+		}
 	}
-	if (*prompt->msg == 0)
-		prompt->word_count++;
-	// printf("%i\n", prompt->word_count);
 	prompt->msg = start_ptr_save;
 }
 
