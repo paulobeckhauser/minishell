@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/29 20:01:59 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/30 12:30:19 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 		heredoc_newline = readline("> ");
 	}
 	free(heredoc_newline);
+	// in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (in.fd == -1)
 	{
@@ -66,6 +67,7 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 	}
 	token->in = in;
 	token->type = REDIRECTION;
+	close(in.fd);
 }
 
 void	create_tmp_folder(void)
