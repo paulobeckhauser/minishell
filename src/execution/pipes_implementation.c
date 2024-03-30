@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 20:20:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/30 12:00:10 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void pipes_implementation(t_info *structure)
     {
         structure->pid[i] = fork();
 
-        // printf("%d\n", i);
+        
 
         if (structure->pid[i] == 0)
         {          
@@ -32,7 +32,17 @@ void pipes_implementation(t_info *structure)
             if (structure->table->in.file_name)
             {
            
-            
+                // printf("here\n");
+                // printf("%d\n", structure->table->in.fd);
+
+                // size_t ret;
+                // char *buffer;
+                
+                // ret = read(structure->table->in.fd, buffer, 1);
+                
+                // printf("%s\n", buffer);
+
+                
                 dup2(structure->table->in.fd, STDIN_FILENO);
                 close(structure->table->in.fd);
             }
