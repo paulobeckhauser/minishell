@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/30 12:30:19 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/30 13:26:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	init_in_redirection(t_token *token, char *file_name)
 
 	in.heredoc = false;
 	if ((in.fd = open(file_name, O_RDONLY)) == -1)
-	{
-		file_name = ft_strjoin("bash: ", file_name);
-		perror(file_name);
-	}
+		printf("bash: %s: No such file or directory\n", file_name);
 	else
 		in.file_name = file_name;
 	token->in = in;
@@ -38,19 +35,15 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 	in.heredoc = true;
 	in.file_name = "tmp/heredoc_tmp";
 	heredoc_newline = readline("> ");
-	heredoc_msg = NULL;
+	heredoc_msg = "";
 	while (ft_strcmp(heredoc_newline, delimiter) != 0)
 	{
-		if (!heredoc_msg)
-			heredoc_msg = "";
-		else
-			heredoc_msg = ft_strjoin(heredoc_msg, "\n");
 		heredoc_msg = ft_strjoin(heredoc_msg, heredoc_newline);
+		heredoc_msg = ft_strjoin(heredoc_msg, "\n");
 		free(heredoc_newline);
 		heredoc_newline = readline("> ");
 	}
 	free(heredoc_newline);
-	// in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (in.fd == -1)
 	{
@@ -67,7 +60,11 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 	}
 	token->in = in;
 	token->type = REDIRECTION;
-	close(in.fd);
+	if (close(in.fd) == -1)
+	{
+		perror("close");
+		return ;
+	}
 }
 
 void	create_tmp_folder(void)

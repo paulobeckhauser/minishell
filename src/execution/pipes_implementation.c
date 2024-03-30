@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/30 12:00:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/03/30 13:23:03 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 void pipes_implementation(t_info *structure)
 {
 	int i;
+	int	dev_null_fd;
     
     create_pipes(structure);
     structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1), sizeof(pid_t));
     i = 0;
+	dev_null_fd = open("/dev/null", O_RDONLY);
+	
 
     while(structure->table)
     {
@@ -31,18 +34,21 @@ void pipes_implementation(t_info *structure)
             
             if (structure->table->in.file_name)
             {
-           
-                // printf("here\n");
-                // printf("%d\n", structure->table->in.fd);
-
-                // size_t ret;
-                // char *buffer;
-                
-                // ret = read(structure->table->in.fd, buffer, 1);
-                
-                // printf("%s\n", buffer);
-
-                
+				if (structure->table->in.heredoc)
+					structure->table->in.fd = open("tmp/heredoc_tmp", O_RDONLY);
+			
+				if (structure->table->in.fd != 0)
+				{
+					dup2(structure->table->in.fd, STDIN_FILENO);
+                	close(structure->table->in.fd);
+				}
+				else
+				{
+					close(structure->table->in.fd);
+					dup2(dev_null_fd, STDIN_FILENO);
+					close(dev_null_fd);
+				}
+			    
                 dup2(structure->table->in.fd, STDIN_FILENO);
                 close(structure->table->in.fd);
             }
