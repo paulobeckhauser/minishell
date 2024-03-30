@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:56 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/27 20:53:34 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/30 13:26:13 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,7 @@ void	mark_last_out_redirection(t_token_node *tokens)
 void	close_token_fd(t_token_node *tokens)
 {
 	if (tokens->token.in.file_name && !tokens->token.in.heredoc)
-	{
-		if (close(tokens->token.in.fd) == -1)
-			perror("close");
-	}
+		close(tokens->token.in.fd);
 	else if (tokens->token.out.file_name)
-	{
-		if (close(tokens->token.out.fd) == -1)
-			perror("close");
-	}
+		close(tokens->token.out.fd);
 }
