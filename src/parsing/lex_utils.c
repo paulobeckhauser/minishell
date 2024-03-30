@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/30 15:56:21 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/03/31 00:20:59 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,51 @@ void	count_words(t_prompt *prompt)
 			skip_whitespaces(prompt);
 		else
 		{
-			if (!*(prompt->msg - 1) || (*(prompt->msg - 1) && !ft_strchr(prompt->quotes, *(prompt->msg - 1))))
+			if (!*(prompt->msg - 1) || (*(prompt->msg - 1)
+				&& !ft_strchr(prompt->quotes, *(prompt->msg - 1))))
 				prompt->word_count++;
 			while (*prompt->msg && !ft_strchr(prompt->symbols, *prompt->msg)
-				&& !ft_strchr(prompt->quotes, *prompt->msg) && !ft_strchr(prompt->whitespace, *prompt->msg))
+				&& !ft_strchr(prompt->quotes, *prompt->msg)
+				&& !ft_strchr(prompt->whitespace, *prompt->msg))
 				prompt->msg++;
 		}
 	}
 	prompt->msg = start_ptr_save;
 }
+
+// void	init_words_arr(t_prompt *prompt)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		word_len;
+// 	char	curr_quote;
+
+// 	i = 0;
+// 	j = 0;
+// 	prompt->arr = malloc((prompt->word_count + 1) * sizeof(char *));
+// 	if (!prompt->arr)
+// 		return ;
+// 	while (*prompt->msg)
+// 	{
+// 		if (ft_strchr(prompt->symbols, *prompt->msg))
+// 			break ;
+// 		else if (ft_strchr(prompt->whitespace, *prompt->msg))
+// 		{
+// 			skip_whitespaces(prompt);
+// 		}
+// 		else
+// 		{
+// 			word_len = get_word_length(prompt);
+// 			prompt->arr[i] = malloc(word_len + 1);
+// 			if (!prompt->arr[i])
+// 				return ;
+// 			while (*prompt->msg && j < word_len)
+// 			{
+// 				prompt->arr[i][j++] = *prompt->msg++;
+// 			}
+// 		}
+// 	}
+// }
 
 void	init_words_arr(t_prompt *prompt)
 {
@@ -146,7 +182,7 @@ void	init_words_arr(t_prompt *prompt)
 	}
 	prompt->arr[i][y] = 0;
 	prompt->arr[i + 1] = NULL;
-	// int x = 0;
+	int x = 0;
 	// while (prompt->arr[x])
 	// 	printf("%s\n", prompt->arr[x++]);
 }
