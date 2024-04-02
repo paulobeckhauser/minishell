@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/30 16:55:30 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:03:23 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	get_word_length(t_prompt *prompt)
 					if (!prompt->msg[i + 1] || (prompt->msg[i + 1]
 						&& (ft_strchr(prompt->symbols, prompt->msg[i + 1])
 						|| ft_strchr(prompt->whitespace, prompt->msg[i + 1]))))
-						return (printf("%i\n", len), len);
+						return (len);
 					++i;
 					break ;
 				}

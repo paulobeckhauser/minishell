@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/31 00:20:59 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:10:13 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,96 +95,53 @@ void	count_words(t_prompt *prompt)
 	prompt->msg = start_ptr_save;
 }
 
-// void	init_words_arr(t_prompt *prompt)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		word_len;
-// 	char	curr_quote;
-
-// 	i = 0;
-// 	j = 0;
-// 	prompt->arr = malloc((prompt->word_count + 1) * sizeof(char *));
-// 	if (!prompt->arr)
-// 		return ;
-// 	while (*prompt->msg)
-// 	{
-// 		if (ft_strchr(prompt->symbols, *prompt->msg))
-// 			break ;
-// 		else if (ft_strchr(prompt->whitespace, *prompt->msg))
-// 		{
-// 			skip_whitespaces(prompt);
-// 		}
-// 		else
-// 		{
-// 			word_len = get_word_length(prompt);
-// 			prompt->arr[i] = malloc(word_len + 1);
-// 			if (!prompt->arr[i])
-// 				return ;
-// 			while (*prompt->msg && j < word_len)
-// 			{
-// 				prompt->arr[i][j++] = *prompt->msg++;
-// 			}
-// 		}
-// 	}
-// }
-
 void	init_words_arr(t_prompt *prompt)
 {
 	int		i;
-	int		y;
+	int		j;
+	int		word_len;
 	char	curr_quote;
 
 	i = 0;
-	y = 0;
-	curr_quote = 0;
 	prompt->arr = malloc((prompt->word_count + 1) * sizeof(char *));
 	if (!prompt->arr)
 		return ;
-	prompt->arr[i] = malloc(get_word_length(prompt) + 1);
-	if (!prompt->arr[i])
-		return ;
-	while (*prompt->msg && !ft_strchr(prompt->symbols, *prompt->msg))
+	while (*prompt->msg)
 	{
-		if (ft_strchr(prompt->quotes, *prompt->msg) && y == 0)
-		{
-			prompt->arr[i] = malloc(get_word_length(prompt) + 1);
-			if (!prompt->arr[i])
-				return ;
-			curr_quote = *prompt->msg++;
-			while (*prompt->msg != curr_quote)
-				prompt->arr[i][y++] = *prompt->msg++;
-			if (*prompt->msg == curr_quote)
-				++prompt->msg;
-		}
-		if (ft_strchr(prompt->whitespace, *prompt->msg))
+		if (ft_strchr(prompt->symbols, *prompt->msg))
+			break ;
+		else if (ft_strchr(prompt->whitespace, *prompt->msg))
 		{
 			skip_whitespaces(prompt);
-			prompt->arr[i][y] = 0;
-			if (*prompt->msg == 0
-				|| ft_strchr(prompt->symbols, *prompt->msg))
-				break ;
-			i++;
-			prompt->arr[i] = malloc(get_word_length(prompt) + 1);
-			if (!prompt->arr[i])
-				return ;
-			y = 0;
-		}
-		else if (ft_strchr(prompt->quotes, *prompt->msg) && y != 0)
-		{
-			if (if_no_space_quotes(prompt, *prompt->msg))
-				prompt->msg++;
-			else
-				prompt->arr[i][y++] = *prompt->msg++;
 		}
 		else
-			prompt->arr[i][y++] = *prompt->msg++;
+		{
+			j = 0;
+			word_len = get_word_length(prompt);
+			prompt->arr[i] = malloc(word_len + 1);
+			if (!prompt->arr[i])
+				return ;
+			while (*prompt->msg && j < word_len)
+			{
+				if (ft_strchr(prompt->quotes, *prompt->msg))
+				{
+					curr_quote = *prompt->msg++;
+					while (*prompt->msg && *prompt->msg != curr_quote)
+						prompt->arr[i][j++] = *prompt->msg++;
+					if (*prompt->msg && *prompt->msg == curr_quote)
+						prompt->msg++;
+				}
+				else if (ft_strchr(prompt->whitespace, *prompt->msg)
+					|| ft_strchr(prompt->symbols, *prompt->msg))
+						break ;
+				else
+					prompt->arr[i][j++] = *prompt->msg++;
+			}
+			prompt->arr[i][j] = 0;
+			i++;
+		}
 	}
-	prompt->arr[i][y] = 0;
-	prompt->arr[i + 1] = NULL;
-	int x = 0;
-	// while (prompt->arr[x])
-	// 	printf("%s\n", prompt->arr[x++]);
+	prompt->arr[i] = NULL;
 }
 
 bool	if_no_space_quotes(t_prompt *prompt, char quote)
