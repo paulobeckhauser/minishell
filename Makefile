@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/03 16:43:21 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/03 19:43:28 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,10 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)builtin_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)add_to_envp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_structure.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)check_has_env_value.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_without_value.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_with_value.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)count_number_equal_signs.c \
 
 
 
