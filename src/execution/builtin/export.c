@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 17:00:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:59:47 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,120 @@ static void	export_without_args(t_info *structure)
 	}
 	envp_sorted[i] = NULL;
 	selectiton_sort_variables(envp_sorted);
+	
+
+	int j;
+	int number_equal_sign;
+
 	i = 0;
+	number_equal_sign = 0;
 	while (envp_sorted[i])
 	{
-		array = ft_split(envp_sorted[i], '=');
-		if (array[1])
-			printf("declare -x %s=\"%s\"\n", array[0], array[1]);
+		// printf("%s\n", envp_sorted[i]);
+
+		// j = 0;
+		// while(envp_sorted[i][j])
+		// {
+			
+
+
+		// 	ft_putchar_fd(envp_sorted[i][j], 1);
+		int m;
+		int count_number_signs;
+		m = 0;
+		count_number_signs = 0;
+		while(envp_sorted[i][m])
+		{
+			if (envp_sorted[i][m] == '=')
+				count_number_signs++;
+			m++;
+		}
+
+		if (count_number_signs > 0)
+		{
+			j = 0;
+			int k;
+			k = 0;
+			while(envp_sorted[i][j])
+			{
+				k = 0;
+				while(envp_sorted[i][k] != '=')
+					k++;
+				if(envp_sorted[i][k] == '=')
+					number_equal_sign = k;
+				
+				j++;
+			}
+			
+			char *string_declare;
+
+			string_declare = "declare -x ";
+			j = 0;
+			int l;
+			l = 0;
+			while(string_declare[l])
+			{
+				ft_putchar_fd(string_declare[l], 1);
+				l++;
+			}
+			while(envp_sorted[i][j])
+			{
+				if (envp_sorted[i][j - 1] == '=' && number_equal_sign == j - 1)
+					ft_putchar_fd('\"', 1);
+				ft_putchar_fd(envp_sorted[i][j], 1);
+				
+				if (envp_sorted[i][j + 1] == '\0' && number_equal_sign > 0)
+					ft_putchar_fd('\"', 1);
+				j++;
+			}
+
+			ft_putchar_fd('\n', 1);
+
+		}
 		else
-			printf("declare -x %s\n", envp_sorted[i]);
-		free_2d_array(array);
+		{
+			char *string_declare;
+
+			string_declare = "declare -x ";
+			int l;
+			l = 0;
+			while(string_declare[l])
+			{
+				ft_putchar_fd(string_declare[l], 1);
+				l++;
+			}
+			j = 0;
+			while(envp_sorted[i][j])
+			{
+				ft_putchar_fd(envp_sorted[i][j], 1);
+				j++;
+			}
+			ft_putchar_fd('\n', 1);
+			
+			
+		}
+		
+
+		// 	j++;
+		// }
+
+		
 		i++;
-	}
+	}	
+	
+	// i = 0;
+	// while (envp_sorted[i])
+	// {
+	// 	array = ft_split(envp_sorted[i], '=');
+	// 	if (array[1])
+	// 		printf("declare -x %s=\"%s\"\n", array[0], array[1]);
+	// 	else
+	// 		printf("declare -x %s\n", envp_sorted[i]);
+		// free_2d_array(array);
+	// 	i++;
+	// }
+
+	
 	free_2d_array(envp_sorted);
 }
 

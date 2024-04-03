@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 17:08:39 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:24:30 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,82 @@ void	replace_value_envp(t_info *structure, int check_equal_sign)
 {
 	char	**array;
 
+	int count_equal_sign;
+	int i;
+
+	i = 0;
+	count_equal_sign = 0;
+	
+	
+
+	while (structure->table->arr[1][i])
+	{
+		if (structure->table->arr[1][i] == '=')
+			count_equal_sign++;
+		i++;
+	}
+	// printf("The number of count signs is: %d\n", count_equal_sign);
+
+
+	int first_equal_sign;
+	int j;
+
+	first_equal_sign = 0;
+	j = 0;
+	
+	if (count_equal_sign > 1)
+	{
+		while(structure->table->arr[1][j] && structure->table->arr[1][j] != '=')
+		{
+			j++;
+		}
+		if (structure->table->arr[1][j] == '=')
+			first_equal_sign = j;
+
+
+		j = 0;
+		while(structure->table->arr[1][j])
+		{
+			if (j != first_equal_sign && structure->table->arr[1][j] == '=')
+			{
+				structure->table->arr[1][j] = 41;
+			}
+			j++;
+		}
+	}
+
+	// printf("%d\n", first_equal_sign);
+	// printf("%s\n", structure->table->arr[1]);
 	array = ft_split(structure->table->arr[1], '=');
+
+	// printf("%s\n", array[1]);
+	int k;
+	k = 0;
+
+	while(array[1][k])
+	{
+		if (array[1][k] == 41)
+			array[1][k] = '=';
+		k++;
+	}
+
+
+	char *new_string;
+
+	new_string = ft_strjoin(array[0], "=");
+	new_string = ft_strjoin(new_string, array[1]);
+
+	// printf("The new string is: %s\n", new_string);
+
+	// printf("%s\n", array[1]);
+
+	// printf("%s\n", structure->table->arr[1]);
 
 	structure->envp = delete_string_array(structure->envp, array[0]);
     structure->envp_export = delete_string_array(structure->envp_export, array[0]);
-	// delete_string(structure, array[0]);
-	add_to_envp(structure, structure->table->arr[1], check_equal_sign);
+	// // delete_string(structure, array[0]);
+	add_to_envp(structure, new_string, check_equal_sign);
+	// add_to_envp(structure, array[1], check_equal_sign);
+	// add_to_envp(structure, structure->table->arr[1], check_equal_sign);
 	free_2d_array(array);
 }

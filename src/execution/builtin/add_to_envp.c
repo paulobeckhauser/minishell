@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:38:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 16:42:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:25:03 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ static char **add_variable_to_array(char *str_add, char **array)
 
 void add_to_envp(t_info *structure, char *str_add, int check_equal_sign)
 {   
+    // printf("The string to add is: %s\n", str_add);
+    
+    
     if (check_equal_sign == 1)
         structure->envp = add_variable_to_array(str_add, structure->envp);
     structure->envp_export = add_variable_to_array(str_add, structure->envp_export);
