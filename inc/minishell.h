@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 19:43:05 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:59:29 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_info
 {
 	char				**envp;
 	char				**envp_export;
+	char 				**envp_sorted;
 	int					is_builtin;
 	char				*path_env;
 	int					number_commands;
@@ -182,6 +183,7 @@ void					check_has_env_value(int i, char **envp_sorted,
 void print_with_env_value(int i, char **envp_sorted, t_info *structure);
 void print_without_equal_sign(int i, char **envp_sorted,char *string_declare);
 void count_number_equal_signs(int i, char **envp_sorted,t_info *structure);
+void allocate_mem_sort_var(t_info *structure);
 
 // default_display.c
 void					default_display_with_history(t_prompt *prompt);

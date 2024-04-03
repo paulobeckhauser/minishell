@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 19:44:22 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:01:01 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,50 +19,35 @@ int	is_export_command(char **command)
 
 static void	export_without_args(t_info *structure)
 {
-	int		i;
-	char 	**envp_sorted;
-	int len;
-	
-	len = 0;
-	while (structure->envp_export[len])
-		len++;
-	envp_sorted = (char **)malloc((len + 1) * sizeof(char *));
-	i = 0;
-	while(structure->envp_export[i])
-	{
-		envp_sorted[i] = ft_strdup(structure->envp_export[i]);
-		i++;
-	}
-	envp_sorted[i] = NULL;
-	selectiton_sort_variables(envp_sorted);
-	
+	int	i;
+	int	len;
 
-	int j;
-	
+	allocate_mem_sort_var(structure);
+	selectiton_sort_variables(structure->envp_sorted);
 	i = 0;
-	while (envp_sorted[i])
+	while (structure->envp_sorted[i])
 	{
-		count_number_equal_signs(i, envp_sorted, structure);
+		count_number_equal_signs(i, structure->envp_sorted, structure);
 		if (structure->count_number_signs > 0)
 		{
-			check_has_env_value(i, envp_sorted, structure);
+			check_has_env_value(i, structure->envp_sorted, structure);
 			if (structure->has_value_envp)
-				print_with_env_value(i, envp_sorted, structure);
+				print_with_env_value(i, structure->envp_sorted, structure);
 			else
-				print_export_without_value(i, envp_sorted);
+				print_export_without_value(i, structure->envp_sorted);
 		}
 		else
-			print_without_equal_sign(i, envp_sorted, "declare -x ");
+			print_without_equal_sign(i, structure->envp_sorted, "declare -x ");
 		i++;
-	}	
-	free_2d_array(envp_sorted);
+	}
+	free_2d_array(structure->envp_sorted);
 }
 
 static void	export_with_args(t_info *structure)
 {
-	int		i;
-	int		j;
-	int		check_equal_sign;
+	int	i;
+	int	j;
+	int	check_equal_sign;
 
 	check_equal_sign = 0;
 	j = 0;
