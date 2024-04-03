@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 16:25:09 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:45:24 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,13 @@ static void	export_without_args(t_info *structure)
 
 		if (count_number_signs > 0)
 		{
-			
-			//check if there is value in the key
 			p = 0;
 			while(envp_sorted[i][p] && envp_sorted[i][p] != '=')
-			{
-			
 				p++;
-			}
 			if (envp_sorted[i][p+1])
 				has_value_env = 1;
 			else
 				has_value_env = 0;
-
-			// if(has_value_env)
-			// 	printf("The env has value");
-			// else
-			// 	printf("The env DOES NOT HAVE value");
 			
 			if (has_value_env)
 			{
@@ -96,17 +86,18 @@ static void	export_without_args(t_info *structure)
 					j++;
 				}
 				
-				char *string_declare;
+				print_export_structure("declare -x ");
+				// char *string_declare;
 
-				string_declare = "declare -x ";
+				// string_declare = "declare -x ";
 				j = 0;
-				int l;
-				l = 0;
-				while(string_declare[l])
-				{
-					ft_putchar_fd(string_declare[l], 1);
-					l++;
-				}
+				// int l;
+				// l = 0;
+				// while(string_declare[l])
+				// {
+				// 	ft_putchar_fd(string_declare[l], 1);
+				// 	l++;
+				// }
 				while(envp_sorted[i][j])
 				{
 					if (envp_sorted[i][j - 1] == '=' && number_equal_sign == j - 1)
@@ -122,17 +113,8 @@ static void	export_without_args(t_info *structure)
 			}
 			else
 			{
-				char *string_declare;
-
-				string_declare = "declare -x ";
+				print_export_structure("declare -x ");
 				j = 0;
-				int l;
-				l = 0;
-				while(string_declare[l])
-				{
-					ft_putchar_fd(string_declare[l], 1);
-					l++;
-				}
 				while(envp_sorted[i][j])
 				{
 					ft_putchar_fd(envp_sorted[i][j], 1);

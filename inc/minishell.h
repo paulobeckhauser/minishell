@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 11:13:22 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:42:44 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 // MACRO variable library
 # include <limits.h>
-	// CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
+// CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
 
 // Store variables to handle input (SZYMON)
@@ -170,6 +170,7 @@ void					replace_value_envp(t_info *structure,
 							int check_equal_sign);
 int						check_env_variable(char **array, t_info *structure);
 char					**delete_string_array(char **array, char *str_delete);
+void					print_export_structure(char *str_declare);
 
 // default_display.c
 void					default_display_with_history(t_prompt *prompt);

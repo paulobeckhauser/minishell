@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/29 19:33:52 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/03 16:43:21 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)builtin_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)add_to_envp.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_structure.c \
 
 
 

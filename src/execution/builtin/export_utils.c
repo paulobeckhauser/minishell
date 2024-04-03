@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 16:09:29 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:46:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	replace_value_envp(t_info *structure, int check_equal_sign)
 			count_equal_sign++;
 		i++;
 	}
-	printf("The number of count signs is: %d\n", count_equal_sign);
 
 
 	int first_equal_sign;
