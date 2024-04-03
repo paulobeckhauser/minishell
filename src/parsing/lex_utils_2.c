@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/28 11:27:54 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:03:23 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,40 @@ void	skip_whitespaces(t_prompt *prompt)
 int	get_word_length(t_prompt *prompt)
 {
 	int		len;
+	int		i;
 	char	curr_quote;
+
 	len = 0;
+	i = 0;
 	curr_quote = 0;
-	if (ft_strchr(prompt->quotes, prompt->msg[len]))
+	while (prompt->msg[i])
 	{
-		curr_quote = prompt->msg[len++];
-		while (prompt->msg[len] && prompt->msg[len] != curr_quote)
+		if (ft_strchr(prompt->whitespace, prompt->msg[i])
+			|| ft_strchr(prompt->symbols, prompt->msg[i]))
+			break ;
+		if (ft_strchr(prompt->quotes, prompt->msg[i]))
+		{
+			curr_quote = prompt->msg[i++];
+			while (prompt->msg[i])
+			{
+				if (prompt->msg[i] == curr_quote)
+				{
+					if (!prompt->msg[i + 1] || (prompt->msg[i + 1]
+						&& (ft_strchr(prompt->symbols, prompt->msg[i + 1])
+						|| ft_strchr(prompt->whitespace, prompt->msg[i + 1]))))
+						return (len);
+					++i;
+					break ;
+				}
+				i++;
+				len++;
+			}
+		}
+		else
+		{
+			i++;
 			len++;
-	}
-	else
-	{
-		while (!ft_strchr(prompt->symbols, prompt->msg[len])
-			&& prompt->msg[len])
-			len++;
+		}
 	}
 	return (len);
 }

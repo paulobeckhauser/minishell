@@ -29,3 +29,5 @@ test.c
 concat.c
 
 tmp/
+
+minishell_tester/
