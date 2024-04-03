@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 14:59:47 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:25:09 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	is_export_command(char **command)
 static void	export_without_args(t_info *structure)
 {
 	int		i;
-	char	**array;
 	char 	**envp_sorted;
 	int len;
 	
@@ -40,20 +39,16 @@ static void	export_without_args(t_info *structure)
 
 	int j;
 	int number_equal_sign;
+	int has_value_env;
+	int p;
+
+	p = 0;
 
 	i = 0;
+	has_value_env = 0;
 	number_equal_sign = 0;
 	while (envp_sorted[i])
 	{
-		// printf("%s\n", envp_sorted[i]);
-
-		// j = 0;
-		// while(envp_sorted[i][j])
-		// {
-			
-
-
-		// 	ft_putchar_fd(envp_sorted[i][j], 1);
 		int m;
 		int count_number_signs;
 		m = 0;
@@ -67,43 +62,87 @@ static void	export_without_args(t_info *structure)
 
 		if (count_number_signs > 0)
 		{
-			j = 0;
-			int k;
-			k = 0;
-			while(envp_sorted[i][j])
+			
+			//check if there is value in the key
+			p = 0;
+			while(envp_sorted[i][p] && envp_sorted[i][p] != '=')
 			{
+			
+				p++;
+			}
+			if (envp_sorted[i][p+1])
+				has_value_env = 1;
+			else
+				has_value_env = 0;
+
+			// if(has_value_env)
+			// 	printf("The env has value");
+			// else
+			// 	printf("The env DOES NOT HAVE value");
+			
+			if (has_value_env)
+			{
+				j = 0;
+				int k;
 				k = 0;
-				while(envp_sorted[i][k] != '=')
-					k++;
-				if(envp_sorted[i][k] == '=')
-					number_equal_sign = k;
+				while(envp_sorted[i][j])
+				{
+					k = 0;
+					while(envp_sorted[i][k] != '=')
+						k++;
+					if(envp_sorted[i][k] == '=')
+						number_equal_sign = k;
+					
+					j++;
+				}
 				
-				j++;
+				char *string_declare;
+
+				string_declare = "declare -x ";
+				j = 0;
+				int l;
+				l = 0;
+				while(string_declare[l])
+				{
+					ft_putchar_fd(string_declare[l], 1);
+					l++;
+				}
+				while(envp_sorted[i][j])
+				{
+					if (envp_sorted[i][j - 1] == '=' && number_equal_sign == j - 1)
+						ft_putchar_fd('\"', 1);
+					ft_putchar_fd(envp_sorted[i][j], 1);
+					
+					if (envp_sorted[i][j + 1] == '\0' && number_equal_sign > 0)
+						ft_putchar_fd('\"', 1);
+					j++;
+				}
+
+				ft_putchar_fd('\n', 1);
+			}
+			else
+			{
+				char *string_declare;
+
+				string_declare = "declare -x ";
+				j = 0;
+				int l;
+				l = 0;
+				while(string_declare[l])
+				{
+					ft_putchar_fd(string_declare[l], 1);
+					l++;
+				}
+				while(envp_sorted[i][j])
+				{
+					ft_putchar_fd(envp_sorted[i][j], 1);
+					j++;
+				}
+				ft_putchar_fd('\"', 1);
+				ft_putchar_fd('\"', 1);
+				ft_putchar_fd('\n', 1);
 			}
 			
-			char *string_declare;
-
-			string_declare = "declare -x ";
-			j = 0;
-			int l;
-			l = 0;
-			while(string_declare[l])
-			{
-				ft_putchar_fd(string_declare[l], 1);
-				l++;
-			}
-			while(envp_sorted[i][j])
-			{
-				if (envp_sorted[i][j - 1] == '=' && number_equal_sign == j - 1)
-					ft_putchar_fd('\"', 1);
-				ft_putchar_fd(envp_sorted[i][j], 1);
-				
-				if (envp_sorted[i][j + 1] == '\0' && number_equal_sign > 0)
-					ft_putchar_fd('\"', 1);
-				j++;
-			}
-
-			ft_putchar_fd('\n', 1);
 
 		}
 		else
@@ -129,27 +168,8 @@ static void	export_without_args(t_info *structure)
 			
 		}
 		
-
-		// 	j++;
-		// }
-
-		
 		i++;
 	}	
-	
-	// i = 0;
-	// while (envp_sorted[i])
-	// {
-	// 	array = ft_split(envp_sorted[i], '=');
-	// 	if (array[1])
-	// 		printf("declare -x %s=\"%s\"\n", array[0], array[1]);
-	// 	else
-	// 		printf("declare -x %s\n", envp_sorted[i]);
-		// free_2d_array(array);
-	// 	i++;
-	// }
-
-	
 	free_2d_array(envp_sorted);
 }
 
