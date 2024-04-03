@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 19:49:35 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:54:00 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 # include <sys/wait.h>
 # include <stdlib.h>
 # include <fcntl.h>
-
+# include <signal.h>
+# include <termios.h>
 
 // MACRO variable library
 # include <limits.h> // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
@@ -255,5 +256,9 @@ void			print_table(t_cmd *table);
 void			print_redirection_file(t_cmd *table);
 void			print_syntax_token_error(t_prompt *prompt);
 const char		*type_to_string(t_type type);
+
+// signals.c
+void			handle_signal(int signal);
+void			handle_key_combos(void);
 
 #endif
