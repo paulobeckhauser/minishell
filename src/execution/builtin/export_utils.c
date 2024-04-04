@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 12:36:35 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:47:27 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,18 @@ static void	handle_equal_signs(t_info *structure)
 		while (structure->table->arr[1][i])
 		{
 			if (i != first_equal_sign && structure->table->arr[1][i] == '=')
-			{
 				structure->table->arr[1][i] = 2;
-			}
 			i++;
 		}
 	}
 }
 
-static void use_print_export_structure(t_info *structure, char **array, char *new_string, int check_equal_sign)
+static void	use_print_export_structure(t_info *structure, char **array,
+		char *new_string, int check_equal_sign)
 {
 	structure->envp = delete_string_array(structure->envp, array[0]);
 	structure->envp_export = delete_string_array(structure->envp_export,
-				array[0]);
+			array[0]);
 	add_to_envp(structure, new_string, check_equal_sign);
 	free_2d_array(array);
 }
@@ -69,21 +68,13 @@ void	replace_value_envp(t_info *structure, int check_equal_sign)
 		}
 		new_string = ft_strjoin(array[0], "=");
 		new_string = ft_strjoin(new_string, array[1]);
-		use_print_export_structure(structure, array, new_string, check_equal_sign);
-		// structure->envp = delete_string_array(structure->envp, array[0]);
-		// structure->envp_export = delete_string_array(structure->envp_export,
-		// 		array[0]);
-		// add_to_envp(structure, new_string, check_equal_sign);
-		// free_2d_array(array);
+		use_print_export_structure(structure, array, new_string,
+			check_equal_sign);
 	}
 	else
 	{
 		new_string = ft_strjoin(array[0], "=");
-		use_print_export_structure(structure, array, new_string, check_equal_sign);
-		// structure->envp = delete_string_array(structure->envp, array[0]);
-		// structure->envp_export = delete_string_array(structure->envp_export,
-		// 		array[0]);
-		// add_to_envp(structure, new_string, check_equal_sign);
-		// free_2d_array(array);
+		use_print_export_structure(structure, array, new_string,
+			check_equal_sign);
 	}
 }
