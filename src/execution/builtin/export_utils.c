@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 13:47:27 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:46:03 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@ static void	use_print_export_structure(t_info *structure, char **array,
 	free_2d_array(array);
 }
 
+static void	print_if_there_is_arg(char *new_string, char **array,
+		t_info *structure, int check_equal_sign)
+{
+	int	i;
+
+	i = 0;
+	while (array[1][i])
+	{
+		if (array[1][i] == 2)
+			array[1][i] = '=';
+		i++;
+	}
+	new_string = ft_strjoin(array[0], "=");
+	new_string = ft_strjoin(new_string, array[1]);
+	use_print_export_structure(structure, array, new_string, check_equal_sign);
+}
+
 void	replace_value_envp(t_info *structure, int check_equal_sign)
 {
 	char	**array;
@@ -58,19 +75,7 @@ void	replace_value_envp(t_info *structure, int check_equal_sign)
 	handle_equal_signs(structure);
 	array = ft_split(structure->table->arr[1], '=');
 	if (array[1])
-	{
-		i = 0;
-		while (array[1][i])
-		{
-			if (array[1][i] == 2)
-				array[1][i] = '=';
-			i++;
-		}
-		new_string = ft_strjoin(array[0], "=");
-		new_string = ft_strjoin(new_string, array[1]);
-		use_print_export_structure(structure, array, new_string,
-			check_equal_sign);
-	}
+		print_if_there_is_arg(new_string, array, structure, check_equal_sign);
 	else
 	{
 		new_string = ft_strjoin(array[0], "=");
