@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/04 14:52:19 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/04 15:18:29 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)create_child_processes.c \
 						$(SRC_DIR)$(EXECUTION_DIR)builtin_execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
+						$(SRC_DIR)$(EXECUTION_DIR)wait_child_processes.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \

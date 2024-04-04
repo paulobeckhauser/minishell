@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocate_memory_path_commands.c                    :+:      :+:    :+:   */
+/*   wait_child_processes.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 13:30:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 13:32:17 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/04/04 15:16:33 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/04/04 15:20:01 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void allocate_memory_path_commands(t_info *structure)
+void	wait_child_processes(t_info *structure)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    
-    
+	i = 0;
+	while (i < structure->number_commands)
+	{
+		waitpid(structure->pid[i], NULL, 0);
+		i++;
+	}
 }

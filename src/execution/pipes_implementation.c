@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 14:51:30 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:20:12 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,5 @@ void	pipes_implementation(t_info *structure)
 		i++;
 		structure->table = structure->table->next;
 	}
-	i = 0;
-	while (i < structure->number_commands)
-	{
-		waitpid(structure->pid[i], NULL, 0);
-		i++;
-	}
+	wait_child_processes(structure);
 }
