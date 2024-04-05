@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:27:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 22:29:55 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 22:55:54 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,21 @@ void	get_path_env(t_info *structure)
 	int k;
 	int m;
 	int p;
+	int count;
 
 	if (structure->envp == NULL)
 		return ;
 	i = 0;
 	j = 0;
 	len_path = 0;
+	count = 0;
 	while (structure->envp[i])
 	{
 		str_temp = allocate_str_temp(structure, str_temp, i);
 		str_temp = save_str_temp(structure, i, str_temp);
 		if (ft_strcmp(str_temp, "PATH") == 0)
 		{
+			count++;
 			while (structure->envp[i][j] && structure->envp[i][j] != '=')
 			{
 				j++;
@@ -55,7 +58,17 @@ void	get_path_env(t_info *structure)
 			}
 			structure->path_env[p] = '\0';
 		}
+
 		free(str_temp);
 		i++;
+	}
+
+	
+	if (count)
+		printf("There is envp\n");
+	else
+	{
+		structure->path_env = ft_strdup("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+		printf("There is no envp\n");
 	}
 }
