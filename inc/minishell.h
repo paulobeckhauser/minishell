@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 12:22:08 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:41:35 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # include <limits.h>
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
+
+extern int	g_signal;
 
 // Store variables to handle input (SZYMON)
 typedef struct s_prompt
@@ -188,6 +190,8 @@ void print_without_equal_sign(int i, char **envp_sorted,char *string_declare);
 void count_number_equal_signs(int i, char **envp_sorted,t_info *structure);
 void allocate_mem_sort_var(t_info *structure);
 void count_equal_sign(t_info *structure);
+char	*allocate_str_temp(t_info *structure, char *str_temp, int i);
+char	*save_str_temp(t_info *structure, int i, char *str_temp);
 
 // default_display.c
 void					default_display_with_history(t_prompt *prompt);
@@ -284,5 +288,8 @@ const char		*type_to_string(t_type type);
 // signals.c
 void			handle_signal(int signal);
 void			handle_key_combos(void);
+void	handle_signal_heredoc(int signal);
+void	handle_heredoc_combos(void);
+
 
 #endif

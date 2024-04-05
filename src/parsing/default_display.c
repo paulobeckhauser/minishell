@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/05 08:28:02 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:06:26 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // prompts
 void default_display_with_history(t_prompt *prompt)
 {
-    handle_key_combos();
 	prompt->buf = getcwd(NULL, 0);
 	if (prompt->buf == NULL)
 	{
@@ -26,6 +25,7 @@ void default_display_with_history(t_prompt *prompt)
 	char *color_prompt = ft_strjoin("\001\033[1;32m\002", prompt->buf);
 	color_prompt = ft_strjoin(color_prompt, "\001\033[0m\002");
 	color_prompt = ft_strjoin(color_prompt, "$> ");
+    handle_key_combos();
 	prompt->msg = readline(color_prompt);
 	if (prompt->msg == NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/05 08:42:59 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:45:18 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_token	init_redirection_token(t_prompt *prompt)
 		init_truncate_out_redirection(&token, file_name);
 	else if (token.t_value.single_ptr[0] == '>' && token.t_value.single_ptr[1] == '>')
 		init_append_out_redirection(&token, file_name);
+	g_signal = 0;
 	return (token);
 
 }
@@ -94,9 +95,55 @@ t_token	init_cmd_token(t_prompt *prompt)
 	
 	count_words(prompt);
 	init_words_arr(prompt);
+	verify_dollar(prompt);
 	if (!if_builtin_cmd(prompt->arr[0]))
 		token = init_simple_cmd_token(prompt);
 	else
 		token = init_builtin_cmd_token(prompt);
 	return (token);
+}
+
+void	verify_dollar(t_prompt *prompt)
+{
+	int		i;
+	int		y;
+	char	*dollar_word;
+	i = 0;
+	while (prompt->arr[i])
+	{
+		if (ft_strchr(prompt->arr[i], '$'))
+		{
+			dollar_word = find_dollar_word(prompt, prompt->arr[i]);
+			
+		}
+	}
+}
+
+char	*find_dollar_word(t_prompt *prompt, char *str)
+{
+	int		len;
+	int		i;
+	char	*dollar_word;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i++] == '$')
+			break ;
+	}
+	len = 0;
+	while (str[len] && ft_strchr(prompt->whitespace, str[len]) && str[len] != '$')
+		len++;
+	dollar_word = malloc(len + 1);
+	if (!dollar_word)
+		return (NULL);
+	i = 0;
+	while (*str)
+	{
+		if (ft_strchr(prompt->whitespace, *str) || *str == '$')
+			break ;
+		dollar_word[i++] = *str++;
+	}
+	dollar_word[i] = 0;
+	return (dollar_word);
 }

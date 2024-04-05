@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/05 12:23:02 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:01:35 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,41 +30,50 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prom
 	t_in	in;
 	char	*heredoc_newline;
 	char	*heredoc_msg;
+	pid_t	pid;
 
+	g_signal = 1;
 	create_tmp_folder();
 	in.heredoc = true;
 	in.file_name = "tmp/heredoc_tmp";
-	heredoc_newline = readline("> ");
-	heredoc_msg = "";
-	while (ft_strcmp(heredoc_newline, delimiter) != 0)
+	pid = fork();
+	if (pid == 0)
 	{
-		heredoc_msg = ft_strjoin(heredoc_msg, heredoc_newline);
-		heredoc_msg = ft_strjoin(heredoc_msg, "\n");
-		free(heredoc_newline);
+		handle_heredoc_combos();
 		heredoc_newline = readline("> ");
-	}
-	free(heredoc_newline);
-	in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (in.fd == -1)
-	{
-		perror("open");
-		return ;
-	}
-	if (heredoc_msg)
-	{
-		if (write(in.fd, heredoc_msg, ft_strlen(heredoc_msg)) == -1)
+		heredoc_msg = "";
+		while (ft_strcmp(heredoc_newline, delimiter) != 0)
 		{
-			perror("write");
+			heredoc_msg = ft_strjoin(heredoc_msg, heredoc_newline);
+			heredoc_msg = ft_strjoin(heredoc_msg, "\n");
+			free(heredoc_newline);
+			heredoc_newline = readline("> ");
+		}
+		free(heredoc_newline);
+		in.fd = open(in.file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
+		if (in.fd == -1)
+		{
+			perror("open");
 			return ;
 		}
+		if (heredoc_msg)
+		{
+			if (write(in.fd, heredoc_msg, ft_strlen(heredoc_msg)) == -1)
+			{
+				perror("write");
+				return ;
+			}
+		}
+		token->in = in;
+		token->type = REDIRECTION;
+		if (close(in.fd) == -1)
+		{
+			perror("close");
+			return ;
+		}
+		exit(0);
 	}
-	token->in = in;
-	token->type = REDIRECTION;
-	if (close(in.fd) == -1)
-	{
-		perror("close");
-		return ;
-	}
+	waitpid(pid, NULL, 0);
 }
 
 void	create_tmp_folder(void)
