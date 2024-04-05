@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocate_memory_path_commands.c                    :+:      :+:    :+:   */
+/*   print_export_without_value.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 13:30:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/17 13:32:17 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/04/03 19:33:18 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/04/03 20:18:15 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-void allocate_memory_path_commands(t_info *structure)
+void	print_export_without_value(int i, char **envp_sorted)
 {
-    int i;
+	int	j;
 
-    i = 0;
-    
-    
+	j = 0;
+	print_export_structure("declare -x ");
+	while (envp_sorted[i][j])
+	{
+		ft_putchar_fd(envp_sorted[i][j], 1);
+		j++;
+	}
+	ft_putchar_fd('\"', 1);
+	ft_putchar_fd('\"', 1);
+	ft_putchar_fd('\n', 1);
 }

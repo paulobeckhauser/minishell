@@ -6,67 +6,80 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 17:08:39 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:46:03 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static int	get_lenght(char **envp)
+static void	handle_equal_signs(t_info *structure)
 {
-	int	length;
+	int	first_equal_sign;
+	int	i;
 
-	length = 0;
-	while (envp[length])
-		length++;
-	return (length);
-}
-
-static int	str_compare(int j, int length, int j_min, char **envp)
-{
-	while (j < length)
-	{
-		if (ft_strcmp(envp[j], envp[j_min]) < 0)
-			j_min = j;
-		j++;
-	}
-	return (j_min);
-}
-
-void	selectiton_sort_variables(char **envp)
-{
-	int		length;
-	int		i;
-	int		j;
-	int		j_min;
-	char	*temp;
-
-	length = get_lenght(envp);
+	first_equal_sign = 0;
 	i = 0;
-	while (i < length - 1)
+	if (structure->count_equal_sign > 1)
 	{
-		j_min = i;
-		j = i + 1;
-		j_min = str_compare(j, length, j_min, envp);
-		if (j_min != i)
+		while (structure->table->arr[1][i]
+			&& structure->table->arr[1][i] != '=')
 		{
-			temp = envp[i];
-			envp[i] = envp[j_min];
-			envp[j_min] = temp;
+			i++;
 		}
+		if (structure->table->arr[1][i] == '=')
+			first_equal_sign = i;
+		i = 0;
+		while (structure->table->arr[1][i])
+		{
+			if (i != first_equal_sign && structure->table->arr[1][i] == '=')
+				structure->table->arr[1][i] = 2;
+			i++;
+		}
+	}
+}
+
+static void	use_print_export_structure(t_info *structure, char **array,
+		char *new_string, int check_equal_sign)
+{
+	structure->envp = delete_string_array(structure->envp, array[0]);
+	structure->envp_export = delete_string_array(structure->envp_export,
+			array[0]);
+	add_to_envp(structure, new_string, check_equal_sign);
+	free_2d_array(array);
+}
+
+static void	print_if_there_is_arg(char *new_string, char **array,
+		t_info *structure, int check_equal_sign)
+{
+	int	i;
+
+	i = 0;
+	while (array[1][i])
+	{
+		if (array[1][i] == 2)
+			array[1][i] = '=';
 		i++;
 	}
+	new_string = ft_strjoin(array[0], "=");
+	new_string = ft_strjoin(new_string, array[1]);
+	use_print_export_structure(structure, array, new_string, check_equal_sign);
 }
 
 void	replace_value_envp(t_info *structure, int check_equal_sign)
 {
 	char	**array;
+	int		i;
+	char	*new_string;
 
+	count_equal_sign(structure);
+	handle_equal_signs(structure);
 	array = ft_split(structure->table->arr[1], '=');
-
-	structure->envp = delete_string_array(structure->envp, array[0]);
-    structure->envp_export = delete_string_array(structure->envp_export, array[0]);
-	// delete_string(structure, array[0]);
-	add_to_envp(structure, structure->table->arr[1], check_equal_sign);
-	free_2d_array(array);
+	if (array[1])
+		print_if_there_is_arg(new_string, array, structure, check_equal_sign);
+	else
+	{
+		new_string = ft_strjoin(array[0], "=");
+		use_print_export_structure(structure, array, new_string,
+			check_equal_sign);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:54:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/13 19:11:19 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:21:41 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int	is_exit_command(char **command)
 
 void	execute_exit_command(char **command)
 {
-	printf("exit\n");
+	exit(0);
 }

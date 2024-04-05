@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 17:00:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:47:45 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,35 @@ int	is_export_command(char **command)
 
 static void	export_without_args(t_info *structure)
 {
-	int		i;
-	char	**array;
-	char 	**envp_sorted;
-	int len;
-	
-	len = 0;
-	while (structure->envp_export[len])
-		len++;
-	envp_sorted = (char **)malloc((len + 1) * sizeof(char *));
+	int	i;
+	int	len;
+
+	allocate_mem_sort_var(structure);
+	selectiton_sort_variables(structure->envp_sorted);
 	i = 0;
-	while(structure->envp_export[i])
+	while (structure->envp_sorted[i])
 	{
-		envp_sorted[i] = ft_strdup(structure->envp_export[i]);
-		i++;
-	}
-	envp_sorted[i] = NULL;
-	selectiton_sort_variables(envp_sorted);
-	i = 0;
-	while (envp_sorted[i])
-	{
-		array = ft_split(envp_sorted[i], '=');
-		if (array[1])
-			printf("declare -x %s=\"%s\"\n", array[0], array[1]);
+		count_number_equal_signs(i, structure->envp_sorted, structure);
+		if (structure->count_number_signs > 0)
+		{
+			check_has_env_value(i, structure->envp_sorted, structure);
+			if (structure->has_value_envp)
+				print_with_env_value(i, structure->envp_sorted, structure);
+			else
+				print_export_without_value(i, structure->envp_sorted);
+		}
 		else
-			printf("declare -x %s\n", envp_sorted[i]);
-		free_2d_array(array);
+			print_without_equal_sign(i, structure->envp_sorted, "declare -x ");
 		i++;
 	}
-	free_2d_array(envp_sorted);
+	free_2d_array(structure->envp_sorted);
 }
 
 static void	export_with_args(t_info *structure)
 {
-	int		i;
-	int		j;
-	int		check_equal_sign;
+	int	i;
+	int	j;
+	int	check_equal_sign;
 
 	check_equal_sign = 0;
 	j = 0;

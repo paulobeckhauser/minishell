@@ -6,22 +6,19 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:09:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/11 15:26:06 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:09:41 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-void check_builtin(t_info *structure, char *str)
+void	check_builtin(t_info *structure, char *str)
 {
-    if (ft_strcmp(str, "echo") == 0 || ft_strcmp(str, "cd") == 0 || ft_strcmp(str, "pwd") == 0 
-        || ft_strcmp(str, "export") == 0 || ft_strcmp(str, "unset") == 0 
-            || ft_strcmp(str, "env") == 0 || ft_strcmp(str, "exit") == 0)
-    {
-        
-        structure->is_builtin = 1;
-        // printf("IS BUILTIN\n");
-    }
-    else
-        structure->is_builtin = 0;
+	if (ft_strcmp(str, "echo") == 0 || ft_strcmp(str, "cd") == 0
+		|| ft_strcmp(str, "pwd") == 0 || ft_strcmp(str, "export") == 0
+		|| ft_strcmp(str, "unset") == 0 || ft_strcmp(str, "env") == 0
+		|| ft_strcmp(str, "exit") == 0)
+		structure->is_builtin = 1;
+	else
+		structure->is_builtin = 0;
 }

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   check_has_env_value.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 18:54:28 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 13:46:34 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/04/03 19:11:07 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/04/03 20:18:58 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-int	is_env_command(char **command)
+void	check_has_env_value(int i, char **envp_sorted, t_info *structure)
 {
-	return (ft_strcmp(command[0], "env") == 0);
-}
+	int	j;
 
-void	execute_env_command(t_info *structure)
-{
-	int	i;
-
-	i = 0;
-	while (structure->envp[i])
-	{
-		printf("%s\n", structure->envp[i]);
-		i++;
-	}
+	j = 0;
+	while (envp_sorted[i][j] && envp_sorted[i][j] != '=')
+		j++;
+	if (envp_sorted[i][j + 1])
+		structure->has_value_envp = 1;
+	else
+		structure->has_value_envp = 0;
 }
