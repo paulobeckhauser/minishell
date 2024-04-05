@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 17:54:00 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 08:43:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_prompt
 	int		word_count;
 	int		pipe_count;
 	int		token_count;
+	int		curr_heredoc_fd;
 	int		heredoc_count;
 	char	**heredoc;
 }	t_prompt;
@@ -188,7 +189,7 @@ void			init_prompt(t_prompt *prompt);
 
 // init_redirection.c
 void			init_in_redirection(t_token *token, char *file_name);
-void			init_heredoc_in_redirection(t_token *token, char *delimiter);
+void			init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prompt);
 void	create_tmp_folder(void);
 void			init_truncate_out_redirection(t_token *token, char *file_name);
 void			init_append_out_redirection(t_token *token, char *file_name);

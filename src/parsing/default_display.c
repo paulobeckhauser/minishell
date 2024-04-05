@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/03 17:52:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 08:28:02 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void default_display_with_history(t_prompt *prompt)
 	prompt->msg = readline(color_prompt);
 	if (prompt->msg == NULL)
 	{
-		ft_printf("\nexit\n");
+		ft_printf("exit\n");
 		exit(0);
 	}
     check_quotes(prompt);
