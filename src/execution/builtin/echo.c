@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 14:54:54 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:07:06 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,20 @@ int	is_echo_command(char **command)
 {
 	return (ft_strcmp(command[0], "echo") == 0);
 }
+
+
+// int check_dollar_sign(char *str)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while(str[i])
+// 	{
+		
+// 		i++;
+// 	}
+// }
+
 
 static char	*join_string_echo(int start, int after, t_info *structure,
 		char *string)
@@ -40,6 +54,7 @@ static char	*join_string_echo(int start, int after, t_info *structure,
 	char *concat_str;
 
 	concat_str = "";
+	
 
 	if (count_dollar_sign > 0)
 	{
@@ -48,9 +63,12 @@ static char	*join_string_echo(int start, int after, t_info *structure,
 		while(structure->table->arr[start])
 		{
 			
+
+			
 			j = 0;
 			while(structure->table->arr[start][j])
 			{
+				
 				if (structure->table->arr[start][j] == '$')
 				{
 					j++;
@@ -58,7 +76,7 @@ static char	*join_string_echo(int start, int after, t_info *structure,
 					int n;
 					m = j;
 					n = 0;
-					while(structure->table->arr[start][m] && structure->table->arr[start][m] != ' ')
+					while(structure->table->arr[start][m] && structure->table->arr[start][m] != ' ' && structure->table->arr[start][m] != '$')
 					{
 						m++;
 						n++;
