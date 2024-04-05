@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 14:21:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:08:12 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_token_node
 }						t_token_node;
 
 void					store_envp(char **envp, t_info *structure);
-void					execution(t_info *structure, t_prompt *prompt);
+void					execution(t_info *structure);
 int						ft_strcmp(const char *s1, const char *s2);
 void					check_builtin(t_info *structure, char *str);
 void					get_path_env(t_info *structure);

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:54:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 20:21:41 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:14:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,15 @@ int	is_exit_command(char **command)
 
 void	execute_exit_command(char **command)
 {
-	exit(0);
+	if (!command[1])
+	{
+		printf("exit\n");
+		exit(0);
+	}
+	else
+	{
+		printf("exit\n");
+		printf("bash: exit: %s: numeric argument required\n", command[1]);
+		exit(0);
+	}
 }
