@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 18:41:35 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 21:26:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,11 +213,11 @@ void			init_truncate_out_redirection(t_token *token, char *file_name);
 void			init_append_out_redirection(t_token *token, char *file_name);
 
 // lex_init_token_list.c
-t_token_node			*init_token_list(t_prompt *prompt);
-t_token_node			*init_token_node(t_prompt *prompt, int index);
+t_token_node			*init_token_list(t_info *structure, t_prompt *prompt);
+t_token_node			*init_token_node(t_info *structure, t_prompt *prompt, int index);
 void					add_node_to_list(t_token_node **head,
 							t_token_node **current, t_token_node *new_node);
-t_token					init_token_struct(t_prompt *prompt);
+t_token					init_token_struct(t_info *structure, t_prompt *prompt);
 t_type					find_token(t_prompt *prompt);
 
 // lex_init_token_type.c lex_init_token_type_2.c
@@ -225,9 +225,12 @@ t_token					init_end_token(void);
 t_token					init_error_token(void);
 t_token					init_pipe_token(t_prompt *prompt);
 t_token					init_redirection_token(t_prompt *prompt);
-t_token					init_cmd_token(t_prompt *prompt);
+t_token					init_cmd_token(t_info *structure, t_prompt *prompt);
 t_token					init_builtin_cmd_token(t_prompt *prompt);
 t_token					init_simple_cmd_token(t_prompt *prompt);
+void					verify_dollar(t_info *structure, t_prompt *prompt);
+char					*replace_dollar_word(t_info *structure, char *str);
+char					*find_dollar_word(t_prompt *prompt, char *str);
 
 // lex_utils.c lex_utils_2.c
 void					init_heredoc_arr(t_prompt *prompt, t_token_node *list);
@@ -274,22 +277,22 @@ void					close_token_fd(t_token_node *tokens);
 
 // parser.c
 bool					parser(t_info *structure, t_prompt *prompt);
-t_token_node			*lex(t_prompt *prompt);
+t_token_node			*lex(t_info *structure, t_prompt *prompt);
 t_cmd					*parse(t_token_node *tokens, t_prompt *prompt);
 
 // print.c
-void			print_token_list(t_token_node *token);
-void 			print_tree(t_token_node *node, int depth, char *left_right);
-void			print_table(t_cmd *table);
-void			print_redirection_file(t_cmd *table);
-void			print_syntax_token_error(t_prompt *prompt);
-const char		*type_to_string(t_type type);
+void					print_token_list(t_token_node *token);
+void 					print_tree(t_token_node *node, int depth, char *left_right);
+void					print_table(t_cmd *table);
+void					print_redirection_file(t_cmd *table);
+void					print_syntax_token_error(t_prompt *prompt);
+const char				*type_to_string(t_type type);
 
 // signals.c
-void			handle_signal(int signal);
-void			handle_key_combos(void);
-void	handle_signal_heredoc(int signal);
-void	handle_heredoc_combos(void);
+void					handle_signal(int signal);
+void					handle_key_combos(void);
+void					handle_signal_heredoc(int signal);
+void					handle_heredoc_combos(void);
 
 
 #endif
