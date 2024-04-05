@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:38:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 14:22:59 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:38:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static char	**add_variable_to_array(char *str_add, char **array)
 	char	**backup_array;
 	int		i;
 
+	backup_array = NULL;
 	backup_array = allocate_mem_backup_array(array, backup_array);
 	i = 0;
 	while (array[i])

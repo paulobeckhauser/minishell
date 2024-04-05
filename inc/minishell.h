@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:08:12 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:37:36 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void					add_to_envp(t_info *structure, char *str_add,
 							int check_equal_sign);
 void					replace_value_envp(t_info *structure,
 							int check_equal_sign);
-int						check_env_variable(char **array, t_info *structure);
+int						check_env_variable(t_info *structure);
 char					**delete_string_array(char **array, char *str_delete);
 void					print_export_structure(char *str_declare);
 void					print_export_with_value(int i, char **envp_sorted,

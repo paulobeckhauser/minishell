@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:31:57 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:37:30 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,14 @@ void	execute_unset_command(t_info *structure)
 		return ;
 	else
 	{
-		if (check_env_variable(structure->envp, structure) == 1)
+		if (check_env_variable(structure) == 1)
 		{
 			structure->envp = delete_string_array(structure->envp,
 					structure->table->arr[1]);
 			structure->envp_export = delete_string_array(structure->envp_export,
 					structure->table->arr[1]);
 		}
-		else if (check_env_variable(structure->envp_export, structure) == 1)
+		else if (check_env_variable(structure) == 1)
 			structure->envp_export = delete_string_array(structure->envp_export,
 					structure->table->arr[1]);
 		else

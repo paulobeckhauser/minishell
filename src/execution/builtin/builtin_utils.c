@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:10:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 14:21:05 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:36:40 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ char	*save_str_temp(t_info *structure, int i, char *str_temp)
 	return (str_temp);
 }
 
-int	check_env_variable(char **array, t_info *structure)
+int	check_env_variable(t_info *structure)
 {
-	char	*temp;
 	int		check_exist;
 	int		i;
 	char	*str_temp;
