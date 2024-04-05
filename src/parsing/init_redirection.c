@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/05 08:44:50 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 12:38:00 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prom
 		perror("open");
 		return ;
 	}
-	else
-		prompt->curr_heredoc_fd = in.fd;
 	if (heredoc_msg)
 	{
 		if (write(in.fd, heredoc_msg, ft_strlen(heredoc_msg)) == -1)
@@ -67,8 +65,6 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prom
 		perror("close");
 		return ;
 	}
-	else
-		prompt->curr_heredoc_fd = -1;
 }
 
 void	create_tmp_folder(void)
