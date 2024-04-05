@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 14:46:03 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:33:11 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	replace_value_envp(t_info *structure, int check_equal_sign)
 	int		i;
 	char	*new_string;
 
+	new_string = NULL;
 	count_equal_sign(structure);
 	handle_equal_signs(structure);
 	array = ft_split(structure->table->arr[1], '=');

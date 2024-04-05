@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 11:49:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:31:57 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static char	**save_in_array_backup(char **array, char **array_backup,
 char	**delete_string_array(char **array, char *str_delete)
 {
 	char	**array_backup;
-	char	**env_var;
 	int		i;
 
+	array_backup = NULL;
 	array_backup = allocate_mem_array_backup(array, array_backup, str_delete);
 	array_backup = save_in_array_backup(array, array_backup, str_delete);
 	free_2d_array(array);
@@ -86,9 +86,6 @@ char	**delete_string_array(char **array, char *str_delete)
 
 void	execute_unset_command(t_info *structure)
 {
-	int	i;
-	int	l;
-
 	if (!structure->table->arr[1])
 		return ;
 	else
