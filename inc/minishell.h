@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 15:18:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 12:22:08 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
-# include <unistd.h>
+# include <signal.h>
+# include <termios.h>
+
 
 // MACRO variable library
 # include <limits.h>
@@ -200,14 +202,11 @@ void					free_double_arr(char **arr);
 void					init_prompt(t_prompt *prompt);
 
 // init_redirection.c
-void					init_in_redirection(t_token *token, char *file_name);
-void					init_heredoc_in_redirection(t_token *token,
-							char *delimiter);
-void					create_tmp_folder(void);
-void					init_truncate_out_redirection(t_token *token,
-							char *file_name);
-void					init_append_out_redirection(t_token *token,
-							char *file_name);
+void			init_in_redirection(t_token *token, char *file_name);
+void			init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prompt);
+void	create_tmp_folder(void);
+void			init_truncate_out_redirection(t_token *token, char *file_name);
+void			init_append_out_redirection(t_token *token, char *file_name);
 
 // lex_init_token_list.c
 t_token_node			*init_token_list(t_prompt *prompt);
@@ -275,12 +274,15 @@ t_token_node			*lex(t_prompt *prompt);
 t_cmd					*parse(t_token_node *tokens, t_prompt *prompt);
 
 // print.c
-void					print_token_list(t_token_node *token);
-void					print_tree(t_token_node *node, int depth,
-							char *left_right);
-void					print_table(t_cmd *table);
-void					print_redirection_file(t_cmd *table);
-void					print_syntax_token_error(t_prompt *prompt);
-const char				*type_to_string(t_type type);
+void			print_token_list(t_token_node *token);
+void 			print_tree(t_token_node *node, int depth, char *left_right);
+void			print_table(t_cmd *table);
+void			print_redirection_file(t_cmd *table);
+void			print_syntax_token_error(t_prompt *prompt);
+const char		*type_to_string(t_type type);
+
+// signals.c
+void			handle_signal(int signal);
+void			handle_key_combos(void);
 
 #endif

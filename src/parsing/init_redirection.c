@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/30 13:26:28 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 08:44:50 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_in_redirection(t_token *token, char *file_name)
 	token->type = REDIRECTION;
 }
 
-void	init_heredoc_in_redirection(t_token *token, char *delimiter)
+void	init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prompt)
 {
 	t_in	in;
 	char	*heredoc_newline;
@@ -50,6 +50,8 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 		perror("open");
 		return ;
 	}
+	else
+		prompt->curr_heredoc_fd = in.fd;
 	if (heredoc_msg)
 	{
 		if (write(in.fd, heredoc_msg, ft_strlen(heredoc_msg)) == -1)
@@ -65,6 +67,8 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 		perror("close");
 		return ;
 	}
+	else
+		prompt->curr_heredoc_fd = -1;
 }
 
 void	create_tmp_folder(void)

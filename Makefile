@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/04 15:18:29 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/05 12:18:56 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)parse_set_redirection_priority.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
 						$(SRC_DIR)$(PARSING_DIR)print.c \
+						$(SRC_DIR)$(PARSING_DIR)signals.c \
 
 
 SHARED_SRCS			:= $(SRC_DIR)main.c
