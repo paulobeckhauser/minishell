@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   count_number_equal_signs.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 18:54:28 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 13:46:34 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/04/03 19:40:44 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/04/04 13:46:21 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-int	is_env_command(char **command)
+void	count_number_equal_signs(int i, char **envp_sorted, t_info *structure)
 {
-	return (ft_strcmp(command[0], "env") == 0);
+	int	j;
+
+	j = 0;
+	structure->count_number_signs = 0;
+	while (envp_sorted[i][j])
+	{
+		if (envp_sorted[i][j] == '=')
+			structure->count_number_signs++;
+		j++;
+	}
 }
 
-void	execute_env_command(t_info *structure)
+void	count_equal_sign(t_info *structure)
 {
 	int	i;
 
 	i = 0;
-	while (structure->envp[i])
+	structure->count_equal_sign = 0;
+	while (structure->table->arr[1][i])
 	{
-		printf("%s\n", structure->envp[i]);
+		if (structure->table->arr[1][i] == '=')
+			structure->count_equal_sign++;
 		i++;
 	}
 }

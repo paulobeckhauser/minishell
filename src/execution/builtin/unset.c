@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 17:11:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/04 11:49:21 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@ int	is_unset_command(char **command)
 	return (ft_strcmp(command[0], "unset") == 0);
 }
 
-char	**delete_string_array(char **array, char *str_delete)
+static char	**allocate_mem_array_backup(char **array, char **array_backup,
+		char *str_delete)
 {
-	char	**array_backup;
-	char	**env_var;
 	int		i;
 	int		count;
-	int		j;
-	int		g;
-	int		u;
-	int		f;
+	char	**env_var;
 
 	i = 0;
 	count = 0;
@@ -39,6 +35,16 @@ char	**delete_string_array(char **array, char *str_delete)
 		free_2d_array(env_var);
 	}
 	array_backup = (char **)malloc((i - count + 1) * sizeof(char *));
+	return (array_backup);
+}
+
+static char	**save_in_array_backup(char **array, char **array_backup,
+		char *str_delete)
+{
+	int		j;
+	int		g;
+	char	**env_var;
+
 	j = 0;
 	g = 0;
 	while (array[j])
@@ -52,18 +58,29 @@ char	**delete_string_array(char **array, char *str_delete)
 		j++;
 	}
 	array_backup[g] = NULL;
+	return (array_backup);
+}
+
+char	**delete_string_array(char **array, char *str_delete)
+{
+	char	**array_backup;
+	char	**env_var;
+	int		i;
+
+	array_backup = allocate_mem_array_backup(array, array_backup, str_delete);
+	array_backup = save_in_array_backup(array, array_backup, str_delete);
 	free_2d_array(array);
-	u = 0;
-	while (array_backup[u])
-		u++;
-	array = (char **)malloc((u + 1) * sizeof(char *));
-	f = 0;
-	while (array_backup[f])
+	i = 0;
+	while (array_backup[i])
+		i++;
+	array = (char **)malloc((i + 1) * sizeof(char *));
+	i = 0;
+	while (array_backup[i])
 	{
-		array[f] = ft_strdup(array_backup[f]);
-		f++;
+		array[i] = ft_strdup(array_backup[i]);
+		i++;
 	}
-	array[f] = NULL;
+	array[i] = NULL;
 	return (array);
 }
 

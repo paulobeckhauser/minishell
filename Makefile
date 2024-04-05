@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/03/29 19:33:52 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/04 15:18:29 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,12 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)builtin_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)add_to_envp.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_structure.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)check_has_env_value.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_without_value.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_with_value.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)count_number_equal_signs.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)sort_var_envp.c \
 
 
 
@@ -95,9 +101,9 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)store_commands.c \
 						$(SRC_DIR)$(EXECUTION_DIR)create_pipes.c \
 						$(SRC_DIR)$(EXECUTION_DIR)create_child_processes.c \
-						$(SRC_DIR)$(EXECUTION_DIR)here_doc.c \
 						$(SRC_DIR)$(EXECUTION_DIR)builtin_execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
+						$(SRC_DIR)$(EXECUTION_DIR)wait_child_processes.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
