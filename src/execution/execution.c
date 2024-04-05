@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:07:59 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 21:09:10 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,6 @@ void	execution(t_info *structure)
 		builtin_execution(structure);
 	else
 		pipes_implementation(structure);
+
+	
 }

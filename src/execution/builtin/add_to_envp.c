@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:38:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:38:55 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 21:53:20 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static char	**allocate_mem_backup_array(char **array, char **backup_array)
 	while (array[i])
 		i++;
 	backup_array = (char **)malloc((i + 1) * sizeof(char *));
+	if (backup_array == NULL)
+	{
+		perror("Memory allocation failed!\n");
+		exit(EXIT_FAILURE);
+	}
 	return (backup_array);
 }
 
@@ -31,6 +36,11 @@ static char	**allocate_mem_array(char **array, char **backup_array)
 	while (backup_array[i])
 		i++;
 	array = (char **)malloc((i + 2) * sizeof(char *));
+	if (array == NULL)
+	{
+		perror("Memory allocation failed!\n");
+		exit(EXIT_FAILURE);
+	}
 	return (array);
 }
 

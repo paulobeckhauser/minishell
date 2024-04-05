@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:27:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/28 16:20:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 22:29:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,46 @@ void	get_path_env(t_info *structure)
 {
 	int		i;
 	int		len_path;
-	char	*default_path;
+	int		j;
+	char	*str_temp;
+	int k;
+	int m;
+	int p;
 
-	default_path = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:"
-					"/sbin:/bin:/usr/games:/usr/local/games:/snap/bin";
+	if (structure->envp == NULL)
+		return ;
 	i = 0;
+	j = 0;
 	len_path = 0;
 	while (structure->envp[i])
 	{
-		if (ft_strncmp(structure->envp[i], "PATHs=", 5) == 0)
+		str_temp = allocate_str_temp(structure, str_temp, i);
+		str_temp = save_str_temp(structure, i, str_temp);
+		if (ft_strcmp(str_temp, "PATH") == 0)
 		{
-			len_path = ft_strlen(structure->envp[i]);
-			break ;
+			while (structure->envp[i][j] && structure->envp[i][j] != '=')
+			{
+				j++;
+			}
+			k = j + 1;
+			j++;
+			m = 0;
+			while (structure->envp[i][j])
+			{
+				m++;
+				j++;
+			}
+			structure->path_env = (char *)malloc((m + 1) * sizeof(char));
+			p = 0;
+			while (structure->envp[i][k])
+			{
+				structure->path_env[p] = structure->envp[i][k];
+				k++;
+				p++;
+			}
+			structure->path_env[p] = '\0';
 		}
+		free(str_temp);
 		i++;
 	}
-	if (!structure->envp[i])
-		structure->path_env = ft_strdup(default_path);
-	else
-		structure->path_env = ft_strdup(structure->envp[i] + 5);
 }

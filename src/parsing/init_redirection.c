@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/05 12:38:00 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 20:51:45 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_in_redirection(t_token *token, char *file_name)
 	token->type = REDIRECTION;
 }
 
-void	init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prompt)
+void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 {
 	t_in	in;
 	char	*heredoc_newline;

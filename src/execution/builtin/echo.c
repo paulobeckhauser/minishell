@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:10:44 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 22:31:49 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ static char	*join_string_echo(int start, t_info *structure)
 							return_str[p] = '\0';
 							
 						}
+						free(str_temp);
 						u++;
 					}
 					if (!count_equal)

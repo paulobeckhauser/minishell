@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:37:30 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 21:54:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ static char	**allocate_mem_array_backup(char **array, char **array_backup,
 		free_2d_array(env_var);
 	}
 	array_backup = (char **)malloc((i - count + 1) * sizeof(char *));
+	if (array_backup == NULL)
+    {
+        perror("Memory allocation failed!\n");
+        exit(EXIT_FAILURE);
+    }
 	return (array_backup);
 }
 

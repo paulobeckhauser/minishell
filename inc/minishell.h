@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:37:36 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 21:50:14 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void					*ft_free(char **strs, int count);
 
 // free variables
 void					free_2d_array(char **array);
+void free_2d_int_array(int **array);
 
 // BUILTIN FUNCTIONS
 int						is_cd_command(char **command);
@@ -205,7 +206,7 @@ void					init_prompt(t_prompt *prompt);
 
 // init_redirection.c
 void			init_in_redirection(t_token *token, char *file_name);
-void			init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prompt);
+void			init_heredoc_in_redirection(t_token *token, char *delimiter);
 void	create_tmp_folder(void);
 void			init_truncate_out_redirection(t_token *token, char *file_name);
 void			init_append_out_redirection(t_token *token, char *file_name);

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:44:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 16:00:01 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 21:37:00 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static char	**store_array(char **envp)
 		array[i] = ft_strdup(envp[i]);
 		i++;
 	}
+	array[i] = NULL;
 	return (array);
 }
 
