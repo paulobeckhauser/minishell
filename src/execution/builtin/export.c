@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 12:47:45 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:19:38 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	is_export_command(char **command)
 static void	export_without_args(t_info *structure)
 {
 	int	i;
-	int	len;
 
 	allocate_mem_sort_var(structure);
 	selectiton_sort_variables(structure->envp_sorted);
@@ -46,19 +45,18 @@ static void	export_without_args(t_info *structure)
 static void	export_with_args(t_info *structure)
 {
 	int	i;
-	int	j;
 	int	check_equal_sign;
 
 	check_equal_sign = 0;
-	j = 0;
-	while (structure->table->arr[1][j])
+	i = 0;
+	while (structure->table->arr[1][i])
 	{
-		if (structure->table->arr[1][j] == '=')
+		if (structure->table->arr[1][i] == '=')
 		{
 			check_equal_sign++;
 			break ;
 		}
-		j++;
+		i++;
 	}
 	if (check_equal_sign == 1)
 		replace_value_envp(structure, check_equal_sign);
