@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 17:51:37 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:33:52 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,144 @@ static char	*join_string_echo(int start, int after, t_info *structure,
 {
 	int	i;
 
-	string = ft_strdup(structure->table->arr[start]);
-	i = after;
-	while (structure->table->arr[i])
+	// printf("%s\n", structure->table->arr[start]);
+
+	int j;
+	int count_dollar_sign;
+
+	j = 0;
+	count_dollar_sign = 0;
+	while(structure->table->arr[start][j])
 	{
-		string = ft_strjoin(string, " ");
-		string = ft_strjoin(string, structure->table->arr[i]);
-		i++;
+		if (structure->table->arr[start][j] == '$')
+			count_dollar_sign++;
+		j++;
 	}
+	
+	char *str_env;
+
+	if (count_dollar_sign > 0)
+	{
+		// printf("%d\n", count_dollar_sign);
+
+		j = 0;
+		while(structure->table->arr[start][j])
+		{
+			if (structure->table->arr[start][j] == '$')
+			{
+				j++;
+				int m;
+				int n;
+				m = j;
+				n = 0;
+				while(structure->table->arr[start][m] && structure->table->arr[start][m] != ' ')
+				{
+					m++;
+					n++;
+				}
+
+				str_env = malloc((n + 1) * sizeof(char));
+
+				int k;
+				int p;
+
+				p = 0;
+				k = j;
+				while(structure->table->arr[start][k] && structure->table->arr[start][k] != ' ')
+				{
+					str_env[p] = structure->table->arr[start][k];
+					k++;
+					p++;
+					
+				}
+				str_env[p] = '\0';
+				// printf("%d\n", n);
+				// printf("%s\n", str_env);
+				// while(structure->table->arr[start][j] != '$')
+
+
+				//FIND in env
+				char *str_temp;
+				char *return_str;
+				
+				int u = 0;
+				while(structure->envp_export[u])
+				{
+					str_temp = allocate_str_temp(structure, str_temp, u);
+					str_temp = save_str_temp(structure, u, str_temp);
+					if (ft_strcmp(str_temp, str_env) == 0)
+					{
+						// printf("The env exists!");
+
+						int m;
+						m = 0;
+						while (structure->envp_export[u][m] && structure->envp_export[u][m] != '=')
+						{
+							
+							m++;
+						}
+						int l;
+						int g;
+						g = m + 1;
+
+						l = 0;
+						while (structure->envp_export[u][m])
+						{
+							
+							l++;
+							m++;
+							
+						}
+
+						return_str = malloc((l) * sizeof(char));
+
+						int p;
+						p = 0;
+						while(structure->envp_export[u][g])
+						{
+							return_str[p] = structure->envp_export[u][g];
+							g++;
+							p++;
+						}
+						return_str[p] = '\0';
+						
+					}
+					u++;
+				}
+				
+
+
+				
+				string = ft_strdup(return_str); //delete later
+			}
+			else
+				j++;
+		}
+		
+	}
+
+
+
+
+
+
+	
+	else
+	{
+		
+		string = ft_strdup(structure->table->arr[start]);
+		i = after;
+		while (structure->table->arr[i])
+		{
+			string = ft_strjoin(string, " ");
+			string = ft_strjoin(string, structure->table->arr[i]);
+			i++;
+		}
+	}
+	
+
+
+	
 	return (string);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 12:22:08 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:21:13 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ void print_without_equal_sign(int i, char **envp_sorted,char *string_declare);
 void count_number_equal_signs(int i, char **envp_sorted,t_info *structure);
 void allocate_mem_sort_var(t_info *structure);
 void count_equal_sign(t_info *structure);
+char	*allocate_str_temp(t_info *structure, char *str_temp, int i);
+char	*save_str_temp(t_info *structure, int i, char *str_temp);
 
 // default_display.c
 void					default_display_with_history(t_prompt *prompt);
