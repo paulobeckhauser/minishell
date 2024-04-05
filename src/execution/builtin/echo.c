@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 15:07:06 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:26:42 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,25 @@ int	is_echo_command(char **command)
 }
 
 
-// int check_dollar_sign(char *str)
-// {
-// 	int i;
+static int check_dollar_sign(char *str)
+{
+	int i;
+	int check_dollar_sign;
 
-// 	i = 0;
-// 	while(str[i])
-// 	{
-		
-// 		i++;
-// 	}
-// }
+	check_dollar_sign = 0;
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] == '$')
+		{
+			check_dollar_sign = 1;
+			break;
+		}
+		i++;
+	}
+	return (check_dollar_sign);
+}
+
 
 
 static char	*join_string_echo(int start, int after, t_info *structure,
@@ -54,15 +62,31 @@ static char	*join_string_echo(int start, int after, t_info *structure,
 	char *concat_str;
 
 	concat_str = "";
+	char *temp_str;
 	
 
 	if (count_dollar_sign > 0)
 	{
-		// printf("%d\n", count_dollar_sign);
 
 		while(structure->table->arr[start])
 		{
 			
+
+			if (check_dollar_sign(structure->table->arr[start]))
+			{
+				int s = 0;
+
+				while (structure->table->arr[start][s] != '$')
+				{
+					temp_str[s] = structure->table->arr[start][s];
+					s++;
+				}
+				temp_str[s] = '\0';
+
+				concat_str = ft_strjoin(concat_str, temp_str);
+			}
+			// else
+			// 	printf("There is no dollar sign\n");
 
 			
 			j = 0;
@@ -103,8 +127,10 @@ static char	*join_string_echo(int start, int after, t_info *structure,
 					//FIND in env
 					char *str_temp;
 					char *return_str;
+					int count_equal;
 					
 					int u = 0;
+					count_equal = 0;
 					while(structure->envp_export[u])
 					{
 						str_temp = allocate_str_temp(structure, str_temp, u);
@@ -112,7 +138,7 @@ static char	*join_string_echo(int start, int after, t_info *structure,
 						if (ft_strcmp(str_temp, str_env) == 0)
 						{
 						
-
+							count_equal = 1;
 							int m;
 							m = 0;
 							while (structure->envp_export[u][m] && structure->envp_export[u][m] != '=')
@@ -148,13 +174,25 @@ static char	*join_string_echo(int start, int after, t_info *structure,
 						}
 						u++;
 					}
-				
+
+					// if (count_equal)
+					// 	printf("The env exist\n");
+					// else
+					// 	printf("The env does not exist\n");
+					if (!count_equal)
+						return_str = "";
+					// retus
 					concat_str = ft_strjoin(concat_str, return_str);
 					concat_str = ft_strjoin(concat_str, " ");
 				}
 				else
 					j++;
 			}
+			
+			
+			
+			
+			
 			
 			start++;
 		}
