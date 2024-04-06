@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 21:26:21 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/06 17:38:20 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,8 @@ t_token					init_simple_cmd_token(t_prompt *prompt);
 void					verify_dollar(t_info *structure, t_prompt *prompt);
 char					*replace_dollar_word(t_info *structure, char *str);
 char					*find_dollar_word(t_prompt *prompt, char *str);
+char					*extract_dollar_value(char *str);
+void					replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word, char *replacement);
 
 // lex_utils.c lex_utils_2.c
 void					init_heredoc_arr(t_prompt *prompt, t_token_node *list);

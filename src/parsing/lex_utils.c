@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/02 18:10:13 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/06 18:50:23 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,7 @@ void	init_words_arr(t_prompt *prompt)
 		if (ft_strchr(prompt->symbols, *prompt->msg))
 			break ;
 		else if (ft_strchr(prompt->whitespace, *prompt->msg))
-		{
 			skip_whitespaces(prompt);
-		}
 		else
 		{
 			j = 0;
