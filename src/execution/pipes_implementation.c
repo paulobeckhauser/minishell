@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 15:20:12 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/06 18:25:51 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,32 @@ void	pipes_implementation(t_info *structure)
 			sizeof(pid_t));
 	i = 0;
 	dev_null_fd = open("/dev/null", O_RDONLY);
+	int command_number;
+
+	command_number = 0;
 	while (structure->table)
 	{
+		command_number++;
 		structure->pid[i] = fork();
+		if (structure->pid[i] == -1)
+		{
+			perror("fork failed");
+    		exit(EXIT_FAILURE);
+		}
 		if (structure->pid[i] == 0)
 		{
 			if (structure->table->in.file_name)
 			{
 				if (structure->table->in.heredoc)
+				{
 					structure->table->in.fd = open("tmp/heredoc_tmp", O_RDONLY);
+					if (structure->table->in.fd == -1)
+					{
+						perror("open failed");
+    					exit(EXIT_FAILURE);
+					}
+					
+				}
 				if (structure->table->in.fd != 0)
 				{
 					dup2(structure->table->in.fd, STDIN_FILENO);
@@ -42,9 +59,8 @@ void	pipes_implementation(t_info *structure)
 					dup2(dev_null_fd, STDIN_FILENO);
 					close(dev_null_fd);
 				}
-				dup2(structure->table->in.fd, STDIN_FILENO);
-				close(structure->table->in.fd);
 			}
+
 			else if (i != 0)
 			{
 				dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
@@ -64,8 +80,24 @@ void	pipes_implementation(t_info *structure)
 				builtin_execution(structure);
 			else
 			{
-				execve(structure->path_commands[i], structure->table->arr,
-					structure->envp);
+				if (execve(structure->path_commands[i], structure->table->arr,
+						structure->envp) == -1)
+				{
+					ft_putstr_fd(structure->commands[i], 2);
+					ft_putstr_fd(": command not found\n", 2);
+					
+					if(command_number == structure->number_commands)
+					{
+						printf("The number of commands is: %d\n", structure->number_commands);
+						exit(127);
+					}
+				}
+			}
+
+			if (structure->table->next != NULL)
+			{
+				dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+				close(structure->fds_pipes[i][1]);
 			}
 		}
 		else

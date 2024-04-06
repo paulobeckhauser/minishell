@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:27:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 23:09:49 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:11:22 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	get_path_env(t_info *structure)
 	int		len_path;
 	int		j;
 	char	*str_temp;
-	int k;
-	int m;
-	int p;
-	int count;
+	int		k;
+	int		m;
+	int		p;
+	int		count;
 
 	if (structure->envp == NULL)
 		return ;
@@ -58,7 +58,6 @@ void	get_path_env(t_info *structure)
 			}
 			structure->path_env[p] = '\0';
 		}
-
 		free(str_temp);
 		i++;
 	}

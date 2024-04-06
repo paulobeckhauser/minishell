@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/05 08:28:02 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/06 19:52:08 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:37:09 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:48:28 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,22 @@ static void	export_with_args(t_info *structure)
 	int	i;
 	int	check_equal_sign;
 
+	
+	
+	i = 0;
+
+	if (((structure->table->arr[1][i] == '-') && (structure->table->arr[1][i + 1] != '-')) || (structure->table->arr[1][i + 1] == '-') ||  
+				(structure->table->arr[1][i] >= '0' &&  structure->table->arr[1][i] <= '9') )
+	{
+		ft_putstr_fd("bash: export: `", 2);
+		ft_putstr_fd(structure->table->arr[1], 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
+
+		structure->last_exit_status = EXIT_FAILURE;
+		
+	}
+	
+	
 	check_equal_sign = 0;
 	i = 0;
 	while (structure->table->arr[1][i])

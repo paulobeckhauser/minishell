@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:32:54 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/06 13:14:52 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:10:39 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	store_path_commands(t_info *structure)
 	j = 0;
 	while (structure->commands[i])
 	{
-
 		if (access(structure->commands[i], X_OK) == 0)
 			structure->path_commands[i] = ft_strdup(structure->commands[i]);
 		else
@@ -73,10 +72,7 @@ void	store_path_commands(t_info *structure)
 					':', structure->commands[i]);
 			get_path_command(structure, i, j);
 			free_2d_array(structure->possible_paths);
-			
 		}
-		
-
 		i++;
 	}
 	structure->path_commands[i] = NULL;

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 21:50:14 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/06 19:13:27 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
-# include <signal.h>
 # include <termios.h>
-
 
 // MACRO variable library
 # include <limits.h>
@@ -105,7 +104,7 @@ typedef struct s_info
 {
 	char				**envp;
 	char				**envp_export;
-	char 				**envp_sorted;
+	char				**envp_sorted;
 	int					is_builtin;
 	char				*path_env;
 	int					number_commands;
@@ -116,10 +115,11 @@ typedef struct s_info
 	pid_t				*pid;
 	int					has_value_envp;
 	int					number_equal_sign;
-	int 				count_number_signs;
-	int		count_equal_sign;
-
+	int					count_number_signs;
+	int					count_equal_sign;
 	t_cmd				*table;
+	int					exit_status;
+	int					last_exit_status;
 }						t_info;
 
 typedef struct s_token_node
@@ -133,7 +133,8 @@ typedef struct s_token_node
 }						t_token_node;
 
 void					store_envp(char **envp, t_info *structure);
-void					execution(t_info *structure);
+// void					execution(t_info *structure);
+bool					execution(t_info *structure);
 int						ft_strcmp(const char *s1, const char *s2);
 void					check_builtin(t_info *structure, char *str);
 void					get_path_env(t_info *structure);
@@ -144,7 +145,8 @@ void					create_pipes(t_info *structure);
 void					create_child_processes(t_info *structure);
 void					builtin_execution(t_info *structure);
 void					pipes_implementation(t_info *structure);
-void wait_child_processes(t_info *structure);
+void					wait_child_processes(t_info *structure);
+void					init_vars(t_info *structure);
 
 // split_concat_commands
 char					**split_concat_command(char const *s, char c,
@@ -154,7 +156,7 @@ void					*ft_free(char **strs, int count);
 
 // free variables
 void					free_2d_array(char **array);
-void free_2d_int_array(int **array);
+void					free_2d_int_array(int **array);
 
 // BUILTIN FUNCTIONS
 int						is_cd_command(char **command);
@@ -163,6 +165,7 @@ int						is_pwd_command(char **command);
 void					execute_pwd_command(char **command);
 int						is_echo_command(char **command);
 void					execute_echo_command(t_info *structure);
+// int						execute_echo_command(t_info *structure);
 int						is_export_command(char **command);
 void					execute_export_command(t_info *structure);
 int						is_unset_command(char **command);
@@ -184,13 +187,18 @@ void					print_export_with_value(int i, char **envp_sorted,
 void					print_export_without_value(int i, char **envp_sorted);
 void					check_has_env_value(int i, char **envp_sorted,
 							t_info *structure);
-void print_with_env_value(int i, char **envp_sorted, t_info *structure);
-void print_without_equal_sign(int i, char **envp_sorted,char *string_declare);
-void count_number_equal_signs(int i, char **envp_sorted,t_info *structure);
-void allocate_mem_sort_var(t_info *structure);
-void count_equal_sign(t_info *structure);
-char	*allocate_str_temp(t_info *structure, char *str_temp, int i);
-char	*save_str_temp(t_info *structure, int i, char *str_temp);
+void					print_with_env_value(int i, char **envp_sorted,
+							t_info *structure);
+void					print_without_equal_sign(int i, char **envp_sorted,
+							char *string_declare);
+void					count_number_equal_signs(int i, char **envp_sorted,
+							t_info *structure);
+void					allocate_mem_sort_var(t_info *structure);
+void					count_equal_sign(t_info *structure);
+char					*allocate_str_temp(t_info *structure, char *str_temp,
+							int i);
+char					*save_str_temp(t_info *structure, int i,
+							char *str_temp);
 
 // default_display.c
 void					default_display_with_history(t_prompt *prompt);
@@ -205,11 +213,14 @@ void					free_double_arr(char **arr);
 void					init_prompt(t_prompt *prompt);
 
 // init_redirection.c
-void			init_in_redirection(t_token *token, char *file_name);
-void			init_heredoc_in_redirection(t_token *token, char *delimiter);
-void	create_tmp_folder(void);
-void			init_truncate_out_redirection(t_token *token, char *file_name);
-void			init_append_out_redirection(t_token *token, char *file_name);
+void					init_in_redirection(t_token *token, char *file_name);
+void					init_heredoc_in_redirection(t_token *token,
+							char *delimiter);
+void					create_tmp_folder(void);
+void					init_truncate_out_redirection(t_token *token,
+							char *file_name);
+void					init_append_out_redirection(t_token *token,
+							char *file_name);
 
 // lex_init_token_list.c
 t_token_node			*init_token_list(t_prompt *prompt);
@@ -277,15 +288,16 @@ t_token_node			*lex(t_prompt *prompt);
 t_cmd					*parse(t_token_node *tokens, t_prompt *prompt);
 
 // print.c
-void			print_token_list(t_token_node *token);
-void 			print_tree(t_token_node *node, int depth, char *left_right);
-void			print_table(t_cmd *table);
-void			print_redirection_file(t_cmd *table);
-void			print_syntax_token_error(t_prompt *prompt);
-const char		*type_to_string(t_type type);
+void					print_token_list(t_token_node *token);
+void					print_tree(t_token_node *node, int depth,
+							char *left_right);
+void					print_table(t_cmd *table);
+void					print_redirection_file(t_cmd *table);
+void					print_syntax_token_error(t_prompt *prompt);
+const char				*type_to_string(t_type type);
 
 // signals.c
-void			handle_signal(int signal);
-void			handle_key_combos(void);
+void					handle_signal(int signal);
+void					handle_key_combos(void);
 
 #endif

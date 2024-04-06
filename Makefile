@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/05 19:48:28 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/06 18:49:17 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ BUILTIN_DIR		:= builtin/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= -Wall -Wextra -Werror
+CFLAGS			:= #-Wall -Wextra -Werror
 LREADLINE		:= -lreadline
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
@@ -124,7 +124,9 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)signals.c \
 
 
-SHARED_SRCS			:= $(SRC_DIR)main.c
+SHARED_SRCS			:= 	$(SRC_DIR)main.c \
+						$(SRC_DIR)init_vars.c \
+	
 
 #Source Files
 SRCS			:= 	$(SHARED_SRCS) \

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:10:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 21:53:57 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:11:35 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	*allocate_str_temp(t_info *structure, char *str_temp, int i)
 		len++;
 	str_temp = (char *)malloc((len + 1) * sizeof(char));
 	if (str_temp == NULL)
-    {
-        perror("Memory allocation failed!\n");
-        exit(EXIT_FAILURE);
-    }
+	{
+		perror("Memory allocation failed!\n");
+		exit(EXIT_FAILURE);
+	}
 	return (str_temp);
 }
 
