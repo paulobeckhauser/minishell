@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_init_token_type_2.c                            :+:      :+:    :+:   */
+/*   init_token_type_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:35:11 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/22 17:18:25 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/07 17:39:41 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-t_token init_builtin_cmd_token(t_prompt *prompt)
+t_token	init_builtin_cmd_token(t_prompt *prompt)
 {
 	t_token	token;
 

@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   if_no_cmd_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/18 14:14:15 by sfrankie         ###   ########.fr       */
+/*   Created: 2024/03/26 10:05:27 by sfrankie          #+#    #+#             */
+/*   Updated: 2024/04/07 20:54:17 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-void	free_prompt(t_prompt *prompt)
+bool	if_no_cmd_tokens(t_token_node *tokens)
 {
-	prompt->msg = prompt->start_ptr_save;
-	free(prompt->buf);
-	free(prompt->msg);
-}
-
-void	free_double_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	while (tokens)
+	{
+		if (tokens->token.type == BUILTIN_CMD
+			|| tokens->token.type == SIMPLE_CMD)
+			return (false);
+		tokens = tokens->next;
+	}
+	return (true);
 }

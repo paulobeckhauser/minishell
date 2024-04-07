@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/06 17:38:20 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 00:07:50 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,30 @@
 
 extern int	g_signal;
 
+typedef struct s_single_quote_checker
+{
+	int								index;
+	bool							single_quoted;
+	struct s_single_quote_checker	*next;
+}							t_single_quote_checker;
+
+
 // Store variables to handle input (SZYMON)
 typedef struct s_prompt
 {
-	char				*buf;
-	char				*msg;
-	char				*start_ptr_save;
-	char				*curr_ptr_save;
-	char				*symbols;
-	char				*whitespace;
-	char				*quotes;
-	char				**arr;
-	int					word_count;
-	int					pipe_count;
-	int					token_count;
-	int					heredoc_count;
-	char				**heredoc;
-}						t_prompt;
+	char					*buf;
+	char					*msg;
+	char					*start_ptr_save;
+	char					*curr_ptr_save;
+	char					*symbols;
+	char					*whitespace;
+	char					*quotes;
+	char					**arr;
+	int						word_count;
+	int						pipe_count;
+	int						token_count;
+	t_single_quote_checker	*checker;
+}							t_prompt;
 
 typedef enum s_type
 {
@@ -70,69 +77,77 @@ typedef enum s_type
 
 typedef struct s_in
 {
-	bool				heredoc;
-	int					fd;
-	char				*file_name;
-}						t_in;
+	bool					heredoc;
+	int						fd;
+	char					*file_name;
+}							t_in;
 
 typedef struct s_out
 {
-	int					fd;
-	char				*file_name;
-}						t_out;
+	int						fd;
+	char					*file_name;
+}							t_out;
 
 typedef struct s_token
 {
-	t_type				type;
-	t_in				in;
-	t_out				out;
-	union				u_value
+	t_type					type;
+	t_in					in;
+	t_out					out;
+	union					u_value
 	{
-		char			*single_ptr;
-		char			**double_ptr;
+		char				*single_ptr;
+		char				**double_ptr;
 	} t_value;
-	bool				last_redirection;
-}						t_token;
+	bool					last_redirection;
+}							t_token;
 
 typedef struct s_cmd
 {
-	t_type				type;
-	char				**arr;
-	t_in				in;
-	t_out				out;
-	struct s_cmd		*next;
-}						t_cmd;
+	t_type					type;
+	char					**arr;
+	t_in					in;
+	t_out					out;
+	struct s_cmd			*next;
+}							t_cmd;
 
 typedef struct s_info
 {
-	char				**envp;
-	char				**envp_export;
-	char 				**envp_sorted;
-	int					is_builtin;
-	char				*path_env;
-	int					number_commands;
-	char				**commands;
-	char				**possible_paths;
-	char				**path_commands;
-	int					**fds_pipes;
-	pid_t				*pid;
-	int					has_value_envp;
-	int					number_equal_sign;
-	int 				count_number_signs;
-	int		count_equal_sign;
+	char					**envp;
+	char					**envp_export;
+	char 					**envp_sorted;
+	int						is_builtin;
+	char					*path_env;
+	int						number_commands;
+	char					**commands;
+	char					**possible_paths;
+	char					**path_commands;
+	int						**fds_pipes;
+	pid_t					*pid;
+	int						has_value_envp;
+	int						number_equal_sign;
+	int 					count_number_signs;
+	int						count_equal_sign;
 
-	t_cmd				*table;
-}						t_info;
+	t_cmd					*table;
+}							t_info;
 
 typedef struct s_token_node
 {
-	t_token				token;
-	int					index;
-	struct s_token_node	*next;
-	struct s_token_node	*left;
-	struct s_token_node	*right;
+	t_token					token;
+	int						index;
+	struct s_token_node		*next;
+	struct s_token_node		*left;
+	struct s_token_node		*right;
 
-}						t_token_node;
+}							t_token_node;
+
+typedef struct s_dollar_replace_info
+{
+    t_prompt				*prompt;
+    int						i;
+    char					*dollar_word;
+    char					*replacement;
+}							t_dollar_replace_info;
 
 void					store_envp(char **envp, t_info *structure);
 void					execution(t_info *structure, t_prompt *prompt);
@@ -193,108 +208,122 @@ void count_equal_sign(t_info *structure);
 char	*allocate_str_temp(t_info *structure, char *str_temp, int i);
 char	*save_str_temp(t_info *structure, int i, char *str_temp);
 
-// default_display.c
+// DISPLAY (default_display.c, verify_quote_number.c)
 void					default_display_with_history(t_prompt *prompt);
 void					check_quotes(t_prompt *prompt);
 int						count_quotes(t_prompt *prompt);
 
-// free.c
+// FREE (free.c)
 void					free_prompt(t_prompt *prompt);
 void					free_double_arr(char **arr);
+void					free_single_quote_checker_list(t_prompt *prompt);
 
-// init_prompt.c
+// INIT (heredoc_utils.c, init_prompt.c, init_redirection.c)
+void					create_tmp_folder(void);
+void					run_heredoc(t_in *in, t_token *token, char *delimiter);
+void					wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
+	char *delimiter);
+void					open_write_close_tmp_file(t_token *token, t_in *in, char **heredoc_msg);
 void					init_prompt(t_prompt *prompt);
+void					init_primary_redirection_vars(t_token *token, t_prompt *prompt);
+void					init_in_redirection(t_token *token, char *file_name);
+void					init_heredoc_in_redirection(t_token *token, char *delimiter,
+	t_prompt *prompt);
+void					create_tmp_folder(void);
+void					init_truncate_out_redirection(t_token *token, char *file_name);
+void					init_append_out_redirection(t_token *token, char *file_name);
 
-// init_redirection.c
-void			init_in_redirection(t_token *token, char *file_name);
-void			init_heredoc_in_redirection(t_token *token, char *delimiter, t_prompt *prompt);
-void	create_tmp_folder(void);
-void			init_truncate_out_redirection(t_token *token, char *file_name);
-void			init_append_out_redirection(t_token *token, char *file_name);
-
-// lex_init_token_list.c
+// LEX (init_token_list.c, init_token_type_2.c, init_token_type.c, init_words_arr.c,
+// monitor_dollar_sign_2.c, monitor_dollar_sign.c, monitor_single_quote.c,
+// utils_2.c, utils.c)
 t_token_node			*init_token_list(t_info *structure, t_prompt *prompt);
 t_token_node			*init_token_node(t_info *structure, t_prompt *prompt, int index);
 void					add_node_to_list(t_token_node **head,
 							t_token_node **current, t_token_node *new_node);
 t_token					init_token_struct(t_info *structure, t_prompt *prompt);
 t_type					find_token(t_prompt *prompt);
-
-// lex_init_token_type.c lex_init_token_type_2.c
+t_token					init_builtin_cmd_token(t_prompt *prompt);
+t_token					init_simple_cmd_token(t_prompt *prompt);
 t_token					init_end_token(void);
 t_token					init_error_token(void);
 t_token					init_pipe_token(t_prompt *prompt);
 t_token					init_redirection_token(t_prompt *prompt);
 t_token					init_cmd_token(t_info *structure, t_prompt *prompt);
-t_token					init_builtin_cmd_token(t_prompt *prompt);
-t_token					init_simple_cmd_token(t_prompt *prompt);
-void					verify_dollar(t_info *structure, t_prompt *prompt);
-char					*replace_dollar_word(t_info *structure, char *str);
-char					*find_dollar_word(t_prompt *prompt, char *str);
-char					*extract_dollar_value(char *str);
-void					replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word, char *replacement);
-
-// lex_utils.c lex_utils_2.c
-void					init_heredoc_arr(t_prompt *prompt, t_token_node *list);
-char					*verify_redirection(t_prompt *prompt);
-void					count_words(t_prompt *prompt);
 void					init_words_arr(t_prompt *prompt);
-bool					if_no_space_quotes(t_prompt *prompt, char quote);
-int						if_builtin_cmd(char *str);
+void					process_word(t_prompt *prompt, int word_len, int i, int *j);
+void					replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word,
+							char *replacement);
+void					replace_word(t_dollar_replace_info *info, int y);
+void					verify_dollar(t_info *structure, t_prompt *prompt);
+void					handle_dollar(t_info *structure, t_prompt *prompt, char *str, int i);
+char					*find_dollar_word(t_prompt *prompt, char *str);
+char					*replace_dollar_word(t_info *structure, char *str);
+char					*extract_dollar_value(char *str);
+void					init_single_quote_checker_list(t_prompt *prompt);
+void					update_single_quote_status(t_prompt *prompt, int i);
 void					skip_whitespaces(t_prompt *prompt);
 int						get_word_length(t_prompt *prompt);
+int						count_len_inside_quotes(t_prompt *prompt, int i);
 char					*fetch_file_name(t_prompt *prompt);
 char					*find_next_token_to_print_in_err(t_prompt *prompt);
+char					*verify_redirection(t_prompt *prompt);
+void					count_words(t_prompt *prompt);
+void					count_words_inside_quotes(t_prompt *prompt, char **start_ptr_save);
+int						if_builtin_cmd(char *str);
 
-// parse_if_no_cmd_tokens.c
+// PARSE (if_no_cmd_tokens.c, init_binary_tree.c, init_cmd_table.c, init_tree_node.c,
+// set_redirection_priority.c, utils.c)
 bool					if_no_cmd_tokens(t_token_node *tokens);
-
-// parse_init_cmd_table.c
 t_token_node			*init_binary_tree(t_token_node **token_node);
 void					find_first_cmd_token(t_token_node *token,
 							t_token_node **head);
+void					plant_redirections(t_token_node **token, t_token_node **previous_token);
 void					delete_redirection_tokens_from_list(t_token_node **token,
 							t_token_node **head);
+void					plant_cmd(t_token_node **token, t_token_node **previous_token);
 void					init_cmd_table(t_token_node *node, t_cmd **cmd,
 							t_cmd **start_ptr_save, t_prompt *prompt);
+void					init_left_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
+							t_prompt *prompt);
+void					init_right_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
+							t_prompt *prompt);
 t_cmd					*init_cmd(t_token_node *node, t_prompt *prompt);
-
-// parse_init_tree_node.c
 bool					mark_redirection_as_previous(t_token_node **token,
 							t_token_node **previous_token);
 bool					join_redirection_to_cmd(t_token_node **token,
+							t_token_node **previous_token);
+bool					join_next_redirection_to_cmd(t_token_node **token,
 							t_token_node **previous_token);
 bool					mark_cmd_as_previous(t_token_node **token,
 							t_token_node **previous_token);
 bool					join_cmd_to_pipe(t_token_node **token,
 							t_token_node **previous_token);
-
-// parse_set_redirection_priority.c
 void					delete_repeating_redirection_tokens(t_token_node **tokens);
 void					delete_and_close_not_used_redirections(t_token_node **tokens,
 							t_token_node **head);
 void					mark_last_in_redirection(t_token_node *tokens);
 void					mark_last_out_redirection(t_token_node *tokens);
 void					close_token_fd(t_token_node *tokens);
+bool					if_in_left_redirection(t_token_node **node);
+bool					if_in_right_redirection(t_token_node **node);
 
 // parser.c
 bool					parser(t_info *structure, t_prompt *prompt);
 t_token_node			*lex(t_info *structure, t_prompt *prompt);
 t_cmd					*parse(t_token_node *tokens, t_prompt *prompt);
 
-// print.c
-void					print_token_list(t_token_node *token);
-void 					print_tree(t_token_node *node, int depth, char *left_right);
-void					print_table(t_cmd *table);
-void					print_redirection_file(t_cmd *table);
+// PRINT (print.c)
 void					print_syntax_token_error(t_prompt *prompt);
-const char				*type_to_string(t_type type);
+// void					print_token_list(t_token_node *token);
+// void 				print_tree(t_token_node *node, int depth, char *left_right);
+// void					print_table(t_cmd *table);
+// void					print_redirection_file(t_cmd *table);
+// const char			*type_to_string(t_type type);
 
-// signals.c
+// SIGNALS (signals.c)
 void					handle_signal(int signal);
 void					handle_key_combos(void);
 void					handle_signal_heredoc(int signal);
 void					handle_heredoc_combos(void);
-
 
 #endif

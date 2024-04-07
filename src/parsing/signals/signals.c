@@ -6,21 +6,21 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:52:08 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/05 18:00:36 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/07 23:38:18 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
 void	handle_signal(int signal)
 {
 	if (signal == SIGINT && g_signal == 0)
-    {
+	{
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-    }
+	}
 }
 
 void	handle_key_combos(void)
@@ -37,6 +37,7 @@ void	handle_signal_heredoc(int signal)
 {
 	if (signal == SIGINT && g_signal == 1)
 	{
+		write(1, "\n", 1);
 		exit(0);
 	}
 }
