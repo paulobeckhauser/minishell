@@ -6,11 +6,13 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/06 19:52:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:50:42 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	g_signal = 0;
 
 int	main(int argc, char **argv, char **envp)
 {

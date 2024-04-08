@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_set_redirection_priority.c                   :+:      :+:    :+:   */
+/*   set_redirection_priority.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:56 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/30 13:26:13 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/07 21:04:52 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
 void	delete_repeating_redirection_tokens(t_token_node **tokens)
 {
@@ -28,7 +28,8 @@ void	delete_repeating_redirection_tokens(t_token_node **tokens)
 	*tokens = head;
 }
 
-void	delete_and_close_not_used_redirections(t_token_node **tokens, t_token_node **head)
+void	delete_and_close_not_used_redirections(t_token_node **tokens,
+	t_token_node **head)
 {
 	t_token_node	*tmp;
 	t_token_node	*previous_token;
@@ -37,7 +38,8 @@ void	delete_and_close_not_used_redirections(t_token_node **tokens, t_token_node 
 	previous_token = NULL;
 	while (*tokens && (*tokens)->token.type != PIPE)
 	{
-		if ((*tokens)->token.type == REDIRECTION && !(*tokens)->token.last_redirection)
+		if ((*tokens)->token.type == REDIRECTION
+			&& !(*tokens)->token.last_redirection)
 		{
 			tmp = (*tokens);
 			close_token_fd(*tokens);
