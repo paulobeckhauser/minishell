@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:44:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 16:00:01 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/05 23:09:58 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ static char	**store_array(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		array[i] = (char *)malloc((ft_strlen(envp[i]) + 1) * sizeof(char));
+		array[i] = ft_strdup(envp[i]);
 		if (array[i] == NULL)
 		{
 			perror("Memory allocation failed!\n");
 			exit(EXIT_FAILURE);
 		}
-		array[i] = ft_strdup(envp[i]);
 		i++;
 	}
+	array[i] = NULL;
 	return (array);
 }
 

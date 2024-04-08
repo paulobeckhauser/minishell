@@ -6,31 +6,67 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 17:51:37 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:42:49 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+
 
 int	is_echo_command(char **command)
 {
 	return (ft_strcmp(command[0], "echo") == 0);
 }
 
-static char	*join_string_echo(int start, int after, t_info *structure,
-		char *string)
-{
-	int	i;
 
-	string = ft_strdup(structure->table->arr[start]);
-	i = after;
-	while (structure->table->arr[i])
+static int check_dollar_sign(char *str)
+{
+	int i;
+	int check_dollar_sign;
+
+
+	check_dollar_sign = 0;
+	i = 0;
+	while(str[i])
 	{
-		string = ft_strjoin(string, " ");
-		string = ft_strjoin(string, structure->table->arr[i]);
+		if (str[i] == '$')
+		{
+			check_dollar_sign = 1;
+			break;
+		}
 		i++;
 	}
-	return (string);
+	return (check_dollar_sign);
+}
+
+
+
+static char	*join_string_echo(int start, t_info *structure)
+{
+	char *concat_str = "";
+
+	int j;
+	char *str_env;
+	int count;
+
+	count = 0;
+	
+	while(structure->table->arr[start])
+	{
+		if (count > 0)
+			concat_str = ft_strjoin(concat_str, " ");
+		concat_str = ft_strjoin(concat_str, structure->table->arr[start]);
+
+		start++;
+		count++;
+
+	}
+
+
+
+	
+	return (concat_str);
 }
 
 static void	redirection_echo(char *string, t_info *structure)
@@ -54,13 +90,13 @@ void	execute_echo_command(t_info *structure)
 		if (n_flag)
 		{
 			if (structure->table->arr[2])
-				string = join_string_echo(2, 3, structure, string);
+				string = join_string_echo(2, structure);
 			else
 				string = ft_strdup("");
 		}
 		else
 		{
-			string = join_string_echo(1, 2, structure, string);
+			string = join_string_echo(1, structure);
 			string = ft_strjoin(string, "\n");
 		}
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/07 22:22:29 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/08 12:49:47 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,7 +130,10 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)signals/signals.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
 
-SHARED_SRCS			:= $(SRC_DIR)main.c
+
+SHARED_SRCS			:= 	$(SRC_DIR)main.c \
+						$(SRC_DIR)init_vars.c \
+	
 
 #Source Files
 SRCS			:= 	$(SHARED_SRCS) \

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 12:47:45 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:00:01 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	is_export_command(char **command)
 static void	export_without_args(t_info *structure)
 {
 	int	i;
-	int	len;
 
 	allocate_mem_sort_var(structure);
 	selectiton_sort_variables(structure->envp_sorted);
@@ -46,25 +45,43 @@ static void	export_without_args(t_info *structure)
 static void	export_with_args(t_info *structure)
 {
 	int	i;
-	int	j;
 	int	check_equal_sign;
 
-	check_equal_sign = 0;
-	j = 0;
-	while (structure->table->arr[1][j])
+	
+	
+	i = 0;
+
+	if (((structure->table->arr[1][i] == '-') && (structure->table->arr[1][i + 1] != '-')) || (structure->table->arr[1][i + 1] == '-') ||  
+				(structure->table->arr[1][i] >= '0' &&  structure->table->arr[1][i] <= '9') )
 	{
-		if (structure->table->arr[1][j] == '=')
+		ft_putstr_fd("bash: export: `", 2);
+		ft_putstr_fd(structure->table->arr[1], 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
+
+		structure->last_exit_status = EXIT_FAILURE;
+		
+	}
+	
+	
+	check_equal_sign = 0;
+	i = 0;
+	while (structure->table->arr[1][i])
+	{
+		if (structure->table->arr[1][i] == '=')
 		{
 			check_equal_sign++;
 			break ;
 		}
-		j++;
+		i++;
 	}
 	if (check_equal_sign == 1)
+	{
+		
 		replace_value_envp(structure, check_equal_sign);
+	}
 	else
 	{
-		if (check_env_variable(structure->envp, structure))
+		if (check_env_variable(structure))
 			return ;
 		else
 			add_to_envp(structure, structure->table->arr[1], check_equal_sign);

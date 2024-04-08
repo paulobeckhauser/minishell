@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:10:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 18:40:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:46:17 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ char	*allocate_str_temp(t_info *structure, char *str_temp, int i)
 		&& structure->envp_export[i][len] != '=')
 		len++;
 	str_temp = (char *)malloc((len + 1) * sizeof(char));
+	if (str_temp == NULL)
+	{
+		perror("Memory allocation failed!\n");
+		exit(EXIT_FAILURE);
+	}
 	return (str_temp);
 }
 
@@ -38,9 +43,8 @@ char	*save_str_temp(t_info *structure, int i, char *str_temp)
 	return (str_temp);
 }
 
-int	check_env_variable(char **array, t_info *structure)
+int	check_env_variable(t_info *structure)
 {
-	char	*temp;
 	int		check_exist;
 	int		i;
 	char	*str_temp;

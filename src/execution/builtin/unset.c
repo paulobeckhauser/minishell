@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 11:49:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/06 14:05:03 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ static char	**allocate_mem_array_backup(char **array, char **array_backup,
 		free_2d_array(env_var);
 	}
 	array_backup = (char **)malloc((i - count + 1) * sizeof(char *));
+	if (array_backup == NULL)
+	{
+		perror("Memory allocation failed!\n");
+		exit(EXIT_FAILURE);
+	}
 	return (array_backup);
 }
 
@@ -64,9 +69,9 @@ static char	**save_in_array_backup(char **array, char **array_backup,
 char	**delete_string_array(char **array, char *str_delete)
 {
 	char	**array_backup;
-	char	**env_var;
 	int		i;
 
+	array_backup = NULL;
 	array_backup = allocate_mem_array_backup(array, array_backup, str_delete);
 	array_backup = save_in_array_backup(array, array_backup, str_delete);
 	free_2d_array(array);
@@ -86,21 +91,18 @@ char	**delete_string_array(char **array, char *str_delete)
 
 void	execute_unset_command(t_info *structure)
 {
-	int	i;
-	int	l;
-
 	if (!structure->table->arr[1])
 		return ;
 	else
 	{
-		if (check_env_variable(structure->envp, structure) == 1)
+		if (check_env_variable(structure) == 1)
 		{
 			structure->envp = delete_string_array(structure->envp,
 					structure->table->arr[1]);
 			structure->envp_export = delete_string_array(structure->envp_export,
 					structure->table->arr[1]);
 		}
-		else if (check_env_variable(structure->envp_export, structure) == 1)
+		else if (check_env_variable(structure) == 1)
 			structure->envp_export = delete_string_array(structure->envp_export,
 					structure->table->arr[1]);
 		else

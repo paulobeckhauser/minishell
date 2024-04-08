@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 00:07:50 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:46:07 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
-# include <signal.h>
 # include <termios.h>
-
 
 // MACRO variable library
 # include <limits.h>
@@ -112,24 +111,25 @@ typedef struct s_cmd
 
 typedef struct s_info
 {
-	char					**envp;
-	char					**envp_export;
-	char 					**envp_sorted;
-	int						is_builtin;
-	char					*path_env;
-	int						number_commands;
-	char					**commands;
-	char					**possible_paths;
-	char					**path_commands;
-	int						**fds_pipes;
-	pid_t					*pid;
-	int						has_value_envp;
-	int						number_equal_sign;
-	int 					count_number_signs;
-	int						count_equal_sign;
-
-	t_cmd					*table;
-}							t_info;
+	char				**envp;
+	char				**envp_export;
+	char				**envp_sorted;
+	int					is_builtin;
+	char				*path_env;
+	int					number_commands;
+	char				**commands;
+	char				**possible_paths;
+	char				**path_commands;
+	int					**fds_pipes;
+	pid_t				*pid;
+	int					has_value_envp;
+	int					number_equal_sign;
+	int					count_number_signs;
+	int					count_equal_sign;
+	t_cmd				*table;
+	int					exit_status;
+	int					last_exit_status;
+}						t_info;
 
 typedef struct s_token_node
 {
@@ -150,7 +150,8 @@ typedef struct s_dollar_replace_info
 }							t_dollar_replace_info;
 
 void					store_envp(char **envp, t_info *structure);
-void					execution(t_info *structure, t_prompt *prompt);
+// void					execution(t_info *structure);
+bool					execution(t_info *structure);
 int						ft_strcmp(const char *s1, const char *s2);
 void					check_builtin(t_info *structure, char *str);
 void					get_path_env(t_info *structure);
@@ -161,7 +162,8 @@ void					create_pipes(t_info *structure);
 void					create_child_processes(t_info *structure);
 void					builtin_execution(t_info *structure);
 void					pipes_implementation(t_info *structure);
-void wait_child_processes(t_info *structure);
+void					wait_child_processes(t_info *structure);
+void					init_vars(t_info *structure);
 
 // split_concat_commands
 char					**split_concat_command(char const *s, char c,
@@ -171,6 +173,7 @@ void					*ft_free(char **strs, int count);
 
 // free variables
 void					free_2d_array(char **array);
+void					free_2d_int_array(int **array);
 
 // BUILTIN FUNCTIONS
 int						is_cd_command(char **command);
@@ -179,6 +182,7 @@ int						is_pwd_command(char **command);
 void					execute_pwd_command(char **command);
 int						is_echo_command(char **command);
 void					execute_echo_command(t_info *structure);
+// int						execute_echo_command(t_info *structure);
 int						is_export_command(char **command);
 void					execute_export_command(t_info *structure);
 int						is_unset_command(char **command);
@@ -192,7 +196,7 @@ void					add_to_envp(t_info *structure, char *str_add,
 							int check_equal_sign);
 void					replace_value_envp(t_info *structure,
 							int check_equal_sign);
-int						check_env_variable(char **array, t_info *structure);
+int						check_env_variable(t_info *structure);
 char					**delete_string_array(char **array, char *str_delete);
 void					print_export_structure(char *str_declare);
 void					print_export_with_value(int i, char **envp_sorted,
@@ -200,13 +204,18 @@ void					print_export_with_value(int i, char **envp_sorted,
 void					print_export_without_value(int i, char **envp_sorted);
 void					check_has_env_value(int i, char **envp_sorted,
 							t_info *structure);
-void print_with_env_value(int i, char **envp_sorted, t_info *structure);
-void print_without_equal_sign(int i, char **envp_sorted,char *string_declare);
-void count_number_equal_signs(int i, char **envp_sorted,t_info *structure);
-void allocate_mem_sort_var(t_info *structure);
-void count_equal_sign(t_info *structure);
-char	*allocate_str_temp(t_info *structure, char *str_temp, int i);
-char	*save_str_temp(t_info *structure, int i, char *str_temp);
+void					print_with_env_value(int i, char **envp_sorted,
+							t_info *structure);
+void					print_without_equal_sign(int i, char **envp_sorted,
+							char *string_declare);
+void					count_number_equal_signs(int i, char **envp_sorted,
+							t_info *structure);
+void					allocate_mem_sort_var(t_info *structure);
+void					count_equal_sign(t_info *structure);
+char					*allocate_str_temp(t_info *structure, char *str_temp,
+							int i);
+char					*save_str_temp(t_info *structure, int i,
+							char *str_temp);
 
 // DISPLAY (default_display.c, verify_quote_number.c)
 void					default_display_with_history(t_prompt *prompt);
