@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 00:06:31 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 20:34:02 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	count_words(t_prompt *prompt)
 			skip_whitespaces(prompt);
 		else
 		{
-			if (!*(prompt->msg - 1) || (*(prompt->msg - 1)
+			if (prompt->msg == start_ptr_save || (*(prompt->msg - 1)
 					&& !ft_strchr(prompt->quotes, *(prompt->msg - 1))))
 				prompt->word_count++;
 			while (*prompt->msg && !ft_strchr(prompt->symbols, *prompt->msg)
