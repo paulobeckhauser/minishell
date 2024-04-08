@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 17:38:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:59:58 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	pipes_implementation(t_info *structure)
                     
                     if(command_number == structure->number_commands)
                     {
+                        // printf("The number of commands is: %d\n", structure->number_commands);
                         // printf("The number of commands is: %d\n", structure->number_commands);
                         exit(127);
                     }
