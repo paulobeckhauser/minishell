@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 12:50:42 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:55:10 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,19 @@ int	main(int argc, char **argv, char **envp)
 				continue;
 			else
 			{
-				// printf("%s\n", structure.table->arr[0]);
-				if ( (ft_strcmp(structure.table->arr[0], "echo") == 0) && ft_strcmp(structure.table->arr[1], "$?") == 0)
-				{
-					printf("%d\n", structure.last_exit_status);
-					// printf("AAAAA\n");
-				}
+				// // printf("%s\n", structure.table->arr[0]);
+				// if ( (ft_strcmp(structure.table->arr[0], "echo") == 0) && ft_strcmp(structure.table->arr[1], "$?") == 0)
+				// {
+				// 	printf("here\n");
+				// 	printf("%d\n", structure.last_exit_status);
+				// 	// printf("AAAAA\n");
+				// }
 
-				else
-				{
-					execution(&structure);
+				// else
+				// {
+				execution(&structure);
 					
-				}
+				// }
 			}
 
 			
