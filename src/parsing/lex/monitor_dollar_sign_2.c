@@ -6,11 +6,50 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:28:23 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 20:51:26 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:52:48 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+char	*replace_dollar_word(t_info *structure, char *str)
+{
+	char	*word_replacement;
+	char	*str_temp;
+	int		i;
+
+	i = 0;
+	while (structure->envp_export[i])
+	{
+		str_temp = allocate_str_temp(structure, str_temp, i);
+		str_temp = save_str_temp(structure, i, str_temp);
+		if (ft_strcmp(str_temp, str) == 0)
+			return (extract_dollar_value(structure->envp_export[i]));
+		i++;
+	}
+	return (NULL);
+}
+
+char	*extract_dollar_value(char *str)
+{
+	char	*word_replacement;
+	char	*start_ptr_save;
+
+	while (*str)
+	{
+		if (*str++ == '=')
+			break ;
+	}
+	word_replacement = malloc(ft_strlen(str) + 1);
+	if (!word_replacement)
+		return (NULL);
+	start_ptr_save = word_replacement;
+	while (*str)
+		*word_replacement++ = *str++;
+	*word_replacement = 0;
+	word_replacement = start_ptr_save;
+	return (word_replacement);
+}
 
 void	replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word,
 	char *replacement)

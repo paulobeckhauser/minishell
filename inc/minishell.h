@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 12:46:07 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:16:38 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,8 @@ void					replace_word(t_dollar_replace_info *info, int y);
 void					verify_dollar(t_info *structure, t_prompt *prompt);
 void					handle_dollar(t_info *structure, t_prompt *prompt, char *str, int i);
 char					*find_dollar_word(t_prompt *prompt, char *str);
+void					move_pointer_after_dollar(char **str);
+void					measure_dollar_word_len(char **str, t_prompt *prompt, int *len);
 char					*replace_dollar_word(t_info *structure, char *str);
 char					*extract_dollar_value(char *str);
 void					init_single_quote_checker_list(t_prompt *prompt);
