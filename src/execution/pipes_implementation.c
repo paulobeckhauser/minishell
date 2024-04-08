@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 13:46:46 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:59:58 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,13 @@ void	pipes_implementation(t_info *structure)
                 builtin_execution(structure);
             else
             {
+				int j = 0;
+				while (j < structure->number_commands - 1)
+				{
+				    close(structure->fds_pipes[j][0]);
+				    close(structure->fds_pipes[j][1]);
+				    j++;
+				}
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
                 {
@@ -88,6 +95,7 @@ void	pipes_implementation(t_info *structure)
                     
                     if(command_number == structure->number_commands)
                     {
+                        // printf("The number of commands is: %d\n", structure->number_commands);
                         // printf("The number of commands is: %d\n", structure->number_commands);
                         exit(127);
                     }
