@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_prompt.c                                       :+:      :+:    :+:   */
+/*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/16 12:52:15 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/16 17:48:06 by sfrankie         ###   ########.fr       */
+/*   Created: 2024/04/07 15:24:27 by sfrankie          #+#    #+#             */
+/*   Updated: 2024/04/07 15:24:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
 void	init_prompt(t_prompt *prompt)
 {

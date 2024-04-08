@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_init_token_list.c                              :+:      :+:    :+:   */
+/*   init_token_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/03/21 23:36:50 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/07 17:37:38 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-t_token_node	*init_token_list(t_prompt *prompt)
+t_token_node	*init_token_list(t_info *structure, t_prompt *prompt)
 {
 	t_token_node	*list;
 	t_token_node	*head;
@@ -24,35 +24,31 @@ t_token_node	*init_token_list(t_prompt *prompt)
 	i = 0;
 	while (1)
 	{
-		list = init_token_node(prompt, i++);
+		list = init_token_node(structure, prompt, i++);
 		if (!list)
 			return (NULL);
 		if (list->token.type == END)
-		{
-			free(list);
 			break ;
-		}
 		if (list->token.type == ERROR)
-		{
-			free(list);
 			return (NULL);
-		}
 		add_node_to_list(&head, &current, list);
 	}
-	if (prompt->heredoc_count > 0)
-		init_heredoc_arr(prompt, head);
+	if ((head && head->token.type == PIPE)
+		|| (current && current->token.type == PIPE))
+		return (ft_printf("bash: syntax error near unexpected token `|'\n"),
+			NULL);
 	prompt->token_count = i;
 	return (head);
 }
 
-t_token_node	*init_token_node(t_prompt *prompt, int index)
+t_token_node	*init_token_node(t_info *structure, t_prompt *prompt, int index)
 {
 	t_token_node	*node;
 
 	node = ft_calloc(1, sizeof(t_token_node));
 	if (!node)
 		return (NULL);
-	node->token = init_token_struct(prompt);
+	node->token = init_token_struct(structure, prompt);
 	node->next = NULL;
 	node->index = index;
 	return (node);
@@ -73,7 +69,7 @@ void	add_node_to_list(t_token_node **head, t_token_node **current,
 	}
 }
 
-t_token	init_token_struct(t_prompt *prompt)
+t_token	init_token_struct(t_info *structure, t_prompt *prompt)
 {
 	t_type	type;
 	t_token	token;
@@ -84,7 +80,7 @@ t_token	init_token_struct(t_prompt *prompt)
 	else if (type == REDIRECTION)
 		token = init_redirection_token(prompt);
 	else if (type == WORD)
-		token = init_cmd_token(prompt);
+		token = init_cmd_token(structure, prompt);
 	else
 		token = init_end_token();
 	if (type != WORD && type != REDIRECTION)

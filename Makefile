@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/05 12:18:56 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/07 22:22:29 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,8 @@ NAME			= minishell
 SRC_DIR			:= src/
 OBJ_DIR			:= obj/
 EXECUTION_DIR	:= execution/
-PARSING_DIR		:= parsing/
 BUILTIN_DIR		:= builtin/
+PARSING_DIR		:= parsing/
 
 # Compiler and Flags
 CC				:= cc
@@ -87,7 +87,6 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)sort_var_envp.c \
 
 
-
 EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
@@ -106,23 +105,30 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)wait_child_processes.c \
 					
 
-PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)default_display.c \
-						$(SRC_DIR)$(PARSING_DIR)free.c \
-						$(SRC_DIR)$(PARSING_DIR)init_prompt.c \
-						$(SRC_DIR)$(PARSING_DIR)init_redirection.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_token_list.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_token_type_2.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_init_token_type.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_utils_2.c \
-						$(SRC_DIR)$(PARSING_DIR)lex_utils.c \
-						$(SRC_DIR)$(PARSING_DIR)parse_if_no_cmd_tokens.c \
-						$(SRC_DIR)$(PARSING_DIR)parse_init_tree_node.c \
-						$(SRC_DIR)$(PARSING_DIR)parse_init_cmd_table.c \
-						$(SRC_DIR)$(PARSING_DIR)parse_set_redirection_priority.c \
+PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
+						$(SRC_DIR)$(PARSING_DIR)display/verify_quote_number.c \
+						$(SRC_DIR)$(PARSING_DIR)free/free.c \
+						$(SRC_DIR)$(PARSING_DIR)init/init_prompt.c \
+						$(SRC_DIR)$(PARSING_DIR)init/init_redirection.c \
+						$(SRC_DIR)$(PARSING_DIR)init/heredoc_utils.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/init_token_list.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/init_token_type_2.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/init_token_type.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/init_words_arr.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign_2.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/monitor_single_quote.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/utils_2.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/utils.c \
+						$(SRC_DIR)$(PARSING_DIR)parse/if_no_cmd_tokens.c \
+						$(SRC_DIR)$(PARSING_DIR)parse/init_binary_tree.c \
+						$(SRC_DIR)$(PARSING_DIR)parse/init_cmd_table.c \
+						$(SRC_DIR)$(PARSING_DIR)parse/init_tree_node.c \
+						$(SRC_DIR)$(PARSING_DIR)parse/set_redirection_priority.c \
+						$(SRC_DIR)$(PARSING_DIR)parse/utils.c \
+						$(SRC_DIR)$(PARSING_DIR)print/print.c \
+						$(SRC_DIR)$(PARSING_DIR)signals/signals.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
-						$(SRC_DIR)$(PARSING_DIR)print.c \
-						$(SRC_DIR)$(PARSING_DIR)signals.c \
-
 
 SHARED_SRCS			:= $(SRC_DIR)main.c
 

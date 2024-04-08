@@ -6,11 +6,13 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 14:34:18 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:55:04 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	g_signal = 0;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -20,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 1)
 	{
 		(void)argv;
-		store_envp(envp, &structure);
+		store_envp(envp, &structure);		
 		get_path_env(&structure);
 		while (1)
 		{
