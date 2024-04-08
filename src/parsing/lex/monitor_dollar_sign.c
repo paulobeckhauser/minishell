@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 17:58:44 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:21:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ void	verify_dollar(t_info *structure, t_prompt *prompt)
 			continue ;
 		}
 		while (ft_strchr(prompt->arr[i], '$'))
-		{
 			handle_dollar(structure, prompt, prompt->arr[i], i);
-		}
 		prompt->checker = prompt->checker->next;
 		i++;
 	}
@@ -44,6 +42,9 @@ void	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int i)
 	char	*word_replacement;
 
 	dollar_word = find_dollar_word(prompt, str);
+	if (ft_strcmp(dollar_word, "?") == 0)
+		replace_words_in_arr(prompt, i, dollar_word,
+			ft_itoa(structure->last_exit_status));
 	word_replacement = replace_dollar_word(structure, dollar_word);
 	if (!word_replacement)
 		word_replacement = "";
@@ -55,16 +56,15 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	int		len;
 	int		i;
 	char	*dollar_word;
+	char	*dollar_start;
 
-	while (*str)
-	{
-		if (*str++ == '$')
-			break ;
-	}
+	move_pointer_after_dollar(&str);
+	if (*str == '?')
+		return ("?");
+	dollar_start = str;
 	len = 0;
-	while (str[len] && ft_strchr(prompt->whitespace, str[len])
-		&& str[len] != '$')
-		len++;
+	measure_dollar_word_len(&str, prompt, &len);
+	str = dollar_start;
 	dollar_word = malloc(len + 1);
 	if (!dollar_word)
 		return (NULL);
@@ -79,41 +79,25 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	return (dollar_word);
 }
 
-char	*replace_dollar_word(t_info *structure, char *str)
+void	move_pointer_after_dollar(char **str)
 {
-	char	*word_replacement;
-	char	*str_temp;
-	int		i;
-
-	i = 0;
-	while (structure->envp_export[i])
+	while (**str)
 	{
-		str_temp = allocate_str_temp(structure, str_temp, i);
-		str_temp = save_str_temp(structure, i, str_temp);
-		if (ft_strcmp(str_temp, str) == 0)
-			return (extract_dollar_value(structure->envp_export[i]));
-		i++;
+		if (**str == '$')
+		{
+			++(*str);
+			break ;
+		}
+		++(*str);
 	}
-	return (NULL);
 }
 
-char	*extract_dollar_value(char *str)
+void	measure_dollar_word_len(char **str, t_prompt *prompt, int *len)
 {
-	char	*word_replacement;
-	char	*start_ptr_save;
-
-	while (*str)
+	while (**str != '\0' && !ft_strchr(prompt->whitespace, **str)
+		&& **str != '$')
 	{
-		if (*str++ == '=')
-			break ;
+		(*len)++;
+		(*str)++;
 	}
-	word_replacement = malloc(ft_strlen(str) + 1);
-	if (!word_replacement)
-		return (NULL);
-	start_ptr_save = word_replacement;
-	while (*str)
-		*word_replacement++ = *str++;
-	*word_replacement = 0;
-	word_replacement = start_ptr_save;
-	return (word_replacement);
 }
