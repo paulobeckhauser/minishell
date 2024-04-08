@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 19:08:59 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/09 00:00:20 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ void					handle_key_combos_execution(void);
 
 // DISPLAY (default_display.c, verify_quote_number.c)
 void					default_display_with_history(t_prompt *prompt);
+char					*init_color_prompt(t_prompt *prompt);
 void					check_quotes(t_prompt *prompt);
 int						count_quotes(t_prompt *prompt);
 
@@ -230,7 +231,9 @@ int						count_quotes(t_prompt *prompt);
 void					free_prompt(t_prompt *prompt);
 void					free_double_arr(char **arr);
 void					free_single_quote_checker_list(t_prompt *prompt);
-
+void					free_token_list(t_token_node **list);
+void					free_cmd_table(t_info *structure);
+	
 // INIT (heredoc_utils.c, init_prompt.c, init_redirection.c)
 void					create_tmp_folder(void);
 void					run_heredoc(t_in *in, t_token *token, char *delimiter);

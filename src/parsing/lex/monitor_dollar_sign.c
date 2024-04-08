@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 15:21:01 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 23:24:06 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	verify_dollar(t_info *structure, t_prompt *prompt)
 	t_single_quote_checker	*head;
 
 	i = 0;
+	head = prompt->checker;
 	while (prompt->arr[i] && prompt->checker)
 	{
 		if (prompt->checker && prompt->checker->index == i
@@ -33,6 +34,7 @@ void	verify_dollar(t_info *structure, t_prompt *prompt)
 		prompt->checker = prompt->checker->next;
 		i++;
 	}
+	prompt->checker = head;
 	free_single_quote_checker_list(prompt);
 }
 

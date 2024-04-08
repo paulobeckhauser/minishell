@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 18:58:25 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/09 00:00:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ bool	parser(t_info *structure, t_prompt *prompt)
 	if (!tokens || if_no_cmd_tokens(tokens))
 		return (false);
 	structure->table = parse(tokens, prompt);
+	free_token_list(&tokens);
 	if (!structure->table)
 		return (false);
 	free_prompt(prompt);
