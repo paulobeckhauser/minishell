@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 15:16:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:08:59 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,10 @@ char					*allocate_str_temp(t_info *structure, char *str_temp,
 char					*save_str_temp(t_info *structure, int i,
 							char *str_temp);
 
+// SIGNALS (signals.c)
+void					handle_execution(int signal);
+void					handle_key_combos_execution(void);
+
 // DISPLAY (default_display.c, verify_quote_number.c)
 void					default_display_with_history(t_prompt *prompt);
 void					check_quotes(t_prompt *prompt);
@@ -281,6 +285,7 @@ char					*verify_redirection(t_prompt *prompt);
 void					count_words(t_prompt *prompt);
 void					count_words_inside_quotes(t_prompt *prompt, char **start_ptr_save);
 int						if_builtin_cmd(char *str);
+
 
 // PARSE (if_no_cmd_tokens.c, init_binary_tree.c, init_cmd_table.c, init_tree_node.c,
 // set_redirection_priority.c, utils.c)
