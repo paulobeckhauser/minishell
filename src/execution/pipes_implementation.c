@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 13:52:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:58:20 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,23 @@ void	pipes_implementation(t_info *structure)
             {
                 dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
             }
+
+            int j = 0;
+            while (j < structure->number_commands - 1)
+            {
+                close(structure->fds_pipes[j][0]);
+                close(structure->fds_pipes[j][1]);
+                j++;
+            }
+    
             if (structure->table->type == BUILTIN_CMD)
+            {
                 builtin_execution(structure);
+                exit(EXIT_SUCCESS);
+                
+            }
             else
             {
-				int j = 0;
-				while (j < structure->number_commands - 1)
-				{
-				    close(structure->fds_pipes[j][0]);
-				    close(structure->fds_pipes[j][1]);
-				    j++;
-				}
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
                 {
@@ -95,13 +101,13 @@ void	pipes_implementation(t_info *structure)
                     
                     if(command_number == structure->number_commands)
                     {
-                        // printf("The number of commands is: %d\n", structure->number_commands);
-                        // printf("The number of commands is: %d\n", structure->number_commands);
                         exit(127);
                     }
                 }
             }
         }
+
+        
         else
         {
             if (i != 0)
