@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:54:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 15:26:04 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 22:23:51 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,20 @@ void	execute_exit_command(char **command)
 	exit_status = 0;
 	if (!command[1])
 	{
-		printf("exit\n");
+		// printf("exit\n");
+
 		exit(0);
 	}
 
 	else
 	{
 		if (ft_strcmp(command[1],"0") == 0)
+		{
+			
 			printf("Exit with 0\n");
+
+			
+		}
 
 		else
 		{

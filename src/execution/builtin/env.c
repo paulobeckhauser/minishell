@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:54:28 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 13:46:34 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:49:47 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	execute_env_command(t_info *structure)
 	i = 0;
 	while (structure->envp[i])
 	{
-		printf("%s\n", structure->envp[i]);
+		ft_putstr_fd(structure->envp[i], STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
 	}
 }

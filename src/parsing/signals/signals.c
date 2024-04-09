@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:52:08 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 23:04:47 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:35:31 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	handle_signal(int signal)
 {
+
 	if (signal == SIGINT && g_signal == 0)
 	{
 		write(1, "\n", 1);
