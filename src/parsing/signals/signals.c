@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:52:08 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 12:34:54 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:48:37 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	handle_signal(int signal)
 {
+
 	if (signal == SIGINT && g_signal == 0)
 	{
 		write(1, "\n", 1);

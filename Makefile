@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/08 12:49:47 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/08 22:16:37 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,19 @@ CFLAGS			:= #-Wall -Wextra -Werror
 LREADLINE		:= -lreadline
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+    # Linux specific CFLAGS or LDFLAGS
+	LREADLINE		:= -lreadline -L $(HOME)/goinfre/.brew/opt/readline/lib
+	IREADLINE		:= -I $(HOME)/goinfre/.brew/opt/readline/include
+endif
+ifeq ($(UNAME_S),Darwin)
+    # Mac OS X specific CFLAGS or LDFLAGS
+    LREADLINE		:= -lreadline -L $(HOME)/goinfre/.brew/opt/readline/lib
+	IREADLINE		:= -I $(HOME)/goinfre/.brew/opt/readline/include
+endif
 
 # Libraries
 LIBFT			:= ./libs/libft/libft.a
@@ -162,7 +175,7 @@ $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c
 					@echo $(YELLOW) "Compiling...\t" $< $(EOC)
 #					@curl 'http://141.147.48.52:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@mkdir -p $(@D)
-					@${CC} ${CFLAGS} ${DEBUG} $(SANITIZER) -I.libs/libft -c $? -o $@
+					@${CC} ${CFLAGS} ${DEBUG} $(SANITIZER) -I.libs/libft -c $(IREADLINE) $? -o $@
 
 
 ${NAME}: 		${OBJ}
