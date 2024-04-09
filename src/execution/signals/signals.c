@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:06:45 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 19:11:25 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 20:36:58 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	handle_key_combos_execution(void)
 
 	sa_ctrl_c.sa_handler = &handle_execution;
 	sa_ctrl_c.sa_flags = SA_RESTART;
+	sigemptyset(&sa_ctrl_c.sa_mask);
 	sigaction(SIGINT, &sa_ctrl_c, NULL);
 	signal(SIGQUIT, SIG_IGN);
 }

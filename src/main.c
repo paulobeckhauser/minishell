@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 13:55:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/08 23:51:05 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 
 
 
-		
+			
 
 	if (argc == 1)
 	{
@@ -37,7 +37,10 @@ int	main(int argc, char **argv, char **envp)
 		while (1)
 		{
 			if (!parser(&structure, &prompt))
+			{
+				free_cmd_table(&structure);
 				continue;
+			}
 			else
 			{
 				// // printf("%s\n", structure.table->arr[0]);
@@ -51,6 +54,7 @@ int	main(int argc, char **argv, char **envp)
 				// else
 				// {
 				execution(&structure);
+				free_cmd_table(&structure);
 					
 				// }
 			}
@@ -59,11 +63,10 @@ int	main(int argc, char **argv, char **envp)
 
 
 			
-			
+
 		}
 		
 		
-
 		free_2d_array(structure.envp);
 		free_2d_array(structure.envp_export);
 		free_2d_array(structure.envp_sorted);
