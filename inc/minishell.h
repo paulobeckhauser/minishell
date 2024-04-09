@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 17:00:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:51:40 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # include <limits.h>
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
+
+
+# include "exit_codes.h"
 
 extern int	g_signal;
 
@@ -164,6 +167,7 @@ void					builtin_execution(t_info *structure);
 void					pipes_implementation(t_info *structure);
 void					wait_child_processes(t_info *structure);
 void					init_vars(t_info *structure);
+void commands_error_handling(t_info *structure);
 
 // split_concat_commands
 char					**split_concat_command(char const *s, char c,

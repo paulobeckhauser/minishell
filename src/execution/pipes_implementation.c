@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 14:58:20 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:31:35 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,17 @@ void	pipes_implementation(t_info *structure)
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
                 {
-                    ft_putstr_fd(structure->commands[i], 2);
-                    ft_putstr_fd(": command not found\n", 2);
+                    // ft_putstr_fd(structure->commands[i], 2);
+                    // ft_putstr_fd(": command not found\n", 2);
+
                     
+                    structure->last_exit_status = EX_COMM_NOTFOUND;
+
+
+
                     if(command_number == structure->number_commands)
                     {
-                        exit(127);
+                        exit(EX_COMM_NOTFOUND);
                     }
                 }
             }

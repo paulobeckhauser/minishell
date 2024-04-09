@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   command_error_handling.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 18:52:24 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/04/09 18:48:57 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/04/09 18:50:04 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-bool	execution(t_info *structure)
+void commands_error_handling(t_info *structure)
 {
-	handle_key_combos_execution();
-	get_number_commands(structure);
-	store_commands(structure);
-	store_path_commands(structure);
-	commands_error_handling(structure);	
-	if (structure->table->type == BUILTIN_CMD
-		&& structure->number_commands == 1)
-		builtin_execution(structure);
-	else
-		pipes_implementation(structure);
-	return (true);
+	int i;
+	
+	i = 0;
+	while (structure->path_commands[i])
+	{
+		if (access(structure->path_commands[i], X_OK) == 0)
+		{
+			structure->last_exit_status = EX_SUCESS;
+		}
+		else
+		{
+			ft_putstr_fd(structure->commands[i], 2);
+			ft_putstr_fd(": command not found\n", 2);
+			structure->last_exit_status = EX_COMM_NOTFOUND;
+			
+		}
+		i++;
+	}
+
 }
