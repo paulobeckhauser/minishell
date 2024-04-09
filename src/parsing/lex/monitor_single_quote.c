@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   single_quote_monitor.c                             :+:      :+:    :+:   */
+/*   monitor_single_quote.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:13:29 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 14:13:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/08 23:15:50 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_single_quote_checker_list(t_prompt *prompt)
 
 	i = 0;
 	head = malloc(sizeof(t_single_quote_checker));
+	if (!head)
+		return ;
 	checker = head;
 	while (i < prompt->word_count)
 	{

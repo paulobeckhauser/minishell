@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 15:21:01 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:16:23 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	verify_dollar(t_info *structure, t_prompt *prompt)
 	t_single_quote_checker	*head;
 
 	i = 0;
+	head = prompt->checker;
 	while (prompt->arr[i] && prompt->checker)
 	{
 		if (prompt->checker && prompt->checker->index == i
@@ -28,27 +29,33 @@ void	verify_dollar(t_info *structure, t_prompt *prompt)
 			prompt->checker = prompt->checker->next;
 			continue ;
 		}
-		while (ft_strchr(prompt->arr[i], '$'))
-			handle_dollar(structure, prompt, prompt->arr[i], i);
+		while (prompt->arr[i] && ft_strchr(prompt->arr[i], '$'))
+			handle_dollar(structure, prompt, prompt->arr[i], &i);
 		prompt->checker = prompt->checker->next;
 		i++;
 	}
+	prompt->checker = head;
 	free_single_quote_checker_list(prompt);
 }
 
-void	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int i)
+void	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 {
 	char	*dollar_word;
 	char	*word_replacement;
 
 	dollar_word = find_dollar_word(prompt, str);
+	if (ft_strcmp(dollar_word, "$") == 0)
+	{
+		++(*i);
+		return ;
+	}
 	if (ft_strcmp(dollar_word, "?") == 0)
-		replace_words_in_arr(prompt, i, dollar_word,
+		replace_words_in_arr(prompt, *i, dollar_word,
 			ft_itoa(structure->last_exit_status));
 	word_replacement = replace_dollar_word(structure, dollar_word);
 	if (!word_replacement)
 		word_replacement = "";
-	replace_words_in_arr(prompt, i, dollar_word, word_replacement);
+	replace_words_in_arr(prompt, *i, dollar_word, word_replacement);
 }
 
 char	*find_dollar_word(t_prompt *prompt, char *str)
@@ -59,10 +66,11 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	char	*dollar_start;
 
 	move_pointer_after_dollar(&str);
+	if (!*str || (*str) && ft_strchr(prompt->whitespace, *str))
+		return ("$");
 	if (*str == '?')
 		return ("?");
 	dollar_start = str;
-	len = 0;
 	measure_dollar_word_len(&str, prompt, &len);
 	str = dollar_start;
 	dollar_word = malloc(len + 1);
@@ -94,6 +102,7 @@ void	move_pointer_after_dollar(char **str)
 
 void	measure_dollar_word_len(char **str, t_prompt *prompt, int *len)
 {
+	*len = 0;
 	while (**str != '\0' && !ft_strchr(prompt->whitespace, **str)
 		&& **str != '$')
 	{
