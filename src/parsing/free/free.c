@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/09 13:13:58 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:04:27 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
