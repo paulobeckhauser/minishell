@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/08 22:16:37 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/09 13:02:42 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ PARSING_DIR		:= parsing/
 CC				:= cc
 RM				:= rm -f
 CFLAGS			:= #-Wall -Wextra -Werror
-LREADLINE		:= -lreadline
+#LREADLINE		:= -lreadline
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
 
@@ -116,6 +116,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)builtin_execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
 						$(SRC_DIR)$(EXECUTION_DIR)wait_child_processes.c \
+						$(SRC_DIR)$(EXECUTION_DIR)signals/signals.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
