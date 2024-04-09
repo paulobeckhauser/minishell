@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 00:00:20 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:08:59 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,7 +271,7 @@ void					replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word,
 							char *replacement);
 void					replace_word(t_dollar_replace_info *info, int y);
 void					verify_dollar(t_info *structure, t_prompt *prompt);
-void					handle_dollar(t_info *structure, t_prompt *prompt, char *str, int i);
+void					handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i);
 char					*find_dollar_word(t_prompt *prompt, char *str);
 void					move_pointer_after_dollar(char **str);
 void					measure_dollar_word_len(char **str, t_prompt *prompt, int *len);

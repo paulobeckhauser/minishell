@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:47:52 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 22:28:13 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:14:12 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ bool	join_redirection_to_cmd(t_token_node **token,
 			(*token)->left = *previous_token;
 			if ((*previous_token)->left)
 				(*token)->right = (*previous_token)->left;
-			*previous_token = NULL;
 		}
 		else
 			(*token)->left = NULL;
