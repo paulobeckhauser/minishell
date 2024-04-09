@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 13:10:24 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:52:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	pipes_implementation(t_info *structure)
             if (i != 0)
             {
                 dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
-                close(structure->fds_pipes[i - 1][0]); // Close read end of the pipe in the child
+                close(structure->fds_pipes[i - 1][0]);
             }
 
             if (structure->table->out.file_name)
