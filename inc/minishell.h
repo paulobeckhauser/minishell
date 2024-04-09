@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 18:51:40 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:45:54 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,10 @@ void					create_pipes(t_info *structure);
 void					create_child_processes(t_info *structure);
 void					builtin_execution(t_info *structure);
 void					pipes_implementation(t_info *structure);
-void					wait_child_processes(t_info *structure);
+// void					wait_child_processes(t_info *structure);
+
+// pid_t	wait_child_processes(t_info *structure);
+pid_t	wait_child_processes(t_info *structure, int *status);
 void					init_vars(t_info *structure);
 void commands_error_handling(t_info *structure);
 

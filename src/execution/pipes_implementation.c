@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 18:31:35 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/09 21:22:42 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ void	pipes_implementation(t_info *structure)
 {
     int	i;
     int	dev_null_fd;
+    int command_number;
+    pid_t w_id;
 
     create_pipes(structure);
     structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1),
             sizeof(pid_t));
     i = 0;
     dev_null_fd = open("/dev/null", O_RDONLY);
-    int command_number;
 
     command_number = 0;
     while (structure->table)
@@ -95,11 +96,7 @@ void	pipes_implementation(t_info *structure)
             {
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
-                {
-                    // ft_putstr_fd(structure->commands[i], 2);
-                    // ft_putstr_fd(": command not found\n", 2);
-
-                    
+                {                   
                     structure->last_exit_status = EX_COMM_NOTFOUND;
 
 
@@ -124,5 +121,13 @@ void	pipes_implementation(t_info *structure)
         structure->table = structure->table->next;
     }
     close(dev_null_fd);
-    wait_child_processes(structure);
+    int status;
+    
+    w_id = wait_child_processes(structure, &status);
+
+    if (status == 32512)
+        structure->last_exit_status = EX_FAILURE;
+
+    // printf("The status is: %d\n", status);
+
 }
