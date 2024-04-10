@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_child_processes.c                             :+:      :+:    :+:   */
+/*   command_error_handling.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 15:16:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 20:46:08 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/04/09 18:48:57 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/04/09 18:50:04 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-pid_t	wait_child_processes(t_info *structure, int *status)
+void commands_error_handling(t_info *structure)
 {
-	int	i;
-	pid_t w_id;
-	// int status;
-
+	int i;
+	
 	i = 0;
-	while (i < structure->number_commands)
+	while (structure->path_commands[i])
 	{
-		w_id = waitpid(structure->pid[i], status, 0);
+		if (access(structure->path_commands[i], X_OK) == 0)
+		{
+			structure->last_exit_status = EX_SUCESS;
+		}
+		else
+		{
+			ft_putstr_fd(structure->commands[i], 2);
+			ft_putstr_fd(": command not found\n", 2);
+			structure->last_exit_status = EX_COMM_NOTFOUND;
+			
+		}
 		i++;
 	}
-	return(w_id);
+
 }

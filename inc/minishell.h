@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 16:28:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:05:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 // Minishell functions libraries
 # include <fcntl.h>
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <termios.h>
@@ -35,6 +35,9 @@
 # include <limits.h>
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
+
+
+# include "exit_codes.h"
 
 extern int	g_signal;
 
@@ -162,8 +165,12 @@ void					create_pipes(t_info *structure);
 void					create_child_processes(t_info *structure);
 void					builtin_execution(t_info *structure);
 void					pipes_implementation(t_info *structure);
-void					wait_child_processes(t_info *structure);
+// void					wait_child_processes(t_info *structure);
+
+// pid_t	wait_child_processes(t_info *structure);
+pid_t	wait_child_processes(t_info *structure, int *status);
 void					init_vars(t_info *structure);
+void commands_error_handling(t_info *structure);
 
 // split_concat_commands
 char					**split_concat_command(char const *s, char c,

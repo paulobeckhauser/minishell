@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/09 16:28:40 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/10 15:05:34 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
 						$(SRC_DIR)$(EXECUTION_DIR)wait_child_processes.c \
 						$(SRC_DIR)$(EXECUTION_DIR)signals/signals.c \
+						$(SRC_DIR)$(EXECUTION_DIR)commands_error_handling.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 17:55:31 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:06:02 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	execution(t_info *structure)
 	get_number_commands(structure);
 	store_commands(structure);
 	store_path_commands(structure);
+	// commands_error_handling(structure);	
 	if (structure->table->type == BUILTIN_CMD
 		&& structure->number_commands == 1)
 		builtin_execution(structure);
