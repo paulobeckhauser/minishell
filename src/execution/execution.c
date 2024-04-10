@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 22:21:37 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 22:31:36 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ bool	execution(t_info *structure)
 			ft_putstr_fd("bash: ", 2);
 			ft_putstr_fd(structure->table->arr[0], 2);
 			ft_putstr_fd(": No such file or directory\n", 2);
+			structure->last_exit_status = EX_COMM_NOTFOUND;
 		}
 		else
 		{
