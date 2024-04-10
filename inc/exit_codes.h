@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_child_processes.c                             :+:      :+:    :+:   */
+/*   exit_codes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 15:16:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 20:46:08 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/04/09 17:27:46 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/04/09 21:22:36 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#ifndef _EXITCODES_H_
+# define _EXITCODES_H_
 
-pid_t	wait_child_processes(t_info *structure, int *status)
-{
-	int	i;
-	pid_t w_id;
-	// int status;
+#define EX_SUCESS		0	/* successful termination */
 
-	i = 0;
-	while (i < structure->number_commands)
-	{
-		w_id = waitpid(structure->pid[i], status, 0);
-		i++;
-	}
-	return(w_id);
-}
+# define EX_FAILURE		1  /* failed termination */
+#define EX_COMM_NOTFOUND	127 /* command not found */
+
+#endif
