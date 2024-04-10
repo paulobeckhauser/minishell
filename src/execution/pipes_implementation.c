@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 21:22:42 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:06:32 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,10 @@ void	pipes_implementation(t_info *structure)
     
     w_id = wait_child_processes(structure, &status);
 
-    if (status == 32512)
+    if (status == 256)
         structure->last_exit_status = EX_FAILURE;
-
-    // printf("The status is: %d\n", status);
+    
+    else if (status == 32512)
+        structure->last_exit_status = EX_COMM_NOTFOUND;
 
 }
