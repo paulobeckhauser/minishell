@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 13:06:32 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:06:29 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

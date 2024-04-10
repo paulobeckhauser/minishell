@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 20:34:02 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:32:34 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void	count_words_inside_quotes(t_prompt *prompt, char **start_ptr_save)
 	char	curr_quote;
 
 	curr_quote = *prompt->msg;
+	if (*(prompt->msg + 1) && *(prompt->msg + 1) == curr_quote)
+	{
+		prompt->msg += 2;
+		return ;
+	}
 	if (prompt->msg == *start_ptr_save
 		|| ft_strchr(prompt->symbols, *(prompt->msg - 1))
 		|| ft_strchr(prompt->whitespace, *(prompt->msg - 1)))

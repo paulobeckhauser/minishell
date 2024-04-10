@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 20:45:54 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:05:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,6 +290,7 @@ void					skip_whitespaces(t_prompt *prompt);
 int						get_word_length(t_prompt *prompt);
 int						count_len_inside_quotes(t_prompt *prompt, int i);
 char					*fetch_file_name(t_prompt *prompt);
+char					*process_file_name(t_prompt *prompt, char *file_name, size_t i);
 char					*find_next_token_to_print_in_err(t_prompt *prompt);
 char					*verify_redirection(t_prompt *prompt);
 void					count_words(t_prompt *prompt);

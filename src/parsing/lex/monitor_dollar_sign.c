@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_dollar_sign.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/09 16:04:37 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:06:38 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

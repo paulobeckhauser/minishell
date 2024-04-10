@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:15:05 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 23:21:30 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:51:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	init_words_arr(t_prompt *prompt)
 		{
 			j = 0;
 			word_len = get_word_length(prompt);
+			if (word_len == 0)
+			{
+				prompt->msg += 2;
+				continue ;
+			}
 			process_word(prompt, word_len, i, &j);
 			i++;
 		}
