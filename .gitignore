@@ -31,3 +31,4 @@ concat.c
 tmp/
 
 tester/
+minishell_tester
