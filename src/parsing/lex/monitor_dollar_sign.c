@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_dollar_sign.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 15:06:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:32:24 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	verify_dollar(t_info *structure, t_prompt *prompt)
 {
 	int						i;
-	int						y;
 	t_single_quote_checker	*head;
 
 	i = 0;
@@ -66,7 +65,7 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	char	*dollar_start;
 
 	move_pointer_after_dollar(&str);
-	if (!*str || (*str) && ft_strchr(prompt->whitespace, *str))
+	if (!*str || ((*str) && ft_strchr(prompt->whitespace, *str)))
 		return ("$");
 	if (*str == '?')
 		return ("?");

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 15:24:23 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:55:05 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,8 +251,7 @@ void					open_write_close_tmp_file(t_token *token, t_in *in, char **heredoc_msg)
 void					init_prompt(t_prompt *prompt);
 void					init_primary_redirection_vars(t_token *token, t_prompt *prompt);
 void					init_in_redirection(t_token *token, char *file_name);
-void					init_heredoc_in_redirection(t_token *token, char *delimiter,
-	t_prompt *prompt);
+void					init_heredoc_in_redirection(t_token *token, char *delimiter);
 void					create_tmp_folder(void);
 void					init_truncate_out_redirection(t_token *token, char *file_name);
 void					init_append_out_redirection(t_token *token, char *file_name);
@@ -313,7 +312,7 @@ void					init_cmd_table(t_token_node *node, t_cmd **cmd,
 							t_cmd **start_ptr_save, t_prompt *prompt);
 void					init_left_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
 							t_prompt *prompt);
-void					init_right_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
+void					init_right_leaf(t_token_node **node, t_cmd **table,
 							t_prompt *prompt);
 t_cmd					*init_cmd(t_token_node *node, t_prompt *prompt);
 bool					mark_redirection_as_previous(t_token_node **token,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd_table.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 23:31:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:34:02 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_cmd_table(t_token_node *node, t_cmd **table, t_cmd **head,
 	if (node->left && node->left->token.type != PIPE)
 		init_left_leaf(&node, table, head, prompt);
 	if (node->right && node->right->token.type != PIPE)
-		init_right_leaf(&node, table, head, prompt);
+		init_right_leaf(&node, table, prompt);
 }
 
 void	init_left_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
@@ -55,7 +55,7 @@ void	init_left_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
 	(*node)->left = NULL;
 }
 
-void	init_right_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
+void	init_right_leaf(t_token_node **node, t_cmd **table,
 	t_prompt *prompt)
 {
 	t_cmd	*new_cmd;

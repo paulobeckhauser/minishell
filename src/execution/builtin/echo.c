@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 13:42:49 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:28:27 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,9 @@ int	is_echo_command(char **command)
 }
 
 
-static int check_dollar_sign(char *str)
-{
-	int i;
-	int check_dollar_sign;
-
-
-	check_dollar_sign = 0;
-	i = 0;
-	while(str[i])
-	{
-		if (str[i] == '$')
-		{
-			check_dollar_sign = 1;
-			break;
-		}
-		i++;
-	}
-	return (check_dollar_sign);
-}
-
-
-
 static char	*join_string_echo(int start, t_info *structure)
 {
 	char *concat_str = "";
-
-	int j;
-	char *str_env;
 	int count;
 
 	count = 0;

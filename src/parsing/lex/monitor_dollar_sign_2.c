@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_dollar_sign_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:28:23 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 14:52:48 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:31:25 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*replace_dollar_word(t_info *structure, char *str)
 {
-	char	*word_replacement;
 	char	*str_temp;
 	int		i;
 
