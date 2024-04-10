@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 17:55:31 by sfrankie         ###   ########.fr       */
+/*   Created: 2024/04/09 16:27:18 by sfrankie          #+#    #+#             */
+/*   Updated: 2024/04/09 16:27:39 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-bool	execution(t_info *structure)
+char	*find_next_token_to_print_in_err(t_prompt *prompt)
 {
-	handle_key_combos_execution();
-	get_number_commands(structure);
-	store_commands(structure);
-	store_path_commands(structure);
-	if (structure->table->type == BUILTIN_CMD
-		&& structure->number_commands == 1)
-		builtin_execution(structure);
+	t_type	type;
+
+	type = find_token(prompt);
+	if (type == PIPE)
+		return ("|");
+	else if (type == REDIRECTION)
+		return (verify_redirection(prompt));
 	else
-	{
-		pipes_implementation(structure);
-	}
-	return (true);
+		return (NULL);
 }

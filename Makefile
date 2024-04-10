@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/09 13:02:42 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/09 16:28:40 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,6 +132,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_single_quote.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/utils_3.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/utils_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/utils.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/if_no_cmd_tokens.c \

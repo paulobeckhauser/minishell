@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 19:56:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:05:11 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	get_word_length(t_prompt *prompt)
 			|| ft_strchr(prompt->symbols, prompt->msg[i]))
 			break ;
 		if (ft_strchr(prompt->quotes, prompt->msg[i]))
-			return (count_len_inside_quotes(prompt, i));
+		{
+			len += count_len_inside_quotes(prompt, i);
+			break ;
+		}
 		else
 		{
 			i++;
@@ -61,10 +64,12 @@ int	count_len_inside_quotes(t_prompt *prompt, int i)
 							prompt->msg[i + 1]))))
 				return (len);
 			++i;
-			break ;
 		}
-		i++;
-		len++;
+		else
+		{
+			i++;
+			len++;
+		}
 	}
 	return (len);
 }
@@ -72,36 +77,53 @@ int	count_len_inside_quotes(t_prompt *prompt, int i)
 char	*fetch_file_name(t_prompt *prompt)
 {
 	char	*file_name;
-	char	*start_ptr_save;
-	size_t	i;
+	char	curr_quote;
+	int		i;
+	int		y;
 
 	skip_whitespaces(prompt);
 	i = 0;
-	while (!ft_strchr(prompt->whitespace, prompt->msg[i])
+	while (prompt->msg[i] && !ft_strchr(prompt->whitespace, prompt->msg[i])
 		&& !ft_strchr(prompt->symbols, prompt->msg[i]))
+	{
+		if (ft_strchr(prompt->quotes, prompt->msg[i]))
+		{
+			i += count_len_inside_quotes(prompt, i);
+			break ;
+		}	
 		i++;
+	}
 	if (i == 0)
 		return (NULL);
 	file_name = malloc(i + 1);
 	if (!file_name)
 		return (NULL);
-	start_ptr_save = file_name;
-	while (!ft_strchr(prompt->whitespace, *prompt->msg)
-		&& !ft_strchr(prompt->symbols, *prompt->msg))
-		*file_name++ = *prompt->msg++;
-	*file_name = 0;
-	return (start_ptr_save);
+	file_name = process_file_name(prompt, file_name, i + 1);
+    return (file_name);
 }
 
-char	*find_next_token_to_print_in_err(t_prompt *prompt)
+char	*process_file_name(t_prompt *prompt, char *file_name, size_t i)
 {
-	t_type	type;
+    char	curr_quote;
+    size_t	y;
 
-	type = find_token(prompt);
-	if (type == PIPE)
-		return ("|");
-	else if (type == REDIRECTION)
-		return (verify_redirection(prompt));
-	else
-		return (NULL);
+    y = 0;
+    while (*prompt->msg && y < i)
+    {
+        if (ft_strchr(prompt->quotes, *prompt->msg))
+        {
+            curr_quote = *prompt->msg++;
+            while (*prompt->msg && *prompt->msg != curr_quote)
+                file_name[y++] = *prompt->msg++;
+            if (*prompt->msg && *prompt->msg == curr_quote)
+                prompt->msg++;
+        }
+        else if (ft_strchr(prompt->whitespace, *prompt->msg)
+            || ft_strchr(prompt->symbols, *prompt->msg))
+            break ;
+        else
+            file_name[y++] = *prompt->msg++;
+    }
+    file_name[y] = 0;
+    return (file_name);
 }

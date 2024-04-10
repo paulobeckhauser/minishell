@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 14:58:20 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:43:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,11 @@ void	pipes_implementation(t_info *structure)
                     ft_putstr_fd(structure->commands[i], 2);
                     ft_putstr_fd(": command not found\n", 2);
                     
+					structure->last_exit_status = 127;
+					
                     if(command_number == structure->number_commands)
                     {
+						structure->last_exit_status = 127;
                         exit(127);
                     }
                 }
