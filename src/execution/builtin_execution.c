@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 08:59:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 15:09:55 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:03:33 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	builtin_execution(t_info *structure)
 	if (is_env_command(structure->table->arr))
 		execute_env_command(structure);
 	if (is_exit_command(structure->table->arr))
-		execute_exit_command(structure->table->arr);
+		execute_exit_command(structure);
 }

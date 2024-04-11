@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 23:39:30 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:54:43 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,12 @@ void	print_syntax_token_error(t_prompt *prompt)
 // 		printf("Error: empty command table.\n");
 // 	while (table)
 // 	{
-// 		printf("%s\n", type_to_string(table->type));
+// 		// printf("%s\n", type_to_string(table->type));
+// 		int x = 0;
+// 		while (table->arr[x])
+// 		{
+// 			printf("%s\n", table->arr[x++]);
+// 		}
 // 		table = table->next;
 // 	}
 // }
