@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 22:35:02 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/10 23:08:11 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 bool	execution(t_info *structure)
 {
 	int test;
+	int i;
+	i =0;
 
 	test = 0;
 
@@ -28,9 +30,17 @@ bool	execution(t_info *structure)
 
 		if (test == 0)
 		{
-			ft_putstr_fd("bash: ", 2);
-			ft_putstr_fd(structure->table->arr[0], 2);
-			ft_putstr_fd(": No such file or directory\n", 2);
+			i = 0;
+			while (structure->table)
+			{
+				if (structure->table->type != BUILTIN_CMD)
+				{
+					ft_putstr_fd("bash: ", 2);
+					ft_putstr_fd(structure->table->arr[0], 2);
+					ft_putstr_fd(": No such file or directory\n", 2);
+				}
+				structure->table = structure->table->next;
+			}
 			structure->last_exit_status = EX_COMM_NOTFOUND;
 		}
 		else
