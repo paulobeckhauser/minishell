@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 15:06:29 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/11 22:06:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	pipes_implementation(t_info *structure)
         }
         if (structure->pid[i] == 0)
         {
-            if (structure->table->in.file_name)
+            if (structure->table->in.file_name && (!structure->table->arr[1] || (structure->table->arr[1]
+				&& ft_strcmp(structure->table->arr[0], "grep") == 0)))
             {
                 if (structure->table->in.heredoc)
                 {

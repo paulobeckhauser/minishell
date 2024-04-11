@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 14:05:11 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:35:13 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ int	get_word_length(t_prompt *prompt)
 			len += count_len_inside_quotes(prompt, i);
 			break ;
 		}
-		else
-		{
-			i++;
-			len++;
-		}
+		i++;
+		len++;
 	}
+	if (!len)
+		prompt->msg += 2;
 	return (len);
 }
 
@@ -90,7 +89,7 @@ char	*fetch_file_name(t_prompt *prompt)
 		{
 			i += count_len_inside_quotes(prompt, i);
 			break ;
-		}	
+		}
 		i++;
 	}
 	if (i == 0)
@@ -99,31 +98,31 @@ char	*fetch_file_name(t_prompt *prompt)
 	if (!file_name)
 		return (NULL);
 	file_name = process_file_name(prompt, file_name, i + 1);
-    return (file_name);
+	return (file_name);
 }
 
 char	*process_file_name(t_prompt *prompt, char *file_name, size_t i)
 {
-    char	curr_quote;
-    size_t	y;
+	char	curr_quote;
+	size_t	y;
 
-    y = 0;
-    while (*prompt->msg && y < i)
-    {
-        if (ft_strchr(prompt->quotes, *prompt->msg))
-        {
-            curr_quote = *prompt->msg++;
-            while (*prompt->msg && *prompt->msg != curr_quote)
-                file_name[y++] = *prompt->msg++;
-            if (*prompt->msg && *prompt->msg == curr_quote)
-                prompt->msg++;
-        }
-        else if (ft_strchr(prompt->whitespace, *prompt->msg)
-            || ft_strchr(prompt->symbols, *prompt->msg))
-            break ;
-        else
-            file_name[y++] = *prompt->msg++;
-    }
-    file_name[y] = 0;
-    return (file_name);
+	y = 0;
+	while (*prompt->msg && y < i)
+	{
+		if (ft_strchr(prompt->quotes, *prompt->msg))
+		{
+			curr_quote = *prompt->msg++;
+			while (*prompt->msg && *prompt->msg != curr_quote)
+				file_name[y++] = *prompt->msg++;
+			if (*prompt->msg && *prompt->msg == curr_quote)
+				prompt->msg++;
+		}
+		else if (ft_strchr(prompt->whitespace, *prompt->msg)
+			|| ft_strchr(prompt->symbols, *prompt->msg))
+			break ;
+		else
+			file_name[y++] = *prompt->msg++;
+	}
+	file_name[y] = 0;
+	return (file_name);
 }

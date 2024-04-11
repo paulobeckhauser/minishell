@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 23:39:30 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:09:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,17 @@ void	print_syntax_token_error(t_prompt *prompt)
 // 		printf("Error: empty token list\n");
 // 	while (node)
 // 	{
-// 		printf("%s\n", type_to_string(node->token.type));
+// 		printf("%s ", type_to_string(node->token.type));
+// 		int	i = 0;
+// 		if ((node->token.type == BUILTIN_CMD || node->token.type == SIMPLE_CMD)
+// 			&& node->token.t_value.double_ptr)
+// 		{
+// 			printf("(\"");
+// 			while (node->token.t_value.double_ptr[i])
+// 				printf("%s ", node->token.t_value.double_ptr[i++]);
+// 			printf("\")");
+// 		}
+// 		printf("\n");
 // 		node = node->next;
 // 	}
 // }
@@ -49,7 +59,11 @@ void	print_syntax_token_error(t_prompt *prompt)
 // 		printf("Error: empty command table.\n");
 // 	while (table)
 // 	{
-// 		printf("%s\n", type_to_string(table->type));
+// 		printf("%s ", type_to_string(table->type));
+// 		int	i = 0;
+// 		while (table->arr[i])
+// 			printf("%s ", table->arr[i++]);
+// 		printf("\n");
 // 		table = table->next;
 // 	}
 // }
