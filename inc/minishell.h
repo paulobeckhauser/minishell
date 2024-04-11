@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/11 23:32:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:41:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,8 @@ void					store_envp(char **envp, t_info *structure);
 bool					execution(t_info *structure);
 int						ft_strcmp(const char *s1, const char *s2);
 void					check_builtin(t_info *structure, char *str);
-void					get_path_env(t_info *structure);
+// void					get_path_env(t_info *structure);
+int	get_path_env(t_info *structure);
 void					get_number_commands(t_info *structure);
 void					store_path_commands(t_info *structure);
 void					store_commands(t_info *structure);
@@ -214,7 +215,8 @@ void					execute_unset_command(t_info *structure);
 int						is_env_command(char **command);
 void					execute_env_command(t_info *structure);
 int						is_exit_command(char **command);
-void					execute_exit_command(char **command);
+// void					execute_exit_command(char **command);
+void	execute_exit_command(t_info *structure);
 void					selectiton_sort_variables(char **envp);
 void					add_to_envp(t_info *structure, char *str_add,
 							int check_equal_sign);
@@ -267,8 +269,7 @@ void					open_write_close_tmp_file(t_token *token, t_in *in, char **heredoc_msg)
 void					init_prompt(t_prompt *prompt);
 void					init_primary_redirection_vars(t_token *token, t_prompt *prompt);
 void					init_in_redirection(t_token *token, char *file_name);
-void					init_heredoc_in_redirection(t_token *token, char *delimiter,
-	t_prompt *prompt);
+void					init_heredoc_in_redirection(t_token *token, char *delimiter);
 void					create_tmp_folder(void);
 void					init_truncate_out_redirection(t_token *token, char *file_name);
 void					init_append_out_redirection(t_token *token, char *file_name);
@@ -336,7 +337,7 @@ void					init_cmd_table(t_token_node *node, t_cmd **cmd,
 							t_cmd **start_ptr_save, t_prompt *prompt);
 void					init_left_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
 							t_prompt *prompt);
-void					init_right_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
+void					init_right_leaf(t_token_node **node, t_cmd **table,
 							t_prompt *prompt);
 t_cmd					*init_cmd(t_token_node *node, t_prompt *prompt);
 bool					mark_redirection_as_previous(t_token_node **token,

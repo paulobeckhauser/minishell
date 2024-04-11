@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/11 23:15:36 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:43:04 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	verify_dollar(t_info *structure, t_prompt *prompt)
 {
 	int						i;
-	int						y;
 	t_single_quote_checker	*head;
 
 	i = 0;
@@ -65,7 +64,7 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	char	*dollar_start;
 
 	move_pointer_after_dollar(&str);
-	if (!*str || (*str) && ft_strchr(prompt->whitespace, *str))
+	if (!*str || ((*str) && ft_strchr(prompt->whitespace, *str)))
 		return ("$");
 	if (*str == '?')
 		return ("?");

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/11 22:06:01 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:42:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void	pipes_implementation(t_info *structure)
                     
                 }
             }
+
+            
+
+            
             
             if (i != 0)
             {

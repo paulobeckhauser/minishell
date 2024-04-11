@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/11 23:35:13 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:43:12 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ int	count_len_inside_quotes(t_prompt *prompt, int i)
 char	*fetch_file_name(t_prompt *prompt)
 {
 	char	*file_name;
-	char	curr_quote;
-	int		i;
-	int		y;
+	char	*start_ptr_save;
+	size_t	i;
 
 	skip_whitespaces(prompt);
 	i = 0;
