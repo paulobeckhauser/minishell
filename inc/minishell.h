@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 22:34:28 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:22:47 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,8 @@ void					free_2d_int_array(int **array);
 
 // BUILTIN FUNCTIONS
 int						is_cd_command(char **command);
-void					execute_cd_command(char **command);
+// void					execute_cd_command(char **command);
+void	execute_cd_command(t_info *structure);
 int						is_pwd_command(char **command);
 void					execute_pwd_command(char **command);
 int						is_echo_command(char **command);
