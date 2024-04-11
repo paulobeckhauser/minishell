@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 23:08:11 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:17:33 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ bool	execution(t_info *structure)
 			store_path_commands(structure);
 			pipes_implementation(structure);
 		}
+
+		
 	}
+	
+	
 	return (true);
 }

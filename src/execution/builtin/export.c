@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 16:16:14 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:17:10 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,6 @@ static void	export_with_args(t_info *structure)
 {
 	int	i;
 	int	check_equal_sign;
-
-
-
-	// int m = 0;
-	// while (structure->table->arr[m])
-	// {
-	// 	printf("%s\n", structure->table->arr[m]);
-	// 	m++;
-	// }
-
-
 	int k;
 
 	k = 1;
@@ -64,28 +53,23 @@ static void	export_with_args(t_info *structure)
 	while(structure->table->arr[k])
 	{
 
-
+		
 		if (ft_strcmp(structure->table->arr[k], "=") == 0)
 		{
 			ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
 			structure->last_exit_status = 1;
-			
 		}
 
 		else
 		{
-			
 			i = 0;
-
 			if (((structure->table->arr[k][i] == '-') && (structure->table->arr[k][i + 1] != '-')) || (structure->table->arr[k][i + 1] == '-') ||  
 						(structure->table->arr[k][i] >= '0' &&  structure->table->arr[k][i] <= '9') )
 			{
 				ft_putstr_fd("bash: export: `", 2);
 				ft_putstr_fd(structure->table->arr[k], 2);
 				ft_putstr_fd("': not a valid identifier\n", 2);
-
-				structure->last_exit_status = EXIT_FAILURE;
-				
+				structure->last_exit_status = EXIT_FAILURE;	
 			}
 			
 			
@@ -97,19 +81,19 @@ static void	export_with_args(t_info *structure)
 				{
 					if (structure->table->arr[k][i - 1] && structure->table->arr[k][i - 1] == '-')
 					{
-						ft_putstr_fd("export: not valid in this context: ", 2);
-						int k;
+						ft_putstr_fd("bash: export: `", 2);
+						// ft_putstr_fd("export: not valid in this context: ", 2);
+						int m;
 
-						k = 0;
+						m = 0;
 
-						while(k < i)
+						while(structure->table->arr[k][m])
 						{
-							ft_putchar_fd(structure->table->arr[k][k], 2);
-							k++;
+							ft_putchar_fd(structure->table->arr[k][m], 2);
+							m++;
 						}
-						ft_putchar_fd('\n', 2);
-						
-						structure->last_exit_status = EXIT_FAILURE;
+						ft_putstr_fd("': not a valid identifier\n", 2);						
+						structure->last_exit_status = 1;
 						break ;
 						
 					}
@@ -137,79 +121,7 @@ static void	export_with_args(t_info *structure)
 
 		k++;
 
-	}
-
-
-	
-
-
-	// if (ft_strcmp(structure->table->arr[1], "=") == 0)
-	// {
-	// 	ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
-	// 	structure->last_exit_status = 1;
-		
-	// }
-
-	// else
-	// {
-		
-	// 	i = 0;
-
-	// 	if (((structure->table->arr[1][i] == '-') && (structure->table->arr[1][i + 1] != '-')) || (structure->table->arr[1][i + 1] == '-') ||  
-	// 				(structure->table->arr[1][i] >= '0' &&  structure->table->arr[1][i] <= '9') )
-	// 	{
-	// 		ft_putstr_fd("bash: export: `", 2);
-	// 		ft_putstr_fd(structure->table->arr[1], 2);
-	// 		ft_putstr_fd("': not a valid identifier\n", 2);
-
-	// 		structure->last_exit_status = EXIT_FAILURE;
-			
-	// 	}
-		
-		
-	// 	check_equal_sign = 0;
-	// 	i = 0;
-	// 	while (structure->table->arr[1][i])
-	// 	{
-	// 		if (structure->table->arr[1][i] == '=')
-	// 		{
-	// 			if (structure->table->arr[1][i - 1] && structure->table->arr[1][i - 1] == '-')
-	// 			{
-	// 				ft_putstr_fd("export: not valid in this context: ", 2);
-	// 				int k;
-
-	// 				k = 0;
-
-	// 				while(k < i)
-	// 				{
-	// 					ft_putchar_fd(structure->table->arr[1][k], 2);
-	// 					k++;
-	// 				}
-	// 				ft_putchar_fd('\n', 2);
-					
-	// 				structure->last_exit_status = EXIT_FAILURE;
-	// 				break ;
-					
-	// 			}
-	// 			check_equal_sign++;
-	// 			break ;
-	// 		}
-	// 		i++;
-	// 	}
-	// 	if (check_equal_sign == 1)
-	// 	{
-			
-	// 		replace_value_envp(structure, check_equal_sign);
-	// 	}
-	// 	else
-	// 	{
-	// 		if (check_env_variable(structure))
-	// 			return ;
-	// 		else
-	// 			add_to_envp(structure, structure->table->arr[1], check_equal_sign);
-	// 	}
-	// }
-	
+	}	
 }
 
 void	execute_export_command(t_info *structure)

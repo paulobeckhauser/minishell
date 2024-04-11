@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 22:35:15 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:23:47 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	pipes_implementation(t_info *structure)
             sizeof(pid_t));
     i = 0;
     dev_null_fd = open("/dev/null", O_RDONLY);
+    // if (dev_null_fd == -1)
+    // {
+        
+    // }
+    
 
     command_number = 0;
     while (structure->table)
@@ -80,6 +85,7 @@ void	pipes_implementation(t_info *structure)
             else if (structure->table->next != NULL)
             {
                 dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+                close(structure->fds_pipes[i][1]);
             }
 
             int j = 0;
@@ -120,11 +126,25 @@ void	pipes_implementation(t_info *structure)
                 close(structure->fds_pipes[i - 1][0]);
             if (structure->table->next != NULL)
                 close(structure->fds_pipes[i][1]);
+
+            // int j = 0;
+            // while (j < structure->number_commands - 1)
+            // {
+            //     close(structure->fds_pipes[j][0]);
+            //     close(structure->fds_pipes[j][1]);
+            //     j++;
+            // }
+
+            
+
         }
         i++;
         structure->table = structure->table->next;
     }
+
+    
     close(dev_null_fd);
+        
     int status;
     
     w_id = wait_child_processes(structure, &status);
@@ -134,5 +154,8 @@ void	pipes_implementation(t_info *structure)
     
     else if (status == 32512)
         structure->last_exit_status = EX_COMM_NOTFOUND;
+
+    // if (structure->table->in.fd)
+    //     close(structure->table->in.fd);
 
 }
