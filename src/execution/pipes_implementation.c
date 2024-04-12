@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 14:34:27 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:47:49 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void	pipes_implementation(t_info *structure)
         
     // }
     
+    char **current;
+    bool    redirection = false;
+
+    current = structure->table->arr;
+    if (structure->table->in.file_name)
+        redirection = true;
 
     command_number = 0;
     while (structure->table)
@@ -139,15 +145,6 @@ void	pipes_implementation(t_info *structure)
                 close(structure->fds_pipes[i - 1][0]);
             if (structure->table->next != NULL)
                 close(structure->fds_pipes[i][1]);
-
-            // int j = 0;
-            // while (j < structure->number_commands - 1)
-            // {
-            //     close(structure->fds_pipes[j][0]);
-            //     close(structure->fds_pipes[j][1]);
-            //     j++;
-            // }
-
             
 
         }
@@ -162,7 +159,7 @@ void	pipes_implementation(t_info *structure)
     
     w_id = wait_child_processes(structure, &status);
 
-    // printf("The status is: %d\n", status);
+    printf("The status is: %d\n", status);
 
     if (status == 256)
         structure->last_exit_status = 1;
@@ -172,11 +169,15 @@ void	pipes_implementation(t_info *structure)
 
     else if (status == 512)
     {
- 
-        structure->last_exit_status = 2;
+        if (ft_strcmp(current[0], "grep") == 0 && redirection)
+            structure->last_exit_status = 1;
+        else
+            structure->last_exit_status = 2;
     }
     
     else if (status == 0)
         structure->last_exit_status = 0;
+
+    printf("%s\n", current[0]);
 
 }
