@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 15:29:05 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 00:46:06 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 	create_tmp_folder();
 	in.heredoc = true;
 	in.file_name = "tmp/heredoc_tmp";
+	in.fd = 0;
 	pid = fork();
 	if (pid == 0)
 		run_heredoc(&in, token, delimiter);
+	token->type = REDIRECTION;
+	token->in = in;
 	waitpid(pid, NULL, 0);
 	g_signal = 0;
 }

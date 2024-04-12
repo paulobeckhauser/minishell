@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:12:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 19:24:32 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/12 00:40:31 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 		{
 			ft_printf("bash: warning: here-document delimited by ");
 			ft_printf("end-of-file (wanted `stop')\n");
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 	}
 	free(*heredoc_newline);
@@ -91,8 +91,6 @@ void	open_write_close_tmp_file(t_token *token, t_in *in, char **heredoc_msg)
 			return ;
 		}
 	}
-	token->in = *in;
-	token->type = REDIRECTION;
 	if (close(in->fd) == -1)
 	{
 		perror("close");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_words_arr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:15:05 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 22:35:28 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:42:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 void	init_words_arr(t_prompt *prompt)
 {
-	int		i;
-	int		j;
-	int		word_len;
+	t_init_words_arr_vars	vars;
 
-	i = 0;
-	prompt->arr = malloc((prompt->word_count + 1) * sizeof(char *));
+	vars.i = 0;
+	prompt->arr = ft_calloc(prompt->word_count + 1, sizeof(char *));
 	if (!prompt->arr)
 		return ;
 	init_single_quote_checker_list(prompt);
@@ -31,18 +29,15 @@ void	init_words_arr(t_prompt *prompt)
 			skip_whitespaces(prompt);
 		else
 		{
-			j = 0;
-			word_len = get_word_length(prompt);
-			if (word_len == 0)
-			{
-				prompt->msg += 2;
+			vars.j = 0;
+			vars.word_len = get_word_length(prompt);
+			if (vars.word_len == 0)
 				continue ;
-			}
-			process_word(prompt, word_len, i, &j);
-			i++;
+			process_word(prompt, vars.word_len, vars.i, &vars.j);
+			vars.i++;
 		}
 	}
-	prompt->arr[i] = NULL;
+	prompt->arr[vars.i] = NULL;
 }
 
 void	process_word(t_prompt *prompt, int word_len, int i, int *j)
