@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 00:46:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/12 11:42:53 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ void	init_in_redirection(t_token *token, char *file_name)
 
 	in.heredoc = false;
 	in.fd = open(file_name, O_RDONLY);
-	if (in.fd == -1)
-		ft_printf("bash: %s: No such file or directory\n", file_name);
-	else
+	// if (in.fd == -1)
+	// 	ft_printf("bash: %s: No such file or directory\n", file_name);
+	// else
+	// 	in.file_name = file_name;
+
+	if (in.fd != -1)
 		in.file_name = file_name;
 	token->in = in;
 	token->type = REDIRECTION;
