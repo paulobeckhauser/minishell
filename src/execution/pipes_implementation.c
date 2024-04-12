@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 11:23:44 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:54:09 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	pipes_implementation(t_info *structure)
     else if (status == 32512)
         structure->last_exit_status = EX_COMM_NOTFOUND;
 
-    // if (structure->table->in.fd)
-    //     close(structure->table->in.fd);
+    else if (status == 512)
+        structure->last_exit_status = EX_NUM_REQ;
 
 }
