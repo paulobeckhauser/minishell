@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 13:01:28 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 23:55:09 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,14 @@ typedef struct s_in
 {
 	bool					heredoc;
 	int						fd;
-	char					*file_name;
+	char					**file_name;
 }							t_in;
 
 typedef struct s_out
 {
+	bool					trunc;
 	int						fd;
-	char					*file_name;
+	char					**file_name;
 }							t_out;
 
 typedef struct s_token
@@ -353,12 +354,13 @@ bool					join_cmd_to_pipe(t_token_node **token,
 							t_token_node **previous_token);
 void					delete_repeating_redirection_tokens(t_token_node **tokens);
 void					delete_and_close_not_used_redirections(t_token_node **tokens,
-							t_token_node **head);
+							t_token_node **head, t_token_node **previous_token);
 void					mark_last_in_redirection(t_token_node *tokens);
 void					mark_last_out_redirection(t_token_node *tokens);
 void					close_token_fd(t_token_node *tokens);
 bool					if_in_left_redirection(t_token_node **node);
 bool					if_in_right_redirection(t_token_node **node);
+void	join_redirection_file_names(t_token_node **tokens);
 
 // parser.c
 bool					parser(t_info *structure, t_prompt *prompt);

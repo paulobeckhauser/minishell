@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redirection.c                                 :+:      :+:    :+:   */
+/*   init_redirection_new.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/19 18:11:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 17:43:30 by sfrankie         ###   ########.fr       */
+/*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
+/*   Updated: 2024/04/12 21:50:10 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,11 @@ void	init_primary_redirection_vars(t_token *token, t_prompt *prompt)
 
 void	init_in_redirection(t_token *token, char *file_name)
 {
-	t_in	in;
-
-	in.heredoc = false;
-	in.fd = open(file_name, O_RDONLY);
-	// if (in.fd == -1)
-	// 	ft_printf("bash: %s: No such file or directory\n", file_name);
-	// else
-	// 	in.file_name = file_name;
-
-	if (in.fd != -1)
-		in.file_name = file_name;
-	token->in = in;
+	token->in.heredoc = false;
+	token->in.file_name = ft_calloc(2, sizeof(char *));
+	token->in.file_name[0] = malloc(ft_strlen(file_name) + 1);
+	ft_strlcpy(token->in.file_name[0], file_name, ft_strlen(file_name) + 1);
+	token->in.file_name[1] = NULL;
 	token->type = REDIRECTION;
 }
 
@@ -48,7 +41,8 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 	g_signal = 1;
 	create_tmp_folder();
 	in.heredoc = true;
-	in.file_name = "tmp/heredoc_tmp";
+	in.file_name[0] = "tmp/heredoc_tmp";
+	in.file_name[1] = NULL;
 	in.fd = 0;
 	pid = fork();
 	if (pid == 0)
@@ -63,14 +57,9 @@ void	init_truncate_out_redirection(t_token *token, char *file_name)
 {
 	t_out	out;
 
-	out.fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	out.file_name = file_name;
-	if (out.fd == -1)
-	{
-		ft_printf("bash: error creating file `%s'\n", out.file_name);
-		token->type = END;
-		return ;
-	}
+	out.file_name[0] = file_name;
+	out.file_name[1] = NULL;
+	out.trunc = true;
 	token->out = out;
 	token->type = REDIRECTION;
 }
@@ -79,14 +68,9 @@ void	init_append_out_redirection(t_token *token, char *file_name)
 {
 	t_out	out;
 
-	out.fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	out.file_name = file_name;
-	if (out.fd == -1)
-	{
-		ft_printf("bash: error creating file `%s'\n", out.file_name);
-		token->type = END;
-		return ;
-	}
+	out.file_name[0] = file_name;
+	out.file_name[1] = NULL;
+	out.trunc = false;
 	token->out = out;
 	token->type = REDIRECTION;
 }

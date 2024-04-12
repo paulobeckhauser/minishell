@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 14:47:49 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:15:02 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ void	pipes_implementation(t_info *structure)
     
     w_id = wait_child_processes(structure, &status);
 
-    printf("The status is: %d\n", status);
 
     if (status == 256)
         structure->last_exit_status = 1;
@@ -169,7 +168,7 @@ void	pipes_implementation(t_info *structure)
 
     else if (status == 512)
     {
-        if (ft_strcmp(current[0], "grep") == 0 && redirection)
+        if (ft_strcmp(current[0], "grep") == 0 && !current[2] && redirection)
             structure->last_exit_status = 1;
         else
             structure->last_exit_status = 2;
@@ -178,6 +177,5 @@ void	pipes_implementation(t_info *structure)
     else if (status == 0)
         structure->last_exit_status = 0;
 
-    printf("%s\n", current[0]);
 
 }

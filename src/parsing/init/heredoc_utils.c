@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:12:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 00:40:31 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:29:19 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 
 void	open_write_close_tmp_file(t_token *token, t_in *in, char **heredoc_msg)
 {
-	in->fd = open(in->file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
+	in->fd = open(in->file_name[0], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (in->fd == -1)
 	{
 		perror("open");

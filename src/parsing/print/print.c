@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 13:01:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 23:14:40 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,18 @@ void	print_redirection_file(t_cmd *table)
 		printf("Error: empty command table.\n");
 	while (table)
 	{
+		printf("%s\n", type_to_string(table->type));
 		if (table->in.file_name || table->out.file_name)
 		{
 			if (table->in.file_name)
-				printf("R: %s\n", table->in.file_name);
-			if (table->out.file_name)
-				printf("R: %s\n", table->out.file_name);	
+			{
+				int i = 0;
+				while (table->in.file_name[i])
+					printf("R: %s ", table->in.file_name[i++]);
+				printf("\n");
+			}
+			// if (table->out.file_name)
+			// 	printf("R: %s\n", table->out.file_name);	
 		}
 		else
 			printf("R: no_redirection\n");
