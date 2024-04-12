@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/11 18:22:47 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 11:24:00 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,20 @@
 
 extern int	g_signal;
 
+typedef struct s_init_words_arr_vars
+{
+	int		i;
+	int		j;
+	int		word_len;
+	char	curr_quote;
+}				t_init_words_arr_vars;
+
 typedef struct s_single_quote_checker
 {
 	int								index;
 	bool							single_quoted;
 	struct s_single_quote_checker	*next;
 }							t_single_quote_checker;
-
 
 // Store variables to handle input (SZYMON)
 typedef struct s_prompt
@@ -143,6 +150,16 @@ typedef struct s_token_node
 	struct s_token_node		*right;
 
 }							t_token_node;
+
+typedef struct s_join_word_tokens_vars
+{
+	char			**command;
+	t_token_node	*head;
+	t_token_node	*curr_save;
+	t_token_node	*arr_save;
+	bool			first_cmd;
+	int				command_word_count;
+}					t_join_word_tokens_vars;
 
 typedef struct s_dollar_replace_info
 {
@@ -276,6 +293,13 @@ t_token					init_redirection_token(t_prompt *prompt);
 t_token					init_cmd_token(t_info *structure, t_prompt *prompt);
 void					init_words_arr(t_prompt *prompt);
 void					process_word(t_prompt *prompt, int word_len, int i, int *j);
+void					join_word_tokens(t_token_node **tokens);
+void					init_word_tokens_vars(t_join_word_tokens_vars *vars, t_token_node **tokens);
+void					join_words_to_command(char ***arr, char ***join);
+void					clean_joined_word_tokens(t_token_node **tokens);
+void					clean_word_token(t_token_node **tokens, t_token_node **tmp);
+int						count_words_in_token(char **arr);
+void					run_word_token_join(t_join_word_tokens_vars *vars);
 void					replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word,
 							char *replacement);
 void					replace_word(t_dollar_replace_info *info, int y);
@@ -347,7 +371,7 @@ void					print_syntax_token_error(t_prompt *prompt);
 // void 				print_tree(t_token_node *node, int depth, char *left_right);
 // void					print_table(t_cmd *table);
 // void					print_redirection_file(t_cmd *table);
-// const char			*type_to_string(t_type type);
+// const char				*type_to_string(t_type type);
 
 // SIGNALS (signals.c)
 void					handle_signal(int signal);

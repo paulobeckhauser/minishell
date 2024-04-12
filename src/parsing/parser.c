@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 22:37:11 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 00:42:58 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_token_node	*lex(t_info *structure, t_prompt *prompt)
 	tokens = init_token_list(structure, prompt);
 	if (!tokens)
 		return (NULL);
+	join_word_tokens(&tokens);
+	delete_repeating_redirection_tokens(&tokens);
 	if (tokens && tokens->token.type == PIPE)
 	{
 		ft_printf("bash: syntax error near unexpected token `|'\n");
@@ -48,7 +50,6 @@ t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 	t_cmd			*table;
 	t_cmd			*head;
 
-	delete_repeating_redirection_tokens(&tokens);
 	tree = init_binary_tree(&tokens);
 	head = NULL;
 	init_cmd_table(tree, &table, &head, prompt);

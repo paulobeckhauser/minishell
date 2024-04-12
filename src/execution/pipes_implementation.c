@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/11 14:23:47 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 11:23:44 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	pipes_implementation(t_info *structure)
         }
         if (structure->pid[i] == 0)
         {
-            if (structure->table->in.file_name)
+            if (structure->table->in.file_name && (!structure->table->arr[1] || (structure->table->arr[1]
+				&& ft_strcmp(structure->table->arr[0], "grep") == 0)))
             {
                 if (structure->table->in.heredoc)
                 {
