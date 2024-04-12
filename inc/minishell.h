@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 11:24:00 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:01:28 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,9 +369,9 @@ t_cmd					*parse(t_token_node *tokens, t_prompt *prompt);
 void					print_syntax_token_error(t_prompt *prompt);
 // void					print_token_list(t_token_node *token);
 // void 				print_tree(t_token_node *node, int depth, char *left_right);
-// void					print_table(t_cmd *table);
-// void					print_redirection_file(t_cmd *table);
-// const char				*type_to_string(t_type type);
+void					print_table(t_cmd *table);
+void					print_redirection_file(t_cmd *table);
+const char				*type_to_string(t_type type);
 
 // SIGNALS (signals.c)
 void					handle_signal(int signal);

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 12:54:09 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:53:15 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,22 @@ void	pipes_implementation(t_info *structure)
                     }
                     
                 }
-                if (structure->table->in.fd != 0)
+                if (structure->table->in.fd != 0 && structure->table->in.fd != -1)
                 {
                     dup2(structure->table->in.fd, STDIN_FILENO);
                     close(structure->table->in.fd);
                 }
+
+                else if (structure->table->in.fd == -1)
+                {
+                    int len = 0;
+                    char **temp_arr;
+                    
+                    len = count_words_in_token(structure->table->arr);
+                    temp_arr = &structure->table->in.file_name;
+                    join_words_to_command(&structure->table->arr, &temp_arr);
+                }
+                
                 else
                 {
                     close(structure->table->in.fd);
@@ -105,6 +116,7 @@ void	pipes_implementation(t_info *structure)
             }
             else
             {
+                structure->last_exit_status = EX_SUCESS;
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
                 {                   
@@ -150,13 +162,21 @@ void	pipes_implementation(t_info *structure)
     
     w_id = wait_child_processes(structure, &status);
 
+    printf("The status is: %d\n", status);
+
     if (status == 256)
-        structure->last_exit_status = EX_FAILURE;
+        structure->last_exit_status = 1;
     
     else if (status == 32512)
-        structure->last_exit_status = EX_COMM_NOTFOUND;
+        structure->last_exit_status = 127;
 
     else if (status == 512)
-        structure->last_exit_status = EX_NUM_REQ;
+    {
+ 
+        structure->last_exit_status = 2;
+    }
+    
+    else if (status == 0)
+        structure->last_exit_status = 0;
 
 }
