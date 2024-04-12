@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 23:55:09 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:26:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,10 +264,10 @@ void					free_cmd_table(t_info *structure);
 	
 // INIT (heredoc_utils.c, init_prompt.c, init_redirection.c)
 void					create_tmp_folder(void);
-void					run_heredoc(t_in *in, t_token *token, char *delimiter);
+void					run_heredoc(t_token *token, char *delimiter);
 void					wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 	char *delimiter);
-void					open_write_close_tmp_file(t_token *token, t_in *in, char **heredoc_msg);
+void					open_write_close_tmp_file(t_token *token, char **heredoc_msg);
 void					init_prompt(t_prompt *prompt);
 void					init_primary_redirection_vars(t_token *token, t_prompt *prompt);
 void					init_in_redirection(t_token *token, char *file_name);

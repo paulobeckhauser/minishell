@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/12 19:33:52 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/13 01:10:32 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,6 +130,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/init_token_type_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/init_token_type.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/init_words_arr.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/join_redirection_file_names.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/join_word_tokens.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign.c \

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 21:50:10 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:27:54 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,36 @@ void	init_in_redirection(t_token *token, char *file_name)
 
 void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 {
-	t_in	in;
 	pid_t	pid;
 
 	g_signal = 1;
 	create_tmp_folder();
-	in.heredoc = true;
-	in.file_name[0] = "tmp/heredoc_tmp";
-	in.file_name[1] = NULL;
-	in.fd = 0;
+	token->in.heredoc = true;
+	token->in.file_name[0] = "tmp/heredoc_tmp";
+	token->in.file_name[1] = NULL;
+	token->in.fd = 0;
 	pid = fork();
 	if (pid == 0)
-		run_heredoc(&in, token, delimiter);
-	token->type = REDIRECTION;
-	token->in = in;
+		run_heredoc(token, delimiter);
+	token->type = REDIRECTION;;
 	waitpid(pid, NULL, 0);
 	g_signal = 0;
 }
 
 void	init_truncate_out_redirection(t_token *token, char *file_name)
 {
-	t_out	out;
-
-	out.file_name[0] = file_name;
-	out.file_name[1] = NULL;
-	out.trunc = true;
-	token->out = out;
+	token->out.file_name[0] = file_name;
+	token->out.file_name[1] = NULL;
+	token->out.fd = 0;
+	token->out.trunc = true;
 	token->type = REDIRECTION;
 }
 
 void	init_append_out_redirection(t_token *token, char *file_name)
 {
-	t_out	out;
-
-	out.file_name[0] = file_name;
-	out.file_name[1] = NULL;
-	out.trunc = false;
-	token->out = out;
+	token->out.file_name[0] = file_name;
+	token->out.file_name[1] = NULL;
+	token->out.fd = 0;
+	token->out.trunc = false;
 	token->type = REDIRECTION;
 }

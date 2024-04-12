@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:12:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 21:29:19 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:26:53 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	create_tmp_folder(void)
 	free(create_tmp_folder);
 }
 
-void	run_heredoc(t_in *in, t_token *token, char *delimiter)
+void	run_heredoc(t_token *token, char *delimiter)
 {
 	char	*heredoc_newline;
 	char	*heredoc_msg;
 
 	handle_heredoc_combos();
 	wait_for_heredoc_delimiter(&heredoc_newline, &heredoc_msg, delimiter);
-	open_write_close_tmp_file(token, in, &heredoc_msg);
+	open_write_close_tmp_file(token, &heredoc_msg);
 	exit(0);
 }
 
@@ -75,23 +75,23 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 	free(*heredoc_newline);
 }
 
-void	open_write_close_tmp_file(t_token *token, t_in *in, char **heredoc_msg)
+void	open_write_close_tmp_file(t_token *token, char **heredoc_msg)
 {
-	in->fd = open(in->file_name[0], O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (in->fd == -1)
+	token->in.fd = open(token->in.file_name[0], O_RDWR | O_CREAT | O_TRUNC, 0777);
+	if (token->in.fd == -1)
 	{
 		perror("open");
 		return ;
 	}
 	if (*heredoc_msg)
 	{
-		if (write(in->fd, *heredoc_msg, ft_strlen(*heredoc_msg)) == -1)
+		if (write(token->in.fd, *heredoc_msg, ft_strlen(*heredoc_msg)) == -1)
 		{
 			perror("write");
 			return ;
 		}
 	}
-	if (close(in->fd) == -1)
+	if (close(token->in.fd) == -1)
 	{
 		perror("close");
 		return ;

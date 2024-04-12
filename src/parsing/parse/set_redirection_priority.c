@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:56 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 23:54:34 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:17:42 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,17 @@ void	delete_and_close_not_used_redirections(t_token_node **tokens,
 	t_token_node **head, t_token_node **previous_token)
 {
 	t_token_node	*tmp;
-	t_token_node	*previous_token;
 
 	tmp = NULL;
-	if (!previous_token)
-		previous_token = NULL;
-	while (*tokens && (*tokens)->token.type != PIPE)
+	while (*tokens)
 	{
 		if ((*tokens)->token.type == REDIRECTION
 			&& !(*tokens)->token.last_redirection)
 		{
 			tmp = (*tokens);
 			close_token_fd(*tokens);
-			if (previous_token)
-				previous_token->next = (*tokens)->next;
+			if (*previous_token)
+				(*previous_token)->next = (*tokens)->next;
 			*tokens = (*tokens)->next;
 			free(tmp);
 		}
@@ -95,7 +92,9 @@ void	delete_and_close_not_used_redirections(t_token_node **tokens,
 		{
 			if (!*head)
 				*head = *tokens;
-			previous_token = *tokens;
+			*previous_token = *tokens;
+			if ((*tokens)->token.type == PIPE)
+				break ;
 			*tokens = (*tokens)->next;
 		}
 	}
