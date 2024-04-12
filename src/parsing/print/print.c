@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 00:52:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:01:21 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,50 +53,50 @@ void	print_syntax_token_error(t_prompt *prompt)
 // 	print_tree(node->right, depth + 1, "(RIGHT)");
 // }
 
-// void	print_table(t_cmd *table)
-// {
-// 	if (!table)
-// 		printf("Error: empty command table.\n");
-// 	while (table)
-// 	{
-// 		printf("%s ", type_to_string(table->type));
-// 		int	i = 0;
-// 		while (table->arr[i])
-// 			printf("%s ", table->arr[i++]);
-// 		printf("\n");
-// 		table = table->next;
-// 	}
-// }
+void	print_table(t_cmd *table)
+{
+	if (!table)
+		printf("Error: empty command table.\n");
+	while (table)
+	{
+		printf("%s ", type_to_string(table->type));
+		int	i = 0;
+		while (table->arr[i])
+			printf("%s ", table->arr[i++]);
+		printf("\n");
+		table = table->next;
+	}
+}
 
-// void	print_redirection_file(t_cmd *table)
-// {
-// 	if (!table)
-// 		printf("Error: empty command table.\n");
-// 	while (table)
-// 	{
-// 		if (table->in.file_name || table->out.file_name)
-// 		{
-// 			if (table->in.file_name)
-// 				printf("R: %s\n", table->in.file_name);
-// 			if (table->out.file_name)
-// 				printf("R: %s\n", table->out.file_name);	
-// 		}
-// 		else
-// 			printf("R: no_redirection\n");
-// 		table = table->next;
-// 	}
-// }
+void	print_redirection_file(t_cmd *table)
+{
+	if (!table)
+		printf("Error: empty command table.\n");
+	while (table)
+	{
+		if (table->in.file_name || table->out.file_name)
+		{
+			if (table->in.file_name)
+				printf("R: %s\n", table->in.file_name);
+			if (table->out.file_name)
+				printf("R: %s\n", table->out.file_name);	
+		}
+		else
+			printf("R: no_redirection\n");
+		table = table->next;
+	}
+}
 
-// const char	*type_to_string(t_type type)
-// {
-//     switch (type) {
-//         case END: return "END";
-// 		case ERROR: return "ERROR";
-//         case PIPE: return "PIPE";
-//         case REDIRECTION: return "REDIRECTION";
-//         case WORD: return "WORD";
-//         case SIMPLE_CMD: return "SIMPLE_CMD";
-//         case BUILTIN_CMD: return "BUILTIN_CMD";
-//         default: return "UNKNOWN";
-//     }
-// }
+const char	*type_to_string(t_type type)
+{
+    switch (type) {
+        case END: return "END";
+		case ERROR: return "ERROR";
+        case PIPE: return "PIPE";
+        case REDIRECTION: return "REDIRECTION";
+        case WORD: return "WORD";
+        case SIMPLE_CMD: return "SIMPLE_CMD";
+        case BUILTIN_CMD: return "BUILTIN_CMD";
+        default: return "UNKNOWN";
+    }
+}

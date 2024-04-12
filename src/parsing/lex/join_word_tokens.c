@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_word_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/11 23:31:02 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:42:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void	join_words_to_command(char ***arr, char ***join)
 		join_temp++;
 		arr_temp++;
 	}
-	free_2d_array(*join);
+	// if (*join)
+	// 	free_2d_array(*join);
 	*join = NULL;
 	*arr_temp = NULL;
 	*arr = start_ptr_save;
