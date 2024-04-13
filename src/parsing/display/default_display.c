@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/13 13:00:43 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/13 13:19:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	default_display_with_history(t_prompt *prompt)
 	size_t	size;
 	char	**create_tmp_folder;
 	pid_t	pid;
+	
 
+	char **temp_arr;
+	int i;
 
 	// printf("here 1\n");
 	size = PATH_MAX;
@@ -28,11 +31,36 @@ void	default_display_with_history(t_prompt *prompt)
 	{
 		prompt->buf = getcwd(NULL, 0);
 
+		
 		prompt->folder =  getcwd(NULL, size);
+		// printf("The value of path is: %s\n", prompt->folder);
+		
 	}
 	else
 	{
+		// printf("The previous folder was: %s\n", prompt->folder);
+
+		// temp_arr = ft_split(prompt->folder, '\\');
+
+		// i = 0;
+		// while (temp_arr[i])
+		// {
+			
+		// 	i++;
+		// }
+		
+		// printf("This is the last element of prev folder: %s\n", temp_arr[i]);
+		
+		
 		prompt->folder = getenv("HOME");
+		
+		
+
+		
+
+		
+
+
 		prompt->folder_deleted = 1;
 	}
 

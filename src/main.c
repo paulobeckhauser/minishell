@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 21:49:31 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:35:51 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	main(int argc, char **argv, char **envp)
 
 	char *test;
 
+	char **test_arr;
+	int i;
+
 	if (argc == 1)
 	{
 		(void)argv;
@@ -29,14 +32,60 @@ int	main(int argc, char **argv, char **envp)
 		init_vars(&structure);
 		store_envp(envp, &structure);
 
+		prompt.folder = NULL;
 
 
+		char *str;
 		
 		while (1)
 		{
 			
-			// test = getcwd(cwd, sizeof(cwd));
-			// // printf("%s\n", test);
+			test = getcwd(cwd, sizeof(cwd));
+			// printf("\nThe value of current path is: %s\n\n", test);
+			// printf("\nThe value of previous path is: %s\n", prompt.folder);
+
+			if (prompt.folder != NULL)
+			{
+				
+				test_arr = ft_split(prompt.folder, '/');
+				// printf("here\n");
+
+				i = 0;
+
+				while (test_arr[i])
+				{
+					i++;
+				}
+				// printf("The last path is: %s\n", test_arr[i - 1]);
+				free_2d_array(test_arr);
+			}
+
+			if (test == NULL)
+			{
+				
+				str = ft_strdup(prompt.folder);
+
+				// printf("HAAAA HERE IS THE NEW STRING %s\n", str);
+
+
+				int m = 0;
+
+				while (str[m])
+				{
+					ft_putchar_fd(str[m], 1);
+					m++;
+				}
+				ft_putchar_fd('\n', 1);
+
+				
+
+			}
+
+			
+
+			
+			
+			
 
 			// if (getcwd(cwd, sizeof(cwd)) == NULL) {
 			// 	// The current directory doesn't exist. Print an error message and skip this command.
