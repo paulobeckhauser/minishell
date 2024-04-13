@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 21:30:08 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/13 15:17:17 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **envp)
 				continue;
 			else
 				execution(&structure);
+
 		}
 		free_2d_array(structure.envp);
 		free_2d_array(structure.envp_export);

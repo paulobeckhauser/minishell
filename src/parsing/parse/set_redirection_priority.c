@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:56 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/13 00:17:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/13 15:18:20 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,6 @@ void	mark_last_out_redirection(t_token_node *tokens)
 		current_last->token.last_redirection = true;
 }
 
-void	close_token_fd(t_token_node *tokens)
-{
-	if (tokens->token.in.file_name && !tokens->token.in.heredoc)
-		close(tokens->token.in.fd);
-	else if (tokens->token.out.file_name)
-		close(tokens->token.out.fd);
-}
-
 void	delete_and_close_not_used_redirections(t_token_node **tokens,
 	t_token_node **head, t_token_node **previous_token)
 {
@@ -82,7 +74,6 @@ void	delete_and_close_not_used_redirections(t_token_node **tokens,
 			&& !(*tokens)->token.last_redirection)
 		{
 			tmp = (*tokens);
-			close_token_fd(*tokens);
 			if (*previous_token)
 				(*previous_token)->next = (*tokens)->next;
 			*tokens = (*tokens)->next;
