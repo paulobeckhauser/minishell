@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 14:47:49 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:59:59 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void	pipes_implementation(t_info *structure)
             }
             else
             {
+                
+
                 structure->last_exit_status = EX_SUCESS;
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
@@ -159,7 +161,7 @@ void	pipes_implementation(t_info *structure)
     
     w_id = wait_child_processes(structure, &status);
 
-    printf("The status is: %d\n", status);
+    // printf("The status is: %d\n", status);
 
     if (status == 256)
         structure->last_exit_status = 1;
@@ -178,6 +180,6 @@ void	pipes_implementation(t_info *structure)
     else if (status == 0)
         structure->last_exit_status = 0;
 
-    printf("%s\n", current[0]);
+    // printf("%s\n", current[0]);
 
 }

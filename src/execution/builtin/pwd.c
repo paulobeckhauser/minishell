@@ -6,11 +6,12 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:36:05 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:23:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/13 12:43:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
 
 int	is_pwd_command(char **command)
 {
@@ -22,6 +23,7 @@ void	execute_pwd_command(char **command)
 	char	*cur_path;
 	size_t	size;
 	(void)command;
+
 
 	size = PATH_MAX;
 	cur_path = getcwd(NULL, size);

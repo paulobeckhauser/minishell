@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 23:07:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/13 13:00:43 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,25 @@
 void	default_display_with_history(t_prompt *prompt)
 {
 	char	*color_prompt;
+	size_t	size;
+	char	**create_tmp_folder;
+	pid_t	pid;
 
-	prompt->buf = getcwd(NULL, 0);
-	if (prompt->buf == NULL)
+
+	// printf("here 1\n");
+	size = PATH_MAX;
+	if (getcwd(NULL, 0) != NULL)
 	{
-		perror("getcwd() error");
-		return ;
+		prompt->buf = getcwd(NULL, 0);
+
+		prompt->folder =  getcwd(NULL, size);
 	}
+	else
+	{
+		prompt->folder = getenv("HOME");
+		prompt->folder_deleted = 1;
+	}
+
 	color_prompt = init_color_prompt(prompt);
 	handle_key_combos();
 	prompt->msg = readline(color_prompt);
@@ -43,8 +55,13 @@ char	*init_color_prompt(t_prompt *prompt)
 	char	*tmp;
 
 	tmp = NULL;
-	color_prompt = ft_strjoin("\001\033[1;32m\002", prompt->buf);
-	free(prompt->buf);
+	if (prompt->folder_deleted == 0)
+	{
+		color_prompt = ft_strjoin("\001\033[1;32m\002", prompt->buf);
+		free(prompt->buf);
+	}
+	else
+		color_prompt = ft_strjoin("\001\033[1;32m\002", prompt->folder);
 	tmp = ft_strjoin(color_prompt, "\001\033[0m\002");
 	free(color_prompt);
 	color_prompt = tmp;

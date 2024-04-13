@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/11 14:48:44 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:49:31 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_prompt	prompt;
 	t_info		structure;
+	char cwd[PATH_MAX];
+
+	char *test;
 
 	if (argc == 1)
 	{
@@ -25,8 +28,23 @@ int	main(int argc, char **argv, char **envp)
 		
 		init_vars(&structure);
 		store_envp(envp, &structure);
+
+
+
+		
 		while (1)
 		{
+			
+			// test = getcwd(cwd, sizeof(cwd));
+			// // printf("%s\n", test);
+
+			// if (getcwd(cwd, sizeof(cwd)) == NULL) {
+			// 	// The current directory doesn't exist. Print an error message and skip this command.
+			// 	perror("minishell");
+			// 	continue;
+			// }
+			
+			
 			if (!parser(&structure, &prompt))
 				continue;
 			else

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 13:01:28 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/13 12:44:02 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 // MACRO variable library
 # include <limits.h>
+#include <linux/limits.h>
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
 
@@ -71,6 +72,8 @@ typedef struct s_prompt
 	int						pipe_count;
 	int						token_count;
 	t_single_quote_checker	*checker;
+	char 					*folder;
+	int						folder_deleted;
 }							t_prompt;
 
 typedef enum s_type
