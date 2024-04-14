@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/11 23:43:12 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/13 10:29:49 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	skip_whitespaces(t_prompt *prompt)
 {
-	while (ft_strchr(prompt->whitespace, *prompt->msg)
-		&& *prompt->msg)
+	// printf("The prompt->msg is: %c\n", *prompt->msg);
+	// printf("The prompt->whitespace is: %s\n", prompt->whitespace);
+
+	while (*prompt->msg && ft_strchr(prompt->whitespace, *prompt->msg))
 		prompt->msg++;
 }
 
