@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 08:59:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/13 16:43:41 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:12:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ void	builtin_execution(t_info *structure)
 			{
 				ft_putstr_fd("minishell: ", 2);
 				perror(structure->table->out.file_name[l]);
-				exit(EXIT_FAILURE);
+				structure->last_exit_status = EXIT_FAILURE;
 			}
 			if (close(structure->table->out.fd) == -1)
 			{
 				ft_putstr_fd("minishell: ", 2);
 				perror(structure->table->in.file_name[l]);
-				exit(EXIT_FAILURE);
+				structure->last_exit_status = EXIT_FAILURE;
 			}
 			l++;
 		}
@@ -94,7 +94,7 @@ void	builtin_execution(t_info *structure)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			perror(structure->table->out.file_name[l]);
-			exit(EXIT_FAILURE);
+			structure->last_exit_status = EXIT_FAILURE;
 		}
         dup2(structure->table->out.fd, STDOUT_FILENO);
         close(structure->table->out.fd);

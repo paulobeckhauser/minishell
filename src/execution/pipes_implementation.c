@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 18:08:37 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:32:22 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void	pipes_implementation(t_info *structure)
 				}
 				if (structure->table->next != NULL)
 				{
-					// printf("HERE\n");
 					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
 					close(structure->fds_pipes[i][1]);
 				}
