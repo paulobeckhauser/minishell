@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 13:01:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/13 13:15:41 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,30 @@ void	print_table(t_cmd *table)
 
 void	print_redirection_file(t_cmd *table)
 {
+	int i;
 	if (!table)
 		printf("Error: empty command table.\n");
 	while (table)
 	{
+		printf("%s\n", type_to_string(table->type));
 		if (table->in.file_name || table->out.file_name)
 		{
 			if (table->in.file_name)
-				printf("R: %s\n", table->in.file_name);
+			{
+				i = 0;
+				printf("(R_IN): ");
+				while (table->in.file_name[i])
+					printf("%s ", table->in.file_name[i++]);
+				printf("\n");
+			}
 			if (table->out.file_name)
-				printf("R: %s\n", table->out.file_name);	
+			{
+				i = 0;
+				printf("(R_OUT): ");
+				while (table->out.file_name[i])
+					printf("%s ", table->out.file_name[i++]);
+				printf("\n");
+			}
 		}
 		else
 			printf("R: no_redirection\n");

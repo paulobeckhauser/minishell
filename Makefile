@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/14 13:38:29 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/14 14:16:37 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
+						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_free.c \
@@ -114,7 +115,6 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)create_pipes.c \
 						$(SRC_DIR)$(EXECUTION_DIR)create_child_processes.c \
 						$(SRC_DIR)$(EXECUTION_DIR)builtin_execution.c \
-						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
 						$(SRC_DIR)$(EXECUTION_DIR)wait_child_processes.c \
 						$(SRC_DIR)$(EXECUTION_DIR)signals/signals.c \
 						$(SRC_DIR)$(EXECUTION_DIR)commands_error_handling.c \
@@ -125,7 +125,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)display/verify_quote_number.c \
 						$(SRC_DIR)$(PARSING_DIR)free/free.c \
-						$(SRC_DIR)$(PARSING_DIR)init/init_prompt.c \
+						$(SRC_DIR)$(PARSING_DIR)init/init_prompt.c	\
 						$(SRC_DIR)$(PARSING_DIR)init/init_redirection.c \
 						$(SRC_DIR)$(PARSING_DIR)init/heredoc_utils.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/clean_joined_word_tokens.c \
@@ -133,6 +133,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/init_token_type_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/init_token_type.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/init_words_arr.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/join_redirection_file_names.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/join_word_tokens.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign.c \
@@ -149,6 +150,8 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)print/print.c \
 						$(SRC_DIR)$(PARSING_DIR)signals/signals.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
+						
+
 
 
 SHARED_SRCS			:= 	$(SRC_DIR)main.c \

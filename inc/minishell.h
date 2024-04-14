@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 13:02:28 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 14:16:42 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,14 @@ typedef struct s_in
 {
 	bool					heredoc;
 	int						fd;
-	char					*file_name;
+	char					**file_name;
 }							t_in;
 
 typedef struct s_out
 {
+	int						*trunc;
 	int						fd;
-	char					*file_name;
+	char					**file_name;
 }							t_out;
 
 typedef struct s_token
@@ -272,10 +273,10 @@ void					free_cmd_table(t_info *structure);
 	
 // INIT (heredoc_utils.c, init_prompt.c, init_redirection.c)
 void					create_tmp_folder(void);
-void					run_heredoc(t_in *in, t_token *token, char *delimiter);
+void					run_heredoc(t_token *token, char *delimiter);
 void					wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 	char *delimiter);
-void					open_write_close_tmp_file(t_token *token, t_in *in, char **heredoc_msg);
+void					open_write_close_tmp_file(t_token *token, char **heredoc_msg);
 void					init_prompt(t_prompt *prompt);
 void					init_primary_redirection_vars(t_token *token, t_prompt *prompt);
 void					init_in_redirection(t_token *token, char *file_name);
@@ -362,12 +363,15 @@ bool					join_cmd_to_pipe(t_token_node **token,
 							t_token_node **previous_token);
 void					delete_repeating_redirection_tokens(t_token_node **tokens);
 void					delete_and_close_not_used_redirections(t_token_node **tokens,
-							t_token_node **head);
+							t_token_node **head, t_token_node **previous_token);
 void					mark_last_in_redirection(t_token_node *tokens);
 void					mark_last_out_redirection(t_token_node *tokens);
-void					close_token_fd(t_token_node *tokens);
 bool					if_in_left_redirection(t_token_node **node);
 bool					if_in_right_redirection(t_token_node **node);
+void	join_redirection_file_names(t_token_node **tokens);
+void	join_in_file_names(t_token_node **tokens);
+void	join_out_file_names(t_token_node **tokens);
+
 
 // parser.c
 bool					parser(t_info *structure, t_prompt *prompt);
