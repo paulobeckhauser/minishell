@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   free_exec_variables.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 14:36:05 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/13 12:43:55 by pabeckha         ###   ########.fr       */
+/*   Created: 2024/04/14 13:01:02 by pabeckha          #+#    #+#             */
+/*   Updated: 2024/04/14 13:02:17 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-
-int	is_pwd_command(char **command)
+void free_exec_variables(t_info *structure)
 {
-	return (ft_strcmp(command[0], "pwd") == 0);
-}
-
-void	execute_pwd_command(char **command)
-{
-	char	*cur_path;
-	size_t	size;
-	(void)command;
-
-
-	size = PATH_MAX;
-	cur_path = getcwd(NULL, size);
-	if (cur_path == NULL)
-	{
-		perror("getcwd() error");
-		return ;
-	}
-	printf("%s\n", cur_path);
-	free(cur_path);
+    free_2d_array(structure->envp);
+    free_2d_array(structure->envp_export);
+    free_2d_array(structure->envp_sorted);
+    free_2d_array(structure->commands);
+    free_2d_array(structure->path_commands);
+    free_2d_int_array(structure->fds_pipes);
 }

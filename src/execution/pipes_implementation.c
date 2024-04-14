@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 13:44:01 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 14:18:06 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ void	pipes_implementation(t_info *structure)
             }
             else
             {
+                
+
                 structure->last_exit_status = EX_SUCESS;
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
