@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 12:00:11 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 13:35:17 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ bool	execution(t_info *structure)
 	int test;
 	int i;
 	char cwd[PATH_MAX];
-	char *temp;
 	
 	i = 0;
 
