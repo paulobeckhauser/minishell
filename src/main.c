@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/13 14:35:51 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 12:01:41 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(int argc, char **argv, char **envp)
 
 		prompt.folder = NULL;
 
+		structure.folder = NULL;
+		structure.folder_deleted = 0;
 
 		char *str;
 		
@@ -41,41 +43,48 @@ int	main(int argc, char **argv, char **envp)
 		{
 			
 			test = getcwd(cwd, sizeof(cwd));
+			// structure.folder = getcwd(cwd, sizeof(cwd));
 			// printf("\nThe value of current path is: %s\n\n", test);
 			// printf("\nThe value of previous path is: %s\n", prompt.folder);
+			// printf("\nThe value of previous path is: %s\n", structure.folder);
 
-			if (prompt.folder != NULL)
-			{
+			// if (structure.folder != NULL)
+			// {
 				
-				test_arr = ft_split(prompt.folder, '/');
-				// printf("here\n");
+			// 	test_arr = ft_split(structure.folder, '/');
+			// 	// printf("here\n");
 
-				i = 0;
+			// 	i = 0;
 
-				while (test_arr[i])
-				{
-					i++;
-				}
-				// printf("The last path is: %s\n", test_arr[i - 1]);
-				free_2d_array(test_arr);
-			}
+			// 	while (test_arr[i])
+			// 	{
+			// 		i++;
+			// 	}
+			// 	// printf("The last path is: %s\n", test_arr[i - 1]);
+			// 	free_2d_array(test_arr);
+			// }
 
 			if (test == NULL)
 			{
-				
-				str = ft_strdup(prompt.folder);
-
+				// printf("here\n");
+				str = ft_strdup(structure.folder);
+				// printf("here 2\n");
 				// printf("HAAAA HERE IS THE NEW STRING %s\n", str);
+				// free(structure.folder);
+				// printf("here 3\n");
+				structure.folder = get_parent_folder(str);
+				// printf("here 4\n");
+				printf("%s\n", structure.folder);
 
+				// int m = 0;
 
-				int m = 0;
-
-				while (str[m])
-				{
-					ft_putchar_fd(str[m], 1);
-					m++;
-				}
-				ft_putchar_fd('\n', 1);
+				// while (str[m])
+				// {
+				// 	ft_putchar_fd(str[m], 1);
+				// 	m++;
+				// }
+				// ft_putchar_fd('\n', 1);
+				
 
 				
 
@@ -98,6 +107,8 @@ int	main(int argc, char **argv, char **envp)
 				continue;
 			else
 				execution(&structure);
+			
+			
 		}
 		free_2d_array(structure.envp);
 		free_2d_array(structure.envp_export);

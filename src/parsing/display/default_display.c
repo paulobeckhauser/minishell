@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/13 13:19:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 12:01:34 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 // Display current directory + prompt for user + addhistory for previous
 // prompts
-void	default_display_with_history(t_prompt *prompt)
+void	default_display_with_history(t_prompt *prompt, t_info *structure)
 {
 	char	*color_prompt;
 	size_t	size;
 	char	**create_tmp_folder;
 	pid_t	pid;
+	char cwd[PATH_MAX];
+
+	char *str;
 	
 
 	char **temp_arr;
@@ -30,9 +33,13 @@ void	default_display_with_history(t_prompt *prompt)
 	if (getcwd(NULL, 0) != NULL)
 	{
 		prompt->buf = getcwd(NULL, 0);
+	
 
 		
 		prompt->folder =  getcwd(NULL, size);
+		// printf("The value of structure folder is: %s\n", structure->folder);
+		// structure->folder =  getcwd(cwd, sizeof(cwd));
+		
 		// printf("The value of path is: %s\n", prompt->folder);
 		
 	}
@@ -52,19 +59,26 @@ void	default_display_with_history(t_prompt *prompt)
 		// printf("This is the last element of prev folder: %s\n", temp_arr[i]);
 		
 		
-		prompt->folder = getenv("HOME");
+		// structure->folder = getenv("HOME");
+
+		// str = ft_strdup(structure->folder);
+		// free(structure->folder);
+		// structure->folder = get_parent_folder(str);
+		
+		// structure->folder =  getcwd(NULL, size);
 		
 		
 
 		
-
+		// printf("here\n");
+		// printf("The value of structure folder is: %s\n", structure->folder);
 		
 
 
-		prompt->folder_deleted = 1;
+		structure->folder_deleted = 1;
 	}
 
-	color_prompt = init_color_prompt(prompt);
+	color_prompt = init_color_prompt(prompt, structure);
 	handle_key_combos();
 	prompt->msg = readline(color_prompt);
 	free(color_prompt);
@@ -77,19 +91,29 @@ void	default_display_with_history(t_prompt *prompt)
 	add_history(prompt->msg);
 }
 
-char	*init_color_prompt(t_prompt *prompt)
+char	*init_color_prompt(t_prompt *prompt, t_info *structure)
 {
 	char	*color_prompt;
 	char	*tmp;
 
+	
 	tmp = NULL;
-	if (prompt->folder_deleted == 0)
+	if (structure->folder_deleted == 0)
 	{
 		color_prompt = ft_strjoin("\001\033[1;32m\002", prompt->buf);
 		free(prompt->buf);
 	}
 	else
-		color_prompt = ft_strjoin("\001\033[1;32m\002", prompt->folder);
+	{
+		// printf("here 3\n");
+		color_prompt = ft_strjoin("\001\033[1;32m\002", structure->folder);
+		chdir(structure->folder);
+		structure->folder_deleted = 0;
+		// printf("The color prompt is: %s\n", color_prompt);
+		free(structure->folder);
+		
+	}
+		// color_prompt = ft_strjoin("\001\033[1;32m\002", structure->folder);
 	tmp = ft_strjoin(color_prompt, "\001\033[0m\002");
 	free(color_prompt);
 	color_prompt = tmp;

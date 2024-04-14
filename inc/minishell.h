@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/13 12:44:02 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 11:15:34 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ typedef struct s_info
 	t_cmd				*table;
 	int					exit_status;
 	int					last_exit_status;
+	char 					*folder;
+	int						folder_deleted;
 }						t_info;
 
 typedef struct s_token_node
@@ -246,14 +248,17 @@ char					*allocate_str_temp(t_info *structure, char *str_temp,
 							int i);
 char					*save_str_temp(t_info *structure, int i,
 							char *str_temp);
+char *get_parent_folder(char *str);
 
 // SIGNALS (signals.c)
 void					handle_execution(int signal);
 void					handle_key_combos_execution(void);
 
 // DISPLAY (default_display.c, verify_quote_number.c)
-void					default_display_with_history(t_prompt *prompt);
-char					*init_color_prompt(t_prompt *prompt);
+// void					default_display_with_history(t_prompt *prompt);
+void	default_display_with_history(t_prompt *prompt, t_info *structure);
+// char					*init_color_prompt(t_prompt *prompt);
+char	*init_color_prompt(t_prompt *prompt, t_info *structure);
 void					check_quotes(t_prompt *prompt);
 int						count_quotes(t_prompt *prompt);
 
