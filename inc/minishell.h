@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 14:16:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 21:29:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_prompt
 	t_single_quote_checker	*checker;
 	char 					*folder;
 	int						folder_deleted;
+	bool					in_prio;
+	bool					out_prio;
 }							t_prompt;
 
 typedef enum s_type
@@ -120,6 +122,8 @@ typedef struct s_cmd
 	char					**arr;
 	t_in					in;
 	t_out					out;
+	bool					in_prio;
+	bool					out_prio;
 	struct s_cmd			*next;
 }							t_cmd;
 
@@ -195,6 +199,10 @@ void					pipes_implementation(t_info *structure);
 pid_t	wait_child_processes(t_info *structure, int *status);
 void					init_vars(t_info *structure);
 void commands_error_handling(t_info *structure);
+
+void	open_files(t_cmd *table, int dev_null_fd);
+void	open_in_files(t_cmd *table, int dev_null_fd);
+void	open_out_files(t_cmd *table);
 
 // split_concat_commands
 char					**split_concat_command(char const *s, char c,
@@ -279,11 +287,11 @@ void					wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 void					open_write_close_tmp_file(t_token *token, char **heredoc_msg);
 void					init_prompt(t_prompt *prompt);
 void					init_primary_redirection_vars(t_token *token, t_prompt *prompt);
-void					init_in_redirection(t_token *token, char *file_name);
+void					init_in_redirection(t_token *token, char *file_name, t_prompt *prompt);
 void					init_heredoc_in_redirection(t_token *token, char *delimiter);
 void					create_tmp_folder(void);
-void					init_truncate_out_redirection(t_token *token, char *file_name);
-void					init_append_out_redirection(t_token *token, char *file_name);
+void					init_truncate_out_redirection(t_token *token, char *file_name, t_prompt *prompt);
+void					init_append_out_redirection(t_token *token, char *file_name, t_prompt *prompt);
 
 // LEX (init_token_list.c, init_token_type_2.c, init_token_type.c, init_words_arr.c,
 // monitor_dollar_sign_2.c, monitor_dollar_sign.c, monitor_single_quote.c,

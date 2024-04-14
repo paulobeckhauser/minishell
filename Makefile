@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/14 14:16:37 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/14 20:14:39 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
+						$(SRC_DIR)$(EXECUTION_DIR)open_files.c \
 						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_token_type.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 15:30:26 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 21:25:18 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,16 @@ t_token	init_redirection_token(t_prompt *prompt)
 	}
 	else if (token.t_value.single_ptr[0] == '<'
 		&& ft_strlen(token.t_value.single_ptr) == 1)
-		init_in_redirection(&token, file_name);
+		init_in_redirection(&token, file_name, prompt);
 	else if (token.t_value.single_ptr[0] == '<'
 		&& token.t_value.single_ptr[1] == '<')
 		init_heredoc_in_redirection(&token, file_name);
 	else if (token.t_value.single_ptr[0] == '>'
 		&& ft_strlen(token.t_value.single_ptr) == 1)
-		init_truncate_out_redirection(&token, file_name);
+		init_truncate_out_redirection(&token, file_name, prompt);
 	else if (token.t_value.single_ptr[0] == '>'
 		&& token.t_value.single_ptr[1] == '>')
-		init_append_out_redirection(&token, file_name);
+		init_append_out_redirection(&token, file_name, prompt);
 	return (token);
 }
 

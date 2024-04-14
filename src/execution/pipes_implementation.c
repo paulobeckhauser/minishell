@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 18:32:22 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 20:16:08 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	pipes_implementation(t_info *structure)
             sizeof(pid_t));
     i = 0;
     dev_null_fd = open("/dev/null", O_RDONLY);
-    // if (dev_null_fd == -1)
-    // {
-        
-    // }
+	if (dev_null_fd == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		perror("dev_null");
+		exit(EXIT_FAILURE);
+	}
     
     char **current;
     bool    redirection = false;
@@ -48,95 +50,7 @@ void	pipes_implementation(t_info *structure)
         }
         if (structure->pid[i] == 0)
         {
-			if (structure->table->in.file_name)
-			{
-				int k = 0;
-				while (structure->table->in.file_name[k + 1])
-				{
-					structure->table->in.fd = open(structure->table->in.file_name[k], O_RDONLY);
-					if (structure->table->in.fd == -1)
-					{
-						ft_putstr_fd("minishell: ", 2);
-						perror(structure->table->in.file_name[k]);
-						exit(EXIT_FAILURE);
-					}
-					if (close(structure->table->in.fd) == -1)
-					{
-						ft_putstr_fd("minishell: ", 2);
-						perror(structure->table->in.file_name[k]);
-						exit(EXIT_FAILURE);
-					}
-					k++;
-				}
-				if (structure->table->in.heredoc)
-				{
-					structure->table->in.fd = open("tmp/heredoc_tmp", O_RDONLY);
-					if (structure->table->in.fd == -1)
-					{
-						perror("open failed");
-						exit(EXIT_FAILURE);
-					}
-				}
-				else
-				{
-					structure->table->in.fd = open(structure->table->in.file_name[k], O_RDONLY);
-					if (structure->table->in.fd == -1)
-					{
-						ft_putstr_fd("minishell: ", 2);
-						perror(structure->table->in.file_name[k]);
-						dup2(dev_null_fd, STDIN_FILENO);
-						exit(EXIT_FAILURE);
-					}
-					if (structure->table->in.fd != 0 && structure->table->in.fd != -1)
-					{
-						dup2(structure->table->in.fd, STDIN_FILENO);
-						close(structure->table->in.fd);
-					}
-					// else
-					// {
-					// 	close(structure->table->in.fd);
-					// 	dup2(dev_null_fd, STDIN_FILENO);
-						
-					// }	
-				}
-			}
-
-            if (structure->table->out.file_name)
-            {
-				int	l = 0;
-				while (structure->table->out.file_name[l + 1])
-				{
-					if (structure->table->out.trunc[l])
-						structure->table->out.fd = open(structure->table->out.file_name[l], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-					else
-						structure->table->out.fd = open(structure->table->out.file_name[l], O_WRONLY | O_CREAT | O_APPEND, 0644);
-					if (structure->table->out.fd == -1)
-					{
-						ft_putstr_fd("minishell: ", 2);
-						perror(structure->table->out.file_name[l]);
-						exit(EXIT_FAILURE);
-					}
-					if (close(structure->table->out.fd) == -1)
-					{
-						ft_putstr_fd("minishell: ", 2);
-						perror(structure->table->in.file_name[l]);
-						exit(EXIT_FAILURE);
-					}
-					l++;
-				}
-				if (structure->table->out.trunc[l])
-					structure->table->out.fd = open(structure->table->out.file_name[l], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-				else
-					structure->table->out.fd = open(structure->table->out.file_name[l], O_WRONLY | O_CREAT | O_APPEND, 0644);
-				if (structure->table->out.fd == -1)
-				{
-					ft_putstr_fd("minishell: ", 2);
-					perror(structure->table->out.file_name[l]);
-					exit(EXIT_FAILURE);
-				}
-                dup2(structure->table->out.fd, STDOUT_FILENO);
-                close(structure->table->out.fd);
-            }
+			open_files(structure->table, dev_null_fd);
 			if (structure->table->in.fd == 0)
 			{
 				if (i != 0)
@@ -197,7 +111,6 @@ void	pipes_implementation(t_info *structure)
                 }
             }
         }
-        
         else
         {
             if (i != 0)
@@ -218,7 +131,6 @@ void	pipes_implementation(t_info *structure)
     
     w_id = wait_child_processes(structure, &status);
 
-	// printf("%d\n", status);
 
 
     if (status == 256)

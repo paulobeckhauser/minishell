@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_child_processes.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:16:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/09 20:46:08 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 19:17:53 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
