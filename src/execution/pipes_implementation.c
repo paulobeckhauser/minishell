@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 20:16:08 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 22:11:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	pipes_implementation(t_info *structure)
 {
     int	i;
-    int	dev_null_fd;
     int command_number;
     pid_t w_id;
 
@@ -23,13 +22,6 @@ void	pipes_implementation(t_info *structure)
     structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1),
             sizeof(pid_t));
     i = 0;
-    dev_null_fd = open("/dev/null", O_RDONLY);
-	if (dev_null_fd == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		perror("dev_null");
-		exit(EXIT_FAILURE);
-	}
     
     char **current;
     bool    redirection = false;
@@ -50,7 +42,10 @@ void	pipes_implementation(t_info *structure)
         }
         if (structure->pid[i] == 0)
         {
-			open_files(structure->table, dev_null_fd);
+			if (!open_files(structure->table))
+				exit(EXIT_FAILURE);
+			else
+				
 			if (structure->table->in.fd == 0)
 			{
 				if (i != 0)
@@ -124,8 +119,6 @@ void	pipes_implementation(t_info *structure)
         structure->table = structure->table->next;
     }
 
-    
-    close(dev_null_fd);
         
     int status;
     

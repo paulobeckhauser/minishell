@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 21:28:11 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 22:18:40 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_primary_redirection_vars(t_token *token, t_prompt *prompt)
 void	init_in_redirection(t_token *token, char *file_name, t_prompt *prompt)
 {
 	if (!prompt->in_prio && !prompt->out_prio)
-		prompt->out_prio = true;
+		prompt->in_prio = true;
 	token->in.heredoc = false;
 	token->in.file_name = ft_calloc(2, sizeof(char *));
 	if (!token->in.file_name)

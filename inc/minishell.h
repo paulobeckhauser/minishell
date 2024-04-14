@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 21:29:32 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 22:11:37 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,9 +200,9 @@ pid_t	wait_child_processes(t_info *structure, int *status);
 void					init_vars(t_info *structure);
 void commands_error_handling(t_info *structure);
 
-void	open_files(t_cmd *table, int dev_null_fd);
-void	open_in_files(t_cmd *table, int dev_null_fd);
-void	open_out_files(t_cmd *table);
+int	open_files(t_cmd *table);
+int	open_in_files(t_cmd *table);
+int	open_out_files(t_cmd *table);
 
 // split_concat_commands
 char					**split_concat_command(char const *s, char c,
