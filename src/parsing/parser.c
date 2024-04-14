@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 13:20:34 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 11:45:02 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ bool	parser(t_info *structure, t_prompt *prompt)
 	t_token_node	*tokens;
 
 	init_prompt(prompt);
-	default_display_with_history(prompt);
+	default_display_with_history(prompt, structure);
+	// printf("The prompt->bus is: %s\n", prompt->buf);
 	tokens = lex(structure, prompt);
 	if (!tokens || if_no_cmd_tokens(tokens))
 		return (false);

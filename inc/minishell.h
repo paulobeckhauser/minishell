@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/12 13:01:28 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 13:02:28 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 // MACRO variable library
 # include <limits.h>
+#include <linux/limits.h>
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
 
@@ -71,6 +72,8 @@ typedef struct s_prompt
 	int						pipe_count;
 	int						token_count;
 	t_single_quote_checker	*checker;
+	char 					*folder;
+	int						folder_deleted;
 }							t_prompt;
 
 typedef enum s_type
@@ -139,6 +142,8 @@ typedef struct s_info
 	t_cmd				*table;
 	int					exit_status;
 	int					last_exit_status;
+	char 					*folder;
+	int						folder_deleted;
 }						t_info;
 
 typedef struct s_token_node
@@ -243,14 +248,18 @@ char					*allocate_str_temp(t_info *structure, char *str_temp,
 							int i);
 char					*save_str_temp(t_info *structure, int i,
 							char *str_temp);
+char *get_parent_folder(char *str);
+void free_exec_variables(t_info *structure);
 
 // SIGNALS (signals.c)
 void					handle_execution(int signal);
 void					handle_key_combos_execution(void);
 
 // DISPLAY (default_display.c, verify_quote_number.c)
-void					default_display_with_history(t_prompt *prompt);
-char					*init_color_prompt(t_prompt *prompt);
+// void					default_display_with_history(t_prompt *prompt);
+void	default_display_with_history(t_prompt *prompt, t_info *structure);
+// char					*init_color_prompt(t_prompt *prompt);
+char	*init_color_prompt(t_prompt *prompt, t_info *structure);
 void					check_quotes(t_prompt *prompt);
 int						count_quotes(t_prompt *prompt);
 
