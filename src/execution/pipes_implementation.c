@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 14:18:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:08:37 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	pipes_implementation(t_info *structure)
 					{
 						ft_putstr_fd("minishell: ", 2);
 						perror(structure->table->in.file_name[k]);
+						dup2(dev_null_fd, STDIN_FILENO);
 						exit(EXIT_FAILURE);
 					}
 					if (structure->table->in.fd != 0 && structure->table->in.fd != -1)
@@ -91,12 +92,12 @@ void	pipes_implementation(t_info *structure)
 						dup2(structure->table->in.fd, STDIN_FILENO);
 						close(structure->table->in.fd);
 					}
-					else
-					{
-						close(structure->table->in.fd);
-						dup2(dev_null_fd, STDIN_FILENO);
+					// else
+					// {
+					// 	close(structure->table->in.fd);
+					// 	dup2(dev_null_fd, STDIN_FILENO);
 						
-					}	
+					// }	
 				}
 			}
 
@@ -136,17 +137,34 @@ void	pipes_implementation(t_info *structure)
                 dup2(structure->table->out.fd, STDOUT_FILENO);
                 close(structure->table->out.fd);
             }
-			if (i != 0)
-   			{
-   			    close(structure->fds_pipes[i - 1][1]);
-   			    dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
-   			}
+			if (structure->table->in.fd == 0)
+			{
+				if (i != 0)
+				{
+					close(structure->fds_pipes[i - 1][1]);
+					dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+				}
 
-   			if (structure->table->next != NULL)
-   			{
-   			    close(structure->fds_pipes[i][0]); 
-   			    dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
-   			}
+				if (structure->table->next != NULL)
+				{
+					close(structure->fds_pipes[i][0]);
+					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+				}
+			}
+			else if (structure->table->in.fd > 0)
+			{
+				if (i != 0)
+				{
+					dup2(structure->fds_pipes[i - 1][1], STDIN_FILENO);
+					close(structure->fds_pipes[i - 1][0]);
+				}
+				if (structure->table->next != NULL)
+				{
+					// printf("HERE\n");
+					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+					close(structure->fds_pipes[i][1]);
+				}
+			}
 
             int j = 0;
             while (j < structure->number_commands - 1)
