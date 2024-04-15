@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_word_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 13:42:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:46:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,12 @@ void	run_word_token_join(t_join_word_tokens_vars *vars)
 				&vars->curr_save->token.t_value.double_ptr);
 		vars->curr_save = vars->curr_save->next;
 	}
-	vars->arr_save->token.t_value.double_ptr = vars->command;
-	vars->command_word_count = 0;
+	if (vars->curr_save && (vars->curr_save->token.type == BUILTIN_CMD
+			|| vars->curr_save->token.type == SIMPLE_CMD))
+	{
+		vars->arr_save->token.t_value.double_ptr = vars->command;
+		vars->command_word_count = 0;		
+	}
 }
 
 void	join_words_to_command(char ***arr, char ***join)

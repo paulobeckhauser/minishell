@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/13 13:15:41 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:51:55 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ void	print_syntax_token_error(t_prompt *prompt)
 // 	}
 // }
 
-// void print_tree(t_token_node *node, int depth, char *left_right)
-// {
-//     if (node == NULL)
-//         return;
-//     for (int i = 0; i < depth; i++)
-//         ft_printf("     ");
-//     printf("%s %s\n", left_right, type_to_string(node->token.type));
-//     print_tree(node->left, depth + 1, "(LEFT)");
-// 	print_tree(node->right, depth + 1, "(RIGHT)");
-// }
+void print_tree(t_token_node *node, int depth, char *left_right)
+{
+    if (node == NULL)
+        return;
+    for (int i = 0; i < depth; i++)
+        ft_printf("     ");
+    printf("%s %s\n", left_right, type_to_string(node->token.type));
+    print_tree(node->left, depth + 1, "(LEFT)");
+	print_tree(node->right, depth + 1, "(RIGHT)");
+}
 
 void	print_table(t_cmd *table)
 {

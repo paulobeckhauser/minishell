@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_commands.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:17:51 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 14:48:09 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:49:26 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	allocate_memory_commands(t_info *structure)
 	while (current_table)
 	{
 		j = 0;
-		while (current_table->arr[0][j])
+		while (current_table->arr && current_table->arr[0] && current_table->arr[0][j])
 		{
 			j++;
 		}
@@ -54,7 +54,7 @@ void	store_commands(t_info *structure)
 	{
 		j = 0;
 		count = 0;
-		while (current_table->arr[0][j])
+		while (current_table->arr && current_table->arr[0] && current_table->arr[0][j])
 		{
 			count++;
 			j++;

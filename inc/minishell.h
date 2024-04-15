@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/15 11:47:53 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:52:03 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,7 +394,7 @@ t_cmd					*parse(t_token_node *tokens, t_prompt *prompt);
 // PRINT (print.c)
 void					print_syntax_token_error(t_prompt *prompt);
 // void					print_token_list(t_token_node *token);
-// void 				print_tree(t_token_node *node, int depth, char *left_right);
+void 					print_tree(t_token_node *node, int depth, char *left_right);
 void					print_table(t_cmd *table);
 void					print_redirection_file(t_cmd *table);
 const char				*type_to_string(t_type type);
