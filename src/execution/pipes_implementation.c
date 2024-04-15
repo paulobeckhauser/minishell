@@ -6,11 +6,13 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 22:11:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:09:35 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+
 
 void	pipes_implementation(t_info *structure)
 {
@@ -95,14 +97,14 @@ void	pipes_implementation(t_info *structure)
                 structure->last_exit_status = EX_SUCESS;
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
-                {                   
-                    structure->last_exit_status = EX_COMM_NOTFOUND;
+                {             
+						structure->last_exit_status = EX_COMM_NOTFOUND;
 
-
-                    if(command_number == structure->number_commands)
-                    {
-                        exit(EX_COMM_NOTFOUND);
-                    }
+						if(command_number == structure->number_commands)
+						{
+							exit(EX_COMM_NOTFOUND);
+						}
+						
                 }
             }
         }
@@ -123,25 +125,26 @@ void	pipes_implementation(t_info *structure)
     int status;
     
     w_id = wait_child_processes(structure, &status);
+	
+	// printf("%d\n", status);
 
 
-
-    if (status == 256)
-        structure->last_exit_status = 1;
+    // if (status == 256)
+    //     structure->last_exit_status = 1;
     
-    else if (status == 32512)
-        structure->last_exit_status = 127;
+    // else if (status == 32512)
+    //     structure->last_exit_status = 127;
 
-    else if (status == 512)
-    {
-        if (ft_strcmp(current[0], "grep") == 0 && !current[2] && redirection)
-            structure->last_exit_status = 1;
-        else
-            structure->last_exit_status = 2;
-    }
+    // else if (status == 512)
+    // {
+    //     if (ft_strcmp(current[0], "grep") == 0 && !current[2] && redirection)
+    //         structure->last_exit_status = 1;
+    //     else
+    //         structure->last_exit_status = 2;
+    // }
     
-    else if (status == 0)
-        structure->last_exit_status = 0;
+    // else if (status == 0)
+    //     structure->last_exit_status = 0;
 
 
 }

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 22:11:37 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:47:53 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <signal.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+#include <sys/stat.h>
 # include <termios.h>
 
 // MACRO variable library
@@ -36,11 +37,15 @@
 #include <linux/limits.h>
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
+# include <errno.h>
 
 
 # include "exit_codes.h"
 
 extern int	g_signal;
+
+// struct stat path_stat;
+
 
 typedef struct s_init_words_arr_vars
 {
