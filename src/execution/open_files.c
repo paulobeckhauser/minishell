@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:57:30 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 22:18:11 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 09:49:09 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,11 @@ int	open_out_files(t_cmd *table)
 			perror(table->out.file_name[i]);
 			return (0);
 		}
-        dup2(table->out.fd, STDOUT_FILENO);
-        close(table->out.fd);
+		if (table->type == SIMPLE_CMD)
+		{
+			dup2(table->out.fd, STDOUT_FILENO);
+			close(table->out.fd);
+		}
     }
 	return (1);
 }
