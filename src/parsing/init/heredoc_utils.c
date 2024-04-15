@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:12:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 22:38:46 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:29:55 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 	*heredoc_newline = readline("> ");
 	if (*heredoc_newline == NULL)
 	{
-		ft_printf("bash: warning: here-document delimited by end-of-file");
-		ft_printf(" (wanted `stop')\n");
-		exit(0);
+		ft_putstr_fd("bash: warning: here-document delimited by end-of-file", 1);
+		ft_putstr_fd(" (wanted `", 1);
+		ft_putstr_fd(delimiter, 1);
+		ft_putstr_fd("')\n", 1);
+		exit(EXIT_SUCCESS);
 	}
 	*heredoc_msg = "";
 	while (ft_strcmp(*heredoc_newline, delimiter) != 0)
@@ -67,8 +69,10 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 		*heredoc_newline = readline("> ");
 		if (*heredoc_newline == NULL)
 		{
-			ft_printf("bash: warning: here-document delimited by ");
-			ft_printf("end-of-file (wanted `stop')\n");
+			ft_putstr_fd("bash: warning: here-document delimited by end-of-file", 1);
+			ft_putstr_fd(" (wanted `", 1);
+			ft_putstr_fd(delimiter, 1);
+			ft_putstr_fd("')\n", 1);
 			exit(EXIT_SUCCESS);
 		}
 	}

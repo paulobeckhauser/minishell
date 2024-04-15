@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:57:30 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/15 11:02:28 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:29:35 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ int	open_in_files(t_cmd *table)
 			{
 				perror("open failed");
 				return (0);
+			}
+			if (table->in.fd != 0 && table->type == SIMPLE_CMD)
+			{
+				dup2(table->in.fd, STDIN_FILENO);
+				close(table->in.fd);
 			}
 		}
 		else

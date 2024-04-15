@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/15 12:52:03 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:21:14 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,8 @@ void					init_append_out_redirection(t_token *token, char *file_name, t_prompt *
 // LEX (init_token_list.c, init_token_type_2.c, init_token_type.c, init_words_arr.c,
 // monitor_dollar_sign_2.c, monitor_dollar_sign.c, monitor_single_quote.c,
 // utils_2.c, utils.c)
+int						if_multiple_redirections(t_token_node *tokens);
+int						if_multiple_word_tokens(t_token_node *tokens);
 t_token_node			*init_token_list(t_info *structure, t_prompt *prompt);
 t_token_node			*init_token_node(t_info *structure, t_prompt *prompt, int index);
 void					add_node_to_list(t_token_node **head,
@@ -318,7 +320,7 @@ void					init_words_arr(t_prompt *prompt);
 void					process_word(t_prompt *prompt, int word_len, int i, int *j);
 void					join_word_tokens(t_token_node **tokens);
 void					init_word_tokens_vars(t_join_word_tokens_vars *vars, t_token_node **tokens);
-void					join_words_to_command(char ***arr, char ***join);
+void					join_words_to_command(char ***arr, char **join);
 void					clean_joined_word_tokens(t_token_node **tokens);
 void					clean_word_token(t_token_node **tokens, t_token_node **tmp);
 int						count_words_in_token(char **arr);
