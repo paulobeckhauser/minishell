@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_word_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/12 13:42:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:29:46 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ void	run_word_token_join(t_join_word_tokens_vars *vars)
 			break ;
 		else if (vars->curr_save->token.type == BUILTIN_CMD
 			|| vars->curr_save->token.type == SIMPLE_CMD)
-			join_words_to_command(&vars->command,
-				&vars->curr_save->token.t_value.double_ptr);
+				join_words_to_command(&vars->command,
+					vars->curr_save->token.t_value.double_ptr);
 		vars->curr_save = vars->curr_save->next;
 	}
 	vars->arr_save->token.t_value.double_ptr = vars->command;
-	vars->command_word_count = 0;
+	vars->command_word_count = 0;		
 }
 
-void	join_words_to_command(char ***arr, char ***join)
+void	join_words_to_command(char ***arr, char **join)
 {
 	char	**start_ptr_save;
 	char	**arr_temp;
@@ -89,7 +89,7 @@ void	join_words_to_command(char ***arr, char ***join)
 
 	start_ptr_save = *arr;
 	arr_temp = *arr;
-	join_temp = *join;
+	join_temp = join;
 	while (*arr_temp)
 		arr_temp++;
 	while (*join_temp)

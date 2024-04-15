@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_number_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 12:49:06 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/03/29 13:17:14 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:47:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_number_commands(t_info *structure)
 	current_table = structure->table;
 	while (current_table)
 	{
-		if (current_table->arr[0])
+		if (current_table->arr && current_table->arr[0])
 			number_commands++;
 		current_table = current_table->next;
 	}

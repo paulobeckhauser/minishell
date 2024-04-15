@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/15 09:56:29 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:09:27 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ bool	parser(t_info *structure, t_prompt *prompt)
 {
 	t_token_node	*tokens;
 
-	rl_restore_prompt();
 	init_prompt(prompt);
 	default_display_with_history(prompt, structure);
 	tokens = lex(structure, prompt);
@@ -35,9 +34,13 @@ t_token_node	*lex(t_info *structure, t_prompt *prompt)
 	tokens = init_token_list(structure, prompt);
 	if (!tokens)
 		return (NULL);
-	join_redirection_file_names(&tokens);
-	join_word_tokens(&tokens);
-	delete_repeating_redirection_tokens(&tokens);
+	if (if_multiple_redirections(tokens))
+	{
+		join_redirection_file_names(&tokens);
+		delete_repeating_redirection_tokens(&tokens);
+	}
+	if (if_multiple_word_tokens(tokens))
+		join_word_tokens(&tokens);
 	if (tokens && tokens->token.type == PIPE)
 	{
 		ft_printf("bash: syntax error near unexpected token `|'\n");
