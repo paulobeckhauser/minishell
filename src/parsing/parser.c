@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 14:18:26 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 09:56:29 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool	parser(t_info *structure, t_prompt *prompt)
 {
 	t_token_node	*tokens;
 
+	rl_restore_prompt();
 	init_prompt(prompt);
 	default_display_with_history(prompt, structure);
 	tokens = lex(structure, prompt);

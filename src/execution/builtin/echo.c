@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 15:28:27 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/15 09:35:02 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,15 @@ static char	*join_string_echo(int start, t_info *structure)
 static void	redirection_echo(char *string, t_info *structure)
 {
 	if (structure->table->out.file_name)
+	{
 		ft_putstr_fd(string, structure->table->out.fd);
+		if (close(structure->table->out.fd) == -1)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			perror("close");
+			return ;
+		}
+	}
 	else
 		ft_putstr_fd(string, STDOUT_FILENO);
 }

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 00:20:06 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 18:27:43 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 09:55:03 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	join_in_file_names(t_token_node **tokens)
 			{
 				start_redirection = NULL;
 				i = 0;
-				break ;
+				*tokens = (*tokens)->next;
+				continue ;
 			}
 			file_arr = ft_calloc(i + 1, sizeof(char *));
 			if (!file_arr)
@@ -107,7 +108,8 @@ void	join_out_file_names(t_token_node **tokens)
 			{
 				start_redirection = NULL;
 				i = 0;
-				break ;
+				*tokens = (*tokens)->next;
+				continue ;
 			}
 			file_arr = ft_calloc(i + 1, sizeof(char *));
 			if (!file_arr)
@@ -132,6 +134,7 @@ void	join_out_file_names(t_token_node **tokens)
 			}
 			file_arr[y] = NULL;
 			last_redirection->token.out.file_name = file_arr;
+			int z = 0;
 			start_redirection = NULL;
 			i = 0;
 		}

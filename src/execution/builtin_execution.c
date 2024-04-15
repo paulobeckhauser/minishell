@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 08:59:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 22:11:04 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 09:09:33 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	builtin_execution(t_info *structure)
 {
 	if (!open_files(structure->table))
+	{
 		structure->last_exit_status = EXIT_FAILURE;
+		return ;
+	}
 	if (is_cd_command(structure->table->arr))
 		execute_cd_command(structure);
 	if (is_pwd_command(structure->table->arr))
