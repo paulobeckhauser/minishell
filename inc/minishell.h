@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/15 15:21:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:31:31 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void					store_envp(char **envp, t_info *structure);
 bool					execution(t_info *structure);
 int						ft_strcmp(const char *s1, const char *s2);
 void					check_builtin(t_info *structure, char *str);
+void	check_path(char *path, char *cmd);
 // void					get_path_env(t_info *structure);
 int	get_path_env(t_info *structure);
 void					get_number_commands(t_info *structure);
