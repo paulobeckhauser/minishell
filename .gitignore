@@ -35,3 +35,5 @@ minishell_tester
 my_test/
 output
 tester.py
+
+pipe change

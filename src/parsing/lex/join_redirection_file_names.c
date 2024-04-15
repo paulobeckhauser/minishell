@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 00:20:06 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/13 13:23:47 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:27:43 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,6 @@ void	join_out_file_names(t_token_node **tokens)
 			}
 			file_arr[y] = NULL;
 			last_redirection->token.out.file_name = file_arr;
-			int z = 0;
-			while (last_redirection->token.out.file_name[z])
-				printf("%s ", last_redirection->token.out.file_name[z++]);
-			printf("\n");
 			start_redirection = NULL;
 			i = 0;
 		}

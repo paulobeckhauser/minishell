@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd_table.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 15:34:02 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/14 21:29:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_cmd	*init_cmd(t_token_node *node, t_prompt *prompt)
 		return (NULL);
 	cmd->type = node->token.type;
 	cmd->arr = node->token.t_value.double_ptr;
+	cmd->in_prio = prompt->in_prio;
+	cmd->out_prio = prompt->out_prio;
 	if (node->left)
 	{
 		if (if_in_left_redirection(&node))
