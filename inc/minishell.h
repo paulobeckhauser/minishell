@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 14:43:40 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:47:42 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
 # include <errno.h>
-
 
 # include "exit_codes.h"
 
@@ -77,7 +76,6 @@ typedef struct s_prompt
 	int						pipe_count;
 	int						token_count;
 	t_single_quote_checker	*checker;
-	char 					*folder;
 	int						folder_deleted;
 	bool					in_prio;
 	bool					out_prio;

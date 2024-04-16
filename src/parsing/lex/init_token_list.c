@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/15 14:07:13 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:32:43 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ t_token_node	*init_token_list(t_info *structure, t_prompt *prompt)
 		if (!list)
 			return (NULL);
 		if (list->token.type == END)
+		{
+			free(list);
 			break ;
+		}
 		if (list->token.type == ERROR)
 			return (NULL);
 		add_node_to_list(&head, &current, list);
