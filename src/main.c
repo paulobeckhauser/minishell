@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 12:11:59 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:06:47 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 		(void)argv;
 		init_vars(&structure);
 		store_envp(envp, &structure);
-		prompt.folder = NULL;
+
 		structure.folder = NULL;
 		structure.folder_deleted = 0;
 		while (1)

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/15 12:31:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:40:52 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,18 @@ void	pipes_implementation(t_info *structure)
                 exit(EXIT_SUCCESS);
                 
             }
-            else
+			
             {
-                
-
-                structure->last_exit_status = EX_SUCESS;
                 if (execve(structure->path_commands[i], structure->table->arr,
                         structure->envp) == -1)
                 {             
-						structure->last_exit_status = EX_COMM_NOTFOUND;
+                		check_path(structure->path_commands[i], structure->table->arr[0]);
+						// structure->last_exit_status = EX_COMM_NOTFOUND;
 
-						if(command_number == structure->number_commands)
-						{
-							exit(EX_COMM_NOTFOUND);
-						}
+						// if(command_number == structure->number_commands)
+						// {
+						// 	exit(EX_COMM_NOTFOUND);
+						// }
 						
                 }
             }
@@ -148,3 +146,4 @@ void	pipes_implementation(t_info *structure)
 
 
 }
+

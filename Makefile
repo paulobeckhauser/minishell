@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/16 12:14:46 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/16 18:07:40 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,7 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 
 EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)check_builtin.c \
+						$(SRC_DIR)$(EXECUTION_DIR)check_path.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
 						$(SRC_DIR)$(EXECUTION_DIR)open_files.c \
