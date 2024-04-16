@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 17:53:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:15:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ void	free_cmd_table(t_info *structure)
 		free(current);
 		current = next;
 	}
+	free(current);
 	structure->table = NULL;
 }

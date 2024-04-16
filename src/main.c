@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 16:47:35 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:31:10 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv, char **envp)
 		init_vars(&structure);
 		store_envp(envp, &structure);
 
+
 		structure.folder = NULL;
 		structure.folder_deleted = 0;
 
@@ -48,7 +49,10 @@ int	main(int argc, char **argv, char **envp)
 			if (!parser(&structure, &prompt))
 				continue;
 			else
+			{
 				execution(&structure);
+				free_cmd_table(&structure);
+			}
 
 		}
 		// free_2d_array(structure.envp);

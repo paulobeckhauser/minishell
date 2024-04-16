@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 14:44:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:36:53 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	verify_dollar(t_info *structure, t_prompt *prompt)
 		i++;
 	}
 	prompt->checker = head;
+	free_single_quote_checker_list(prompt);
 	return (1);
 }
 

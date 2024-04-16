@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 17:57:44 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:30:49 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,15 @@ bool	execution(t_info *structure)
 	char cwd[PATH_MAX];
 	
 	i = 0;
+
 	test = 0;
+
 	handle_key_combos_execution();
 	get_number_commands(structure);
+
+
 	structure->folder = getcwd(cwd, sizeof(cwd));
+
 	if (structure->table->type == BUILTIN_CMD && structure->number_commands == 1)
 		builtin_execution(structure);
 	else
@@ -42,6 +47,8 @@ bool	execution(t_info *structure)
 			store_path_commands(structure);
 			pipes_implementation(structure);
 		}
+
+		
 	}
 	return (true);
 }
