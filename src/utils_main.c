@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:14:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 11:39:58 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:44:41 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	init_vars(t_info *structure)
 	structure->count_number_signs = 0;
 	structure->count_equal_sign = 0;
 	structure->last_exit_status = 0;
+	structure->folder = NULL;
+	structure->folder_deleted = 0;
 }
 
 void	store_last_path(t_info *structure)

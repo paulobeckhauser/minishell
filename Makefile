@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/16 11:31:32 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/16 12:14:46 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,7 @@ PARSING_DIR		:= parsing/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= #-Wall -Wextra -Werror
-#LREADLINE		:= -lreadline
+CFLAGS			:= -Wall -Wextra -Werror
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
 

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 11:36:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:11:35 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,12 +185,10 @@ typedef struct s_dollar_replace_info
 }							t_dollar_replace_info;
 
 void					store_envp(char **envp, t_info *structure);
-// void					execution(t_info *structure);
 bool					execution(t_info *structure);
 int						ft_strcmp(const char *s1, const char *s2);
 void					check_builtin(t_info *structure, char *str);
-// void					get_path_env(t_info *structure);
-int	get_path_env(t_info *structure);
+int						get_path_env(t_info *structure);
 void					get_number_commands(t_info *structure);
 void					store_path_commands(t_info *structure);
 void					store_commands(t_info *structure);
@@ -198,9 +196,7 @@ void					create_pipes(t_info *structure);
 void					create_child_processes(t_info *structure);
 void					builtin_execution(t_info *structure);
 void					pipes_implementation(t_info *structure);
-// void					wait_child_processes(t_info *structure);
 
-// pid_t	wait_child_processes(t_info *structure);
 pid_t	wait_child_processes(t_info *structure, int *status);
 void					init_vars(t_info *structure);
 void store_last_path(t_info *structure);

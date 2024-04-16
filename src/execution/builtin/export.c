@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/11 16:17:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:24:43 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,56 +46,50 @@ static void	export_with_args(t_info *structure)
 {
 	int	i;
 	int	check_equal_sign;
-	int k;
+	int	k;
+						int m;
 
 	k = 1;
-
-	while(structure->table->arr[k])
+	while (structure->table->arr[k])
 	{
-
-		
 		if (ft_strcmp(structure->table->arr[k], "=") == 0)
 		{
 			ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
 			structure->last_exit_status = 1;
 		}
-
 		else
 		{
 			i = 0;
-			if (((structure->table->arr[k][i] == '-') && (structure->table->arr[k][i + 1] != '-')) || (structure->table->arr[k][i + 1] == '-') ||  
-						(structure->table->arr[k][i] >= '0' &&  structure->table->arr[k][i] <= '9') )
+			if (((structure->table->arr[k][i] == '-')
+					&& (structure->table->arr[k][i + 1] != '-'))
+				|| (structure->table->arr[k][i + 1] == '-')
+				|| (structure->table->arr[k][i] >= '0'
+					&& structure->table->arr[k][i] <= '9'))
 			{
 				ft_putstr_fd("bash: export: `", 2);
 				ft_putstr_fd(structure->table->arr[k], 2);
 				ft_putstr_fd("': not a valid identifier\n", 2);
-				structure->last_exit_status = EXIT_FAILURE;	
+				structure->last_exit_status = EXIT_FAILURE;
 			}
-			
-			
 			check_equal_sign = 0;
 			i = 0;
 			while (structure->table->arr[k][i])
 			{
 				if (structure->table->arr[k][i] == '=')
 				{
-					if (structure->table->arr[k][i - 1] && structure->table->arr[k][i - 1] == '-')
+					if (structure->table->arr[k][i - 1]
+						&& structure->table->arr[k][i - 1] == '-')
 					{
 						ft_putstr_fd("bash: export: `", 2);
-						// ft_putstr_fd("export: not valid in this context: ", 2);
-						int m;
-
 						m = 0;
-
-						while(structure->table->arr[k][m])
+						while (structure->table->arr[k][m])
 						{
 							ft_putchar_fd(structure->table->arr[k][m], 2);
 							m++;
 						}
-						ft_putstr_fd("': not a valid identifier\n", 2);						
+						ft_putstr_fd("': not a valid identifier\n", 2);
 						structure->last_exit_status = 1;
 						break ;
-						
 					}
 					check_equal_sign++;
 					break ;
@@ -104,7 +98,6 @@ static void	export_with_args(t_info *structure)
 			}
 			if (check_equal_sign == 1)
 			{
-				
 				replace_value_envp(structure, check_equal_sign);
 			}
 			else
@@ -112,16 +105,12 @@ static void	export_with_args(t_info *structure)
 				if (check_env_variable(structure))
 					return ;
 				else
-					add_to_envp(structure, structure->table->arr[k], check_equal_sign);
+					add_to_envp(structure, structure->table->arr[k],
+						check_equal_sign);
 			}
 		}
-
-
-
-
 		k++;
-
-	}	
+	}
 }
 
 void	execute_export_command(t_info *structure)

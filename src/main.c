@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 11:39:35 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:11:59 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_prompt	prompt;
 	t_info		structure;
-	char		cwd[PATH_MAX];
-	char		*curr_path;
-	char		*str;
 
 	if (argc == 1)
 	{
