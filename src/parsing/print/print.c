@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/15 12:51:55 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:38:06 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,6 @@ void	print_syntax_token_error(t_prompt *prompt)
 			find_next_token_to_print_in_err(prompt));
 }
 
-// void	print_token_list(t_token_node *node)
-// {
-// 	if (!node)
-// 		printf("Error: empty token list\n");
-// 	while (node)
-// 	{
-// 		printf("%s ", type_to_string(node->token.type));
-// 		int	i = 0;
-// 		if ((node->token.type == BUILTIN_CMD || node->token.type == SIMPLE_CMD)
-// 			&& node->token.t_value.double_ptr)
-// 		{
-// 			printf("(\"");
-// 			while (node->token.t_value.double_ptr[i])
-// 				printf("%s ", node->token.t_value.double_ptr[i++]);
-// 			printf("\")");
-// 		}
-// 		printf("\n");
-// 		node = node->next;
-// 	}
-// }
 
 void print_tree(t_token_node *node, int depth, char *left_right)
 {

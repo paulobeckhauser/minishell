@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:50:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 12:24:43 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:29:45 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	export_with_args(t_info *structure)
 	int	i;
 	int	check_equal_sign;
 	int	k;
-						int m;
+	int m;
 
 	k = 1;
 	while (structure->table->arr[k])
@@ -97,9 +97,7 @@ static void	export_with_args(t_info *structure)
 				i++;
 			}
 			if (check_equal_sign == 1)
-			{
 				replace_value_envp(structure, check_equal_sign);
-			}
 			else
 			{
 				if (check_env_variable(structure))
