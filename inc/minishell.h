@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/15 15:21:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:36:10 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void					pipes_implementation(t_info *structure);
 // pid_t	wait_child_processes(t_info *structure);
 pid_t	wait_child_processes(t_info *structure, int *status);
 void					init_vars(t_info *structure);
+void store_last_path(t_info *structure);
 void commands_error_handling(t_info *structure);
 
 int	open_files(t_cmd *table);

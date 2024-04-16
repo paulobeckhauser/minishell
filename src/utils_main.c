@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_vars.c                                        :+:      :+:    :+:   */
+/*   utils_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:14:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 11:35:36 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:39:58 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void init_vars(t_info *structure)
+void	init_vars(t_info *structure)
 {
-    structure->envp = NULL;
-    structure->envp_export = NULL;
-    structure->envp_sorted = NULL;
+	structure->envp = NULL;
+	structure->envp_export = NULL;
+	structure->envp_sorted = NULL;
 	structure->is_builtin = 0;
 	structure->path_env = NULL;
 	structure->number_commands = 0;
@@ -32,18 +32,17 @@ void init_vars(t_info *structure)
 	structure->last_exit_status = 0;
 }
 
-void store_last_path(t_info *structure)
+void	store_last_path(t_info *structure)
 {
-	char		*curr_path;
-	char		*str;
-	char		cwd[PATH_MAX];
+	char	*curr_path;
+	char	*str;
+	char	cwd[PATH_MAX];
 
-	
 	curr_path = getcwd(cwd, sizeof(cwd));
 	if (curr_path == NULL)
 	{
 		str = ft_strdup(structure->folder);
 		structure->folder = get_parent_folder(str);
+		free(str);
 	}
-	free(str);
 }
