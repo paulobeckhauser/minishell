@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 14:18:39 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:48:12 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@
 void	default_display_with_history(t_prompt *prompt, t_info *structure)
 {
 	char	*color_prompt;
+	char	*tmp;
 	size_t	size;
 
 	size = PATH_MAX;
-	if (getcwd(NULL, 0) != NULL)
-	{
+	tmp = getcwd(NULL, 0);
+	if (tmp)
 		prompt->buf = getcwd(NULL, 0);
-		prompt->folder =  getcwd(NULL, size);
-	}
 	else
 		structure->folder_deleted = 1;
-
+	free(tmp);
 	color_prompt = init_color_prompt(prompt, structure);
 	handle_key_combos();
 	prompt->msg = readline(color_prompt);

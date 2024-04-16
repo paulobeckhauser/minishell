@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/14 14:16:54 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:47:35 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	main(int argc, char **argv, char **envp)
 		
 		init_vars(&structure);
 		store_envp(envp, &structure);
-
-		prompt.folder = NULL;
 
 		structure.folder = NULL;
 		structure.folder_deleted = 0;
