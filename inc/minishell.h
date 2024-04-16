@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/15 15:21:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:43:40 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void					store_envp(char **envp, t_info *structure);
 bool					execution(t_info *structure);
 int						ft_strcmp(const char *s1, const char *s2);
 void					check_builtin(t_info *structure, char *str);
+void	check_path(char *path, char *cmd);
 // void					get_path_env(t_info *structure);
 int	get_path_env(t_info *structure);
 void					get_number_commands(t_info *structure);
@@ -328,8 +329,8 @@ void					run_word_token_join(t_join_word_tokens_vars *vars);
 void					replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word,
 							char *replacement);
 void					replace_word(t_dollar_replace_info *info, int y);
-void					verify_dollar(t_info *structure, t_prompt *prompt);
-void					handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i);
+int						verify_dollar(t_info *structure, t_prompt *prompt);
+int						handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i);
 char					*find_dollar_word(t_prompt *prompt, char *str);
 void					move_pointer_after_dollar(char **str);
 void					measure_dollar_word_len(char **str, t_prompt *prompt, int *len);

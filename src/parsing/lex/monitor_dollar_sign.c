@@ -6,13 +6,23 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/11 23:43:04 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:44:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-void	verify_dollar(t_info *structure, t_prompt *prompt)
+static int shift_left(char **arr, int index, int size)
+{
+	free(arr[index]);
+	if (size == 1)
+		return (0);
+    memmove(&arr[index], &arr[index + 1], (size - index - 1) * sizeof(char *));
+    arr[size - 1] = NULL;
+	return (1);
+}
+
+int	verify_dollar(t_info *structure, t_prompt *prompt)
 {
 	int						i;
 	t_single_quote_checker	*head;
@@ -29,14 +39,21 @@ void	verify_dollar(t_info *structure, t_prompt *prompt)
 			continue ;
 		}
 		while (prompt->arr[i] && ft_strchr(prompt->arr[i], '$'))
-			handle_dollar(structure, prompt, prompt->arr[i], &i);
+		{
+			if (!handle_dollar(structure, prompt, prompt->arr[i], &i))
+			{
+				if (!shift_left(prompt->arr, i, prompt->word_count))
+					return (0);
+			}
+		}
 		prompt->checker = prompt->checker->next;
 		i++;
 	}
 	prompt->checker = head;
+	return (1);
 }
 
-void	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
+int	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 {
 	char	*dollar_word;
 	char	*word_replacement;
@@ -45,15 +62,19 @@ void	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 	if (ft_strcmp(dollar_word, "$") == 0)
 	{
 		++(*i);
-		return ;
+		return (1);
 	}
 	if (ft_strcmp(dollar_word, "?") == 0)
+	{
 		replace_words_in_arr(prompt, *i, dollar_word,
 			ft_itoa(structure->last_exit_status));
+		return (1);
+	}
 	word_replacement = replace_dollar_word(structure, dollar_word);
 	if (!word_replacement)
-		word_replacement = "";
+		return (0);
 	replace_words_in_arr(prompt, *i, dollar_word, word_replacement);
+	return (1);
 }
 
 char	*find_dollar_word(t_prompt *prompt, char *str)
