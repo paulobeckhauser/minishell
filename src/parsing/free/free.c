@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 16:09:01 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:53:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	free_cmd_table(t_info *structure)
 	int		i;
 
 	current = structure->table;
-	while (current != NULL)
+	while (current)
 	{
 		next = current->next;
-		if (current->arr != NULL)
+		if (current->arr)
 		{
 			i = 0;
 			while (current->arr[i] != NULL)
