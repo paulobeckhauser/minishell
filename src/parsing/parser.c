@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 13:45:41 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:53:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ bool	parser(t_info *structure, t_prompt *prompt)
 	structure->table = parse(tokens, prompt);
 	if (!structure->table)
 	{
-		free_token_list(&tokens);
 		free(prompt->start_ptr_save);
 		return (false);
 	}
-	free_token_list(&tokens);
 	free(prompt->start_ptr_save);
 	return (true);
 }
@@ -66,7 +64,9 @@ t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 	t_cmd			*head;
 
 	tree = init_binary_tree(&tokens);
+	table = NULL;
 	head = NULL;
 	init_cmd_table(tree, &table, &head, prompt);
+	free_tree(tree);
 	return (head);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 13:45:30 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:52:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	pipes_implementation(t_info *structure)
     int	i;
     int command_number;
     pid_t w_id;
+	t_cmd	*head;
 
     create_pipes(structure);
     structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1),
@@ -33,6 +34,7 @@ void	pipes_implementation(t_info *structure)
         redirection = true;
 
     command_number = 0;
+	head = structure->table;
     while (structure->table)
     {
         command_number++;
@@ -119,7 +121,7 @@ void	pipes_implementation(t_info *structure)
         structure->table = structure->table->next;
     }
 
-        
+    structure->table = head;    
     int status;
     
     w_id = wait_child_processes(structure, &status);

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:56 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/13 15:18:20 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:06:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	mark_last_in_redirection(t_token_node *tokens)
 	while (tokens && tokens->token.type != PIPE)
 	{
 		if (tokens->token.type == REDIRECTION
-			&& tokens->token.t_value.single_ptr[0] == '<')
+			&& tokens->token.val[0] == '<')
 			current_last = tokens;
 		tokens = tokens->next;
 	}
@@ -54,7 +54,7 @@ void	mark_last_out_redirection(t_token_node *tokens)
 	while (tokens && tokens->token.type != PIPE)
 	{
 		if (tokens->token.type == REDIRECTION
-			&& tokens->token.t_value.single_ptr[0] == '>')
+			&& tokens->token.val[0] == '>')
 			current_last = tokens;
 		tokens = tokens->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_dollar_sign.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 13:46:40 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:54:43 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	verify_dollar(t_info *structure, t_prompt *prompt)
 		i++;
 	}
 	prompt->checker = head;
+	free_single_quote_checker_list(prompt);
 	return (1);
 }
 

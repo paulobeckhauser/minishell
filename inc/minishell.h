@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 13:47:11 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:52:24 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int						count_quotes(t_prompt *prompt);
 void					free_prompt(t_prompt *prompt);
 void					free_double_arr(char **arr);
 void					free_single_quote_checker_list(t_prompt *prompt);
+void					free_tree(t_token_node *node);
 void					free_token_list(t_token_node **list);
 void					free_cmd_table(t_cmd **table);
 

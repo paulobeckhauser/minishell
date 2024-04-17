@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 22:35:48 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:05:43 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_primary_redirection_vars(t_token *token, t_prompt *prompt)
 	token->in.heredoc = false;
 	token->out.fd = 1;
 	token->out.file_name = NULL;
-	token->t_value.single_ptr = verify_redirection(prompt);
+	token->val = verify_redirection(prompt);
 	token->last_redirection = false;
 }
 
@@ -31,8 +31,7 @@ void	init_in_redirection(t_token *token, char *file_name, t_prompt *prompt)
 	token->in.file_name = ft_calloc(2, sizeof(char *));
 	if (!token->in.file_name)
 		return ;
-	token->in.file_name[0] = malloc(ft_strlen(file_name) + 1);
-	ft_strlcpy(token->in.file_name[0], file_name, ft_strlen(file_name) + 1);
+	token->in.file_name[0] = file_name;
 	token->in.file_name[1] = NULL;
 	token->type = REDIRECTION;
 }
