@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 19:10:02 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:45:30 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	pipes_implementation(t_info *structure)
 
 						// if(command_number == structure->number_commands)
 						// {
-						// 	exit(EX_COMM_NOTFOUND);j
+						// 	exit(EX_COMM_NOTFOUND);
 						// }
 						
                 }

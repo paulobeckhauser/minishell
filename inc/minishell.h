@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 13:39:36 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:47:11 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@
 # include <limits.h>
 # include <linux/limits.h>
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
-# include "builtins.h"
-# include "execution.h"
-# include "exit_codes.h"
-# include "parsing.h"
-# include <errno.h>
 # include <stdbool.h>
+# include "parsing.h"
+# include "execution.h"
+# include "builtins.h"
+# include <stdbool.h>
+# include <errno.h>
+
+# include "exit_codes.h"
+# include <errno.h>
 
 extern int				g_signal;
 
