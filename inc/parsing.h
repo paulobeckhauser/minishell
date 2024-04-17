@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:34:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 13:37:22 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:56:06 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,8 @@ typedef struct s_token
 	t_type							type;
 	t_in							in;
 	t_out							out;
-	union							u_value
-	{
-		char						*single_ptr;
-		char						**double_ptr;
-	} t_value;
+	char							*val;
+	char							**word_val;
 	bool							last_redirection;
 }									t_token;
 
