@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 19:58:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:12:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	init_left_leaf(t_token_node **node, t_cmd **table, t_cmd **head,
 		(*table)->next = new_cmd;
 		*table = (*table)->next;
 	}
-	(*node)->left = NULL;
 }
 
 void	init_right_leaf(t_token_node **node, t_cmd **table,
@@ -63,7 +62,6 @@ void	init_right_leaf(t_token_node **node, t_cmd **table,
 	new_cmd = init_cmd((*node)->right, prompt);
 	(*table)->next = new_cmd;
 	*table = (*table)->next;
-	(*node)->right = NULL;
 }
 
 t_cmd	*init_cmd(t_token_node *node, t_prompt *prompt)
@@ -74,7 +72,7 @@ t_cmd	*init_cmd(t_token_node *node, t_prompt *prompt)
 	if (!cmd)
 		return (NULL);
 	cmd->type = node->token.type;
-	cmd->arr = node->token.t_value.double_ptr;
+	cmd->arr = node->token.word_val;
 	cmd->in_prio = prompt->in_prio;
 	cmd->out_prio = prompt->out_prio;
 	if (node->left)

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 16:47:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:05:22 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,8 @@ typedef struct s_token
 	t_type					type;
 	t_in					in;
 	t_out					out;
-	union					u_value
-	{
-		char				*single_ptr;
-		char				**double_ptr;
-	} t_value;
+	char					*val;
+	char					**word_val;
 	bool					last_redirection;
 }							t_token;
 
@@ -280,6 +277,7 @@ int						count_quotes(t_prompt *prompt);
 void					free_prompt(t_prompt *prompt);
 void					free_double_arr(char **arr);
 void					free_single_quote_checker_list(t_prompt *prompt);
+void					free_tree(t_token_node *node);
 void					free_token_list(t_token_node **list);
 void					free_cmd_table(t_info *structure);
 	

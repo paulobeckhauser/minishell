@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 20:15:56 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:41:14 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ void	free_single_quote_checker_list(t_prompt *prompt)
 	prompt->checker = NULL;
 }
 
+void	free_tree(t_token_node *node)
+{
+	if (node->left)
+		free_tree(node->left);
+	if (node->right)
+		free_tree(node->right);
+	free(node);
+}
+
 void	free_token_list(t_token_node **list)
 {
 	t_token_node	*current;
@@ -67,16 +76,12 @@ void	free_cmd_table(t_info *structure)
 	while (current)
 	{
 		next = current->next;
+		if (current->in.file_name)
+			free_double_arr(current->in.file_name);
+		if (current->out.file_name)
+			free_double_arr(current->out.file_name);
 		if (current->arr)
-		{
-			i = 0;
-			while (current->arr[i] != NULL)
-			{
-				free(current->arr[i]);
-				i++;
-			}
-			free(current->arr);
-		}
+			free_double_arr(current->arr);
 		free(current);
 		current = next;
 	}

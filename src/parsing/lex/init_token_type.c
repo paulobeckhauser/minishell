@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 14:43:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:03:43 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_token	init_end_token(void)
 	token.out.fd = 1;
 	token.out.file_name = NULL;
 	token.type = END;
-	token.t_value.single_ptr = NULL;
+	token.val = NULL;
 	token.last_redirection = false;
 	return (token);
 }
@@ -37,7 +37,7 @@ t_token	init_error_token(void)
 	token.out.fd = 1;
 	token.out.file_name = NULL;
 	token.type = ERROR;
-	token.t_value.single_ptr = NULL;
+	token.val = NULL;
 	token.last_redirection = false;
 	return (token);
 }
@@ -52,7 +52,7 @@ t_token	init_pipe_token(t_prompt *prompt)
 	token.out.fd = 1;
 	token.out.file_name = NULL;
 	token.type = PIPE;
-	token.t_value.single_ptr = "|";
+	token.val = "|";
 	token.last_redirection = false;
 	++prompt->pipe_count;
 	return (token);
@@ -70,17 +70,17 @@ t_token	init_redirection_token(t_prompt *prompt)
 		token = init_error_token();
 		print_syntax_token_error(prompt);
 	}
-	else if (token.t_value.single_ptr[0] == '<'
-		&& ft_strlen(token.t_value.single_ptr) == 1)
+	else if (token.val[0] == '<'
+		&& ft_strlen(token.val) == 1)
 		init_in_redirection(&token, file_name, prompt);
-	else if (token.t_value.single_ptr[0] == '<'
-		&& token.t_value.single_ptr[1] == '<')
+	else if (token.val[0] == '<'
+		&& token.val[1] == '<')
 		init_heredoc_in_redirection(&token, file_name);
-	else if (token.t_value.single_ptr[0] == '>'
-		&& ft_strlen(token.t_value.single_ptr) == 1)
+	else if (token.val[0] == '>'
+		&& ft_strlen(token.val) == 1)
 		init_truncate_out_redirection(&token, file_name, prompt);
-	else if (token.t_value.single_ptr[0] == '>'
-		&& token.t_value.single_ptr[1] == '>')
+	else if (token.val[0] == '>'
+		&& token.val[1] == '>')
 		init_append_out_redirection(&token, file_name, prompt);
 	return (token);
 }

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 20:30:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 12:42:16 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ bool	execution(t_info *structure)
 
 
 	structure->folder = getcwd(cwd, sizeof(cwd));
-
 	if (structure->table->type == BUILTIN_CMD && structure->number_commands == 1)
 		builtin_execution(structure);
 	else
