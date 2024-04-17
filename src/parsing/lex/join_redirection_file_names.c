@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_redirection_file_names.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 00:20:06 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/15 09:55:03 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:13:17 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void	join_out_file_names(t_token_node **tokens)
 			}
 			file_arr[y] = NULL;
 			last_redirection->token.out.file_name = file_arr;
-			int z = 0;
 			start_redirection = NULL;
 			i = 0;
 		}

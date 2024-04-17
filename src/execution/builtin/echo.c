@@ -3,44 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/15 09:35:02 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:18:36 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-
 
 int	is_echo_command(char **command)
 {
 	return (ft_strcmp(command[0], "echo") == 0);
 }
 
-
 static char	*join_string_echo(int start, t_info *structure)
 {
-	char *concat_str = "";
-	int count;
+	char	*concat_str;
+	int		count;
 
+	concat_str = "";
 	count = 0;
-	
-	while(structure->table->arr[start])
+	while (structure->table->arr[start])
 	{
 		if (count > 0)
 			concat_str = ft_strjoin(concat_str, " ");
 		concat_str = ft_strjoin(concat_str, structure->table->arr[start]);
-
 		start++;
 		count++;
-
 	}
-
-
-
-	
 	return (concat_str);
 }
 

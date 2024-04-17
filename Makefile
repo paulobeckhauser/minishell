@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/16 15:47:32 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/17 13:44:36 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,7 @@ PARSING_DIR		:= parsing/
 # Compiler and Flags
 CC				:= cc
 RM				:= rm -f
-CFLAGS			:= #-Wall -Wextra -Werror
-#LREADLINE		:= -lreadline
+CFLAGS			:= -Wall -Wextra -Werror
 DEBUG			:= -g
 # SANITIZER 		:= #-fsanitize=address -g
 
@@ -98,6 +97,8 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_with_value.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)count_number_equal_signs.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)sort_var_envp.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_without_args.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_with_args.c \
 
 
 EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
@@ -158,7 +159,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 
 
 SHARED_SRCS			:= 	$(SRC_DIR)main.c \
-						$(SRC_DIR)init_vars.c \
+						$(SRC_DIR)utils_main.c \
 	
 
 #Source Files

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 12:42:16 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:52:43 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 bool	execution(t_info *structure)
 {
-	int test;
-	int i;
-	char cwd[PATH_MAX];
-	
+	int		test;
+	int		i;
+	char	cwd[PATH_MAX];
+
 	i = 0;
 
 	test = 0;
@@ -32,7 +32,6 @@ bool	execution(t_info *structure)
 	else
 	{
 		test = get_path_env(structure);
-
 		if (test == 0)
 		{
 			i = 0;

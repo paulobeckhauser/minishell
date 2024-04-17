@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/13 10:29:49 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:14:00 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	count_len_inside_quotes(t_prompt *prompt, int i)
 char	*fetch_file_name(t_prompt *prompt)
 {
 	char	*file_name;
-	char	*start_ptr_save;
 	size_t	i;
 
 	skip_whitespaces(prompt);

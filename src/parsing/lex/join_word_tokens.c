@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 14:06:04 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:54:24 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	join_word_tokens(t_token_node **tokens)
 }
 
 void	init_word_tokens_vars(t_join_word_tokens_vars *vars,
-	t_token_node **tokens)
+		t_token_node **tokens)
 {
 	vars->command = NULL;
 	vars->head = *tokens;
@@ -102,8 +102,6 @@ void	join_words_to_command(char ***arr, char **join)
 		join_temp++;
 		arr_temp++;
 	}
-	// if (*join)
-	// 	free_2d_array(*join);
 	*join = NULL;
 	*arr_temp = NULL;
 	*arr = start_ptr_save;

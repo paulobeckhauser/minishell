@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 13:41:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:53:52 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void	free_token_list(t_token_node **list)
 	*list = NULL;
 }
 
-void	free_cmd_table(t_info *structure)
+void	free_cmd_table(t_cmd **table)
 {
 	t_cmd	*current;
 	t_cmd	*next;
-	int		i;
+	// int		i;
 
-	current = structure->table;
+	current = *table;
 	while (current)
 	{
 		next = current->next;
@@ -85,6 +85,5 @@ void	free_cmd_table(t_info *structure)
 		free(current);
 		current = next;
 	}
-	free(current);
-	structure->table = NULL;
+	*table = NULL;
 }
