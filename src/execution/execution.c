@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 17:57:44 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:45:08 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 bool	execution(t_info *structure)
 {
-	int test;
-	int i;
-	char cwd[PATH_MAX];
-	
+	int		test;
+	int		i;
+	char	cwd[PATH_MAX];
+
 	i = 0;
 	test = 0;
 	handle_key_combos_execution();
@@ -28,7 +28,6 @@ bool	execution(t_info *structure)
 	else
 	{
 		test = get_path_env(structure);
-
 		if (test == 0)
 		{
 			i = 0;

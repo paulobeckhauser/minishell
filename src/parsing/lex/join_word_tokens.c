@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_word_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/15 15:29:46 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:26:28 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	join_word_tokens(t_token_node **tokens)
 }
 
 void	init_word_tokens_vars(t_join_word_tokens_vars *vars,
-	t_token_node **tokens)
+		t_token_node **tokens)
 {
 	vars->command = NULL;
 	vars->head = *tokens;
@@ -72,12 +72,12 @@ void	run_word_token_join(t_join_word_tokens_vars *vars)
 			break ;
 		else if (vars->curr_save->token.type == BUILTIN_CMD
 			|| vars->curr_save->token.type == SIMPLE_CMD)
-				join_words_to_command(&vars->command,
-					vars->curr_save->token.t_value.double_ptr);
+			join_words_to_command(&vars->command,
+				vars->curr_save->token.t_value.double_ptr);
 		vars->curr_save = vars->curr_save->next;
 	}
 	vars->arr_save->token.t_value.double_ptr = vars->command;
-	vars->command_word_count = 0;		
+	vars->command_word_count = 0;
 }
 
 void	join_words_to_command(char ***arr, char **join)
@@ -102,8 +102,6 @@ void	join_words_to_command(char ***arr, char **join)
 		join_temp++;
 		arr_temp++;
 	}
-	// if (*join)
-	// 	free_2d_array(*join);
 	*join = NULL;
 	*arr_temp = NULL;
 	*arr = start_ptr_save;

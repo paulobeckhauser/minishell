@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd_table.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 21:29:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/17 12:15:38 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:44:55 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 14:48:43 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 12:17:45 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*fill_word(const char *str, int start, int end, char *command)
 	return (word);
 }
 
-char	**split_concat_command(char const *s, char c, char *command)
+char	**split_concat(char const *s, char c, char *command)
 {
 	char	**array;
 	size_t	i;
