@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:47:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 22:26:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:38:40 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	free_2d_int_array(int **array)
 
 	if (array)
 	{
-		
 		i = 0;
 		while (array[i])
 		{
