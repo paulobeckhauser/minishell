@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/15 20:40:52 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:10:02 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	pipes_implementation(t_info *structure)
 
 						// if(command_number == structure->number_commands)
 						// {
-						// 	exit(EX_COMM_NOTFOUND);
+						// 	exit(EX_COMM_NOTFOUND);j
 						// }
 						
                 }

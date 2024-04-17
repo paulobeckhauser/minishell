@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 17:53:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:58:06 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,28 @@ void	free_token_list(t_token_node **list)
 	*list = NULL;
 }
 
-void	free_cmd_table(t_info *structure)
+void	free_cmd_table(t_cmd **table)
 {
 	t_cmd	*current;
 	t_cmd	*next;
-	int		i;
+	// int		i;
 
-	current = structure->table;
+	current = *table;
 	while (current)
 	{
 		next = current->next;
 		if (current->arr)
 		{
-			i = 0;
-			while (current->arr[i] != NULL)
-			{
-				free(current->arr[i]);
-				i++;
-			}
-			free(current->arr);
+			// i = 0;
+			// while (current->arr[i] != NULL)
+			// {
+			// 	free(current->arr[i]);
+			// 	i++;
+			// }
+			// free(current->arr);
 		}
 		free(current);
 		current = next;
 	}
-	structure->table = NULL;
+	*table = NULL;
 }

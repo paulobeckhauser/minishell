@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/16 18:07:40 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/17 12:47:30 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,8 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)print_export_with_value.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)count_number_equal_signs.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)sort_var_envp.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_without_args.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_with_args.c \
 
 
 EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
