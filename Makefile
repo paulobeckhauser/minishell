@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/18 17:28:18 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/18 20:33:30 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,8 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)ft_strcmp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_path_env.c \
 						$(SRC_DIR)$(EXECUTION_DIR)open_files.c \
+						$(SRC_DIR)$(EXECUTION_DIR)in_open_files.c \
+						$(SRC_DIR)$(EXECUTION_DIR)out_open_files.c \
 						$(SRC_DIR)$(EXECUTION_DIR)pipes_implementation.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command.c \
 						$(SRC_DIR)$(EXECUTION_DIR)split_concat_command_utils.c \
@@ -122,6 +124,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 						$(SRC_DIR)$(EXECUTION_DIR)signals/signals.c \
 						$(SRC_DIR)$(EXECUTION_DIR)get_parent_folder.c \
 						$(SRC_DIR)$(EXECUTION_DIR)free_exec_variables.c \
+						$(SRC_DIR)$(EXECUTION_DIR)commands_execution.c \
 					
 
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
