@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 14:23:02 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:28:11 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,24 @@
 
 // Minishell functions libraries
 # include <fcntl.h>
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <termios.h>
 
 // MACRO variable library
-# include <limits.h>
-# include <linux/limits.h>
+
+#ifdef __APPLE__
+	# include <limits.h>
+#else
+	# include <linux/limits.h>
+#endif
+
+
 // CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
 # include <stdbool.h>
 # include "parsing.h"
