@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:46:03 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 16:17:26 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:28:05 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 static int	edge_cases_handle(t_info *structure, int i)
 {
 	int	j;
-	int flag_edge_cases;
+	int	flag_edge_cases;
 
 	flag_edge_cases = 0;
 	j = 0;
-	if (((structure->table->arr[i][j] == '-') && (
-			structure->table->arr[i][j + 1] != '-'))
-			|| (structure->table->arr[i][j + 1] == '-')
-			|| (structure->table->arr[i][j] >= '0'
+	if (((structure->table->arr[i][j] == '-') && (structure->table->arr[i][j
+			+ 1] != '-')) || (structure->table->arr[i][j + 1] == '-')
+		|| (structure->table->arr[i][j] >= '0'
 			&& structure->table->arr[i][j] <= '9'))
 	{
 		ft_putstr_fd("minishell: export: `", 2);
@@ -113,7 +112,6 @@ void	export_with_args(t_info *structure)
 				check_equal_sign = 0;
 				check_equal_sign = nb_equal_signs(structure, i);
 				change_envp(check_equal_sign, structure, i);
-				
 			}
 		}
 		i++;

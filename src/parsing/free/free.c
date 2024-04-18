@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 14:53:52 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:49:14 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ void	free_cmd_table(t_cmd **table)
 	t_cmd	*current;
 	t_cmd	*next;
 	// int		i;
-
+	
+	// if (!*table)
+	// 	return ;
 	current = *table;
 	while (current)
 	{

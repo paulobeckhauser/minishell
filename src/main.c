@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 13:57:29 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:09:35 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 int	g_signal = 0;
+
+
+// static void free_var_pid(t_info *structure)
+// {
+// 	if (!structure->pid)
+// 		return ;
+// 	free(structure->pid);
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -37,11 +45,6 @@ int	main(int argc, char **argv, char **envp)
 			{
 				execution(&structure);
 				free_cmd_table(&structure.table);
-				free_2d_int_array(structure.fds_pipes);
-				free_2d_array(structure.commands);
-				free_2d_array(structure.path_commands);
-				free(structure.path_env);
-				free(structure.pid);
 			}
 				
 		}
