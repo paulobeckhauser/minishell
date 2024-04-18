@@ -6,19 +6,18 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 22:02:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:21:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-
 
 void	pipes_implementation(t_info *structure)
 {
     int	i;
     int command_number;
     pid_t w_id;
+	t_cmd	*head;
 
     create_pipes(structure);
     structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1),
@@ -33,9 +32,11 @@ void	pipes_implementation(t_info *structure)
         redirection = true;
 
     command_number = 0;
+	head = structure->table;
     while (structure->table)
     {
         command_number++;
+		handle_child_key_combos();
         structure->pid[i] = fork();
         if (structure->pid[i] == -1)
         {
@@ -46,8 +47,6 @@ void	pipes_implementation(t_info *structure)
         {
 			if (!open_files(structure->table))
 				exit(EXIT_FAILURE);
-			else
-				
 			if (structure->table->in.fd == 0)
 			{
 				if (i != 0)
@@ -83,7 +82,6 @@ void	pipes_implementation(t_info *structure)
                 close(structure->fds_pipes[j][1]);
                 j++;
             }
-
             if (structure->table->type == BUILTIN_CMD)
             {
 				builtin_execution(structure);
@@ -119,7 +117,7 @@ void	pipes_implementation(t_info *structure)
         structure->table = structure->table->next;
     }
 
-        
+    structure->table = head;    
     int status;
     
     w_id = wait_child_processes(structure, &status);

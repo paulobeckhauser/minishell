@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/17 14:36:42 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/18 16:19:02 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -151,7 +151,9 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/set_redirection_priority.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/utils.c \
 						$(SRC_DIR)$(PARSING_DIR)print/print.c \
-						$(SRC_DIR)$(PARSING_DIR)signals/signals.c \
+						$(SRC_DIR)$(PARSING_DIR)signals/child_signal.c \
+						$(SRC_DIR)$(PARSING_DIR)signals/heredoc_signal.c \
+						$(SRC_DIR)$(PARSING_DIR)signals/parent_signal.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
 						
 

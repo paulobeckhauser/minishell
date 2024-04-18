@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 14:32:34 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:00:25 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	if_builtin_cmd(char *str)
 	builtins[5] = "env";
 	builtins[6] = "exit";
 	builtins[7] = NULL;
-	while (builtins[i])
+	while (builtins[i] && str && *str)
 	{
 		if (ft_strncmp(builtins[i], str, ft_strlen(builtins[i])) == 0
 			&& ft_strlen(builtins[i]) == ft_strlen(str))

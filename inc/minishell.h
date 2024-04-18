@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 18:10:12 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:19:08 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,17 @@ void					handle_execution(int signal);
 void					handle_key_combos_execution(void);
 
 // DISPLAY (default_display.c, verify_quote_number.c)
-// void					default_display_with_history(t_prompt *prompt);
-void					default_display_with_history(t_prompt *prompt,
+int						default_display_with_history(t_prompt *prompt,
 							t_info *structure);
-// char					*init_color_prompt(t_prompt *prompt);
 char					*init_color_prompt(t_prompt *prompt, t_info *structure);
-void					check_quotes(t_prompt *prompt);
+int						check_quotes(t_prompt *prompt);
 int						count_quotes(t_prompt *prompt);
 
 // FREE (free.c)
 void					free_prompt(t_prompt *prompt);
 void					free_double_arr(char **arr);
 void					free_single_quote_checker_list(t_prompt *prompt);
+void					free_tree(t_token_node *node);
 void					free_token_list(t_token_node **list);
 void					free_cmd_table(t_cmd **table);
 
@@ -242,9 +241,11 @@ void					print_redirection_file(t_cmd *table);
 const char				*type_to_string(t_type type);
 
 // SIGNALS (signals.c)
-void					handle_signal(int signal);
-void					handle_key_combos(void);
+void					handle_signal_child(int signal);
+void					handle_child_key_combos(void);
 void					handle_signal_heredoc(int signal);
-void					handle_heredoc_combos(void);
+void					handle_heredoc_key_combos(void);
+void					handle_signal_parent(int signal);
+void					handle_parent_key_combos(void);
 
 #endif
