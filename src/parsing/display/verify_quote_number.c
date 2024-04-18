@@ -6,19 +6,20 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:20:23 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 14:20:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:06:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-void	check_quotes(t_prompt *prompt)
+int	check_quotes(t_prompt *prompt)
 {
 	if (count_quotes(prompt) % 2 != 0)
 	{
-		ft_printf("Error: quotes number not even.\n");
-		exit (1);
+		ft_putstr_fd("minishell: quotes number not even\n", 2);
+		return (0);
 	}
+	return (1);
 }
 
 int	count_quotes(t_prompt *prompt)

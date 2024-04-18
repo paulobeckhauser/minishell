@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:12:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/15 16:29:55 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:17:40 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	run_heredoc(t_token *token, char *delimiter)
 	char	*heredoc_newline;
 	char	*heredoc_msg;
 
-	handle_heredoc_combos();
+	handle_heredoc_key_combos();
 	wait_for_heredoc_delimiter(&heredoc_newline, &heredoc_msg, delimiter);
 	open_write_close_tmp_file(token, &heredoc_msg);
 	exit(0);
