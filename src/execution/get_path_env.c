@@ -6,32 +6,69 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:27:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/10 22:06:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:04:19 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+static void	allocate_mem_path(t_info *structure, int i, int j)
+{
+	int	size_alloc;
+
+	size_alloc = 0;
+	while (structure->envp_export[i][j])
+	{
+		size_alloc++;
+		j++;
+	}
+	structure->path_env = (char *)malloc((size_alloc + 1) * sizeof(char));
+}
+
+static void	store_path(int i, int j, t_info *structure)
+{
+	int	g;
+
+	g = 0;
+	while (structure->envp_export[i][j])
+	{
+		structure->path_env[g] = structure->envp_export[i][j];
+		j++;
+		g++;
+	}
+	structure->path_env[g] = '\0';
+}
+
+static void	init_int_vars(int *i, int *j, int *count)
+{
+	*i = 0;
+	*j = 0;
+	*count = 0;
+}
+
+static void	store_path_env(t_info *structure, int i)
+{
+	int	j;
+
+	j = 0;
+	while (structure->envp_export[i][j] && structure->envp_export[i][j] != '=')
+		j++;
+	j++;
+	allocate_mem_path(structure, i, j);
+	store_path(i, j - 1, structure);
+}
+
 int	get_path_env(t_info *structure)
 {
 	int		i;
-	int		len_path;
 	int		j;
 	char	*str_temp;
-	int		k;
-	int		m;
-	int		p;
 	int		count;
 
 	if (structure->envp_export == NULL)
 		return (0);
-	i = 0;
-	j = 0;
-	len_path = 0;
-	count = 0;
-
+	init_int_vars(&i, &j, &count);
 	structure->path_env = NULL;
-	
 	while (structure->envp_export[i])
 	{
 		str_temp = allocate_str_temp(structure, str_temp, i);
@@ -39,39 +76,10 @@ int	get_path_env(t_info *structure)
 		if (ft_strcmp(str_temp, "PATH") == 0)
 		{
 			count++;
-			while (structure->envp_export[i][j] && structure->envp_export[i][j] != '=')
-			{
-				j++;
-			}
-			k = j + 1;
-			j++;
-			m = 0;
-			while (structure->envp_export[i][j])
-			{
-				m++;
-				j++;
-			}
-			structure->path_env = (char *)malloc((m + 1) * sizeof(char));
-			p = 0;
-			while (structure->envp_export[i][k])
-			{
-				structure->path_env[p] = structure->envp_export[i][k];
-				k++;
-				p++;
-			}
-			structure->path_env[p] = '\0';
+			store_path_env(structure, i);
 		}
 		free(str_temp);
 		i++;
 	}
-
 	return (count);
-
-	
-	
-	// if (!count)
-	// {
-	// 	printf("THERE IS NO PATH!\n");
-	// }
-	// 	structure->path_env = ft_strdup("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
 }

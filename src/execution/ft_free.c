@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:47:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 13:44:14 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:21:12 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	free_2d_int_array(int **array)
 
 	if (array)
 	{
-		
 		i = 0;
 		while (array[i])
 		{
