@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 14:16:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:35:41 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ bool	execution(t_info *structure)
 		builtin_execution(structure);
 	else
 	{
-		flag_cur_folder = get_path_env(structure);
+		// flag_cur_folder = get_path_env(structure);
 		// printf("The flag is: %d\n", flag_cur_folder);
-		if (flag_cur_folder == 0)
+		// if (flag_cur_folder == 0)
+		if (get_path_env(structure) == 0)
 		{
 			while (structure->table)
 			{

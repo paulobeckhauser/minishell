@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:43:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 12:45:39 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:50:40 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	export_without_args(t_info *structure)
 			print_without_equal_sign(i, structure->envp_sorted, "declare -x ");
 		i++;
 	}
+	structure->last_exit_status = 0;
 	free_2d_array(structure->envp_sorted);
 }
