@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 14:03:43 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:07:46 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ t_token	init_cmd_token(t_info *structure, t_prompt *prompt)
 	count_words(prompt);
 	init_words_arr(prompt);
 	if (!verify_dollar(structure, prompt))
+	{
+		token.type = END;
+		return (token);
+	}
+	if (!prompt->arr[0])
 	{
 		token.type = END;
 		return (token);

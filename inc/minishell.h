@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 14:52:24 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:04:06 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,10 @@ void					handle_execution(int signal);
 void					handle_key_combos_execution(void);
 
 // DISPLAY (default_display.c, verify_quote_number.c)
-// void					default_display_with_history(t_prompt *prompt);
-void					default_display_with_history(t_prompt *prompt,
+int						default_display_with_history(t_prompt *prompt,
 							t_info *structure);
-// char					*init_color_prompt(t_prompt *prompt);
 char					*init_color_prompt(t_prompt *prompt, t_info *structure);
-void					check_quotes(t_prompt *prompt);
+int						check_quotes(t_prompt *prompt);
 int						count_quotes(t_prompt *prompt);
 
 // FREE (free.c)
@@ -237,9 +235,11 @@ void					print_redirection_file(t_cmd *table);
 const char				*type_to_string(t_type type);
 
 // SIGNALS (signals.c)
-void					handle_signal(int signal);
-void					handle_key_combos(void);
+void					handle_signal_child(int signal);
+void					handle_child_key_combos(void);
 void					handle_signal_heredoc(int signal);
-void					handle_heredoc_combos(void);
+void					handle_heredoc_key_combos(void);
+void					handle_signal_parent(int signal);
+void					handle_parent_key_combos(void);
 
 #endif

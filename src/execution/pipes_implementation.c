@@ -6,13 +6,11 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 14:52:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:41:13 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-
 
 void	pipes_implementation(t_info *structure)
 {
@@ -38,6 +36,7 @@ void	pipes_implementation(t_info *structure)
     while (structure->table)
     {
         command_number++;
+		handle_child_key_combos();
         structure->pid[i] = fork();
         if (structure->pid[i] == -1)
         {
@@ -48,8 +47,6 @@ void	pipes_implementation(t_info *structure)
         {
 			if (!open_files(structure->table))
 				exit(EXIT_FAILURE);
-			else
-				
 			if (structure->table->in.fd == 0)
 			{
 				if (i != 0)
@@ -85,7 +82,6 @@ void	pipes_implementation(t_info *structure)
                 close(structure->fds_pipes[j][1]);
                 j++;
             }
-
             if (structure->table->type == BUILTIN_CMD)
             {
 				builtin_execution(structure);

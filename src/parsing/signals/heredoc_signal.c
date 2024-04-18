@@ -1,48 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 11:47:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 13:44:14 by sfrankie         ###   ########.fr       */
+/*   Created: 2024/04/18 10:24:44 by sfrankie          #+#    #+#             */
+/*   Updated: 2024/04/18 10:32:43 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-void	free_2d_array(char **array)
+void	handle_signal_heredoc(int signal)
 {
-	int	i;
-
-	i = 0;
-	if (array)
+	if (signal == SIGINT && g_signal == 1)
 	{
-		while (array[i])
-		{
-			free(array[i]);
-			i++;
-		}
-		free(array);
+		write(1, "\n", 1);
+		exit(0);
 	}
-	array = NULL;
 }
 
-void	free_2d_int_array(int **array)
+void	handle_heredoc_key_combos(void)
 {
-	int	i;
+	struct sigaction	sa;
 
-	if (array)
-	{
-		
-		i = 0;
-		while (array[i])
-		{
-			free(array[i]);
-			i++;
-		}
-		free(array);
-	}
-	array = NULL;
+	sa.sa_handler = &handle_signal_heredoc;
+	sa.sa_flags = SA_RESTART;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
 }
