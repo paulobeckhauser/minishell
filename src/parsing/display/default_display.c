@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 16:48:12 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 09:45:05 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	default_display_with_history(t_prompt *prompt, t_info *structure)
 		prompt->buf = getcwd(NULL, 0);
 	else
 		structure->folder_deleted = 1;
-	free(tmp);
+	free(tmp);cd sc
 	color_prompt = init_color_prompt(prompt, structure);
 	handle_key_combos();
 	prompt->msg = readline(color_prompt);
 	free(color_prompt);
 	if (prompt->msg == NULL)
 	{
-		ft_printf("exit\n");
+		ft_putstr_fd("exit\n", 1);
 		exit(0);
 	}
 	check_quotes(prompt);
@@ -45,7 +45,6 @@ char	*init_color_prompt(t_prompt *prompt, t_info *structure)
 	char	*color_prompt;
 	char	*tmp;
 
-	
 	tmp = NULL;
 	if (structure->folder_deleted == 0)
 	{
@@ -58,7 +57,6 @@ char	*init_color_prompt(t_prompt *prompt, t_info *structure)
 		chdir(structure->folder);
 		structure->folder_deleted = 0;
 		free(structure->folder);
-		
 	}
 	tmp = ft_strjoin(color_prompt, "\001\033[0m\002");
 	free(color_prompt);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:30:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 13:32:42 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:01:43 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
