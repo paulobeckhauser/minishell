@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 16:21:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:19:58 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,73 @@ void	pipes_implementation(t_info *structure)
 				exit(EXIT_FAILURE);
 			if (structure->table->in.fd == 0)
 			{
-				if (i != 0)
+				// if (THERE IS OUT REDIRECT)
+				// {
+				// 	do not dup into pipe, because its duplicated to fd
+				// }
+				// else
+				// 	do it 
+
+				if (structure->table->out.fd == 0)
 				{
-					close(structure->fds_pipes[i - 1][1]);
-					dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+					if (i != 0)
+					{
+						close(structure->fds_pipes[i - 1][1]);
+						dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+					}
+
+					if (structure->table->next != NULL)
+					{
+						close(structure->fds_pipes[i][0]);
+						dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+					}
 				}
 
-				if (structure->table->next != NULL)
+				else
 				{
-					close(structure->fds_pipes[i][0]);
-					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+					if (i != 0)
+					{
+						close(structure->fds_pipes[i - 1][1]);
+						dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+					}
+
 				}
 			}
 			else if (structure->table->in.fd > 0)
 			{
-				if (i != 0)
+				if (structure->table->out.fd == 0)
 				{
-					dup2(structure->fds_pipes[i - 1][1], STDIN_FILENO);
-					close(structure->fds_pipes[i - 1][0]);
+					if (i != 0)
+					{
+						dup2(structure->fds_pipes[i - 1][1], STDIN_FILENO);
+						close(structure->fds_pipes[i - 1][0]);
+					}
+					
+					
+					if (structure->table->next != NULL)
+					{
+						dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+						close(structure->fds_pipes[i][1]);
+					}
 				}
-				if (structure->table->next != NULL)
+				else
 				{
-					dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
-					close(structure->fds_pipes[i][1]);
+					if (i != 0)
+					{
+						close(structure->fds_pipes[i - 1][1]);
+						dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+					}
 				}
+				// if (THERE IS OUT REDIRECT)
+				// {
+				// 	do not dup into pipe, because its duplicated to fd
+				// }
+				// else
+				// 	do it
+				// else
+				// {
+					
+				// }
 			}
 
             int j = 0;
@@ -121,5 +164,10 @@ void	pipes_implementation(t_info *structure)
     int status;
     
     w_id = wait_child_processes(structure, &status);
+	free_2d_int_array(structure->fds_pipes);
+	free_2d_array(structure->commands);
+	free_2d_array(structure->path_commands);
+	free(structure->path_env);
+	free(structure->pid);
 }
 

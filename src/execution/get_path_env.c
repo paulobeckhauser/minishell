@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_path_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:27:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 20:04:19 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:57:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static void	allocate_mem_path(t_info *structure, int i, int j)
+static int	allocate_mem_path(t_info *structure, int i, int j)
 {
 	int	size_alloc;
 
@@ -23,14 +23,15 @@ static void	allocate_mem_path(t_info *structure, int i, int j)
 		j++;
 	}
 	structure->path_env = (char *)malloc((size_alloc + 1) * sizeof(char));
+	return (size_alloc);
 }
 
-static void	store_path(int i, int j, t_info *structure)
+static void	store_path(int i, int j, t_info *structure, int size_alloc)
 {
 	int	g;
 
 	g = 0;
-	while (structure->envp_export[i][j])
+	while (structure->envp_export[i][j] && g < size_alloc)
 	{
 		structure->path_env[g] = structure->envp_export[i][j];
 		j++;
@@ -49,13 +50,14 @@ static void	init_int_vars(int *i, int *j, int *count)
 static void	store_path_env(t_info *structure, int i)
 {
 	int	j;
+	int	size_alloc;
 
 	j = 0;
 	while (structure->envp_export[i][j] && structure->envp_export[i][j] != '=')
 		j++;
 	j++;
-	allocate_mem_path(structure, i, j);
-	store_path(i, j - 1, structure);
+	size_alloc = allocate_mem_path(structure, i, j);
+	store_path(i, j - 1, structure, size_alloc);
 }
 
 int	get_path_env(t_info *structure)

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 14:04:19 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:40:03 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 	table = NULL;
 	head = NULL;
 	init_cmd_table(tree, &table, &head, prompt);
-	free_tree(tree);
+	// free_tree(tree);
 	return (head);
 }

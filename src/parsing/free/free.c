@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 14:35:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:04:07 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	free_token_list_full(t_token_node **list)
 	current = *list;
 	while (current != NULL)
 	{
+		if (current->token.out.trunc)
+			free(current->token.out.trunc);
 		if (current->token.word_val)
 			free_double_arr(current->token.word_val);
 		next = current->next;
@@ -101,6 +103,8 @@ void	free_cmd_table(t_cmd **table)
 			free_double_arr(current->in.file_name);
 		if (current->out.file_name)
 			free_double_arr(current->out.file_name);
+		if (current->out.trunc)
+			free(current->out.trunc);
 		if (current->arr)
 			free_double_arr(current->arr);
 		free(current);
