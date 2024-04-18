@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 14:53:52 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:35:45 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,30 @@ void	free_token_list(t_token_node **list)
 	t_token_node	*current;
 	t_token_node	*next;
 
+	current = NULL;
+	next = NULL;
 	current = *list;
 	while (current != NULL)
 	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	*list = NULL;
+}
+
+void	free_token_list_full(t_token_node **list)
+{
+	t_token_node	*current;
+	t_token_node	*next;
+
+	current = NULL;
+	next = NULL;
+	current = *list;
+	while (current != NULL)
+	{
+		if (current->token.word_val)
+			free_double_arr(current->token.word_val);
 		next = current->next;
 		free(current);
 		current = next;

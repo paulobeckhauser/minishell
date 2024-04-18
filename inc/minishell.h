@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 14:04:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:23:02 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void					free_double_arr(char **arr);
 void					free_single_quote_checker_list(t_prompt *prompt);
 void					free_tree(t_token_node *node);
 void					free_token_list(t_token_node **list);
+void					free_token_list_full(t_token_node **list);
 void					free_cmd_table(t_cmd **table);
 
 // INIT (heredoc_utils.c, init_prompt.c, init_redirection.c)

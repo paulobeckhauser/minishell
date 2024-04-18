@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 10:07:46 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:15:16 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	init_end_token(void)
 	token.out.file_name = NULL;
 	token.type = END;
 	token.val = NULL;
+	token.word_val = NULL;
 	token.last_redirection = false;
 	return (token);
 }
@@ -38,6 +39,7 @@ t_token	init_error_token(void)
 	token.out.file_name = NULL;
 	token.type = ERROR;
 	token.val = NULL;
+	token.word_val = NULL;
 	token.last_redirection = false;
 	return (token);
 }
@@ -53,6 +55,7 @@ t_token	init_pipe_token(t_prompt *prompt)
 	token.out.file_name = NULL;
 	token.type = PIPE;
 	token.val = "|";
+	token.word_val = NULL;
 	token.last_redirection = false;
 	++prompt->pipe_count;
 	return (token);
