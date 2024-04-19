@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:14:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 13:29:31 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:17:52 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,10 @@ char	*get_parent_folder(char *str);
 void	free_exec_variables(t_info *structure);
 void	export_without_args(t_info *structure);
 void	export_with_args(t_info *structure);
+// void echo_n_flag(char *string, t_info *structure);
+// char *echo_n_flag(char *string, t_info *structure);
+char *echo_n_flag(char *string, t_info *structure, int i);
+char	*join_string_echo(int start, t_info *structure);
+int flag_string_only_n(char *str);
 
 #endif

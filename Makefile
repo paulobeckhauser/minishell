@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/18 20:33:30 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/18 21:33:22 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ LIBFT			:= ./libs/libft/libft.a
 					
 BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo_n_flag.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)env.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)exit.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export.c \
