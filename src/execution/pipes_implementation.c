@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/19 11:58:00 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:48:29 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,10 +164,10 @@ void	pipes_implementation(t_info *structure)
     int status;
     
     w_id = wait_child_processes(structure, &status);
-	free_2d_int_array(structure->fds_pipes);
-	free_2d_array(structure->commands);
-	free_2d_array(structure->path_commands);
-	free(structure->path_env);
-	free(structure->pid);
+	// free_2d_int_array(structure->fds_pipes);
+	// free_2d_array(structure->commands);
+	// free_2d_array(structure->path_commands);
+	// free(structure->path_env);
+	// free(structure->pid);
 }
 
