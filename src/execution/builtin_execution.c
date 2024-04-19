@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 08:59:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 14:35:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:45:11 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	builtin_execution(t_info *structure)
 		execute_unset_command(structure);
 	if (is_env_command(structure->table->arr) && get_path_env(structure) != 0)
 		execute_env_command(structure);
-	else if (is_env_command(structure->table->arr) && get_path_env(structure) == 0)
+	else if (is_env_command(structure->table->arr)
+		&& get_path_env(structure) == 0)
 	{
 		ft_putstr_fd("minishell: env: No such file or directory\n", 2);
 		structure->last_exit_status = 127;
