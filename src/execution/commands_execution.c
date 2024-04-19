@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:34:03 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 19:40:36 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:40:13 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,26 @@
 
 static void	handle_no_redirection(t_info *structure, int i)
 {
-	if (i != 0)
+	if (structure->table->out.fd == 0)
 	{
-		close(structure->fds_pipes[i - 1][1]);
-		dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+		if (i != 0)
+		{
+			close(structure->fds_pipes[i - 1][1]);
+			dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+		}	
+		if (structure->table->next != NULL)
+		{
+			close(structure->fds_pipes[i][0]);
+			dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+		}
 	}
-	if (structure->table->next != NULL)
+	else
 	{
-		close(structure->fds_pipes[i][0]);
-		dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
+		if (i != 0)
+		{
+			close(structure->fds_pipes[i - 1][1]);
+			dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+		}
 	}
 }
 

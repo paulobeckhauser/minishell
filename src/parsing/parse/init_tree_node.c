@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 09:31:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/19 16:48:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:44:47 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,7 @@ void	join_left_token_to_pipe(t_token_node **token, t_token_node **first_pipe)
 		{
 			if ((*token)->prev->prev && (*token)->prev->prev->token.type == PIPE)
 				(*token)->left = (*token)->prev->prev;
-			else
-			{
-				ft_putstr_fd("minishell: building tree error\n", 2);
-				exit(EXIT_FAILURE);
-			}
 		}
-	}
-	else
-	{
-		ft_putstr_fd("minishell: building tree error\n", 2);
-		exit(EXIT_FAILURE);
 	}
 }
 
@@ -107,9 +97,4 @@ void	join_right_token_to_pipe(t_token_node **token)
 	if ((*token)->next && ((*token)->next->token.type == BUILTIN_CMD
 		|| (*token)->next->token.type == SIMPLE_CMD))
 		(*token)->right = (*token)->next;
-	else
-	{
-		ft_putstr_fd("minishell: building tree error\n", 2);
-		exit(EXIT_FAILURE);
-	}
 }
