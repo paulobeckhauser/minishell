@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/19 12:17:41 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:46:05 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	execute_echo_command(t_info *structure)
 {
 	char	*string;
 	int		n_flag;
-	int count_n;
-	int i;
+	int		count_n;
+	int		i;
 
 	n_flag = 0;
 	string = NULL;
@@ -64,7 +64,6 @@ void	execute_echo_command(t_info *structure)
 	i = 1;
 	if (structure->table->arr[1])
 	{
-		
 		while (structure->table->arr[i])
 		{
 			if (flag_string_only_n(structure->table->arr[i]))
@@ -73,28 +72,10 @@ void	execute_echo_command(t_info *structure)
 				i++;
 			}
 			else
-				break;
+				break ;
 		}
-		// printf("%d\n", i);
-		
-		// count_n = flag_string_only_n(structure->table->arr[1]);
-		// printf("COUNT_N is: %d\n", count_n);
-
-		// if (count_n)
-		// 	n_flag = 1;
-		// else
-		// {
-		// 	if (ft_strcmp(structure->table->arr[1], "-n") == 0)
-		// 		n_flag = 1;
-		// }
-			
-		
-		
 		if (n_flag)
-		{
 			string = echo_n_flag(string, structure, i);
-
-		}
 		else
 		{
 			string = join_string_echo(1, structure);
