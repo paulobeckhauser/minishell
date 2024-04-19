@@ -6,13 +6,21 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 17:16:41 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:24:19 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 int	g_signal = 0;
+
+
+// static void free_var_pid(t_info *structure)
+// {
+// 	if (!structure->pid)
+// 		return ;
+// 	free(structure->pid);
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
