@@ -66,9 +66,11 @@ void	add_node_to_list(t_token_node **head, t_token_node **current,
 	{
 		*head = new_node;
 		*current = new_node;
+		new_node->prev = NULL;
 	}
 	else
 	{
+		new_node->prev = *current;
 		(*current)->next = new_node;
 		*current = (*current)->next;
 	}

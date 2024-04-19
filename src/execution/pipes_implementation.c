@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 22:19:58 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:58:00 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ void	pipes_implementation(t_info *structure)
 						close(structure->fds_pipes[i][1]);
 					}
 				}
-				else
-				{
-					if (i != 0)
-					{
-						close(structure->fds_pipes[i - 1][1]);
-						dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
-					}
-				}
+				// else
+				// {
+				// 	if (i != 0)
+				// 	{
+				// 		close(structure->fds_pipes[i - 1][1]);
+				// 		dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+				// 	}
+				// }
 				// if (THERE IS OUT REDIRECT)
 				// {
 				// 	do not dup into pipe, because its duplicated to fd

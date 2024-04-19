@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:54:34 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 12:38:06 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:26:42 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ void	print_syntax_token_error(t_prompt *prompt)
 			find_next_token_to_print_in_err(prompt));
 }
 
+void	print_list(t_token_node *list)
+{
+	while (list)
+	{
+		printf("%s\n", type_to_string(list->token.type));
+		list = list->next;
+	}
+}
 
 void print_tree(t_token_node *node, int depth, char *left_right)
 {

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/07 21:47:21 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/07 21:48:55 by sfrankie         ###   ########.fr       */
+/*   Created: 2024/04/19 10:01:22 by sfrankie          #+#    #+#             */
+/*   Updated: 2024/04/19 12:41:36 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 t_token_node	*init_binary_tree(t_token_node **token)
 {
-	t_token_node	*previous_token;
+	t_token_node	*root;
 	t_token_node	*head;
 
 	if (!(*token)->next)
 		return (*token);
-	previous_token = NULL;
+	root = NULL;
 	head = NULL;
 	find_first_cmd_token(*token, &head);
-	plant_redirections(token, &previous_token);
+	plant_redirections(token, &root);
 	*token = head;
 	delete_redirection_tokens_from_list(token, &head);
 	*token = head;
-	plant_cmd(token, &head);
-	return (*token);
+	plant_cmd(token, &root);
+	return (root);
 }
 
 void	find_first_cmd_token(t_token_node *token, t_token_node **head)
@@ -43,43 +43,63 @@ void	find_first_cmd_token(t_token_node *token, t_token_node **head)
 	}
 }
 
-void	plant_redirections(t_token_node **token, t_token_node **previous_token)
+void	plant_redirections(t_token_node **token, t_token_node **root)
 {
 	while (*token)
 	{
-		if (mark_redirection_as_previous(token, previous_token))
-			continue ;
-		else if (join_redirection_to_cmd(token, previous_token))
-			continue ;
-		else
-			*token = (*token)->next;
+		if ((*token)->token.type == BUILTIN_CMD
+			|| (*token)->token.type == SIMPLE_CMD)
+		{
+			*root = *token;
+			join_redirection_to_cmd(token);
+		}
+		*token = (*token)->next;
 	}
 }
 
 void	delete_redirection_tokens_from_list(t_token_node **token,
 	t_token_node **head)
 {
+	t_token_node	*curr;
+
 	while (*token && (*token)->token.type == REDIRECTION)
 		*token = (*token)->next;
 	*head = *token;
 	while (*token)
 	{
 		if ((*token)->next && (*token)->next->token.type == REDIRECTION)
+		{
 			(*token)->next = (*token)->next->next;
+			if ((*token)->next)
+				(*token)->next->prev = *token;
+		}
 		else
 			*token = (*token)->next;
 	}
+	*token = *head;
+	(*token)->prev = NULL;
+	while (*token)
+	{
+		curr = *token;
+		*token = (*token)->next;
+		if (*token)
+			(*token)->prev = curr;
+	}
+	*token = *head;
 }
 
-void	plant_cmd(t_token_node **token, t_token_node **previous_token)
+void	plant_cmd(t_token_node **token, t_token_node **root)
 {
-	while ((*token)->next)
+	t_token_node	*first_pipe;
+
+	first_pipe = NULL;
+	while (*token)
 	{
-		if (mark_cmd_as_previous(token, previous_token))
-			continue ;
-		else if (join_cmd_to_pipe(token, previous_token))
-			continue ;
-		else
-			*token = (*token)->next;
+		if ((*token)->token.type == PIPE)
+		{
+			*root = *token;
+			join_tokens_to_pipe(token, &first_pipe);
+		}
+		*token = (*token)->next;
 	}
 }
