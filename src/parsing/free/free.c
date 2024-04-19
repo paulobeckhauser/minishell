@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 21:04:07 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:34:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void	free_cmd_table(t_cmd **table)
 	t_cmd	*current;
 	t_cmd	*next;
 	// int		i;
-
+	
+	// if (!*table)
+	// 	return ;
 	current = *table;
 	while (current)
 	{

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 12:18:36 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:46:05 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_echo_command(char **command)
 	return (ft_strcmp(command[0], "echo") == 0);
 }
 
-static char	*join_string_echo(int start, t_info *structure)
+char	*join_string_echo(int start, t_info *structure)
 {
 	char	*concat_str;
 	int		count;
@@ -55,19 +55,27 @@ void	execute_echo_command(t_info *structure)
 {
 	char	*string;
 	int		n_flag;
+	int		count_n;
+	int		i;
 
 	n_flag = 0;
+	string = NULL;
+	count_n = 0;
+	i = 1;
 	if (structure->table->arr[1])
 	{
-		if (ft_strcmp(structure->table->arr[1], "-n") == 0)
-			n_flag = 1;
-		if (n_flag)
+		while (structure->table->arr[i])
 		{
-			if (structure->table->arr[2])
-				string = join_string_echo(2, structure);
+			if (flag_string_only_n(structure->table->arr[i]))
+			{
+				n_flag = 1;
+				i++;
+			}
 			else
-				string = ft_strdup("");
+				break ;
 		}
+		if (n_flag)
+			string = echo_n_flag(string, structure, i);
 		else
 		{
 			string = join_string_echo(1, structure);
