@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/18 21:33:22 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/19 22:24:43 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_redirection_file_names.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 00:20:06 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 12:13:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:06:21 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ void	join_in_file_names(t_token_node **tokens)
 					if (!file_arr[y])
 						return ;
 					ft_strlcpy(file_arr[y++], start_redirection->token.in.file_name[0], file_len + 1);
+					free(start_redirection->token.in.file_name[0]);
+					free(start_redirection->token.in.file_name);
 				}
 				start_redirection = start_redirection->next;
-			}
+			} 
 			file_arr[y] = NULL;
 			last_redirection->token.in.file_name = file_arr;
 			start_redirection = NULL;
@@ -85,6 +87,7 @@ void	join_out_file_names(t_token_node **tokens)
 	t_token_node	*head;
 	char			**file_arr;
 	int				file_len;
+	int				last_redirection_trunc;
 	int				i;
 	int				y;
 
@@ -114,6 +117,8 @@ void	join_out_file_names(t_token_node **tokens)
 			file_arr = ft_calloc(i + 1, sizeof(char *));
 			if (!file_arr)
 				return ;
+			last_redirection_trunc = last_redirection->token.out.trunc[0];
+			free(last_redirection->token.out.trunc);
 			last_redirection->token.out.trunc = ft_calloc(i, sizeof(int));
 			if (!last_redirection->token.out.trunc)
 				return ;
@@ -128,7 +133,15 @@ void	join_out_file_names(t_token_node **tokens)
 					if (!file_arr[y])
 						return ;
 					ft_strlcpy(file_arr[y], start_redirection->token.out.file_name[0], file_len + 1);
-					last_redirection->token.out.trunc[y++] = start_redirection->token.out.trunc[0];
+					free(start_redirection->token.out.file_name[0]);
+					free(start_redirection->token.out.file_name);
+					if (y + 1 == i)
+						last_redirection->token.out.trunc[y++] = last_redirection_trunc;
+					else
+					{
+						last_redirection->token.out.trunc[y++] = start_redirection->token.out.trunc[0];
+						free(start_redirection->token.out.trunc);
+					}
 				}
 				start_redirection = start_redirection->next;
 			}

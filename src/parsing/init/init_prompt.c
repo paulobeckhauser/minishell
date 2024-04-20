@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 15:24:27 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/14 21:24:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:42:19 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ void	init_prompt(t_prompt *prompt)
 	prompt->symbols = "|<>";
 	prompt->whitespace = " \t\r\v";
 	prompt->quotes = "\"\'";
+	prompt->off_symbols = "!@#$%^&*-+=()[]{}\\|:;,<>/?.";
 }

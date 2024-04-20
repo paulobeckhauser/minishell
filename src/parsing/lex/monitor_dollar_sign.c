@@ -6,13 +6,13 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 14:54:43 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:40:08 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static int shift_left(char **arr, int index, int size)
+static int shift_strings_left(char **arr, int index, int size)
 {
 	free(arr[index]);
 	if (size == 1)
@@ -42,7 +42,7 @@ int	verify_dollar(t_info *structure, t_prompt *prompt)
 		{
 			if (!handle_dollar(structure, prompt, prompt->arr[i], &i))
 			{
-				if (!shift_left(prompt->arr, i, prompt->word_count))
+				if (!shift_strings_left(prompt->arr, i, prompt->word_count))
 					return (0);
 			}
 		}
@@ -99,7 +99,7 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	i = 0;
 	while (*str)
 	{
-		if (ft_strchr(prompt->whitespace, *str) || *str == '$')
+		if (ft_strchr(prompt->whitespace, *str) || ft_strchr(prompt->off_symbols, *str))
 			break ;
 		dollar_word[i++] = *str++;
 	}

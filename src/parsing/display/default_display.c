@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 14:05:41 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 16:06:52 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	default_display_with_history(t_prompt *prompt, t_info *structure)
 	if (prompt->msg == NULL)
 	{
 		ft_putstr_fd("exit\n", 1);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	if (!check_quotes(prompt))
 	{

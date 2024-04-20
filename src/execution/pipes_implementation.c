@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 20:28:23 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:25:17 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	close_fds_pipes_parent(t_info *structure, int i)
 
 static void	fork_and_execution(t_info *structure, int i)
 {
-	handle_child_key_combos();
 	structure->pid[i] = fork();
+	handle_child_key_combos();
 	if (structure->pid[i] == -1)
 	{
 		perror("fork failed");

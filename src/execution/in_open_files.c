@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_open_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:30:45 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 20:31:20 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:08:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:24:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 11:36:28 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:40:07 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	handle_child_key_combos(void)
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGQUIT, &sa, NULL);
 	sigaction(SIGINT, &sa, NULL);
+	signal(SIGUSR1, SIG_IGN);
 }
