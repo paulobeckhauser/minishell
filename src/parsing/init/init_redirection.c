@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/20 15:02:00 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:47:38 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_primary_redirection_vars(t_token *token, t_prompt *prompt)
 	token->in.heredoc = false;
 	token->out.fd = 1;
 	token->out.file_name = NULL;
+	token->out.trunc = NULL;
 	token->val = verify_redirection(prompt);
 	token->last_redirection = false;
 }

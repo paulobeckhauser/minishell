@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:34:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 20:57:09 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:22:44 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_prompt
 	char							*symbols;
 	char							*whitespace;
 	char							*quotes;
+	char							*off_symbols;
 	char							**arr;
 	int								word_count;
 	int								pipe_count;

@@ -6,11 +6,12 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/19 19:30:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:22:02 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include <termios.h>
 
 int	g_signal = 0;
 

@@ -41,7 +41,7 @@ t_token_node	*init_token_list(t_info *structure, t_prompt *prompt)
 	if ((head && head->token.type == PIPE)
 		|| (current && current->token.type == PIPE))
 		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2),
-			free_token_list_full(&head),NULL);
+			structure->last_exit_status = 2, free_token_list_full(&head), NULL);
 	prompt->token_count = i;
 	return (head);
 }
