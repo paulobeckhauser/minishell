@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/20 15:13:32 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:46:08 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,9 @@ void	free_cmd_table(t_cmd **table)
 		{
 			if (!current->in.heredoc)
 				free_double_arr(current->in.file_name);
-			close(current->in.fd);
 		}
 		if (current->out.file_name)
-		{
 			free_double_arr(current->out.file_name);
-			close(current->out.fd);
-		}
 		if (current->out.file_name && current->out.trunc)
 			free(current->out.trunc);
 		if (current->arr)
