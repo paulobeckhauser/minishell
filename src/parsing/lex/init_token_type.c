@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:28:19 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 16:15:16 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:34:11 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_token	init_error_token(void)
 	token.in.heredoc = false;
 	token.out.fd = 1;
 	token.out.file_name = NULL;
+	token.out.trunc = NULL;
 	token.type = ERROR;
 	token.val = NULL;
 	token.word_val = NULL;

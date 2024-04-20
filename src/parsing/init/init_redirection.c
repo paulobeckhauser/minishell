@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 20:56:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:02:00 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 {
 	pid_t	pid;
 
-	g_signal = 1;
 	create_tmp_folder();
 	token->in.heredoc = true;
 	token->in.file_name = ft_calloc(2, sizeof(char *));
 	token->in.file_name[0] = "tmp/heredoc_tmp";
 	token->in.file_name[1] = NULL;
 	token->in.fd = 0;
+	kill(0, SIGUSR1);
+	g_signal = SIGUSR1;
 	pid = fork();
 	if (pid == 0)
 		run_heredoc(token, delimiter);

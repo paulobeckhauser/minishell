@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/19 19:34:21 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:13:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,17 @@ void	free_token_list_full(t_token_node **list)
 	current = *list;
 	while (current != NULL)
 	{
-		if (current->token.out.trunc)
+		if (current->token.type == ERROR)
+		{
+			free(current);
+			current = next;
+		}
+		if (current->token.type == REDIRECTION
+			&& current->token.out.file_name
+			&& current->token.out.trunc)
 			free(current->token.out.trunc);
-		if (current->token.word_val)
+		if ((current->token.type == BUILTIN_CMD || current->token.type == SIMPLE_CMD)
+			&& current->token.word_val)
 			free_double_arr(current->token.word_val);
 		next = current->next;
 		free(current);
@@ -101,11 +109,18 @@ void	free_cmd_table(t_cmd **table)
 	while (current)
 	{
 		next = current->next;
-		if (current->in.file_name)
-			free_double_arr(current->in.file_name);
+		if (!current->in.heredoc && current->in.file_name)
+		{
+			if (!current->in.heredoc)
+				free_double_arr(current->in.file_name);
+			close(current->in.fd);
+		}
 		if (current->out.file_name)
+		{
 			free_double_arr(current->out.file_name);
-		if (current->out.trunc)
+			close(current->out.fd);
+		}
+		if (current->out.file_name && current->out.trunc)
 			free(current->out.trunc);
 		if (current->arr)
 			free_double_arr(current->arr);

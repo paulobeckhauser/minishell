@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:52:08 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 11:37:39 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:07:18 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_signal_parent(int signal)
 {
-	if (signal == SIGINT && g_signal == 0)
+	if (signal == SIGINT && !g_signal)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
@@ -32,4 +32,5 @@ void	handle_parent_key_combos(void)
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGUSR1, SIG_IGN);
 }
