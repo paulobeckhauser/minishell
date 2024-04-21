@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 17:31:22 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:23:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,30 @@ int	is_echo_command(char **command)
 char	*join_string_echo(int start, t_info *structure)
 {
 	char	*concat_str;
+	char	*temp;
 	int		count;
 
-	concat_str = "";
+	concat_str = NULL;
 	count = 0;
+	temp = NULL;
 	while (structure->table->arr[start])
 	{
 		if (count > 0)
-			concat_str = ft_strjoin(concat_str, " ");
-		concat_str = ft_strjoin(concat_str, structure->table->arr[start]);
+		{
+			temp = ft_strjoin(concat_str, " ");
+			free(concat_str);
+			concat_str = ft_strdup(temp);
+			free(temp);
+		}
+		if (count == 0)
+			concat_str = ft_strjoin("", structure->table->arr[start]);
+		else
+		{
+			temp = ft_strjoin(concat_str, structure->table->arr[start]);
+			free(concat_str);
+			concat_str = ft_strdup(temp);
+			free(temp);
+		}
 		start++;
 		count++;
 	}
