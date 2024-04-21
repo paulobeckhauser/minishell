@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/20 18:40:08 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:45:25 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ static int shift_strings_left(char **arr, int index, int size)
 int	verify_dollar(t_info *structure, t_prompt *prompt)
 {
 	int						i;
+	int						ex;
 	t_single_quote_checker	*head;
 
 	i = 0;
+	ex = 0;
 	head = prompt->checker;
 	while (prompt->arr[i] && prompt->checker)
 	{
@@ -40,11 +42,14 @@ int	verify_dollar(t_info *structure, t_prompt *prompt)
 		}
 		while (prompt->arr[i] && ft_strchr(prompt->arr[i], '$'))
 		{
-			if (!handle_dollar(structure, prompt, prompt->arr[i], &i))
+			ex = handle_dollar(structure, prompt, prompt->arr[i], &i);
+			if (!ex)
 			{
 				if (!shift_strings_left(prompt->arr, i, prompt->word_count))
 					return (0);
 			}
+			else if (ex == 2)
+				break ;
 		}
 		prompt->checker = prompt->checker->next;
 		i++;
@@ -62,8 +67,7 @@ int	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 	dollar_word = find_dollar_word(prompt, str);
 	if (ft_strcmp(dollar_word, "$") == 0)
 	{
-		++(*i);
-		return (1);
+		return (2);
 	}
 	if (ft_strcmp(dollar_word, "?") == 0)
 	{
