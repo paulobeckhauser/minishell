@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 14:43:38 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:14:42 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ void	execute_echo_command(t_info *structure)
 	else
 		string = ft_strdup("\n");
 	redirection_echo(string, structure);
+	free(string);
 }
