@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_dollar_sign_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:28:23 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/10 15:31:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:32:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ char	*replace_dollar_word(t_info *structure, char *str)
 		str_temp = allocate_str_temp(structure, str_temp, i);
 		str_temp = save_str_temp(structure, i, str_temp);
 		if (ft_strcmp(str_temp, str) == 0)
+		{
+			free(str_temp);
 			return (extract_dollar_value(structure->envp_export[i]));
+		}
 		i++;
+		free(str_temp);
 	}
 	return (NULL);
 }
@@ -59,7 +63,10 @@ void	replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word,
 	info.prompt = prompt;
 	info.i = i;
 	info.dollar_word = ft_strjoin("$", dollar_word);
-	info.replacement = replacement;
+	if (ft_strcmp(dollar_word, "?"))
+		free(dollar_word);
+	info.replacement = ft_strdup(replacement);
+	free(replacement);
 	y = 0;
 	while (info.prompt->arr[info.i][y])
 	{
@@ -94,6 +101,8 @@ void	replace_word(t_dollar_replace_info *info, int y)
 		+ ft_strlen(info->replacement) + ft_strlen(after_dollar) + 1);
 	free(info->prompt->arr[info->i]);
 	info->prompt->arr[info->i] = new_str;
+	free(info->dollar_word);
+	free(info->replacement);
 	free(before_dollar);
 	free(after_dollar);
 }
