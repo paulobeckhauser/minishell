@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:14:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 13:25:02 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:30:12 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ char *echo_n_flag(char *string, t_info *structure, int i);
 char	*join_string_echo(int start, t_info *structure);
 int flag_string_only_n(char *str);
 char	*echo_without_flag(char *string, t_info *structure);
+
 
 #endif

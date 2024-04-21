@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:27:59 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/19 12:45:34 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:35:20 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	flag_string_only_n(char *str)
 
 char	*echo_n_flag(char *string, t_info *structure, int i)
 {
+	free(string);
 	if (structure->table->arr[2])
 	{
 		while (structure->table->arr[i])

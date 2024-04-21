@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 17:11:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:31:22 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,20 @@ void	execute_echo_command(t_info *structure)
 {
 	char	*string;
 	int		n_flag;
-	int		count_n;
 	int		i;
 
 	n_flag = 0;
 	string = NULL;
-	count_n = 0;
 	i = 1;
 	if (structure->table->arr[1])
 	{
 		while (structure->table->arr[i])
 		{
-			if (flag_string_only_n(structure->table->arr[i++]))
+			if (flag_string_only_n(structure->table->arr[i]))
+			{
 				n_flag = 1;
+				i++;
+			}
 			else
 				break ;
 		}
