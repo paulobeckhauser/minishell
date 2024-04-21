@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:33:28 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 20:18:47 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:43:59 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_export_with_value(int i, char **envp_sorted,
 	j = 0;
 	while (envp_sorted[i][j])
 	{
-		if (envp_sorted[i][j - 1] == '=' && number_equal_sign == j - 1)
+		if (j > 0 && envp_sorted[i][j - 1] == '=' && number_equal_sign == j - 1)
 			ft_putchar_fd('\"', 1);
 		ft_putchar_fd(envp_sorted[i][j], 1);
 		if (envp_sorted[i][j + 1] == '\0' && number_equal_sign > 0)
