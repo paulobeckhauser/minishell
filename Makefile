@@ -62,7 +62,7 @@ CC				:= cc
 RM				:= rm -f
 CFLAGS			:= -Wall -Wextra -Werror
 DEBUG			:= -g
-# SANITIZER 		:= #-fsanitize=address -g
+#SANITIZER 		:= -fsanitize=address -g
 
 UNAME_S := $(shell uname -s)
 
