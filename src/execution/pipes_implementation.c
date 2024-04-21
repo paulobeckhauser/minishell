@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 15:59:50 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:48:27 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ void	pipes_implementation(t_info *structure)
 	create_pipes(structure);
 	structure->pid = (pid_t *)ft_calloc((structure->number_commands),
 			sizeof(pid_t));
+	if (structure-> pid == NULL)
+	{
+		perror("Memory allocation failed\n");
+		structure->last_exit_status = EXIT_FAILURE;
+		return ;
+	}
 	current = structure->table->arr;
 	head = structure->table;
 	i = 0;

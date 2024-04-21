@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/19 22:24:43 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/21 13:42:19 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,13 +68,16 @@ UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
     # Linux specific CFLAGS or LDFLAGS
-	LREADLINE		:= -lreadline -L $(HOME)/goinfre/.brew/opt/readline/lib
-	IREADLINE		:= -I $(HOME)/goinfre/.brew/opt/readline/include
+LREADLINE		:= -lreadline
+IREADLINE		:=  #-I $(HOME)/goinfre/.brew/opt/readline/include
+
+
 endif
+
 ifeq ($(UNAME_S),Darwin)
     # Mac OS X specific CFLAGS or LDFLAGS
-    LREADLINE		:= -lreadline -L $(HOME)/goinfre/.brew/opt/readline/lib
-	IREADLINE		:= -I $(HOME)/goinfre/.brew/opt/readline/include
+LREADLINE		:= -lreadline -L $(HOME)/goinfre/.brew/opt/readline/lib
+IREADLINE		:= -I $(HOME)/goinfre/.brew/opt/readline/include
 endif
 
 # Libraries
@@ -84,6 +87,7 @@ LIBFT			:= ./libs/libft/libft.a
 BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo_n_flag.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo_without_flag.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)env.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)exit.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export.c \
@@ -188,7 +192,6 @@ OBJ_BONUS		:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS_BONUS))
 all: 		${NAME}
 
 bonus: 		${NAME}_bonus
-
 
 $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c
 					@echo $(YELLOW) "Compiling...\t" $< $(EOC)
