@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/21 14:46:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/21 15:15:31 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	count_words_in_token(char **arr)
 
 void	run_word_token_join(t_join_word_tokens_vars *vars)
 {
-	vars->command = ft_calloc(vars->command_word_count + echo hi >         ./outfiles/outfile01 bye, sizeof(char *));
+	vars->command = ft_calloc(vars->command_word_count + 1, sizeof(char *));
 	if (!vars->command)
 		return ;
 	vars->first_cmd = false;
