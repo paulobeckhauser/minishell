@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 13:25:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 14:43:38 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ static void	redirection_echo(char *string, t_info *structure)
 		ft_putstr_fd(string, STDOUT_FILENO);
 }
 
+static char	*condition_flag(int n_flag, char *string, t_info *structure, int i)
+{
+	if (n_flag)
+		string = echo_n_flag(string, structure, i);
+	else
+		string = echo_without_flag(string, structure);
+	return (string);
+}
+
 void	execute_echo_command(t_info *structure)
 {
 	char	*string;
@@ -66,18 +75,12 @@ void	execute_echo_command(t_info *structure)
 	{
 		while (structure->table->arr[i])
 		{
-			if (flag_string_only_n(structure->table->arr[i]))
-			{
+			if (flag_string_only_n(structure->table->arr[i++]))
 				n_flag = 1;
-				i++;
-			}
 			else
 				break ;
 		}
-		if (n_flag)
-			string = echo_n_flag(string, structure, i);
-		else
-			string = echo_without_flag(string, structure);
+		string = condition_flag(n_flag, string, structure, i);
 	}
 	else
 		string = ft_strdup("\n");

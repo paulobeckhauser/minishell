@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_word_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 14:54:24 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/21 15:54:34 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	count_words_in_token(char **arr)
 
 void	run_word_token_join(t_join_word_tokens_vars *vars)
 {
-	vars->command = ft_calloc(vars->command_word_count, sizeof(char *));
+	vars->command = ft_calloc(vars->command_word_count + 1, sizeof(char *));
 	if (!vars->command)
 		return ;
 	vars->first_cmd = false;

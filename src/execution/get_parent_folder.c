@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 11:00:27 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 20:32:50 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 14:17:33 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static char	*iterate_copy(char **arr, int elem, char *updated_str, char *str)
 	str_path = ft_strjoin("/", arr[elem]);
 	str_new = malloc(ft_strlen(updated_str) - ft_strlen(arr[elem])
 			- ft_strlen("/") + 1);
+	if (!str_new)
+		return (NULL);
 	i = ft_strlen(updated_str) - 1;
 	j = ft_strlen(str_path) - 1;
 	while (str[i] && str_path[j] && str[i] == str_path[j])

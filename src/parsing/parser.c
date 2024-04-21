@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/21 13:44:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/21 13:49:40 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ bool	parser(t_info *structure, t_prompt *prompt)
 	if (!tokens || if_no_cmd_tokens(tokens))
 	{
 		free_token_list(&tokens);
-		// free(prompt->start_ptr_save);
+		free(prompt->start_ptr_save);
 		return (false);
 	}
 	structure->table = parse(tokens, prompt);
 	if (!structure->table)
 	{
-		// free(prompt->start_ptr_save);
+		free(prompt->start_ptr_save);
 		return (false);
 	}
-	// free(prompt->start_ptr_save);
+	free(prompt->start_ptr_save);
 	return (true);
 }
 
@@ -68,6 +68,6 @@ t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 	table = NULL;
 	head = NULL;
 	init_cmd_table(tree, &table, &head, prompt);
-	// free_tree(tree);
+	free_tree(tree);
 	return (head);
 }

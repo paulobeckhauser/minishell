@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:12:56 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 14:06:56 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/21 13:25:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	delete_repeating_redirection_tokens(t_token_node **tokens)
 		mark_last_out_redirection(*tokens);
 		delete_and_close_not_used_redirections(tokens, &head, &previous_token);
 	}
+	*tokens = head;
+	fix_prev_pointers(tokens);
 	*tokens = head;
 }
 
@@ -88,5 +90,20 @@ void	delete_and_close_not_used_redirections(t_token_node **tokens,
 				break ;
 			*tokens = (*tokens)->next;
 		}
+	}
+}
+
+void	fix_prev_pointers(t_token_node **tokens)
+{
+	t_token_node	*curr;
+
+	curr = NULL;
+	(*tokens)->prev = NULL;
+	while (*tokens)
+	{
+		curr = *tokens;
+		*tokens = (*tokens)->next;
+		if (*tokens)
+			(*tokens)->prev = curr;
 	}
 }
