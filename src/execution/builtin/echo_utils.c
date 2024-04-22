@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:28:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 19:13:58 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:32:18 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ static void	increment_values(int *start, int *count)
 {
 	*start = *start + 1;
 	*count = *count + 1;
+}
+
+static char	*replace_string(char *concat_str, char *temp)
+{
+	free(concat_str);
+	concat_str = ft_strdup(temp);
+	free(temp);
+	return (concat_str);
 }
 
 char	*join_string_echo(int start, t_info *structure)
@@ -32,18 +40,14 @@ char	*join_string_echo(int start, t_info *structure)
 		if (count > 0)
 		{
 			temp = ft_strjoin(concat_str, " ");
-			free(concat_str);
-			concat_str = ft_strdup(temp);
-			free(temp);
+			concat_str = replace_string(concat_str, temp);
 		}
 		if (count == 0)
 			concat_str = ft_strjoin("", structure->table->arr[start]);
 		else
 		{
 			temp = ft_strjoin(concat_str, structure->table->arr[start]);
-			free(concat_str);
-			concat_str = ft_strdup(temp);
-			free(temp);
+			concat_str = replace_string(concat_str, temp);
 		}
 		increment_values(&start, &count);
 	}
