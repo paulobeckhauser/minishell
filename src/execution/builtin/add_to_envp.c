@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:38:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 21:53:20 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:26:15 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static char	**add_variable_to_array(char *str_add, char **array)
 		backup_array[i] = ft_strdup(array[i]);
 		i++;
 	}
+	backup_array[i] = NULL;
 	free_2d_array(array);
 	array = allocate_mem_array(array, backup_array);
 	i = 0;

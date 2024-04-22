@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 19:36:09 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:34:12 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	print_if_there_is_arg(char *new_string, char **array,
 	}
 	new_string = ft_strjoin(array[0], "=");
 	new_string = ft_strjoin(new_string, array[1]);
+	new_string = strjoin_free_s1(new_string, array[1]);
 	use_print_export_structure(structure, array, new_string, check_equal_sign);
 }
 
