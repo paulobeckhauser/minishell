@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:16:30 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 14:37:04 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:47:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	update_path(t_info *structure)
 		return ;
 	}
 	new_string = ft_strjoin("PWD=", cur_path);
+	free(cur_path);
 	structure->envp = delete_string_array(structure->envp, "PWD");
 	structure->envp_export = delete_string_array(structure->envp_export, "PWD");
 	add_to_envp(structure, new_string, 1);
