@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/20 17:47:38 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:48:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 	token->type = REDIRECTION;;
 	waitpid(pid, NULL, 0);
 	g_signal = 0;
+	free(delimiter);
 }
 
 void	init_truncate_out_redirection(t_token *token, char *file_name, t_prompt *prompt)

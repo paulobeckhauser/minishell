@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/21 14:23:00 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:48:06 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,19 @@ void	free_token_list_full(t_token_node **list)
 			free(current);
 			current = next;
 		}
-		if (current->token.type == REDIRECTION
-			&& current->token.out.file_name
-			&& current->token.out.trunc)
-			free(current->token.out.trunc);
+		if (current->token.type == REDIRECTION)
+		{
+			if (current->token.in.file_name && !current->token.in.heredoc)
+				free_double_arr(current->token.in.file_name);
+			if (current->token.in.file_name && current->token.in.heredoc)
+				free(current->token.in.file_name);
+			if (current->token.out.file_name)
+			{
+				if (current->token.out.trunc)
+					free(current->token.out.trunc);
+				free_double_arr(current->token.out.file_name);
+			}
+		}
 		if ((current->token.type == BUILTIN_CMD || current->token.type == SIMPLE_CMD)
 			&& current->token.word_val)
 			free_double_arr(current->token.word_val);

@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/22 10:17:56 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/22 10:23:46 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ OBJ_DIR			:= obj/
 EXECUTION_DIR	:= execution/
 BUILTIN_DIR		:= builtin/
 PARSING_DIR		:= parsing/
+UTILS_DIR		:= utils/
 
 # Compiler and Flags
 CC				:= cc
@@ -163,8 +164,9 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)signals/heredoc_signal.c \
 						$(SRC_DIR)$(PARSING_DIR)signals/parent_signal.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
-						$(SRC_DIR)$(PARSING_DIR)strjoin_improved.c \
 						
+
+UTILS_SRCS			:=	$(SRC_DIR)$(UTILS_DIR)strjoin_improved.c \
 
 
 
@@ -177,6 +179,7 @@ SRCS			:= 	$(SHARED_SRCS) \
 					$(EXECUTION_SRCS) \
 					$(BUILTIN_SRCS) \
 					$(PARSING_SRCS) \
+					$(UTILS_SRCS) \
 					
 
 
