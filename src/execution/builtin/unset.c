@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/06 14:05:03 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:13:53 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,25 @@ static char	**allocate_mem_array_backup(char **array, char **array_backup,
 static char	**save_in_array_backup(char **array, char **array_backup,
 		char *str_delete)
 {
+	int		i;
 	int		j;
-	int		g;
 	char	**env_var;
 
+	i = 0;
 	j = 0;
-	g = 0;
-	while (array[j])
+	env_var = NULL;
+	while (array[i])
 	{
-		env_var = ft_split(array[j], '=');
+		env_var = ft_split(array[i], '=');
 		if (ft_strcmp(str_delete, env_var[0]) != 0)
 		{
-			array_backup[g] = ft_strdup(array[j]);
-			g++;
+			array_backup[j] = ft_strdup(array[i]);
+			j++;
 		}
-		j++;
+		i++;
+		free_2d_array(env_var);
 	}
-	array_backup[g] = NULL;
+	array_backup[j] = NULL;
 	return (array_backup);
 }
 
@@ -86,6 +88,7 @@ char	**delete_string_array(char **array, char *str_delete)
 		i++;
 	}
 	array[i] = NULL;
+	free_2d_array(array_backup);
 	return (array);
 }
 

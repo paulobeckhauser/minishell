@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:28:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 18:37:51 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:13:58 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static void	increment_values(int *start, int *count)
 	*start = *start + 1;
 	*count = *count + 1;
 }
-
-
 
 char	*join_string_echo(int start, t_info *structure)
 {

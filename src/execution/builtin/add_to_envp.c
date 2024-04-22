@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:38:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 18:26:15 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:14:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	**allocate_mem_backup_array(char **array, char **backup_array)
 	i = 0;
 	while (array[i])
 		i++;
-	backup_array = (char **)malloc((i + 1) * sizeof(char *));
+	backup_array = ft_calloc(i + 1, sizeof(char *));
 	if (backup_array == NULL)
 	{
 		perror("Memory allocation failed!\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:10:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/08 12:46:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:04:17 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	check_env_variable(t_info *structure)
 		str_temp = save_str_temp(structure, i, str_temp);
 		if (ft_strcmp(str_temp, structure->table->arr[1]) == 0)
 		{
+			free(str_temp);
 			check_exist = 1;
 			break ;
 		}

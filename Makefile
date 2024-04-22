@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/21 18:29:01 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/22 18:37:09 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ OBJ_DIR			:= obj/
 EXECUTION_DIR	:= execution/
 BUILTIN_DIR		:= builtin/
 PARSING_DIR		:= parsing/
+UTILS_DIR		:= utils/
 
 # Compiler and Flags
 CC				:= cc
@@ -166,6 +167,8 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)parser.c \
 						
 
+UTILS_SRCS			:=	$(SRC_DIR)$(UTILS_DIR)strjoin_improved.c \
+
 
 
 SHARED_SRCS			:= 	$(SRC_DIR)main.c \
@@ -177,6 +180,7 @@ SRCS			:= 	$(SHARED_SRCS) \
 					$(EXECUTION_SRCS) \
 					$(BUILTIN_SRCS) \
 					$(PARSING_SRCS) \
+					$(UTILS_SRCS) \
 					
 
 
