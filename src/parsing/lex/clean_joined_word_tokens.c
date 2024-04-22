@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 23:30:45 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/21 14:31:21 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:47:48 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ void	clean_word_token(t_token_node **tokens, t_token_node **tmp)
 	if ((*tokens)->next->next)
 	{
 		*tmp = (*tokens)->next->next;
+		free_double_arr((*tokens)->next->token.word_val);
 		free((*tokens)->next);
 		(*tokens)->next = *tmp;
 	}
 	else
 	{
+		free_double_arr((*tokens)->next->token.word_val);
 		free((*tokens)->next);
 		(*tokens)->next = NULL;
 	}
