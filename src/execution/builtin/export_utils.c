@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:50:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 11:12:54 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:16:32 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void	use_print_export_structure(t_info *structure, char **array,
 static void	print_if_there_is_arg(char *new_string, char **array,
 		t_info *structure, int check_equal_sign)
 {
-	int	i;
+	int		i;
+	char	*backup_string;
 
 	i = 0;
 	while (array[1][i])
@@ -60,9 +61,13 @@ static void	print_if_there_is_arg(char *new_string, char **array,
 			array[1][i] = '=';
 		i++;
 	}
-	new_string = ft_strjoin(array[0], "=");
-	new_string = ft_strjoin(new_string, array[1]);
+	backup_string = NULL;
+	backup_string = ft_strjoin(array[0], "=");
+	free(new_string);
+	new_string = ft_strjoin(backup_string, array[1]);
+	free(backup_string);
 	use_print_export_structure(structure, array, new_string, check_equal_sign);
+	free(new_string);
 }
 
 void	replace_value_envp(t_info *structure, int check_equal_sign)
