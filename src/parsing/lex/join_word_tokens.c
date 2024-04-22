@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 14:51:59 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:57:41 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	run_word_token_join(t_join_word_tokens_vars *vars)
 		if (vars->curr_save->token.type == PIPE)
 			break ;
 		else if (vars->curr_save->token.type == BUILTIN_CMD
-			|| vars->curr_save->token.type == SIMPLE_CMD)\
+			|| vars->curr_save->token.type == SIMPLE_CMD)
 				join_words_to_command(&vars->command,
 					vars->curr_save->token.word_val);
 		vars->curr_save = vars->curr_save->next;
