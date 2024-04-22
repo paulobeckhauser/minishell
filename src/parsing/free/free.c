@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 10:48:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:34:39 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,8 @@ void	free_token_list_full(t_token_node **list)
 		}
 		if (current->token.type == REDIRECTION)
 		{
-			if (current->token.in.file_name && !current->token.in.heredoc)
+			if (current->token.in.file_name)
 				free_double_arr(current->token.in.file_name);
-			if (current->token.in.file_name && current->token.in.heredoc)
-				free(current->token.in.file_name);
 			if (current->token.out.file_name)
 			{
 				if (current->token.out.trunc)
@@ -110,18 +108,17 @@ void	free_cmd_table(t_cmd **table)
 {
 	t_cmd	*current;
 	t_cmd	*next;
-	// int		i;
-	
-	// if (!*table)
-	// 	return ;
+
 	current = *table;
 	while (current)
 	{
 		next = current->next;
-		if (!current->in.heredoc && current->in.file_name)
+		if (current->in.file_name)
 		{
-			if (!current->in.heredoc)
+			// if (!current->in.heredoc)
 				free_double_arr(current->in.file_name);
+			// free(current->in.file_name);
+			// printf("hi\n");
 		}
 		if (current->out.file_name)
 			free_double_arr(current->out.file_name);

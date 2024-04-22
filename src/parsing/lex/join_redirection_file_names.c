@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 00:20:06 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/18 21:06:21 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:31:37 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ void	join_in_file_names(t_token_node **tokens)
 					if (!file_arr[y])
 						return ;
 					ft_strlcpy(file_arr[y++], start_redirection->token.in.file_name[0], file_len + 1);
-					free(start_redirection->token.in.file_name[0]);
-					free(start_redirection->token.in.file_name);
+					free_double_arr(start_redirection->token.in.file_name);
 				}
 				start_redirection = start_redirection->next;
 			} 
