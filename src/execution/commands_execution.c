@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:34:03 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/19 22:02:27 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:54:50 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	handle_no_redirection(t_info *structure, int i)
 		{
 			close(structure->fds_pipes[i - 1][1]);
 			dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
-		}	
+		}
 		if (structure->table->next != NULL)
 		{
 			close(structure->fds_pipes[i][0]);
@@ -46,8 +46,6 @@ static void	handle_redirection(t_info *structure, int i)
 			dup2(structure->fds_pipes[i - 1][1], STDIN_FILENO);
 			close(structure->fds_pipes[i - 1][0]);
 		}
-		
-		
 		if (structure->table->next != NULL)
 		{
 			dup2(structure->fds_pipes[i][1], STDOUT_FILENO);
