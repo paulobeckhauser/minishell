@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:13:29 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/08 23:15:50 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:40:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	init_single_quote_checker_list(t_prompt *prompt)
 		if (i < prompt->word_count - 1)
 		{
 			checker->next = malloc(sizeof(t_single_quote_checker));
+			if (!checker->next)
+				return ;
 			checker = checker->next;
 		}
 		else

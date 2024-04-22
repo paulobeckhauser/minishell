@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 23:30:45 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 14:47:48 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:28:35 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	clean_joined_word_tokens(t_token_node **tokens)
 			if (!first_cmd)
 				first_cmd = true;
 			else
+			{
 				clean_word_token(tokens, &tmp);
+				continue ;
+			}
 		}
 		*tokens = (*tokens)->next;
 	}
