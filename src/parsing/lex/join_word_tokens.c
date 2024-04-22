@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/21 16:48:33 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:51:59 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,21 @@ void	run_word_token_join(t_join_word_tokens_vars *vars)
 					vars->curr_save->token.word_val);
 		vars->curr_save = vars->curr_save->next;
 	}
+	free_double_arr(vars->arr_save->token.word_val);
 	vars->arr_save->token.word_val = vars->command;
 	vars->command_word_count = 0;		
 }
 
 void	join_words_to_command(char ***arr, char **join)
 {
-	char	**start_ptr_save;
+	char	**arr_start_ptr_save;
 	char	**arr_temp;
+	char	**join_start_ptr_save;
 	char	**join_temp;
 	int		dst_size;
 
-	start_ptr_save = *arr;
+	arr_start_ptr_save = *arr;
+	join_start_ptr_save = join;
 	arr_temp = *arr;
 	join_temp = join;
 	while (*arr_temp)
@@ -102,7 +105,7 @@ void	join_words_to_command(char ***arr, char **join)
 		join_temp++;
 		arr_temp++;
 	}
-	*join = NULL;
 	*arr_temp = NULL;
-	*arr = start_ptr_save;
+	join = join_start_ptr_save;
+	*arr = arr_start_ptr_save;
 }

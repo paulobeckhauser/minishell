@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 12:34:39 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:51:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,7 @@ void	free_cmd_table(t_cmd **table)
 	{
 		next = current->next;
 		if (current->in.file_name)
-		{
-			// if (!current->in.heredoc)
-				free_double_arr(current->in.file_name);
-			// free(current->in.file_name);
-			// printf("hi\n");
-		}
+			free_double_arr(current->in.file_name);
 		if (current->out.file_name)
 			free_double_arr(current->out.file_name);
 		if (current->out.file_name && current->out.trunc)
