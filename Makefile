@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/22 10:23:46 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/22 18:37:09 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,6 +105,7 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)sort_var_envp.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_without_args.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export_with_args.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo_utils.c \
 
 
 EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
