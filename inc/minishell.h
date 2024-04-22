@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 13:27:32 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:01:22 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,5 +251,10 @@ void					handle_signal_heredoc(int signal);
 void					handle_heredoc_key_combos(void);
 void					handle_signal_parent(int signal);
 void					handle_parent_key_combos(void);
+
+// UTILS (strjoin_improved.c)
+char					*strjoin_free_s1(char *s1, char *s2);
+char					*strjoin_free_s2(char *s1, char *s2);
+char					*strjoin_free_both(char *s1, char *s2);
 
 #endif

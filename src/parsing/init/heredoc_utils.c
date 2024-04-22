@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:12:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/20 14:34:03 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:58:54 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	run_heredoc(t_token *token, char *delimiter)
 void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 	char *delimiter)
 {
+	char	*tmp;
+
+	tmp = NULL;
 	handle_heredoc_key_combos();
 	*heredoc_newline = readline("> ");
 	if (*heredoc_newline == NULL)
@@ -61,12 +64,11 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 		ft_putstr_fd("')\n", 1);
 		exit(EXIT_SUCCESS);
 	}
-	*heredoc_msg = "";
+	*heredoc_msg = ft_calloc(1, 1);
 	while (ft_strcmp(*heredoc_newline, delimiter) != 0)
 	{
-		*heredoc_msg = ft_strjoin(*heredoc_msg, *heredoc_newline);
-		*heredoc_msg = ft_strjoin(*heredoc_msg, "\n");
-		free(*heredoc_newline);
+		*heredoc_msg = strjoin_free_both(*heredoc_msg, *heredoc_newline);
+		*heredoc_msg = strjoin_free_s1(*heredoc_msg, "\n");
 		*heredoc_newline = readline("> ");
 		if (*heredoc_newline == NULL)
 		{
@@ -101,4 +103,5 @@ void	open_write_close_tmp_file(t_token *token, char **heredoc_msg)
 		perror("close");
 		return ;
 	}
+	free(*heredoc_msg);
 }
