@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 09:31:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/21 12:46:02 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:47:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	join_right_redirections_to_cmd(t_token_node **token)
 	{
 		if ((*token)->next && (*token)->next->token.type == REDIRECTION)
 		{
-			if ((*token)->next->next && (*token)->next->next->token.type == REDIRECTION)
+			if ((*token)->next->next
+				&& (*token)->next->next->token.type == REDIRECTION)
 			{
 				(*token)->left = (*token)->next;
 				(*token)->right = (*token)->next->next;
@@ -67,7 +68,6 @@ void	join_right_redirections_to_cmd(t_token_node **token)
 	}
 }
 
-
 void	join_tokens_to_pipe(t_token_node **token, t_token_node **first_pipe)
 {
 	join_left_token_to_pipe(token, first_pipe);
@@ -77,7 +77,7 @@ void	join_tokens_to_pipe(t_token_node **token, t_token_node **first_pipe)
 void	join_left_token_to_pipe(t_token_node **token, t_token_node **first_pipe)
 {
 	if ((*token)->prev && ((*token)->prev->token.type == BUILTIN_CMD
-		|| (*token)->prev->token.type == SIMPLE_CMD))
+			|| (*token)->prev->token.type == SIMPLE_CMD))
 	{
 		if (!*first_pipe)
 		{
@@ -86,15 +86,9 @@ void	join_left_token_to_pipe(t_token_node **token, t_token_node **first_pipe)
 		}
 		else
 		{
-			if ((*token)->prev->prev && (*token)->prev->prev->token.type == PIPE)
+			if ((*token)->prev->prev
+				&& (*token)->prev->prev->token.type == PIPE)
 				(*token)->left = (*token)->prev->prev;
 		}
 	}
-}
-
-void	join_right_token_to_pipe(t_token_node **token)
-{
-	if ((*token)->next && ((*token)->next->token.type == BUILTIN_CMD
-		|| (*token)->next->token.type == SIMPLE_CMD))
-		(*token)->right = (*token)->next;
 }

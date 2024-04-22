@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 22:21:09 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/17 14:07:13 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 21:01:55 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,12 @@ bool	if_in_right_redirection(t_token_node **node)
 			&& (*node)->right->token.val[1] == '<'))
 		return (true);
 	return (false);
+}
+
+void	assign_type_arr_in_out(t_cmd *cmd, t_prompt *prompt, t_token_node *node)
+{
+	cmd->type = node->token.type;
+	cmd->arr = node->token.word_val;
+	cmd->in_prio = prompt->in_prio;
+	cmd->out_prio = prompt->out_prio;
 }
