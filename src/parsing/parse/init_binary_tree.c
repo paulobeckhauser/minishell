@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:01:22 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/21 14:19:05 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:52:41 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	plant_redirections(t_token_node **token, t_token_node **root)
 void	delete_redirection_tokens_from_list(t_token_node **token,
 	t_token_node **head)
 {
-	t_token_node	*curr;
-
 	while (*token && (*token)->token.type == REDIRECTION)
 		*token = (*token)->next;
 	*head = *token;
@@ -77,14 +75,7 @@ void	delete_redirection_tokens_from_list(t_token_node **token,
 			*token = (*token)->next;
 	}
 	*token = *head;
-	(*token)->prev = NULL;
-	while (*token)
-	{
-		curr = *token;
-		*token = (*token)->next;
-		if (*token)
-			(*token)->prev = curr;
-	}
+	fix_prev_pointers(token);
 	*token = *head;
 }
 

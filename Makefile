@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/22 18:37:09 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/22 20:46:12 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -157,6 +157,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/if_no_cmd_tokens.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/init_binary_tree.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/init_cmd_table.c \
+						$(SRC_DIR)$(PARSING_DIR)parse/init_tree_node_2.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/init_tree_node.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/set_redirection_priority.c \
 						$(SRC_DIR)$(PARSING_DIR)parse/utils.c \

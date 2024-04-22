@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 10:01:22 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/22 21:03:24 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ void					mark_last_in_redirection(t_token_node *tokens);
 void					mark_last_out_redirection(t_token_node *tokens);
 bool					if_in_left_redirection(t_token_node **node);
 bool					if_in_right_redirection(t_token_node **node);
+void					assign_type_arr_in_out(t_cmd *cmd, t_prompt *prompt, t_token_node *node);
 void					join_redirection_file_names(t_token_node **tokens);
 void					join_in_file_names(t_token_node **tokens);
 void					join_out_file_names(t_token_node **tokens);
@@ -236,13 +237,13 @@ t_cmd					*parse(t_token_node *tokens, t_prompt *prompt);
 
 // PRINT (print.c)
 void					print_syntax_token_error(t_prompt *prompt);
-void					print_list(t_token_node *list);
+// void					print_list(t_token_node *list);
 // void					print_token_list(t_token_node *token);
-void					print_tree(t_token_node *node, int depth,
-							char *left_right);
-void					print_table(t_cmd *table);
-void					print_redirection_file(t_cmd *table);
-const char				*type_to_string(t_type type);
+// void					print_tree(t_token_node *node, int depth,
+// 							char *left_right);
+// void					print_table(t_cmd *table);
+// void					print_redirection_file(t_cmd *table);
+// const char				*type_to_string(t_type type);
 
 // SIGNALS (signals.c)
 void					handle_signal_child(int signal);
