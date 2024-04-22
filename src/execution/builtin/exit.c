@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:54:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 12:31:14 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/22 21:44:22 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ static void	exit_2_args(t_info *structure)
 		printf("%s\n", structure->table->arr[0]);
 		if (nb == 0)
 		{
-			ft_putstr_fd("bash: exit: ", 2);
+			ft_putstr_fd("minishell: exit: ", 2);
 			ft_putstr_fd(structure->table->arr[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
 			structure->last_exit_status = EX_NUM_REQ;
+			exit(EX_NUM_REQ);
 		}
 		else
 		{
@@ -55,9 +56,22 @@ static void	exit_2_args(t_info *structure)
 
 static void	exit_more_args(t_info *structure)
 {
+	int nb;
+
+	nb = ft_atoi(structure->table->arr[1]);
 	printf("%s\n", "exit");
 	ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-	structure->last_exit_status = EXIT_FAILURE;
+	if(nb == 0)
+	{
+		
+		structure->last_exit_status = 2;
+		exit(2);
+	}
+	else
+	{
+		structure->last_exit_status = 1;
+		exit(1);
+	}
 }
 
 void	execute_exit_command(t_info *structure)
