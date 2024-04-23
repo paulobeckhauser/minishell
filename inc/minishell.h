@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 21:03:24 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:46:19 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,6 @@
 # include <errno.h>
 
 extern int				g_signal;
-
-typedef struct s_token_node
-{
-	t_token				token;
-	int					index;
-	struct s_token_node *prev;
-	struct s_token_node	*next;
-	struct s_token_node	*left;
-	struct s_token_node	*right;
-
-}						t_token_node;
-
-typedef struct s_join_word_tokens_vars
-{
-	char				**command;
-	t_token_node		*head;
-	t_token_node		*curr_save;
-	t_token_node		*arr_save;
-	bool				first_cmd;
-	int					command_word_count;
-}						t_join_word_tokens_vars;
-
-typedef struct s_dollar_replace_info
-{
-	t_prompt			*prompt;
-	int					i;
-	char				*dollar_word;
-	char				*replacement;
-}						t_dollar_replace_info;
 
 // split_concat_commands
 char					**split_concat(char const *s, char c, char *command);
@@ -168,6 +139,7 @@ void					replace_words_in_arr(t_prompt *prompt, int i,
 							char *dollar_word, char *replacement);
 void					replace_word(t_dollar_replace_info *info, int y);
 int						verify_dollar(t_info *structure, t_prompt *prompt);
+int						if_single_quoted_str(t_single_quote_checker **checker, int *i);
 int						handle_dollar(t_info *structure, t_prompt *prompt,
 							char *str, int *i);
 char					*find_dollar_word(t_prompt *prompt, char *str);
@@ -185,6 +157,8 @@ char					*fetch_file_name(t_prompt *prompt);
 char					*process_file_name(t_prompt *prompt, char *file_name,
 							size_t i);
 char					*find_next_token_to_print_in_err(t_prompt *prompt);
+int	if_wrong_pipe_placement(t_token_node **head, t_token_node **current,
+							t_info *structure);
 char					*verify_redirection(t_prompt *prompt);
 void					count_words(t_prompt *prompt);
 void					count_words_inside_quotes(t_prompt *prompt,
@@ -253,9 +227,10 @@ void					handle_heredoc_key_combos(void);
 void					handle_signal_parent(int signal);
 void					handle_parent_key_combos(void);
 
-// UTILS (strjoin_improved.c)
+// UTILS (strjoin_improved.c, shift_memory.c)
 char					*strjoin_free_s1(char *s1, char *s2);
 char					*strjoin_free_s2(char *s1, char *s2);
 char					*strjoin_free_both(char *s1, char *s2);
+int						shift_strings_left(char **arr, int index, int size);
 
 #endif

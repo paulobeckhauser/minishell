@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:34:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/20 18:22:44 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:13:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,35 @@ typedef struct s_token
 	bool							last_redirection;
 }									t_token;
 
+typedef struct s_token_node
+{
+	t_token				token;
+	int					index;
+	struct s_token_node *prev;
+	struct s_token_node	*next;
+	struct s_token_node	*left;
+	struct s_token_node	*right;
+
+}									t_token_node;
+
+typedef struct s_join_word_tokens_vars
+{
+	char				**command;
+	t_token_node		*head;
+	t_token_node		*curr_save;
+	t_token_node		*arr_save;
+	bool				first_cmd;
+	int					command_word_count;
+}									t_join_word_tokens_vars;
+
+typedef struct s_dollar_replace_info
+{
+	t_prompt			*prompt;
+	int					i;
+	char				*dollar_word;
+	char				*replacement;
+}									t_dollar_replace_info;
+
 typedef struct s_cmd
 {
 	t_type							type;
@@ -95,5 +124,12 @@ typedef struct s_cmd
 	bool							out_prio;
 	struct s_cmd					*next;
 }									t_cmd;
+
+typedef struct s_vars_clean_joined_word_tokens
+{
+	t_token_node	*head;
+	t_token_node	*tmp;
+	bool			first_cmd;
+}									t_vars_clean_joined_word_tokens;
 
 #endif

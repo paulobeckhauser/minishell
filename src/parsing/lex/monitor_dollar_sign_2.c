@@ -6,11 +6,22 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:28:23 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/21 17:32:32 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:45:49 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+void	measure_dollar_word_len(char **str, t_prompt *prompt, int *len)
+{
+	*len = 0;
+	while (**str != '\0' && !ft_strchr(prompt->whitespace, **str)
+		&& **str != '$')
+	{
+		(*len)++;
+		(*str)++;
+	}
+}
 
 char	*replace_dollar_word(t_info *structure, char *str)
 {

@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/22 20:46:12 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/23 17:36:09 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,6 +169,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						
 
 UTILS_SRCS			:=	$(SRC_DIR)$(UTILS_DIR)strjoin_improved.c \
+						$(SRC_DIR)$(UTILS_DIR)shift_memory.c \
 
 
 

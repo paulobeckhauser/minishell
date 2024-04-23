@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 19:13:53 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:53:34 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
