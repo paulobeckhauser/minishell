@@ -6,21 +6,11 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 11:50:47 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:09:09 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-static int shift_strings_left(char **arr, int index, int size)
-{
-	free(arr[index]);
-	if (size == 1)
-		return (0);
-    memmove(&arr[index], &arr[index + 1], (size - index - 1) * sizeof(char *));
-    arr[size - 1] = NULL;
-	return (1);
-}
 
 static char	*getpid_from_stat(t_prompt *prompt)
 {
@@ -62,13 +52,8 @@ int	verify_dollar(t_info *structure, t_prompt *prompt)
 	head = prompt->checker;
 	while (prompt->arr[i] && prompt->checker)
 	{
-		if (prompt->checker && prompt->checker->index == i
-			&& prompt->checker->single_quoted)
-		{
-			i++;
-			prompt->checker = prompt->checker->next;
+		if (if_single_quoted_str(&prompt->checker, &i))
 			continue ;
-		}
 		while (prompt->arr[i] && ft_strchr(prompt->arr[i], '$'))
 		{
 			ex = handle_dollar(structure, prompt, prompt->arr[i], &i);
@@ -80,12 +65,22 @@ int	verify_dollar(t_info *structure, t_prompt *prompt)
 			else if (ex == 2)
 				break ;
 		}
-		prompt->checker = prompt->checker->next;
 		i++;
 	}
-	prompt->checker = head;
-	free_single_quote_checker_list(prompt);
-	return (1);
+	return (prompt->checker = head, free_single_quote_checker_list(prompt), 1);
+}
+
+int	if_single_quoted_str(t_single_quote_checker **checker, int *i)
+{
+	if (*checker && (*checker)->index == *i
+		&& (*checker)->single_quoted)
+	{
+		(*i)++;
+		*checker = (*checker)->next;
+		return (1);
+	}
+	*checker = (*checker)->next;
+	return (0);
 }
 
 int	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
@@ -137,7 +132,8 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	i = 0;
 	while (*str)
 	{
-		if (ft_strchr(prompt->whitespace, *str) || ft_strchr(prompt->off_symbols, *str))
+		if (ft_strchr(prompt->whitespace, *str)
+			|| ft_strchr(prompt->off_symbols, *str))
 			break ;
 		dollar_word[i++] = *str++;
 	}
@@ -155,16 +151,5 @@ void	move_pointer_after_dollar(char **str)
 			break ;
 		}
 		++(*str);
-	}
-}
-
-void	measure_dollar_word_len(char **str, t_prompt *prompt, int *len)
-{
-	*len = 0;
-	while (**str != '\0' && !ft_strchr(prompt->whitespace, **str)
-		&& **str != '$')
-	{
-		(*len)++;
-		(*str)++;
 	}
 }

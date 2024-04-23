@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:13:25 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/15 14:21:37 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:33:09 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	if_multiple_word_tokens(t_token_node *tokens)
 	{
 		if (tokens->token.type == PIPE)
 			first = false;
-		if (tokens->token.type == SIMPLE_CMD || tokens->token.type == BUILTIN_CMD)
+		if (tokens->token.type == SIMPLE_CMD
+			|| tokens->token.type == BUILTIN_CMD)
 		{
 			if (!first)
 				first = true;

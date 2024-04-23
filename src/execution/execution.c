@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/19 19:30:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:33:35 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ static void	pipeline_execution(t_info *structure)
 
 static void	print_err_no_path(t_info *structure)
 {
+	t_cmd	*head;
+
+	head = structure->table;
 	while (structure->table)
 	{
 		ft_putstr_fd("minishell: ", 2);
@@ -34,6 +37,7 @@ static void	print_err_no_path(t_info *structure)
 		ft_putstr_fd(": No such file or directory\n", 2);
 		structure->table = structure->table->next;
 	}
+	structure->table = head;
 	structure->last_exit_status = EX_COMM_NOTFOUND;
 }
 

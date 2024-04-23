@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/16 16:32:43 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:25:05 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +29,15 @@ t_token_node	*init_token_list(t_info *structure, t_prompt *prompt)
 		if (!list)
 			return (free_token_list_full(&head), NULL);
 		if (list->token.type == END)
-		{
-			free(list);
 			break ;
-		}
 		if (list->token.type == ERROR)
 			return (free_token_list_full(&head), free(list), NULL);
 		add_node_to_list(&head, &current, list);
 	}
-	if ((head && head->token.type == PIPE)
-		|| (current && current->token.type == PIPE))
-		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2),
-			structure->last_exit_status = 2, free_token_list_full(&head), NULL);
+	if (if_wrong_pipe_placement(&head, &current, structure))
+		return (NULL);
 	prompt->token_count = i;
-	return (head);
+	return (free(list), head);
 }
 
 t_token_node	*init_token_node(t_info *structure, t_prompt *prompt, int index)
