@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default_display.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 12:54:59 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:56:23 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 
 // Display current directory + prompt for user + addhistory for previous
 // prompts
-int	default_display_with_history(t_prompt *prompt, t_info *structure)
+
+static void	print_colored_prompt(t_prompt *prompt, t_info *structure)
 {
 	char	*color_prompt;
+
+	color_prompt = init_color_prompt(prompt, structure);
+	handle_parent_key_combos();
+	prompt->msg = readline(color_prompt);
+	free(color_prompt);
+}
+
+int	default_display_with_history(t_prompt *prompt, t_info *structure)
+{
 	char	*tmp;
 	size_t	size;
 
@@ -27,10 +37,7 @@ int	default_display_with_history(t_prompt *prompt, t_info *structure)
 	else
 		structure->folder_deleted = 1;
 	free(tmp);
-	color_prompt = init_color_prompt(prompt, structure);
-	handle_parent_key_combos();
-	prompt->msg = readline(color_prompt);
-	free(color_prompt);
+	print_colored_prompt(prompt, structure);
 	if (prompt->msg == NULL)
 	{
 		ft_putstr_fd("exit\n", 1);

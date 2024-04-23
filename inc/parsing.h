@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:34:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 13:13:30 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:50:08 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_token_node
 {
 	t_token				token;
 	int					index;
-	struct s_token_node *prev;
+	struct s_token_node	*prev;
 	struct s_token_node	*next;
 	struct s_token_node	*left;
 	struct s_token_node	*right;
