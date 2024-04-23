@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 16:48:27 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:43:59 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,14 @@ static void	fork_and_execution(t_info *structure, int i)
 		close_fds_pipes_parent(structure, i);
 }
 
-void	pipes_implementation(t_info *structure)
+static void	pipeline_execution(t_info *structure)
 {
-	int		i;
-	pid_t	w_id;
-	t_cmd	*head;
 	char	**current;
+	t_cmd	*head;
+	int		i;
 	int		status;
+	pid_t	w_id;
 
-	create_pipes(structure);
-	structure->pid = (pid_t *)ft_calloc((structure->number_commands),
-			sizeof(pid_t));
-	if (structure-> pid == NULL)
-	{
-		perror("Memory allocation failed\n");
-		structure->last_exit_status = EXIT_FAILURE;
-		return ;
-	}
 	current = structure->table->arr;
 	head = structure->table;
 	i = 0;
@@ -73,4 +64,18 @@ void	pipes_implementation(t_info *structure)
 	structure->table = head;
 	w_id = wait_child_processes(structure, &status);
 	free_pipe_structure(structure);
+}
+
+void	pipes_implementation(t_info *structure)
+{
+	create_pipes(structure);
+	structure->pid = (pid_t *)ft_calloc((structure->number_commands),
+			sizeof(pid_t));
+	if (structure->pid == NULL)
+	{
+		perror("Memory allocation failed\n");
+		structure->last_exit_status = EXIT_FAILURE;
+		return ;
+	}
+	pipeline_execution(structure);
 }

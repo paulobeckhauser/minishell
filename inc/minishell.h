@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 21:03:24 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:53:16 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,7 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <termios.h>
-
-// MACRO variable library
-
-#ifdef __APPLE__
-	# include <limits.h>
-#else
-	# include <linux/limits.h>
-#endif
-
-
-// CHECK IF IT IS NOT A PROBLEM TO IMPORT(NORMINETT/ FORBIDDEN FUNCTION)
+# include <linux/limits.h>
 # include <stdbool.h>
 # include "parsing.h"
 # include "execution.h"
@@ -58,7 +48,7 @@ typedef struct s_token_node
 {
 	t_token				token;
 	int					index;
-	struct s_token_node *prev;
+	struct s_token_node	*prev;
 	struct s_token_node	*next;
 	struct s_token_node	*left;
 	struct s_token_node	*right;
@@ -194,9 +184,10 @@ bool					if_no_cmd_tokens(t_token_node *tokens);
 t_token_node			*init_binary_tree(t_token_node **token_node);
 void					find_first_cmd_token(t_token_node *token,
 							t_token_node **head);
-void					plant_redirections(t_token_node **token, t_token_node **root);
-void					delete_redirection_tokens_from_list(t_token_node **token,
-							t_token_node **head);
+void					plant_redirections(t_token_node **token,
+							t_token_node **root);
+void					delete_redirection_tokens_from_list(
+							t_token_node **token, t_token_node **head);
 void					plant_cmd(t_token_node **token, t_token_node **root);
 void					init_cmd_table(t_token_node *node, t_cmd **cmd,
 							t_cmd **start_ptr_save, t_prompt *prompt);
@@ -205,27 +196,26 @@ void					init_left_leaf(t_token_node **node, t_cmd **table,
 void					init_right_leaf(t_token_node **node, t_cmd **table,
 							t_prompt *prompt);
 t_cmd					*init_cmd(t_token_node *node, t_prompt *prompt);
-// bool					mark_redirection_as_previous(t_token_node **token,
-// 							t_token_node **previous_token);
 void					join_redirection_to_cmd(t_token_node **token);
-int	join_left_redirections_to_cmd(t_token_node **token);
-void	join_right_redirections_to_cmd(t_token_node **token);
-// bool					join_next_redirection_to_cmd(t_token_node **token,
-// 							t_token_node **previous_token);
-// bool					mark_cmd_as_previous(t_token_node **token,
-// 							t_token_node **previous_token);
-void					join_tokens_to_pipe(t_token_node **token, t_token_node **first_pipe);
-void	join_left_token_to_pipe(t_token_node **token, t_token_node **first_pipe);
-void	join_right_token_to_pipe(t_token_node **token);
-void					delete_repeating_redirection_tokens(t_token_node **tokens);
-void					delete_and_close_not_used_redirections(t_token_node **tokens,
-							t_token_node **head, t_token_node **previous_token);
+int						join_left_redirections_to_cmd(t_token_node **token);
+void					join_right_redirections_to_cmd(t_token_node **token);
+void					join_tokens_to_pipe(t_token_node **token,
+							t_token_node **first_pipe);
+void					join_left_token_to_pipe(t_token_node **token,
+							t_token_node **first_pipe);
+void					join_right_token_to_pipe(t_token_node **token);
+void					delete_repeating_redirection_tokens(
+							t_token_node **tokens);
+void					delete_and_close_not_used_redirections(
+							t_token_node **tokens, t_token_node **head,
+							t_token_node **previous_token);
 void					fix_prev_pointers(t_token_node **tokens);
 void					mark_last_in_redirection(t_token_node *tokens);
 void					mark_last_out_redirection(t_token_node *tokens);
 bool					if_in_left_redirection(t_token_node **node);
 bool					if_in_right_redirection(t_token_node **node);
-void					assign_type_arr_in_out(t_cmd *cmd, t_prompt *prompt, t_token_node *node);
+void					assign_type_arr_in_out(t_cmd *cmd,
+							t_prompt *prompt, t_token_node *node);
 void					join_redirection_file_names(t_token_node **tokens);
 void					join_in_file_names(t_token_node **tokens);
 void					join_out_file_names(t_token_node **tokens);
