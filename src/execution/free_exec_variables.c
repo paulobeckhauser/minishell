@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_exec_variables.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 13:01:02 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 22:27:58 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:41:10 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,4 @@ void	free_exec_variables(t_info *structure)
 	free_2d_array(structure->commands);
 	free_2d_array(structure->path_commands);
 	free_2d_int_array(structure->fds_pipes);
-	// free(structure->path_env);
 }

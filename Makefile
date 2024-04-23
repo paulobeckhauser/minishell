@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/23 17:36:09 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/23 18:01:39 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,7 @@ BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo_without_flag.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)env.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)exit.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)exit_args.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)export.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)pwd.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)unset.c \

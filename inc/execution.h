@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:30:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 19:45:34 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:44:43 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ int			open_files(t_cmd *table);
 int			open_in_files(t_cmd *table);
 int			open_out_files(t_cmd *table);
 void		commands_execution(t_info *structure, int i);
-void	execute_child_process(t_info *structure, int i);
+void		execute_child_process(t_info *structure, int i);
 
 #endif

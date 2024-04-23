@@ -6,11 +6,40 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 17:56:55 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:09:09 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+
+static char	*getpid_from_stat(t_prompt *prompt)
+{
+	char 	*file;
+	char	*pid_str;
+	int		fd;
+	int		len;
+
+	fd = open("/proc/self/stat", O_RDONLY);
+	if (fd == -1)
+	{
+		perror("open");
+		return (NULL);
+	}
+	file = get_next_line(fd);
+	len = 0;
+	while (file[len] && !ft_strchr(prompt->whitespace, file[len]))
+		len++;
+	pid_str = malloc(len + 1);
+	if (!pid_str)
+		return (free(file), NULL);
+	pid_str[len--] = 0;
+	while (len >= 0)
+	{
+		pid_str[len] = file[len];
+		len--;
+	}
+	return (close(fd), free(file), pid_str);
+}
 
 int	verify_dollar(t_info *structure, t_prompt *prompt)
 {
@@ -61,6 +90,11 @@ int	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 
 	dollar_word = find_dollar_word(prompt, str);
 	if (ft_strcmp(dollar_word, "$") == 0)
+	{
+		replace_words_in_arr(prompt, *i, "$", getpid_from_stat(prompt));
+		return (1);
+	}
+	if (ft_strcmp(dollar_word, "") == 0)
 		return (2);
 	if (ft_strcmp(dollar_word, "?") == 0)
 	{
@@ -84,6 +118,8 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 
 	move_pointer_after_dollar(&str);
 	if (!*str || ((*str) && ft_strchr(prompt->whitespace, *str)))
+		return ("");
+	if (*str == '$')
 		return ("$");
 	if (*str == '?')
 		return ("?");
