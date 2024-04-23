@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:49:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 14:51:01 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:58:43 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,59 +49,6 @@ void	free_tree(t_token_node *node)
 	if (node->right)
 		free_tree(node->right);
 	free(node);
-}
-
-void	free_token_list(t_token_node **list)
-{
-	t_token_node	*current;
-	t_token_node	*next;
-
-	current = NULL;
-	next = NULL;
-	current = *list;
-	while (current != NULL)
-	{
-		next = current->next;
-		free(current);
-		current = next;
-	}
-	*list = NULL;
-}
-
-void	free_token_list_full(t_token_node **list)
-{
-	t_token_node	*current;
-	t_token_node	*next;
-
-	current = NULL;
-	next = NULL;
-	current = *list;
-	while (current != NULL)
-	{
-		if (current->token.type == ERROR)
-		{
-			free(current);
-			current = next;
-		}
-		if (current->token.type == REDIRECTION)
-		{
-			if (current->token.in.file_name)
-				free_double_arr(current->token.in.file_name);
-			if (current->token.out.file_name)
-			{
-				if (current->token.out.trunc)
-					free(current->token.out.trunc);
-				free_double_arr(current->token.out.file_name);
-			}
-		}
-		if ((current->token.type == BUILTIN_CMD || current->token.type == SIMPLE_CMD)
-			&& current->token.word_val)
-			free_double_arr(current->token.word_val);
-		next = current->next;
-		free(current);
-		current = next;
-	}
-	*list = NULL;
 }
 
 void	free_cmd_table(t_cmd **table)
