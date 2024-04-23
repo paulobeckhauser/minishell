@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:34:03 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 20:54:50 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:33:53 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
