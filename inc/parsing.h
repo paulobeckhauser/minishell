@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:34:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 20:08:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:23:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_token_node
 {
 	t_token				token;
 	int					index;
-	struct s_token_node *prev;
+	struct s_token_node	*prev;
 	struct s_token_node	*next;
 	struct s_token_node	*left;
 	struct s_token_node	*right;

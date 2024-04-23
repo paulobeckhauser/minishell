@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/23 19:26:37 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/23 20:21:29 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,6 +138,7 @@ EXECUTION_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)execution.c \
 PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)display/verify_quote_number.c \
 						$(SRC_DIR)$(PARSING_DIR)free/free.c \
+						$(SRC_DIR)$(PARSING_DIR)free/free_token.c \
 						$(SRC_DIR)$(PARSING_DIR)init/init_prompt.c	\
 						$(SRC_DIR)$(PARSING_DIR)init/init_redirection.c \
 						$(SRC_DIR)$(PARSING_DIR)init/heredoc_utils.c \
