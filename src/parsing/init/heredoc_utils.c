@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:12:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 09:58:54 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:16:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 	*heredoc_newline = readline("> ");
 	if (*heredoc_newline == NULL)
 	{
-		ft_putstr_fd("bash: warning: here-document delimited by end-of-file", 1);
-		ft_putstr_fd(" (wanted `", 1);
-		ft_putstr_fd(delimiter, 1);
-		ft_putstr_fd("')\n", 1);
+		print_heredoc_end_of_file(delimiter);
 		exit(EXIT_SUCCESS);
 	}
 	*heredoc_msg = ft_calloc(1, 1);
@@ -72,10 +69,7 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 		*heredoc_newline = readline("> ");
 		if (*heredoc_newline == NULL)
 		{
-			ft_putstr_fd("bash: warning: here-document delimited by end-of-file", 1);
-			ft_putstr_fd(" (wanted `", 1);
-			ft_putstr_fd(delimiter, 1);
-			ft_putstr_fd("')\n", 1);
+			print_heredoc_end_of_file(delimiter);
 			exit(EXIT_SUCCESS);
 		}
 	}

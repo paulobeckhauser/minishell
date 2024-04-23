@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:34:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 18:50:08 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:23:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,29 @@ typedef struct s_token_node
 	struct s_token_node	*right;
 
 }									t_token_node;
+
+typedef struct s_vars_join_in_redirect_f_names
+{
+	t_token_node	*start_red;
+	t_token_node	*last_red;
+	t_token_node	*head;
+	char			**file_arr;
+	int				file_len;
+	int				i;
+	int				y;
+}	t_vars_join_in_redirect_f_names;
+
+typedef struct s_vars_join_out_redirect_f_names
+{
+	t_token_node	*start_red;
+	t_token_node	*last_red;
+	t_token_node	*head;
+	char			**file_arr;
+	int				file_len;
+	int				last_red_trunc;
+	int				i;
+	int				y;
+}	t_vars_join_out_redirect_f_names;
 
 typedef struct s_join_word_tokens_vars
 {

@@ -6,40 +6,11 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 18:09:09 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:57:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-static char	*getpid_from_stat(t_prompt *prompt)
-{
-	char 	*file;
-	char	*pid_str;
-	int		fd;
-	int		len;
-
-	fd = open("/proc/self/stat", O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		return (NULL);
-	}
-	file = get_next_line(fd);
-	len = 0;
-	while (file[len] && !ft_strchr(prompt->whitespace, file[len]))
-		len++;
-	pid_str = malloc(len + 1);
-	if (!pid_str)
-		return (free(file), NULL);
-	pid_str[len--] = 0;
-	while (len >= 0)
-	{
-		pid_str[len] = file[len];
-		len--;
-	}
-	return (close(fd), free(file), pid_str);
-}
 
 int	verify_dollar(t_info *structure, t_prompt *prompt)
 {
@@ -130,15 +101,10 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	if (!dollar_word)
 		return (NULL);
 	i = 0;
-	while (*str)
-	{
-		if (ft_strchr(prompt->whitespace, *str)
-			|| ft_strchr(prompt->off_symbols, *str))
-			break ;
+	while (*str && !ft_strchr(prompt->whitespace, *str)
+		&& !ft_strchr(prompt->off_symbols, *str))
 		dollar_word[i++] = *str++;
-	}
-	dollar_word[i] = 0;
-	return (dollar_word);
+	return (dollar_word[i] = 0, dollar_word);
 }
 
 void	move_pointer_after_dollar(char **str)

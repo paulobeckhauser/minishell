@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 18:57:41 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:59:20 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	run_word_token_join(t_join_word_tokens_vars *vars)
 			break ;
 		else if (vars->curr_save->token.type == BUILTIN_CMD
 			|| vars->curr_save->token.type == SIMPLE_CMD)
-				join_words_to_command(&vars->command,
-					vars->curr_save->token.word_val);
+			join_words_to_command(&vars->command,
+				vars->curr_save->token.word_val);
 		vars->curr_save = vars->curr_save->next;
 	}
 	free_double_arr(vars->arr_save->token.word_val);
 	vars->arr_save->token.word_val = vars->command;
-	vars->command_word_count = 0;		
+	vars->command_word_count = 0;
 }
 
 void	join_words_to_command(char ***arr, char **join)

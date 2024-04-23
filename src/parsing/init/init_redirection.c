@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 12:29:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:13:48 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 	pid = fork();
 	if (pid == 0)
 		run_heredoc(token, delimiter);
-	token->type = REDIRECTION;;
+	token->type = REDIRECTION;
 	waitpid(pid, NULL, 0);
 	g_signal = 0;
 	free(delimiter);
 }
 
-void	init_truncate_out_redirection(t_token *token, char *file_name, t_prompt *prompt)
+void	init_truncate_out_redirection(t_token *token, char *file_name,
+	t_prompt *prompt)
 {
 	if (!prompt->in_prio && !prompt->out_prio)
 		prompt->out_prio = true;
@@ -69,13 +70,14 @@ void	init_truncate_out_redirection(t_token *token, char *file_name, t_prompt *pr
 	token->out.file_name[1] = NULL;
 	token->out.fd = 0;
 	token->out.trunc = ft_calloc(1, sizeof(int));
-	if(!token->out.trunc)
-		return ; 
+	if (!token->out.trunc)
+		return ;
 	token->out.trunc[0] = 1;
 	token->type = REDIRECTION;
 }
 
-void	init_append_out_redirection(t_token *token, char *file_name, t_prompt *prompt)
+void	init_append_out_redirection(t_token *token, char *file_name,
+	t_prompt *prompt)
 {
 	if (!prompt->in_prio && !prompt->out_prio)
 		prompt->out_prio = true;
