@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 18:57:30 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:19:49 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 	}
 	word_replacement = replace_dollar_word(structure, dollar_word);
 	if (!word_replacement)
-		return (0);
+		return (free(dollar_word), 0);
 	replace_words_in_arr(prompt, *i, dollar_word, word_replacement);
 	return (1);
 }
