@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 20:21:59 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:28:01 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,19 +193,25 @@ void					assign_type_arr_in_out(t_cmd *cmd,
 							t_prompt *prompt, t_token_node *node);
 void					join_redirection_file_names(t_token_node **tokens);
 void					join_in_redirection_file_names(t_token_node **tokens);
-void					init_vars_join_in_redirect_f_names(t_token_node **tokens,
+void					init_vars_join_in_redirect_f_names(
+							t_token_node **tokens,
 							t_vars_join_in_redirect_f_names *vars);
 void					mark_in_redirection_to_join(t_token_node **tokens,
 							t_vars_join_in_redirect_f_names *vars);
-void					assign_in_redirect_f_names(t_vars_join_in_redirect_f_names *vars);
-void					iter_in_redirect_file_names(t_vars_join_in_redirect_f_names *vars);
+void					assign_in_redirect_f_names(
+							t_vars_join_in_redirect_f_names *vars);
+void					iter_in_redirect_file_names(
+							t_vars_join_in_redirect_f_names *vars);
 void					join_out_redirection_file_names(t_token_node **tokens);
-void					init_vars_join_out_redirect_f_names(t_token_node **tokens,
+void					init_vars_join_out_redirect_f_names(
+							t_token_node **tokens,
 							t_vars_join_out_redirect_f_names *vars);
 void					mark_out_redirection_to_join(t_token_node **tokens,
 							t_vars_join_out_redirect_f_names *vars);
-void					assign_out_redirect_f_names(t_vars_join_out_redirect_f_names *vars);
-void					iter_out_redirect_file_names(t_vars_join_out_redirect_f_names *vars);
+void					assign_out_redirect_f_names(
+							t_vars_join_out_redirect_f_names *vars);
+void					iter_out_redirect_file_names(
+							t_vars_join_out_redirect_f_names *vars);
 
 // parser.c
 bool					parser(t_info *structure, t_prompt *prompt);
