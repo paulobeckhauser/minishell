@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:14:47 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 17:53:48 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:00:31 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ char	*echo_without_flag(char *string, t_info *structure);
 void	exit_1_arg(t_info *structure);
 void	exit_2_args(t_info *structure);
 void	exit_more_args(t_info *structure);
+void	execute_handle_error_cd(char *path, t_info *structure);
+void	cd_wihtout_args(t_info *structure);
 
 #endif

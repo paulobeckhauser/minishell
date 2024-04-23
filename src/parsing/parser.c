@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 22:39:36 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:06:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_token_node	*lex(t_info *structure, t_prompt *prompt)
 		join_word_tokens(&tokens);
 	if (tokens && tokens->token.type == PIPE)
 	{
-		ft_printf("bash: syntax error near unexpected token `|'\n");
+		ft_printf("minishell: syntax error near unexpected token `|'\n");
 		return (NULL);
 	}
 	return (tokens);
