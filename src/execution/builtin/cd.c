@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:16:30 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 19:47:16 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:00:07 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	update_path(t_info *structure)
 	free(new_string);
 }
 
-static void	execute_handle_error_cd(char *path, t_info *structure)
+void	execute_handle_error_cd(char *path, t_info *structure)
 {
 	if (chdir(path) == -1)
 	{
@@ -59,10 +59,7 @@ void	execute_cd_command(t_info *structure)
 	while (structure->table->arr[nb_args])
 		nb_args++;
 	if (nb_args == 1)
-	{
-		path = getenv("HOME");
-		execute_handle_error_cd(path, structure);
-	}
+		cd_wihtout_args(structure);
 	else if (nb_args == 2)
 	{
 		path = structure->table->arr[1];

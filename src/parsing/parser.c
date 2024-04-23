@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 20:29:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 21:23:13 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_token_node	*lex(t_info *structure, t_prompt *prompt)
 		join_word_tokens(&tokens);
 	if (tokens && tokens->token.type == PIPE)
 	{
-		ft_printf("bash: syntax error near unexpected token `|'\n");
+		ft_printf("minishell: syntax error near unexpected token `|'\n");
 		return (NULL);
 	}
 	return (tokens);
