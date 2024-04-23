@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/23 20:21:29 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/23 22:21:28 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ LIBFT			:= ./libs/libft/libft.a
 
 					
 BUILTIN_SRCS		:= 	$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd.c \
+						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)cd_without_arg.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo_n_flag.c \
 						$(SRC_DIR)$(EXECUTION_DIR)$(BUILTIN_DIR)echo_without_flag.c \

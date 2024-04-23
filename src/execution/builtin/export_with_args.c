@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:46:03 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/18 16:28:05 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/23 21:26:42 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static int	edge_cases_handle(t_info *structure, int i)
 
 	flag_edge_cases = 0;
 	j = 0;
-	if (((structure->table->arr[i][j] == '-') && (structure->table->arr[i][j
-			+ 1] != '-')) || (structure->table->arr[i][j + 1] == '-')
+	if (((structure->table->arr[i][j] == '-'
+			|| structure->table->arr[i][j] == '@'
+		|| structure->table->arr[i][j] == '#')
+			&& (structure->table->arr[i][j + 1] != '-'))
+		|| (structure->table->arr[i][j + 1] == '-')
 		|| (structure->table->arr[i][j] >= '0'
 			&& structure->table->arr[i][j] <= '9'))
 	{
@@ -100,9 +103,11 @@ void	export_with_args(t_info *structure)
 	i = 1;
 	while (structure->table->arr[i])
 	{
-		if (ft_strcmp(structure->table->arr[i], "=") == 0)
+		if (ft_strcmp(structure->table->arr[i], "=") == 0
+			|| ft_strcmp(structure->table->arr[i], "@") == 0
+			|| ft_strcmp(structure->table->arr[i], "#") == 0)
 		{
-			ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
+			ft_putstr_fd("minishell: export: `=': not a valid identifier\n", 2);
 			structure->last_exit_status = 1;
 		}
 		else
