@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 21:23:13 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:06:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ bool	parser(t_info *structure, t_prompt *prompt)
 	tokens = lex(structure, prompt);
 	if (!tokens || if_no_cmd_tokens(tokens))
 	{
+		if (if_no_cmd_tokens(tokens))
+		{
+			if (!open_redirection_files(tokens))
+				structure->last_exit_status = 1;
+		}
 		free_token_list_full(&tokens);
 		free(prompt->start_ptr_save);
 		return (false);

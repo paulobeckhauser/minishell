@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 20:28:01 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/23 22:40:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,10 @@ char					*replace_dollar_word(t_info *structure, char *str);
 char					*extract_dollar_value(char *str);
 void					init_single_quote_checker_list(t_prompt *prompt);
 void					update_single_quote_status(t_prompt *prompt, int i);
+int						open_redirection_files(t_token_node *tokens);
+int						open_in_red_token(t_token_node *tokens);
+int						open_out_red_token(t_token_node *tokens);
+void					open_based_on_trunc(t_token_node *tokens, int i);
 void					skip_whitespaces(t_prompt *prompt);
 int						get_word_length(t_prompt *prompt);
 int						count_len_inside_quotes(t_prompt *prompt, int i);

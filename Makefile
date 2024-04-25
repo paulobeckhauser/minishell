@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/23 22:21:28 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/23 23:05:56 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,6 +156,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_dollar_sign.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/monitor_single_quote.c \
+						$(SRC_DIR)$(PARSING_DIR)lex/open_redirection_files.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/utils_3.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/utils_2.c \
 						$(SRC_DIR)$(PARSING_DIR)lex/utils.c \
