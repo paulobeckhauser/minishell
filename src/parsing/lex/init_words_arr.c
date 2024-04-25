@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:15:05 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/11 23:42:56 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:08:39 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_words_arr(t_prompt *prompt)
 	vars.i = 0;
 	prompt->arr = ft_calloc(prompt->word_count + 1, sizeof(char *));
 	if (!prompt->arr)
-		return ;
+		mem_alloc_protection();
 	init_single_quote_checker_list(prompt);
 	while (*prompt->msg)
 	{
@@ -46,7 +46,7 @@ void	process_word(t_prompt *prompt, int word_len, int i, int *j)
 
 	prompt->arr[i] = malloc(word_len + 1);
 	if (!prompt->arr[i])
-		return ;
+		mem_alloc_protection();
 	while (*prompt->msg && *j < word_len)
 	{
 		if (ft_strchr(prompt->quotes, *prompt->msg))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_var_envp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:56:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 20:01:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:01:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	allocate_mem_sort_var(t_info *structure)
 	while (structure->envp_export[len])
 		len++;
 	structure->envp_sorted = (char **)malloc((len + 1) * sizeof(char *));
+	if (structure->envp_sorted == NULL)
+		mem_alloc_protection();
 	i = 0;
 	while (structure->envp_export[i])
 	{

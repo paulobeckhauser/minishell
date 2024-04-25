@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 18:23:55 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:01:47 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ static char	**allocate_mem_array_backup(char **array, char **array_backup,
 	}
 	array_backup = (char **)malloc((i - count + 1) * sizeof(char *));
 	if (array_backup == NULL)
-	{
-		perror("Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+		mem_alloc_protection();
 	return (array_backup);
 }
 
@@ -81,6 +78,8 @@ char	**delete_string_array(char **array, char *str_delete)
 	while (array_backup[i])
 		i++;
 	array = (char **)malloc((i + 1) * sizeof(char *));
+	if (array == NULL)
+		mem_alloc_protection();
 	i = 0;
 	while (array_backup[i])
 	{

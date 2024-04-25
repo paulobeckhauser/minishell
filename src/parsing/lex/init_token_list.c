@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:43:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 17:25:05 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:08:34 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_token_node	*init_token_node(t_info *structure, t_prompt *prompt, int index)
 
 	node = ft_calloc(1, sizeof(t_token_node));
 	if (!node)
-		return (NULL);
+		mem_alloc_protection();
 	node->token = init_token_struct(structure, prompt);
 	node->next = NULL;
 	node->index = index;

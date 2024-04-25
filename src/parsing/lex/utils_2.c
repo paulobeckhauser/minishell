@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:14:57 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 17:33:55 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:02:48 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*fetch_file_name(t_prompt *prompt)
 		return (NULL);
 	file_name = malloc(i + 1);
 	if (!file_name)
-		return (NULL);
+		mem_alloc_protection();
 	file_name = process_file_name(prompt, file_name, i + 1);
 	return (file_name);
 }

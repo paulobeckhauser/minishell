@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:27:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 14:21:24 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:00:10 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,7 @@ static int	allocate_mem_path(t_info *structure, int i, int j)
 	}
 	structure->path_env = (char *)malloc((size_alloc + 1) * sizeof(char));
 	if (structure->path_env == NULL)
-	{
-		perror("Memory allocation failed\n");
-		structure->last_exit_status = EXIT_FAILURE;
-		return (0);
-	}
+		mem_alloc_protection();
 	return (size_alloc);
 }
 

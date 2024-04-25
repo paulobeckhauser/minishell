@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 18:59:20 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:09:08 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	run_word_token_join(t_join_word_tokens_vars *vars)
 {
 	vars->command = ft_calloc(vars->command_word_count + 1, sizeof(char *));
 	if (!vars->command)
-		return ;
+		mem_alloc_protection();
 	vars->first_cmd = false;
 	while (vars->curr_save)
 	{
@@ -100,7 +100,7 @@ void	join_words_to_command(char ***arr, char **join)
 		dst_size = ft_strlen(*join_temp);
 		*arr_temp = malloc(dst_size + 1);
 		if (!*arr_temp)
-			return ;
+			mem_alloc_protection();
 		ft_strlcpy(*arr_temp, *join_temp, dst_size + 1);
 		join_temp++;
 		arr_temp++;

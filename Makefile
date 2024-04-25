@@ -6,7 +6,7 @@
 #    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/24 13:25:58 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/25 11:57:45 by sfrankie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -178,6 +178,7 @@ PARSING_SRCS		:=	$(SRC_DIR)$(PARSING_DIR)display/default_display.c \
 UTILS_SRCS			:=	$(SRC_DIR)$(UTILS_DIR)strjoin_improved.c \
 						$(SRC_DIR)$(UTILS_DIR)shift_memory.c \
 						$(SRC_DIR)$(UTILS_DIR)getpid.c \
+						$(SRC_DIR)$(UTILS_DIR)mem_alloc_protection.c \
 
 
 

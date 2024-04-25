@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_path_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:32:54 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 12:17:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:00:53 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ static void	allocate_memory_path_commands(t_info *structure)
 	structure->path_commands = (char **)malloc((structure->number_commands + 1)
 			* sizeof(char *));
 	if (!structure->path_commands)
-	{
-		perror("Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+		mem_alloc_protection();
 }
 
 static void	condition_dup(t_info *structure, int i, int j)

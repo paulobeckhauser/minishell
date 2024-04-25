@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/24 15:46:50 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:02:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	str = dollar_start;
 	dollar_word = malloc(len + 1);
 	if (!dollar_word)
-		return (NULL);
+		mem_alloc_protection();
 	i = 0;
 	while (*str && !ft_strchr(prompt->whitespace, *str)
 		&& !ft_strchr(prompt->off_symbols, *str))

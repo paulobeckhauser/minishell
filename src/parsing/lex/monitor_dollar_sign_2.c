@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:28:23 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/24 13:25:42 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:02:23 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*extract_dollar_value(char *str)
 	}
 	word_replacement = malloc(ft_strlen(str) + 1);
 	if (!word_replacement)
-		return (NULL);
+		mem_alloc_protection();
 	start_ptr_save = word_replacement;
 	while (*str)
 		*word_replacement++ = *str++;

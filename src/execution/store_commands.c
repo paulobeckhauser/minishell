@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_commands.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:17:51 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 12:33:37 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:06:30 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static void	allocate_memory_commands(t_info *structure)
 	structure->commands = (char **)ft_calloc((structure->number_commands + 1),
 			sizeof(char *));
 	if (!structure->commands)
-	{
-		perror("Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+		mem_alloc_protection();
 	while (current_table)
 	{
 		j = 0;
@@ -36,6 +33,8 @@ static void	allocate_memory_commands(t_info *structure)
 			j++;
 		}
 		structure->commands[i] = (char *)ft_calloc((j + 1), sizeof(char));
+		if (!structure->commands[i])
+			mem_alloc_protection();
 		i++;
 		current_table = current_table->next;
 	}

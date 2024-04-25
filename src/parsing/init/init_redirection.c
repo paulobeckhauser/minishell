@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 19:12:35 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 20:13:48 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:08:29 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_in_redirection(t_token *token, char *file_name, t_prompt *prompt)
 	token->in.heredoc = false;
 	token->in.file_name = ft_calloc(2, sizeof(char *));
 	if (!token->in.file_name)
-		return ;
+		mem_alloc_protection();
 	token->in.file_name[0] = file_name;
 	token->in.file_name[1] = NULL;
 	token->type = REDIRECTION;
@@ -44,7 +44,11 @@ void	init_heredoc_in_redirection(t_token *token, char *delimiter)
 	create_tmp_folder();
 	token->in.heredoc = true;
 	token->in.file_name = ft_calloc(2, sizeof(char *));
+	if (!token->in.file_name)
+		mem_alloc_protection();
 	token->in.file_name[0] = ft_strdup("tmp/heredoc_tmp");
+	if (!token->in.file_name[0])
+		mem_alloc_protection();
 	token->in.file_name[1] = NULL;
 	token->in.fd = 0;
 	kill(0, SIGUSR1);
@@ -65,13 +69,13 @@ void	init_truncate_out_redirection(t_token *token, char *file_name,
 		prompt->out_prio = true;
 	token->out.file_name = ft_calloc(2, sizeof(char *));
 	if (!token->out.file_name)
-		return ;
+		mem_alloc_protection();
 	token->out.file_name[0] = file_name;
 	token->out.file_name[1] = NULL;
 	token->out.fd = 0;
 	token->out.trunc = ft_calloc(1, sizeof(int));
 	if (!token->out.trunc)
-		return ;
+		mem_alloc_protection();
 	token->out.trunc[0] = 1;
 	token->type = REDIRECTION;
 }
@@ -83,12 +87,12 @@ void	init_append_out_redirection(t_token *token, char *file_name,
 		prompt->out_prio = true;
 	token->out.file_name = ft_calloc(2, sizeof(char *));
 	if (!token->out.file_name)
-		return ;
+		mem_alloc_protection();
 	token->out.file_name[0] = file_name;
 	token->out.file_name[1] = NULL;
 	token->out.fd = 0;
 	token->out.trunc = ft_calloc(1, sizeof(int));
 	if (!token->out.trunc)
-		return ;
+		mem_alloc_protection();
 	token->type = REDIRECTION;
 }

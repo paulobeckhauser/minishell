@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_envp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:44:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 23:09:58 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:00:46 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,13 @@ static char	**store_array(char **envp)
 		i++;
 	array = (char **)malloc((i + 1) * sizeof(char *));
 	if (array == NULL)
-	{
-		perror("Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+		mem_alloc_protection();
 	i = 0;
 	while (envp[i])
 	{
 		array[i] = ft_strdup(envp[i]);
 		if (array[i] == NULL)
-		{
-			perror("Memory allocation failed!\n");
-			exit(EXIT_FAILURE);
-		}
+			mem_alloc_protection();
 		i++;
 	}
 	array[i] = NULL;

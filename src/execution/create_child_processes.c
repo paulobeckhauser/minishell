@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_child_processes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:03:28 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 15:07:10 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:05:06 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	create_child_processes(t_info *structure)
 
 	structure->pid = (pid_t *)ft_calloc((structure->number_commands + 1),
 			sizeof(pid_t));
+	if (!structure->pid)
+		mem_alloc_protection();
 	i = 0;
 	while (i < structure->number_commands)
 	{

@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:10:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 11:04:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:01:20 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ char	*allocate_str_temp(t_info *structure, char *str_temp, int i)
 		len++;
 	str_temp = (char *)malloc((len + 1) * sizeof(char));
 	if (str_temp == NULL)
-	{
-		perror("Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+		mem_alloc_protection();
 	return (str_temp);
 }
 

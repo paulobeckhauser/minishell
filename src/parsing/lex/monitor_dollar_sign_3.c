@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:25:31 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/24 13:25:44 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:02:27 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	replace_word(t_dollar_replace_info *info, int y)
 			ft_strlen(info->prompt->arr[info->i]) - y - dollar_word_len);
 	new_str = malloc(ft_strlen(before_dollar) + ft_strlen(info->replacement)
 			+ ft_strlen(after_dollar) + 1);
+	if (!new_str)
+		mem_alloc_protection();
 	ft_strlcpy(new_str, before_dollar, ft_strlen(before_dollar) + 1);
 	ft_strlcat(new_str, info->replacement, ft_strlen(before_dollar)
 		+ ft_strlen(info->replacement) + 1);

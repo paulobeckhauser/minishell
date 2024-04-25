@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_to_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 21:38:08 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 20:29:30 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:01:15 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ static char	**allocate_mem_backup_array(char **array, char **backup_array)
 		i++;
 	backup_array = ft_calloc(i + 1, sizeof(char *));
 	if (backup_array == NULL)
-	{
-		perror("Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+		mem_alloc_protection();
 	return (backup_array);
 }
 
@@ -37,10 +34,7 @@ static char	**allocate_mem_array(char **array, char **backup_array)
 		i++;
 	array = (char **)malloc((i + 2) * sizeof(char *));
 	if (array == NULL)
-	{
-		perror("Memory allocation failed!\n");
-		exit(EXIT_FAILURE);
-	}
+		mem_alloc_protection();
 	return (array);
 }
 

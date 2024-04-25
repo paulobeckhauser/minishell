@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:16:30 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 20:09:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:08:46 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	join_in_redirection_file_names(t_token_node **tokens)
 			}
 			vars.file_arr = ft_calloc(vars.i + 1, sizeof(char *));
 			if (!vars.file_arr)
-				return ;
+				mem_alloc_protection();
 			assign_in_redirect_f_names(&vars);
 		}
 		*tokens = (*tokens)->next;
@@ -83,7 +83,7 @@ void	iter_in_redirect_file_names(t_vars_join_in_redirect_f_names *vars)
 				= ft_strlen(vars->start_red->token.in.file_name[0]);
 			vars->file_arr[vars->y] = malloc(vars->file_len + 1);
 			if (!vars->file_arr[vars->y])
-				return ;
+				mem_alloc_protection();
 			ft_strlcpy(vars->file_arr[vars->y++],
 				vars->start_red->token.in.file_name[0], vars->file_len
 				+ 1);

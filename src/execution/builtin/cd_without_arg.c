@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_without_arg.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 22:18:02 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 22:50:15 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:01:26 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ static char	*allocate_mem_string(t_info *structure, int i, int j)
 	}
 	path_home = ft_calloc(l + 1, sizeof(char));
 	if (!path_home)
-	{
-		perror("Memory allocation problem\n");
-		return (NULL);
-	}
+		mem_alloc_protection();
 	return (path_home);
 }
 

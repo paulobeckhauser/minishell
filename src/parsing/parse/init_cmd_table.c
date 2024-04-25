@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:46:42 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 21:01:48 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:09:14 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_cmd	*init_cmd(t_token_node *node, t_prompt *prompt)
 
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
-		return (NULL);
+		mem_alloc_protection();
 	assign_type_arr_in_out(cmd, prompt, node);
 	if (node->left)
 	{

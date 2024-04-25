@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_concat_command.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:44:55 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 12:17:45 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:05:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*fill_word(const char *str, int start, int end, char *command)
 	total_size = end - start + 1 + 1 + len_command;
 	word = (char *)ft_calloc(total_size, sizeof(char));
 	if (!word)
-		return (NULL);
+		mem_alloc_protection();
 	while (start < end)
 	{
 		word[i] = str[start];
@@ -78,7 +78,7 @@ char	**split_concat(char const *s, char c, char *command)
 	ft_initiate_vars(&i, &j, &s_word);
 	array = ft_calloc((word_count(s, c) + 2), sizeof(char *));
 	if (!array)
-		return (NULL);
+		mem_alloc_protection();
 	while (i < ft_strlen(s))
 	{
 		if (s[i] != c && s_word < 0)

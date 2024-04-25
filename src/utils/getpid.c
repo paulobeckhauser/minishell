@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:50:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/24 15:46:31 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:02:56 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*getpid_from_stat(void)
 		len++;
 	pid_str = malloc(len + 1);
 	if (!pid_str)
-		return (free(file), NULL);
+		mem_alloc_protection();
 	pid_str[len--] = 0;
 	while (len >= 0)
 	{

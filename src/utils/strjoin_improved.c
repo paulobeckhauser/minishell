@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strjoin_impoved.c                                  :+:      :+:    :+:   */
+/*   strjoin_improved.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 09:58:41 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/22 10:18:15 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:03:16 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*strjoin_free_s1(char *s1, char *s2)
 
 	string = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!string)
-		return (NULL);
+		mem_alloc_protection();
 	i = 0;
 	while (s1[i])
 	{
@@ -47,7 +47,7 @@ char	*strjoin_free_s2(char *s1, char *s2)
 
 	string = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!string)
-		return (NULL);
+		mem_alloc_protection();
 	i = 0;
 	while (s1[i])
 	{
@@ -74,7 +74,7 @@ char	*strjoin_free_both(char *s1, char *s2)
 
 	string = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!string)
-		return (NULL);
+		mem_alloc_protection();
 	i = 0;
 	while (s1[i])
 	{
