@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_parent_folder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 11:00:27 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 14:17:33 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:18:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static char	*copy_str(char *updated_str, char *str_new, int i)
 	str_new[iter] = '\0';
 	free(updated_str);
 	updated_str = ft_strdup(str_new);
+	if (updated_str == NULL)
+		mem_alloc_protection();
 	return (updated_str);
 }
 
@@ -49,7 +51,7 @@ static char	*iterate_copy(char **arr, int elem, char *updated_str, char *str)
 	str_new = malloc(ft_strlen(updated_str) - ft_strlen(arr[elem])
 			- ft_strlen("/") + 1);
 	if (!str_new)
-		return (NULL);
+		mem_alloc_protection();
 	i = ft_strlen(updated_str) - 1;
 	j = ft_strlen(str_path) - 1;
 	while (str[i] && str_path[j] && str[i] == str_path[j])
@@ -72,6 +74,8 @@ char	*get_parent_folder(char *str)
 	arr = ft_split(str, '/');
 	elem = get_size_arr(arr) - 1;
 	updated_str = ft_strdup(str);
+	if (updated_str == NULL)
+		mem_alloc_protection();
 	while (elem > 0)
 	{
 		if (access(updated_str, X_OK) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_n_flag.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:27:59 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 17:35:20 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:12:29 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ int	flag_string_only_n(char *str)
 	return (0);
 }
 
+static char	*duplicate_empty(void)
+{
+	char	*string;
+
+	string = ft_strdup("");
+	if (string == NULL)
+		mem_alloc_protection();
+	return (string);
+}
+
 char	*echo_n_flag(char *string, t_info *structure, int i)
 {
 	free(string);
@@ -52,9 +62,13 @@ char	*echo_n_flag(char *string, t_info *structure, int i)
 		if (structure->table->arr[i])
 			string = join_string_echo(i, structure);
 		else
+		{
 			string = ft_strdup("");
+			if (string == NULL)
+				mem_alloc_protection();
+		}
 	}
 	else
-		string = ft_strdup("");
+		string = duplicate_empty();
 	return (string);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:14:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 18:52:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:33:17 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	store_last_path(t_info *structure)
 	if (curr_path == NULL)
 	{
 		str = ft_strdup(structure->folder);
+		if (str == NULL)
+			mem_alloc_protection();
 		structure->folder = get_parent_folder(str);
 	}
 	free(str);

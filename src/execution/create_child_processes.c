@@ -6,11 +6,25 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:03:28 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 12:05:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:28:37 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+static void	dup_close(t_info *structure, int i)
+{
+	if (i != 0)
+	{
+		dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
+		close(structure->fds_pipes[i - 1][0]);
+	}
+	if (i != structure->number_commands - 1)
+	{
+		dup2(structure->fds_pipes[i][1], 1);
+		close(structure->fds_pipes[i][1]);
+	}
+}
 
 void	create_child_processes(t_info *structure)
 {
@@ -26,16 +40,7 @@ void	create_child_processes(t_info *structure)
 		structure->pid[i] = fork();
 		if (structure->pid[i] == 0)
 		{
-			if (i != 0)
-			{
-				dup2(structure->fds_pipes[i - 1][0], STDIN_FILENO);
-				close(structure->fds_pipes[i - 1][0]);
-			}
-			if (i != structure->number_commands - 1)
-			{
-				dup2(structure->fds_pipes[i][1], 1);
-				close(structure->fds_pipes[i][1]);
-			}
+			dup_close(structure, i);
 			execve(structure->path_commands[i], structure->table->arr,
 				structure->envp);
 		}

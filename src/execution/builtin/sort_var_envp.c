@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:56:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 12:01:32 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:59:37 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	allocate_mem_sort_var(t_info *structure)
 	while (structure->envp_export[i])
 	{
 		structure->envp_sorted[i] = ft_strdup(structure->envp_export[i]);
+		if (structure->envp_sorted[i] == NULL)
+			mem_alloc_protection();
 		i++;
 	}
 	structure->envp_sorted[i] = NULL;

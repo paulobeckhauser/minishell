@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:27:43 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 18:29:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:08:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ static char	*condition_flag(int n_flag, char *string, t_info *structure, int i)
 	return (string);
 }
 
+static char	*duplicate_newline(void)
+{
+	char	*string;
+
+	string = ft_strdup("\n");
+	if (string == NULL)
+		mem_alloc_protection();
+	return (string);
+}
+
 void	execute_echo_command(t_info *structure)
 {
 	char	*string;
@@ -66,7 +76,7 @@ void	execute_echo_command(t_info *structure)
 		string = condition_flag(n_flag, string, structure, i);
 	}
 	else
-		string = ft_strdup("\n");
+		string = duplicate_newline();
 	redirection_echo(string, structure);
 	free(string);
 }

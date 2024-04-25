@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:32:54 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 12:00:53 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:54:05 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,17 @@ static void	allocate_memory_path_commands(t_info *structure)
 static void	condition_dup(t_info *structure, int i, int j)
 {
 	if (structure->possible_paths[j] != NULL)
+	{
 		structure->path_commands[i] = ft_strdup(structure->possible_paths[j]);
+		if (structure->path_commands[i] == NULL)
+			mem_alloc_protection();
+	}
 	else
+	{
 		structure->path_commands[i] = ft_strdup(structure->possible_paths[--j]);
+		if (structure->path_commands[i] == NULL)
+			mem_alloc_protection();
+	}
 }
 
 static void	get_path_command(t_info *structure, int i, int j)
@@ -62,7 +70,11 @@ void	store_path_commands(t_info *structure)
 	while (structure->commands[i])
 	{
 		if (access(structure->commands[i], X_OK) == 0)
+		{
 			structure->path_commands[i] = ft_strdup(structure->commands[i]);
+			if (structure->path_commands[i] == NULL)
+				mem_alloc_protection();
+		}
 		else
 		{
 			structure->possible_paths = split_concat(structure->path_env,

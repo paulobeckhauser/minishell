@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 12:01:47 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:00:09 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static char	**save_in_array_backup(char **array, char **array_backup,
 		if (ft_strcmp(str_delete, env_var[0]) != 0)
 		{
 			array_backup[j] = ft_strdup(array[i]);
+			if (array_backup[j] == NULL)
+				mem_alloc_protection();
 			j++;
 		}
 		i++;
@@ -84,6 +86,8 @@ char	**delete_string_array(char **array, char *str_delete)
 	while (array_backup[i])
 	{
 		array[i] = ft_strdup(array_backup[i]);
+		if (array[i] == NULL)
+			mem_alloc_protection();
 		i++;
 	}
 	array[i] = NULL;

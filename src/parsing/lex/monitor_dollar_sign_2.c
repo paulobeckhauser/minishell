@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:28:23 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/25 12:02:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:00:48 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	replace_words_in_arr(t_prompt *prompt, int i, char *dollar_word,
 	if (ft_strcmp(dollar_word, "?") && ft_strcmp(dollar_word, "$"))
 		free(dollar_word);
 	info.replacement = ft_strdup(replacement);
+	if (!info.replacement)
+		mem_alloc_protection();
 	free(replacement);
 	y = 0;
 	while (info.prompt->arr[info.i][y])

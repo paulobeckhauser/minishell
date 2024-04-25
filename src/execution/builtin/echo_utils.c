@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:28:31 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/22 19:32:18 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:58:31 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static char	*replace_string(char *concat_str, char *temp)
 {
 	free(concat_str);
 	concat_str = ft_strdup(temp);
+	if (concat_str == NULL)
+		mem_alloc_protection();
 	free(temp);
 	return (concat_str);
 }
