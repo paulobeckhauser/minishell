@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/25 23:32:51 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/25 23:39:10 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -207,14 +207,12 @@ OBJ_BONUS		:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS_BONUS))
 # Rules
 all: 		${NAME}
 
-bonus: 		${NAME}_bonus
 
 $(OBJ_DIR)%.o: 	$(SRC_DIR)%.c
 					@echo $(YELLOW) "Compiling...\t" $< $(EOC)
-#					@curl 'http://141.147.48.52:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 					@mkdir -p $(@D)
 					@${CC} ${CFLAGS} ${DEBUG} $(SANITIZER) -I.libs/libft -c $(IREADLINE) $? -o $@
-
+					
 
 ${NAME}: 		${OBJ}
 					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
@@ -222,14 +220,9 @@ ${NAME}: 		${OBJ}
 					@make -s -C ./libs/libft
 					@${CC} ${CFLAGS} ${DEBUG} $(SANITIZER) $^ -L./libs/libft -lft $(LREADLINE) -o ${NAME}
 					@echo $(GREEN) "Minishell Mandatory is created!\n" $(EOC) $(RESET_COLOR)
+#					@curl 'http://141.147.48.52:8080/ansi?start=8b5cf6&end=db2777&padding=5&text=Minishell!'
 
 
-${NAME}_bonus:	${OBJ_BONUS}
-					@echo $(GREEN) "Source files are compiled!\n" $(EOC)
-					@echo $(WHITE) "Building minishell for" $(YELLOW) "Bonus" $(WHITE)
-					@make -s -C ./libs/libft
-					@${CC} ${CFLAGS} {DEBUG} $^ -L./libs/libft -lft $(LREADLINE) -o ${NAME}_bonus
-					@echo $(GREEN) "Minishell Bonus is created!\n" $(EOC) $(RESET_COLOR)
 
 libft:
 				@make -C libs/libft
@@ -252,4 +245,4 @@ re:				fclean all
 
 
 
-.PHONY: all clean fclean re libft bonus
+.PHONY: all clean fclean re libft
