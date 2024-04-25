@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/25 23:39:10 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/25 23:43:15 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -192,17 +192,11 @@ SRCS			:= 	$(SHARED_SRCS) \
 					$(BUILTIN_SRCS) \
 					$(PARSING_SRCS) \
 					$(UTILS_SRCS) \
-					
-
-
-SRCS_BONUS		:= 	$(SHARED_SRCS)\
-				
+								
 
 # Creation of Object Files for each Source File
 OBJ				:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
-# Creation of Object Files for each Bonus Source File
-OBJ_BONUS		:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS_BONUS))
 
 # Rules
 all: 		${NAME}
@@ -231,12 +225,12 @@ libft:
 clean:
 				@echo $(YELLOW) "Cleaning object files..." $(EOC)
 				@make -s clean -C ./libs/libft
-				@${RM} ${OBJ} ${OBJ_BONUS}
+				@${RM} ${OBJ}
 				@echo $(RED) "Object files are cleaned!\n" $(EOC)
 
 fclean:			clean
 				@echo $(YELLOW) "Removing minishell..." $(EOC)
-				@${RM} ${NAME} ${NAME}_bonus
+				@${RM} ${NAME}
 				@${RM} ./libs/libft/libft.a
 				@rm -rf ${OBJ_DIR}
 				@echo $(RED) "Minishell is removed!\n" $(EOC)
