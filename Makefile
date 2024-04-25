@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/25 11:57:45 by sfrankie         ###   ########.fr        #
+#    Updated: 2024/04/25 23:32:51 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ UTILS_DIR		:= utils/
 CC				:= cc
 RM				:= rm -f
 CFLAGS			:= -Wall -Wextra -Werror
-DEBUG			:= -g
+# DEBUG			:= -g
 #SANITIZER 		:= -fsanitize=address -g
 
 UNAME_S := $(shell uname -s)
