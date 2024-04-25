@@ -6,13 +6,13 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:50:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 18:50:57 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:46:31 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*getpid_from_stat(t_prompt *prompt)
+char	*getpid_from_stat(void)
 {
 	char	*file;
 	char	*pid_str;
@@ -27,7 +27,7 @@ char	*getpid_from_stat(t_prompt *prompt)
 	}
 	file = get_next_line(fd);
 	len = 0;
-	while (file[len] && !ft_strchr(prompt->whitespace, file[len]))
+	while (file[len] && !ft_strchr(" \t\r\v", file[len]))
 		len++;
 	pid_str = malloc(len + 1);
 	if (!pid_str)

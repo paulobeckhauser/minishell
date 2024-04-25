@@ -1,9 +1,0 @@
-[submodule "js_tester_minishell"]
-	path = js_tester_minishell
-	url = git@github.com:paulobeckhauser/js_minishell_tester.git
-[submodule "shell_tester_minishell"]
-	path = shell_tester_minishell
-	url = git@github.com:paulobeckhauser/tester_minishell.git
-[submodule "tester_minishell"]
-	path = tester_minishell
-	url = https://github.com/paulobeckhauser/tester_minishell.git

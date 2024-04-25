@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:44:48 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 22:40:30 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:46:41 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # include "exit_codes.h"
 # include <errno.h>
 
-extern int				g_signal;
+extern volatile sig_atomic_t	g_signal;
 
 // split_concat_commands
 char					**split_concat(char const *s, char c, char *command);
@@ -134,6 +134,8 @@ int						if_single_quoted_str(t_single_quote_checker **checker,
 int						handle_dollar(t_info *structure, t_prompt *prompt,
 							char *str, int *i);
 char					*find_dollar_word(t_prompt *prompt, char *str);
+void					replace_dollar_with_exit_status(t_info *structure,
+							t_prompt *prompt, int i, char *dollar_word);
 void					move_pointer_after_dollar(char **str);
 void					measure_dollar_word_len(char **str, t_prompt *prompt,
 							int *len);
@@ -239,6 +241,6 @@ char					*strjoin_free_s1(char *s1, char *s2);
 char					*strjoin_free_s2(char *s1, char *s2);
 char					*strjoin_free_both(char *s1, char *s2);
 int						shift_strings_left(char **arr, int index, int size);
-char					*getpid_from_stat(t_prompt *prompt);
+char					*getpid_from_stat(void);
 
 #endif

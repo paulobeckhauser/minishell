@@ -6,7 +6,7 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 23:19:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:46:50 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,14 @@ int	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 	dollar_word = find_dollar_word(prompt, str);
 	if (ft_strcmp(dollar_word, "$") == 0)
 	{
-		replace_words_in_arr(prompt, *i, "$", getpid_from_stat(prompt));
+		replace_words_in_arr(prompt, *i, "$", getpid_from_stat());
 		return (1);
 	}
 	if (ft_strcmp(dollar_word, "") == 0)
 		return (2);
 	if (ft_strcmp(dollar_word, "?") == 0)
 	{
-		replace_words_in_arr(prompt, *i, dollar_word,
-			ft_itoa(structure->last_exit_status));
+		replace_dollar_with_exit_status(structure, prompt, *i, dollar_word);
 		return (1);
 	}
 	word_replacement = replace_dollar_word(structure, dollar_word);
@@ -107,15 +106,13 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	return (dollar_word[i] = 0, dollar_word);
 }
 
-void	move_pointer_after_dollar(char **str)
+void	replace_dollar_with_exit_status(t_info *structure, t_prompt *prompt,
+	int i, char *dollar_word)
 {
-	while (**str)
-	{
-		if (**str == '$')
-		{
-			++(*str);
-			break ;
-		}
-		++(*str);
-	}
+	if (g_signal == SIGINT)
+		structure->last_exit_status = 130;
+	replace_words_in_arr(prompt, i, dollar_word,
+		ft_itoa(structure->last_exit_status));
+	g_signal = 0;
+	structure->last_exit_status = 0;
 }
