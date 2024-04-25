@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 18:56:23 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:15:31 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	*init_color_prompt(t_prompt *prompt, t_info *structure)
 	{
 		color_prompt = ft_strjoin("\001\033[1;32m\002", prompt->buf);
 		free(prompt->buf);
+		free(structure->folder);
 	}
 	else
 	{

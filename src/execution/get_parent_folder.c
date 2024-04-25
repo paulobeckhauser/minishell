@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_parent_folder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 11:00:27 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 13:18:51 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:29:35 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static char	*iterate_copy(char **arr, int elem, char *updated_str, char *str)
 	int		i;
 	int		j;
 
+	if (arr[elem] == NULL)
+		arr[elem] = "";
 	str_path = ft_strjoin("/", arr[elem]);
 	str_new = malloc(ft_strlen(updated_str) - ft_strlen(arr[elem])
 			- ft_strlen("/") + 1);
@@ -54,7 +56,7 @@ static char	*iterate_copy(char **arr, int elem, char *updated_str, char *str)
 		mem_alloc_protection();
 	i = ft_strlen(updated_str) - 1;
 	j = ft_strlen(str_path) - 1;
-	while (str[i] && str_path[j] && str[i] == str_path[j])
+	while (i >= 0 && j >= 0 && str[i] && str_path[j] && str[i] == str_path[j])
 	{
 		i--;
 		j--;
@@ -71,6 +73,8 @@ char	*get_parent_folder(char *str)
 	int		elem;
 	char	*updated_str;
 
+	if (str == NULL)
+		str = ft_strdup("");
 	arr = ft_split(str, '/');
 	elem = get_size_arr(arr) - 1;
 	updated_str = ft_strdup(str);
@@ -83,5 +87,6 @@ char	*get_parent_folder(char *str)
 		updated_str = iterate_copy(arr, elem, updated_str, str);
 		elem--;
 	}
+	free_2d_array(arr);
 	return (updated_str);
 }

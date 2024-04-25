@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:14:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 12:51:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:29:44 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,23 @@ void	store_last_path(t_info *structure)
 {
 	char	*curr_path;
 	char	*str;
-	char	cwd[PATH_MAX];
 
-	curr_path = getcwd(cwd, sizeof(cwd));
+	str = NULL;
+	curr_path = getcwd(NULL, 0);
 	if (curr_path == NULL)
 	{
-		str = ft_strdup(structure->folder);
-		if (str == NULL)
-			mem_alloc_protection();
-		structure->folder = get_parent_folder(str);
-		free(str);
+		if (structure->folder != NULL)
+		{
+			str = ft_strdup(structure->folder);
+			if (str == NULL)
+				mem_alloc_protection();
+			else
+			{
+				free(structure->folder);
+				structure->folder = get_parent_folder(str);
+				free(str);
+			}
+		}
 	}
+	free(curr_path);
 }

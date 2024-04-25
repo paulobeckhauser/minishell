@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:36:05 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/16 12:23:42 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:25:32 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ int	is_pwd_command(char **command)
 void	execute_pwd_command(char **command)
 {
 	char	*cur_path;
-	size_t	size;
 
 	(void)command;
-	size = PATH_MAX;
-	cur_path = getcwd(NULL, size);
+	cur_path = getcwd(NULL, 0);
 	if (cur_path == NULL)
 	{
 		perror("getcwd() error");

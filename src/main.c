@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:10:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 11:23:39 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:18:07 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	main(int argc, char **argv, char **envp)
 		(void)argv;
 		init_vars(&structure);
 		store_envp(envp, &structure);
-		structure.folder = NULL;
-		structure.folder_deleted = 0;
 		while (1)
 		{
 			store_last_path(&structure);
@@ -38,6 +36,7 @@ int	main(int argc, char **argv, char **envp)
 				free_cmd_table(&structure.table);
 			}
 		}
+		free(structure.folder);
 		free_exec_variables(&structure);
 	}
 	return (0);

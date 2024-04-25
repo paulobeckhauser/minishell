@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 18:33:35 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:24:54 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ static void	print_err_no_path(t_info *structure)
 bool	execution(t_info *structure)
 {
 	int		flag_cur_folder;
-	char	cwd[PATH_MAX];
 
 	flag_cur_folder = 0;
-	structure->folder = getcwd(cwd, sizeof(cwd));
+	structure->folder = getcwd(NULL, 0);
 	preparation_for_execution(structure);
 	if (structure->table->type == BUILTIN_CMD
 		&& structure->number_commands == 1)
