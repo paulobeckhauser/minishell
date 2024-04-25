@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 17:12:51 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/25 12:07:12 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/25 23:22:37 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
 		print_heredoc_end_of_file(delimiter);
 		exit(EXIT_SUCCESS);
 	}
-	*heredoc_msg = ft_calloc(1, 1);
-	if (*heredoc_msg)
+	*heredoc_msg = ft_calloc(1, sizeof(char));
+	if (*heredoc_msg == NULL)
 		mem_alloc_protection();
 	while (ft_strcmp(*heredoc_newline, delimiter) != 0)
 	{

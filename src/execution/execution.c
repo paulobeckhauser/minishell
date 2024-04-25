@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 22:24:54 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:55:34 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ bool	execution(t_info *structure)
 	int		flag_cur_folder;
 
 	flag_cur_folder = 0;
+	free(structure->folder);
 	structure->folder = getcwd(NULL, 0);
 	preparation_for_execution(structure);
 	if (structure->table->type == BUILTIN_CMD

@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:21:39 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/25 22:15:31 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:58:35 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ static void	print_colored_prompt(t_prompt *prompt, t_info *structure)
 int	default_display_with_history(t_prompt *prompt, t_info *structure)
 {
 	char	*tmp;
-	size_t	size;
 
-	size = PATH_MAX;
 	tmp = getcwd(NULL, 0);
 	if (tmp)
 		prompt->buf = getcwd(NULL, 0);
@@ -63,14 +61,12 @@ char	*init_color_prompt(t_prompt *prompt, t_info *structure)
 	{
 		color_prompt = ft_strjoin("\001\033[1;32m\002", prompt->buf);
 		free(prompt->buf);
-		free(structure->folder);
 	}
 	else
 	{
 		color_prompt = ft_strjoin("\001\033[1;32m\002", structure->folder);
 		chdir(structure->folder);
 		structure->folder_deleted = 0;
-		free(structure->folder);
 	}
 	tmp = ft_strjoin(color_prompt, "\001\033[0m\002");
 	free(color_prompt);
