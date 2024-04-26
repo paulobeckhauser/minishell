@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:37 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 22:55:34 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:26:38 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,15 @@ bool	execution(t_info *structure)
 	else
 	{
 		flag_cur_folder = get_path_env(structure);
+		// printf("The value is: %d\n", flag_cur_folder);
+		
 		if (flag_cur_folder == 0)
 			print_err_no_path(structure);
 		else
+		{
 			pipeline_execution(structure);
+			// free(structure->path_env);		
+		}
 	}
 	return (true);
 }

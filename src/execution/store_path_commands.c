@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_path_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:32:54 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 12:54:05 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:32:12 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void	store_path_commands(t_info *structure)
 		}
 		i++;
 	}
+	free(structure->path_env);
 	structure->path_commands[i] = NULL;
 }

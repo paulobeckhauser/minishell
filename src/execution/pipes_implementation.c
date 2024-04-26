@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 12:00:23 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:53:26 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@ static void	free_pipe_structure(t_info *structure)
 	free_2d_int_array(structure->fds_pipes);
 	free_2d_array(structure->commands);
 	free_2d_array(structure->path_commands);
-	free(structure->path_env);
+
+	// free(structure->path_env);
+		// structure->path_env = NULL;
+		// if (structure->path_env != NULL)
+		// 	printf("not freed\n");
+		// else
+		// 	printf("freed\n");
+	// }
 	free(structure->pid);
 }
 

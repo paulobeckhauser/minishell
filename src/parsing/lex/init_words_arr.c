@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_words_arr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:15:05 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/25 12:08:39 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:49:14 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	process_word(t_prompt *prompt, int word_len, int i, int *j)
 {
 	char	curr_quote;
 
+	curr_quote = 0;
 	prompt->arr[i] = malloc(word_len + 1);
 	if (!prompt->arr[i])
 		mem_alloc_protection();

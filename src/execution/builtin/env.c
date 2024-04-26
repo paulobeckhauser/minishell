@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:54:28 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 12:34:50 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:34:55 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	execute_env_command(t_info *structure)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		i++;
 	}
-	free(structure->path_env);
+	// free(structure->path_env);
 }

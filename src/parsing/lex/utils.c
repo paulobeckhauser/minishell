@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:57:55 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/25 12:02:52 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:47:57 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,14 @@ void	count_words(t_prompt *prompt)
 			skip_whitespaces(prompt);
 		else
 		{
-			if (prompt->msg == start_ptr_save || (*(prompt->msg - 1)
-					&& !ft_strchr(prompt->quotes, *(prompt->msg - 1))))
+			if (prompt->msg == start_ptr_save ||
+				((*(prompt->msg - 1) && !ft_strchr(prompt->quotes, *(prompt->msg
+								- 1))) || (*(prompt->msg - 1) && *(prompt->msg
+							- 2) && ft_strchr(prompt->quotes, *(prompt->msg
+								- 1)) && ft_strchr(prompt->quotes, *(prompt->msg
+								- 2)))
+						)
+			)
 				prompt->word_count++;
 			while (*prompt->msg && !ft_strchr(prompt->symbols, *prompt->msg)
 				&& !ft_strchr(prompt->quotes, *prompt->msg)
@@ -76,9 +82,11 @@ void	count_words_inside_quotes(t_prompt *prompt, char **start_ptr_save)
 		prompt->msg += 2;
 		return ;
 	}
-	if (prompt->msg == *start_ptr_save
-		|| ft_strchr(prompt->symbols, *(prompt->msg - 1))
-		|| ft_strchr(prompt->whitespace, *(prompt->msg - 1)))
+	if (prompt->msg == *start_ptr_save || ft_strchr(prompt->symbols,
+			*(prompt->msg - 1)) || ft_strchr(prompt->whitespace, *(prompt->msg
+				- 1)) || (*(prompt->msg - 1) && *(prompt->msg - 2)
+			&& ft_strchr(prompt->quotes, *(prompt->msg - 1))
+			&& ft_strchr(prompt->quotes, *(prompt->msg - 2))))
 		prompt->word_count++;
 	prompt->msg++;
 	while (*prompt->msg && *prompt->msg != curr_quote)

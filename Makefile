@@ -6,7 +6,7 @@
 #    By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 17:56:15 by pabeckha          #+#    #+#              #
-#    Updated: 2024/04/25 23:43:15 by pabeckha         ###   ########.fr        #
+#    Updated: 2024/04/26 20:39:15 by pabeckha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ CC				:= cc
 RM				:= rm -f
 CFLAGS			:= -Wall -Wextra -Werror
 # DEBUG			:= -g
-#SANITIZER 		:= -fsanitize=address -g
+SANITIZER 		:= -fsanitize=address -g
 
 UNAME_S := $(shell uname -s)
 

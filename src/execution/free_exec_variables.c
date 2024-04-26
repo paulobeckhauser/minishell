@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 13:01:02 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/25 22:14:14 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:00:51 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,6 @@ void	free_exec_variables(t_info *structure)
 	free_2d_array(structure->commands);
 	free_2d_array(structure->path_commands);
 	free_2d_int_array(structure->fds_pipes);
+	if (structure->path_env != NULL)
+		free(structure->path_env);
 }
