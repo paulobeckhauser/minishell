@@ -6,12 +6,22 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:16:30 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 20:09:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:12:52 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: join_in_redirection_file_names
+ * -----------------------------------------
+ * Joins the file names for input redirection tokens into a single array.
+ * 
+ * tokens: A pointer to the head of a linked list of token nodes.
+ * 
+ * This function iterates through the tokens linked list and groups file names
+ * for input redirection tokens that are meant to be joined. It handles the
+ * allocation and assignment of memory for the array of file names.
+ */
 void	join_in_redirection_file_names(t_token_node **tokens)
 {
 	t_vars_join_in_redirect_f_names	vars;
@@ -39,6 +49,16 @@ void	join_in_redirection_file_names(t_token_node **tokens)
 	*tokens = vars.head;
 }
 
+/* Function: init_vars_join_in_redirect_f_names
+ * ---------------------------------------------
+ * Initializes the variables used in joining input redirection file names.
+ * 
+ * tokens: A pointer to the head of a linked list of token nodes.
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * This function initializes the variables used throughout the process of
+ * joining input redirection file names, setting up the initial state.
+ */
 void	init_vars_join_in_redirect_f_names(t_token_node **tokens,
 	t_vars_join_in_redirect_f_names *vars)
 {
@@ -49,6 +69,16 @@ void	init_vars_join_in_redirect_f_names(t_token_node **tokens,
 	vars->i = 0;
 }
 
+/* Function: mark_in_redirection_to_join
+ * --------------------------------------
+ * Marks input redirection tokens that should be joined together.
+ * 
+ * tokens: A pointer to the current token in the linked list.
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * This function iterates through the tokens and marks the start and end of
+ * a sequence of input redirection tokens that should be joined together.
+ */
 void	mark_in_redirection_to_join(t_token_node **tokens,
 	t_vars_join_in_redirect_f_names *vars)
 {
@@ -61,6 +91,16 @@ void	mark_in_redirection_to_join(t_token_node **tokens,
 	}
 }
 
+/* Function: assign_in_redirect_f_names
+ * -------------------------------------
+ * Assigns the joined file names to the last input redirection token.
+ * 
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * After joining the file names, this function assigns the resulting array
+ * of file names to the last input redirection token in the sequence and
+ * resets the variables for the next sequence.
+ */
 void	assign_in_redirect_f_names(t_vars_join_in_redirect_f_names *vars)
 {
 	vars->file_len = 0;
@@ -72,6 +112,15 @@ void	assign_in_redirect_f_names(t_vars_join_in_redirect_f_names *vars)
 	vars->i = 0;
 }
 
+/* Function: iter_in_redirect_file_names
+ * --------------------------------------
+ * Iterates through the marked input redirection tokens to join file names.
+ * 
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * This function iterates from the start to the end of the marked input
+ * redirection tokens, joining their file names into a single array.
+ */
 void	iter_in_redirect_file_names(t_vars_join_in_redirect_f_names *vars)
 {
 	while (vars->start_red && vars->y < vars->i)

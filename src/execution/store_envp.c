@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   store_envp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:44:33 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/05 23:09:58 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:02:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+/* Function: store_array
+ * ---------------------
+ * Copies the environment variables array into a new array.
+ * 
+ * envp: The original environment variables array.
+ * 
+ * Returns: A new array containing copies of the original environment variables.
+ */
 static char	**store_array(char **envp)
 {
 	int		i;
@@ -41,6 +49,13 @@ static char	**store_array(char **envp)
 	return (array);
 }
 
+/* Function: store_envp
+ * --------------------
+ * Stores the environment variables in the t_info structure.
+ * 
+ * envp: The environment variables array.
+ * structure: A pointer to the t_info structure where the environment variables will be stored.
+ */
 void	store_envp(char **envp, t_info *structure)
 {
 	structure->envp = store_array(envp);

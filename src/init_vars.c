@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:14:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 18:52:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:35:42 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+/* Function: init_vars
+ * -------------------
+ * Initializes all the variables in the t_info structure to their default values.
+ * 
+ * structure: A pointer to the t_info structure whose variables are to be initialized.
+ * 
+ * This function sets all pointer variables within the structure to NULL and all integer
+ * variables to 0. It is typically called at the start of the program to ensure that all
+ * variables are in a known state before they are used.
+ */
 void	init_vars(t_info *structure)
 {
 	structure->envp = NULL;
@@ -32,6 +42,17 @@ void	init_vars(t_info *structure)
 	structure->last_exit_status = 0;
 }
 
+/* Function: store_last_path
+ * -------------------------
+ * Stores the last accessed path in the t_info structure.
+ * 
+ * structure: A pointer to the t_info structure where the last path is to be stored.
+ * 
+ * This function attempts to get the current working directory using getcwd and stores
+ * it in the structure. If getcwd returns NULL, indicating an error, it instead stores
+ * the parent folder of the last stored folder. This is a fallback mechanism to ensure
+ * the program has a valid path to work with even in case of errors.
+ */
 void	store_last_path(t_info *structure)
 {
 	char	*curr_path;

@@ -6,12 +6,22 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:16:40 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 20:11:17 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:15:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: join_out_redirection_file_names
+ * ------------------------------------------
+ * Joins the file names for output redirection tokens into a single array.
+ * 
+ * tokens: A pointer to the head of a linked list of token nodes.
+ * 
+ * This function iterates through the tokens linked list and groups file names
+ * for output redirection tokens that are meant to be joined. It handles the
+ * allocation and assignment of memory for the array of file names.
+ */
 void	join_out_redirection_file_names(t_token_node **tokens)
 {
 	t_vars_join_out_redirect_f_names	vars;
@@ -36,6 +46,16 @@ void	join_out_redirection_file_names(t_token_node **tokens)
 	*tokens = vars.head;
 }
 
+/* Function: init_vars_join_out_redirect_f_names
+ * ----------------------------------------------
+ * Initializes the variables used in joining output redirection file names.
+ * 
+ * tokens: A pointer to the head of a linked list of token nodes.
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * This function initializes the variables used throughout the process of
+ * joining output redirection file names, setting up the initial state.
+ */
 void	init_vars_join_out_redirect_f_names(t_token_node **tokens,
 	t_vars_join_out_redirect_f_names *vars)
 {
@@ -46,6 +66,16 @@ void	init_vars_join_out_redirect_f_names(t_token_node **tokens,
 	vars->i = 0;
 }
 
+/* Function: mark_out_redirection_to_join
+ * ---------------------------------------
+ * Marks output redirection tokens that should be joined together.
+ * 
+ * tokens: A pointer to the current token in the linked list.
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * This function iterates through the tokens and marks the start and end of
+ * a sequence of output redirection tokens that should be joined together.
+ */
 void	mark_out_redirection_to_join(t_token_node **tokens,
 	t_vars_join_out_redirect_f_names *vars)
 {
@@ -58,6 +88,16 @@ void	mark_out_redirection_to_join(t_token_node **tokens,
 	}
 }
 
+/* Function: assign_out_redirect_f_names
+ * --------------------------------------
+ * Assigns the joined file names to the last output redirection token.
+ * 
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * After joining the file names, this function assigns the resulting array
+ * of file names to the last output redirection token in the sequence and
+ * resets the variables for the next sequence.
+ */
 void	assign_out_redirect_f_names(t_vars_join_out_redirect_f_names *vars)
 {
 	vars->file_arr = ft_calloc(vars->i + 1, sizeof(char *));
@@ -77,6 +117,15 @@ void	assign_out_redirect_f_names(t_vars_join_out_redirect_f_names *vars)
 	vars->i = 0;
 }
 
+/* Function: iter_out_redirect_file_names
+ * ---------------------------------------
+ * Iterates through the marked output redirection tokens to join file names.
+ * 
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * This function iterates from the start to the end of the marked output
+ * redirection tokens, joining their file names into a single array.
+ */
 void	iter_out_redirect_file_names(t_vars_join_out_redirect_f_names *vars)
 {
 	while (vars->start_red && vars->y < vars->i)

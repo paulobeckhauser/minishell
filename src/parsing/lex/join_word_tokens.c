@@ -6,12 +6,23 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:18:38 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 18:59:20 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:17:15 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: join_word_tokens
+ * ---------------------------
+ * Joins word tokens into a single command array for each command.
+ * 
+ * tokens: A pointer to the head of a linked list of token nodes.
+ * 
+ * This function iterates through the tokens linked list, identifying command
+ * tokens and joining their word values into a single array. This is necessary
+ * for handling commands with arguments as a single entity. After joining, it
+ * cleans up any temporary structures used during the process.
+ */
 void	join_word_tokens(t_token_node **tokens)
 {
 	t_join_word_tokens_vars	vars;
@@ -39,6 +50,16 @@ void	join_word_tokens(t_token_node **tokens)
 	clean_joined_word_tokens(tokens);
 }
 
+/* Function: init_word_tokens_vars
+ * --------------------------------
+ * Initializes the variables used in the join_word_tokens function.
+ * 
+ * vars: A pointer to the struct holding the variables for this operation.
+ * tokens: A pointer to the head of a linked list of token nodes.
+ * 
+ * This function sets up the initial state for the variables used in the
+ * process of joining word tokens.
+ */
 void	init_word_tokens_vars(t_join_word_tokens_vars *vars,
 		t_token_node **tokens)
 {
@@ -50,6 +71,14 @@ void	init_word_tokens_vars(t_join_word_tokens_vars *vars,
 	vars->command_word_count = 0;
 }
 
+/* Function: count_words_in_token
+ * -------------------------------
+ * Counts the number of words in a token's word value array.
+ * 
+ * arr: The array of word values in a token.
+ * 
+ * Returns the count of words in the array.
+ */
 int	count_words_in_token(char **arr)
 {
 	int	count;
@@ -60,6 +89,15 @@ int	count_words_in_token(char **arr)
 	return (count);
 }
 
+/* Function: run_word_token_join
+ * ------------------------------
+ * Joins word tokens into a command array for a single command.
+ * 
+ * vars: A pointer to the struct holding the variables for this operation.
+ * 
+ * This function creates a new array to hold all word values for a command,
+ * including its arguments, and then frees the original word value arrays.
+ */
 void	run_word_token_join(t_join_word_tokens_vars *vars)
 {
 	vars->command = ft_calloc(vars->command_word_count + 1, sizeof(char *));
@@ -81,6 +119,16 @@ void	run_word_token_join(t_join_word_tokens_vars *vars)
 	vars->command_word_count = 0;
 }
 
+/* Function: join_words_to_command
+ * --------------------------------
+ * Joins words into the command array.
+ * 
+ * arr: A pointer to the array where the joined words will be stored.
+ * join: The array of words to join into the command array.
+ * 
+ * This function iterates through the join array, copying each word into the
+ * command array. It ensures that the command array is properly null-terminated.
+ */
 void	join_words_to_command(char ***arr, char **join)
 {
 	char	**arr_start_ptr_save;

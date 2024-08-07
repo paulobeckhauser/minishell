@@ -6,12 +6,23 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:52:08 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/20 16:49:06 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:29:47 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: handle_signal_parent
+ * -------------------------------
+ * Handles signals received by the parent process.
+ * 
+ * signal: The signal number received.
+ * 
+ * This function defines how the parent process reacts to SIGINT (Ctrl+C) signals.
+ * If the global signal flag (g_signal) is not set, it writes a newline to standard
+ * output, prepares readline to handle a new line, clears the current readline
+ * buffer, and forces readline to redisplay the prompt with an empty buffer.
+ */
 void	handle_signal_parent(int signal)
 {
 	if (signal == SIGINT && !g_signal)
@@ -23,6 +34,15 @@ void	handle_signal_parent(int signal)
 	}
 }
 
+/* Function: handle_parent_key_combos
+ * -----------------------------------
+ * Sets up signal handling for the parent process.
+ * 
+ * This function configures how the parent process should handle SIGINT (Ctrl+C)
+ * and SIGQUIT (Ctrl+\) signals using the sigaction structure and function. It
+ * ignores SIGQUIT and SIGUSR1 signals. The SA_RESTART flag is set to make certain
+ * system calls restartable across signals.
+ */
 void	handle_parent_key_combos(void)
 {
 	struct sigaction	sa;

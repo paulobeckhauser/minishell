@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   count_number_equal_signs.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:40:44 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/04 13:46:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:40:57 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: count_number_equal_signs
+ * -----------------------------------
+ * Counts the number of '=' characters in an environment variable string.
+ * 
+ * i: The index of the environment variable in the sorted environment variables array.
+ * envp_sorted: The sorted array of environment variables.
+ * structure: A pointer to the main structure containing the environment variables.
+ * 
+ * This function iterates through the characters of the environment variable at index i,
+ * counting the number of '=' characters. The count is stored in structure->count_number_signs.
+ */
 void	count_number_equal_signs(int i, char **envp_sorted, t_info *structure)
 {
 	int	j;
@@ -26,6 +37,15 @@ void	count_number_equal_signs(int i, char **envp_sorted, t_info *structure)
 	}
 }
 
+/* Function: count_equal_sign
+ * ---------------------------
+ * Counts the number of '=' characters in the first argument of the command.
+ * 
+ * structure: A pointer to the main structure containing the environment variables.
+ * 
+ * This function iterates through the characters of the first argument of the command,
+ * counting the number of '=' characters. The count is stored in structure->count_equal_sign.
+ */
 void	count_equal_sign(t_info *structure)
 {
 	int	i;

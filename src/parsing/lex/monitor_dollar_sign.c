@@ -6,12 +6,27 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:53:32 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 23:19:49 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:19:13 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: verify_dollar
+ * ------------------------
+ * Checks and processes dollar signs ($) in the command array.
+ * 
+ * structure: Struct containing environment variables.
+ * prompt: Struct containing shell information.
+ * 
+ * Returns 1 if successful, 0 otherwise.
+ * 
+ * This function iterates through the command array, skipping over parts that
+ * are within single quotes. If a dollar sign is found, it attempts to handle
+ * it with handle_dollar. If handle_dollar returns 0, it tries to shift the
+ * strings in the array to the left. If handle_dollar returns 2, it breaks
+ * the loop.
+ */
 int	verify_dollar(t_info *structure, t_prompt *prompt)
 {
 	int						i;
@@ -41,6 +56,19 @@ int	verify_dollar(t_info *structure, t_prompt *prompt)
 	return (prompt->checker = head, free_single_quote_checker_list(prompt), 1);
 }
 
+/* Function: if_single_quoted_str
+ * -------------------------------
+ * Checks if the current string is within single quotes.
+ * 
+ * checker: Pointer to a struct tracking single-quoted strings.
+ * i: Pointer to the current index in the command array.
+ * 
+ * Returns 1 if the current string is within single quotes, 0 otherwise.
+ * 
+ * This function checks if the current string is marked as being within single
+ * quotes by the checker. If so, it increments the index and moves to the next
+ * checker node.
+ */
 int	if_single_quoted_str(t_single_quote_checker **checker, int *i)
 {
 	if (*checker && (*checker)->index == *i
@@ -54,6 +82,22 @@ int	if_single_quoted_str(t_single_quote_checker **checker, int *i)
 	return (0);
 }
 
+/* Function: handle_dollar
+ * ------------------------
+ * Handles a string containing a dollar sign ($).
+ * 
+ * structure: Struct containing environment variables.
+ * prompt: Struct containing shell information.
+ * str: The string containing the dollar sign.
+ * i: Pointer to the current index in the command array.
+ * 
+ * Returns 1 if the dollar sign was successfully handled, 2 if the dollar sign
+ * should be ignored, or 0 if an error occurred.
+ * 
+ * This function identifies the word following the dollar sign and attempts to
+ * replace it with its corresponding value from the environment variables. If
+ * the word is a special case (e.g., "$$" or "$?"), it is handled accordingly.
+ */
 int	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 {
 	char	*dollar_word;
@@ -80,6 +124,21 @@ int	handle_dollar(t_info *structure, t_prompt *prompt, char *str, int *i)
 	return (1);
 }
 
+/* Function: find_dollar_word
+ * ---------------------------
+ * Finds the word following a dollar sign in a string.
+ * 
+ * prompt: Struct containing shell information.
+ * str: The string containing the dollar sign.
+ * 
+ * Returns the word following the dollar sign, or an empty string if no valid
+ * word is found.
+ * 
+ * This function skips past the dollar sign and identifies the word that
+ * follows it, stopping at whitespace, another dollar sign, or the end of the
+ * string. Special cases like "$$", "$?", and an immediate following whitespace
+ * are handled separately.
+ */
 char	*find_dollar_word(t_prompt *prompt, char *str)
 {
 	int		len;
@@ -107,6 +166,15 @@ char	*find_dollar_word(t_prompt *prompt, char *str)
 	return (dollar_word[i] = 0, dollar_word);
 }
 
+/* Function: move_pointer_after_dollar
+ * ------------------------------------
+ * Moves the pointer to the character immediately after the first dollar sign.
+ * 
+ * str: Pointer to the string pointer being manipulated.
+ * 
+ * This function iterates through the string until it finds a dollar sign, then
+ * moves the pointer to the character immediately following the dollar sign.
+ */
 void	move_pointer_after_dollar(char **str)
 {
 	while (**str)

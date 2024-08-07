@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_implementation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:07:35 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 17:43:59 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:00:28 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+/* Function: free_pipe_structure
+ * ------------------------------
+ * Frees all allocated memory related to the pipe structure.
+ * 
+ * structure: The structure containing all pipe-related information.
+ */
 static void	free_pipe_structure(t_info *structure)
 {
 	free_2d_int_array(structure->fds_pipes);
@@ -21,6 +27,13 @@ static void	free_pipe_structure(t_info *structure)
 	free(structure->pid);
 }
 
+/* Function: close_fds_pipes_parent
+ * ---------------------------------
+ * Closes file descriptors in the parent process to avoid leaks.
+ * 
+ * structure: The structure containing all pipe-related information.
+ * i: The index of the current command being executed.
+ */
 static void	close_fds_pipes_parent(t_info *structure, int i)
 {
 	if (i != 0)
@@ -29,6 +42,13 @@ static void	close_fds_pipes_parent(t_info *structure, int i)
 		close(structure->fds_pipes[i][1]);
 }
 
+/* Function: fork_and_execution
+ * -----------------------------
+ * Forks the current process and executes the child process or handles the parent process.
+ * 
+ * structure: The structure containing all pipe-related information.
+ * i: The index of the current command being executed.
+ */
 static void	fork_and_execution(t_info *structure, int i)
 {
 	structure->pid[i] = fork();
@@ -44,6 +64,12 @@ static void	fork_and_execution(t_info *structure, int i)
 		close_fds_pipes_parent(structure, i);
 }
 
+/* Function: pipeline_execution
+ * -----------------------------
+ * Executes the pipeline of commands using forks and pipes.
+ * 
+ * structure: The structure containing all pipe-related information.
+ */
 static void	pipeline_execution(t_info *structure)
 {
 	char	**current;
@@ -66,6 +92,12 @@ static void	pipeline_execution(t_info *structure)
 	free_pipe_structure(structure);
 }
 
+/* Function: pipes_implementation
+ * -------------------------------
+ * Main function to implement pipes in the shell.
+ * 
+ * structure: The structure containing all pipe-related information.
+ */
 void	pipes_implementation(t_info *structure)
 {
 	create_pipes(structure);

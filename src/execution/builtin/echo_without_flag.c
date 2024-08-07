@@ -3,15 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   echo_without_flag.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 13:08:07 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 16:15:17 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:42:16 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: echo_without_flag
+ * ----------------------------
+ * Handles the echo command when no flags are provided.
+ * 
+ * string: The initial string to be processed.
+ * structure: A pointer to the main structure containing the command arguments.
+ * 
+ * This function constructs the string to be echoed when the echo command is called
+ * without any flags. It joins all command arguments starting from the first argument
+ * with spaces, appends a newline character at the end, and returns the resulting string.
+ * 
+ * Returns the final string to be echoed.
+ */
 char	*echo_without_flag(char *string, t_info *structure)
 {
 	char	*first_backup_string;

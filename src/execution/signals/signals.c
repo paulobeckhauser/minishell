@@ -6,12 +6,20 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:06:45 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/20 16:50:45 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:51:07 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: handle_execution
+ * --------------------------
+ * Handles the SIGINT signal (Ctrl+C) during command execution.
+ * 
+ * signal: The signal number.
+ * 
+ * If the signal is SIGINT, it writes a newline character to standard output.
+ */
 void	handle_execution(int signal)
 {
 	if (signal == SIGINT)
@@ -20,6 +28,14 @@ void	handle_execution(int signal)
 	}
 }
 
+/* Function: handle_key_combos_execution
+ * -------------------------------------
+ * Sets up signal handling for specific key combinations during command execution.
+ * 
+ * This function configures the handling of the SIGINT signal (Ctrl+C) by setting up
+ * a sigaction structure and using sigaction() to associate the signal with the
+ * handle_execution function. It also ignores the SIGUSR1 signal.
+ */
 void	handle_key_combos_execution(void)
 {
 	struct sigaction	sa_ctrl_c;

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_parent_folder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 11:00:27 by pabeckha          #+#    #+#             */
 /*   Updated: 2024/04/21 14:17:33 by pabeckha         ###   ########.fr       */
@@ -12,6 +12,14 @@
 
 #include "../../inc/minishell.h"
 
+/* Function: get_size_arr
+ * ----------------------
+ * Counts the number of elements in a string array.
+ * 
+ * array: The string array whose elements are to be counted.
+ * 
+ * Returns the number of elements in the array.
+ */
 static int	get_size_arr(char **array)
 {
 	int	i;
@@ -22,6 +30,17 @@ static int	get_size_arr(char **array)
 	return (i);
 }
 
+/* Function: copy_str
+ * ------------------
+ * Copies a string up to a specified index into a new string, frees the original string,
+ * and duplicates the new string into the original string's memory space.
+ * 
+ * updated_str: The original string to be copied and updated.
+ * str_new: The new string where the original string is copied to.
+ * i: The index up to which the original string is copied.
+ * 
+ * Returns the updated string.
+ */
 static char	*copy_str(char *updated_str, char *str_new, int i)
 {
 	int	iter;
@@ -38,6 +57,18 @@ static char	*copy_str(char *updated_str, char *str_new, int i)
 	return (updated_str);
 }
 
+/* Function: iterate_copy
+ * ----------------------
+ * Iteratively copies segments of the original string, excluding parts of the path
+ * that do not match the access rights, and updates the string accordingly.
+ * 
+ * arr: The array of path segments.
+ * elem: The current element of the array being processed.
+ * updated_str: The current state of the string being updated.
+ * str: The original string.
+ * 
+ * Returns the updated string after removing the non-matching path segment.
+ */
 static char	*iterate_copy(char **arr, int elem, char *updated_str, char *str)
 {
 	char	*str_path;
@@ -63,6 +94,19 @@ static char	*iterate_copy(char **arr, int elem, char *updated_str, char *str)
 	return (updated_str);
 }
 
+/* Function: get_parent_folder
+ * ---------------------------
+ * Finds the parent folder of a given path that has the required access rights.
+ * 
+ * str: The path for which the parent folder is to be found.
+ * 
+ * This function splits the given path into segments, iteratively checks each segment
+ * from the end for access rights, and updates the path to exclude segments without
+ * the required access rights. It returns the updated path that meets the access
+ * requirements.
+ * 
+ * Returns the path of the parent folder with the required access rights.
+ */
 char	*get_parent_folder(char *str)
 {
 	char	**arr;
