@@ -6,17 +6,35 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:53:40 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/23 18:23:55 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:50:32 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: is_unset_command
+ * --------------------------
+ * Checks if the given command is the 'unset' command.
+ * 
+ * command: A pointer to an array of strings representing the command and its arguments.
+ * 
+ * Returns 1 (true) if the first string in the command array is "unset", otherwise returns 0 (false).
+ */
 int	is_unset_command(char **command)
 {
 	return (ft_strcmp(command[0], "unset") == 0);
 }
 
+/* Function: allocate_mem_array_backup
+ * -----------------------------------
+ * Allocates memory for a backup array excluding the variable to be deleted.
+ * 
+ * array: The original array of environment variables.
+ * array_backup: The backup array to be filled with variables except the one to delete.
+ * str_delete: The name of the variable to delete.
+ * 
+ * Returns a pointer to the newly allocated backup array.
+ */
 static char	**allocate_mem_array_backup(char **array, char **array_backup,
 		char *str_delete)
 {
@@ -43,6 +61,16 @@ static char	**allocate_mem_array_backup(char **array, char **array_backup,
 	return (array_backup);
 }
 
+/* Function: save_in_array_backup
+ * ------------------------------
+ * Copies the original array to the backup array excluding the variable to be deleted.
+ * 
+ * array: The original array of environment variables.
+ * array_backup: The backup array to be filled.
+ * str_delete: The name of the variable to delete.
+ * 
+ * Returns a pointer to the filled backup array.
+ */
 static char	**save_in_array_backup(char **array, char **array_backup,
 		char *str_delete)
 {
@@ -68,6 +96,15 @@ static char	**save_in_array_backup(char **array, char **array_backup,
 	return (array_backup);
 }
 
+/* Function: delete_string_array
+ * -----------------------------
+ * Deletes a variable from the environment variables array.
+ * 
+ * array: The original array of environment variables.
+ * str_delete: The name of the variable to delete.
+ * 
+ * Returns a new array with the specified variable removed.
+ */
 char	**delete_string_array(char **array, char *str_delete)
 {
 	char	**array_backup;
@@ -92,6 +129,16 @@ char	**delete_string_array(char **array, char *str_delete)
 	return (array);
 }
 
+/* Function: execute_unset_command
+ * -------------------------------
+ * Executes the 'unset' command by removing the specified environment variable.
+ * 
+ * structure: A pointer to the main structure containing environment variables and other data.
+ * 
+ * This function checks if there is a variable to unset. If so, it removes the variable from both
+ * the environment variables array and the export array. It handles the case where the variable
+ * might not exist in one of the arrays.
+ */
 void	execute_unset_command(t_info *structure)
 {
 	if (!structure->table->arr[1])

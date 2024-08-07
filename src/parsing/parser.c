@@ -6,12 +6,26 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:42:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 23:06:32 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:30:34 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+/* Function: parser
+ * ----------------
+ * Parses the user input into a command table.
+ * 
+ * structure: A pointer to the main data structure.
+ * prompt: A pointer to the prompt structure.
+ * 
+ * Returns true if parsing is successful, false otherwise.
+ * 
+ * The function initializes the prompt, processes the input with history,
+ * tokenizes the input, checks for command tokens, opens redirection files,
+ * and parses the tokens into a command table. It cleans up resources if
+ * parsing fails at any stage.
+ */
 bool	parser(t_info *structure, t_prompt *prompt)
 {
 	t_token_node	*tokens;
@@ -41,6 +55,19 @@ bool	parser(t_info *structure, t_prompt *prompt)
 	return (true);
 }
 
+/* Function: lex
+ * -------------
+ * Tokenizes the input string.
+ * 
+ * structure: A pointer to the main data structure.
+ * prompt: A pointer to the prompt structure.
+ * 
+ * Returns a pointer to the first token node if successful, NULL otherwise.
+ * 
+ * The function initializes a token list, checks for multiple redirections,
+ * joins file names for redirections, deletes repeating redirection tokens,
+ * joins word tokens, and checks for a leading pipe token, indicating a syntax error.
+ */
 t_token_node	*lex(t_info *structure, t_prompt *prompt)
 {
 	t_token_node	*tokens;
@@ -63,6 +90,18 @@ t_token_node	*lex(t_info *structure, t_prompt *prompt)
 	return (tokens);
 }
 
+/* Function: parse
+ * ---------------
+ * Parses tokens into a command table.
+ * 
+ * tokens: A pointer to the first token node.
+ * prompt: A pointer to the prompt structure.
+ * 
+ * Returns a pointer to the head of the command table.
+ * 
+ * The function initializes a binary tree from the tokens, initializes a command
+ * table from the tree, and frees the tree.
+ */
 t_cmd	*parse(t_token_node *tokens, t_prompt *prompt)
 {
 	t_token_node	*tree;

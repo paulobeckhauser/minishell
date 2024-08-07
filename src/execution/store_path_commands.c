@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   store_path_commands.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:32:54 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/17 12:17:21 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:03:07 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+/* Function: allocate_memory_path_commands
+ * ---------------------------------------
+ * Allocates memory for the path_commands array within the t_info structure.
+ * This array will store the full paths to the commands.
+ * 
+ * structure: A pointer to the t_info structure containing the command information.
+ */
 static void	allocate_memory_path_commands(t_info *structure)
 {
 	int	i;
@@ -26,6 +33,14 @@ static void	allocate_memory_path_commands(t_info *structure)
 	}
 }
 
+/* Function: condition_dup
+ * -----------------------
+ * Duplicates the valid command path into the path_commands array.
+ * 
+ * structure: A pointer to the t_info structure containing the command information.
+ * i: The index of the current command.
+ * j: The index of the valid path in the possible_paths array.
+ */
 static void	condition_dup(t_info *structure, int i, int j)
 {
 	if (structure->possible_paths[j] != NULL)
@@ -34,6 +49,14 @@ static void	condition_dup(t_info *structure, int i, int j)
 		structure->path_commands[i] = ft_strdup(structure->possible_paths[--j]);
 }
 
+/* Function: get_path_command
+ * --------------------------
+ * Determines the valid command path and stores it in the path_commands array.
+ * 
+ * structure: A pointer to the t_info structure containing the command information.
+ * i: The index of the current command.
+ * j: The index used to iterate through the possible_paths array.
+ */
 static void	get_path_command(t_info *structure, int i, int j)
 {
 	if (structure->possible_paths == NULL)
@@ -54,6 +77,12 @@ static void	get_path_command(t_info *structure, int i, int j)
 	}
 }
 
+/* Function: store_path_commands
+ * -----------------------------
+ * Stores the full paths to the commands in the path_commands array.
+ * 
+ * structure: A pointer to the t_info structure containing the command information.
+ */
 void	store_path_commands(t_info *structure)
 {
 	int	i;

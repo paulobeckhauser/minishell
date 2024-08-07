@@ -6,12 +6,25 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 22:25:20 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 22:38:56 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:20:24 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: open_redirection_files
+ * --------------------------------
+ * Opens files for input or output redirection based on the tokens provided.
+ * 
+ * tokens: A linked list of token nodes representing parsed command tokens.
+ * 
+ * Returns: 1 if all files were successfully opened, 0 otherwise.
+ * 
+ * This function iterates through the list of tokens. If a token is a redirection
+ * token, it checks whether it is for input or output redirection and calls the
+ * appropriate function to open the file. If any file cannot be opened, the function
+ * returns 0 to indicate failure.
+ */
 int	open_redirection_files(t_token_node *tokens)
 {
 	while (tokens)
@@ -32,6 +45,18 @@ int	open_redirection_files(t_token_node *tokens)
 	return (1);
 }
 
+/* Function: open_in_red_token
+ * ---------------------------
+ * Opens a file for input redirection.
+ * 
+ * tokens: The current token node containing the file name for input redirection.
+ * 
+ * Returns: 1 if the file was successfully opened and closed, 0 otherwise.
+ * 
+ * This function attempts to open the file specified in the input redirection token
+ * for reading. If the file cannot be opened or closed, it prints an error message
+ * and returns 0 to indicate failure.
+ */
 int	open_in_red_token(t_token_node *tokens)
 {
 	int	i;
@@ -60,6 +85,19 @@ int	open_in_red_token(t_token_node *tokens)
 	return (1);
 }
 
+/* Function: open_out_red_token
+ * ----------------------------
+ * Opens a file for output redirection.
+ * 
+ * tokens: The current token node containing the file name for output redirection.
+ * 
+ * Returns: 1 if the file was successfully opened and closed, 0 otherwise.
+ * 
+ * This function iterates through the file names specified in the output redirection
+ * token. For each file, it calls open_based_on_trunc to open the file with the correct
+ * flags based on whether the output should be truncated or appended. If any file cannot
+ * be opened or closed, it prints an error message and returns 0 to indicate failure.
+ */
 int	open_out_red_token(t_token_node *tokens)
 {
 	int	i;
@@ -88,6 +126,17 @@ int	open_out_red_token(t_token_node *tokens)
 	return (1);
 }
 
+/* Function: open_based_on_trunc
+ * -----------------------------
+ * Opens a file for output redirection with flags based on truncation preference.
+ * 
+ * tokens: The current token node containing the file name and truncation preference.
+ * i: The index of the file name and truncation preference in the token.
+ * 
+ * This function opens the file specified in the output redirection token with flags
+ * set for either truncation or appending, based on the truncation preference. The file
+ * is created if it does not exist, with permissions set to 0644.
+ */
 void	open_based_on_trunc(t_token_node *tokens, int i)
 {
 	if (tokens->token.out.trunc[i])

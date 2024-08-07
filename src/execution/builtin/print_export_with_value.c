@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   print_export_with_value.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:33:28 by pabeckha          #+#    #+#             */
 /*   Updated: 2024/04/21 16:43:59 by pabeckha         ###   ########.fr       */
@@ -12,6 +12,19 @@
 
 #include "../../../inc/minishell.h"
 
+/* Function: print_export_with_value
+ * ----------------------------------
+ * Prints an environment variable and its value with quotes around the value.
+ * 
+ * i: The index of the current environment variable in the sorted array.
+ * envp_sorted: A sorted array of environment variables.
+ * number_equal_sign: The index of the '=' character in the environment variable string.
+ * 
+ * This function iterates over each character of the environment variable at the given index.
+ * If it encounters the '=' character at the expected position (number_equal_sign), it prints
+ * a double quote before proceeding. It then prints the character and, if it's the last character
+ * in the string and there was an '=' character, it prints a closing double quote before a newline.
+ */
 void	print_export_with_value(int i, char **envp_sorted,
 		int number_equal_sign)
 {
@@ -30,6 +43,18 @@ void	print_export_with_value(int i, char **envp_sorted,
 	ft_putchar_fd('\n', 1);
 }
 
+/* Function: print_with_env_value
+ * -------------------------------
+ * Prepares and prints an environment variable with its value, including quotes around the value.
+ * 
+ * i: The index of the current environment variable in the sorted array.
+ * envp_sorted: A sorted array of environment variables.
+ * structure: A pointer to the main structure containing environment variables and other data.
+ * 
+ * This function first finds the index of the '=' character in the environment variable string.
+ * It then prints the "declare -x " prefix before calling print_export_with_value to print the
+ * environment variable name, its value with quotes, and a newline.
+ */
 void	print_with_env_value(int i, char **envp_sorted, t_info *structure)
 {
 	int	k;

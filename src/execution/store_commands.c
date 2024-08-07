@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   store_commands.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:17:51 by pabeckha          #+#    #+#             */
 /*   Updated: 2024/04/16 12:33:37 by pabeckha         ###   ########.fr       */
@@ -12,6 +12,13 @@
 
 #include "../../inc/minishell.h"
 
+/* Function: allocate_memory_commands
+ * ----------------------------------
+ * Allocates memory for the commands array within the t_info structure.
+ * This array will store the first command from each command table.
+ * 
+ * structure: A pointer to the t_info structure containing the command tables.
+ */
 static void	allocate_memory_commands(t_info *structure)
 {
 	t_cmd	*current_table;
@@ -41,6 +48,13 @@ static void	allocate_memory_commands(t_info *structure)
 	}
 }
 
+/* Function: store_commands
+ * ------------------------
+ * Copies the first command from each command table into the commands array
+ * within the t_info structure.
+ * 
+ * structure: A pointer to the t_info structure containing the command tables.
+ */
 void	store_commands(t_info *structure)
 {
 	t_cmd	*current_table;

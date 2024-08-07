@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   get_path_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:27:34 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/21 14:21:24 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:57:10 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+/* Function: allocate_mem_path
+ * ----------------------------
+ * Allocates memory for the PATH environment variable.
+ * 
+ * structure: The main structure containing all necessary data for execution.
+ * i: The index of the environment variable in the envp_export array.
+ * j: The index to start from within the environment variable string.
+ * 
+ * Returns the size of the allocated memory.
+ */
 static int	allocate_mem_path(t_info *structure, int i, int j)
 {
 	int	size_alloc;
@@ -32,6 +42,15 @@ static int	allocate_mem_path(t_info *structure, int i, int j)
 	return (size_alloc);
 }
 
+/* Function: store_path
+ * ---------------------
+ * Stores the PATH environment variable in the allocated memory.
+ * 
+ * i: The index of the environment variable in the envp_export array.
+ * j: The index to start from within the environment variable string.
+ * structure: The main structure containing all necessary data for execution.
+ * size_alloc: The size of the allocated memory.
+ */
 static void	store_path(int i, int j, t_info *structure, int size_alloc)
 {
 	int	g;
@@ -46,6 +65,14 @@ static void	store_path(int i, int j, t_info *structure, int size_alloc)
 	structure->path_env[g] = '\0';
 }
 
+/* Function: init_int_vars
+ * ------------------------
+ * Initializes integer variables to 0.
+ * 
+ * i: Pointer to the index of the environment variable.
+ * j: Pointer to the index within the environment variable string.
+ * count: Pointer to the count of found PATH variables.
+ */
 static void	init_int_vars(int *i, int *j, int *count)
 {
 	*i = 0;
@@ -53,6 +80,13 @@ static void	init_int_vars(int *i, int *j, int *count)
 	*count = 0;
 }
 
+/* Function: store_path_env
+ * -------------------------
+ * Extracts and stores the PATH environment variable.
+ * 
+ * structure: The main structure containing all necessary data for execution.
+ * i: The index of the environment variable in the envp_export array.
+ */
 static void	store_path_env(t_info *structure, int i)
 {
 	int	j;
@@ -66,6 +100,14 @@ static void	store_path_env(t_info *structure, int i)
 	store_path(i, j - 1, structure, size_alloc);
 }
 
+/* Function: get_path_env
+ * -----------------------
+ * Retrieves the PATH environment variable from the envp_export array.
+ * 
+ * structure: The main structure containing all necessary data for execution.
+ * 
+ * Returns the count of PATH variables found and stored.
+ */
 int	get_path_env(t_info *structure)
 {
 	int		i;

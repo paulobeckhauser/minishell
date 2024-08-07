@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   sort_var_envp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:56:50 by pabeckha          #+#    #+#             */
-/*   Updated: 2024/04/03 20:01:25 by pabeckha         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:49:47 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
+/* Function: get_lenght
+ * --------------------
+ * Calculates the length of the envp array.
+ * 
+ * envp: The environment variables array.
+ * 
+ * Returns the number of elements in the envp array.
+ */
 static int	get_lenght(char **envp)
 {
 	int	length;
@@ -22,6 +30,17 @@ static int	get_lenght(char **envp)
 	return (length);
 }
 
+/* Function: str_compare
+ * ---------------------
+ * Finds the index of the smallest string in envp array from index j to length.
+ * 
+ * j: Starting index for comparison.
+ * length: Total number of elements in envp.
+ * j_min: Index of the current smallest string.
+ * envp: The environment variables array.
+ * 
+ * Returns the index of the smallest string in the specified range.
+ */
 static int	str_compare(int j, int length, int j_min, char **envp)
 {
 	while (j < length)
@@ -33,6 +52,15 @@ static int	str_compare(int j, int length, int j_min, char **envp)
 	return (j_min);
 }
 
+/* Function: allocate_mem_sort_var
+ * -------------------------------
+ * Allocates memory for the sorted environment variables array and copies the content from the original array.
+ * 
+ * structure: A pointer to the main structure containing environment variables and other data.
+ * 
+ * This function allocates memory for the sorted version of the environment variables array and then
+ * duplicates each string from the original array to the sorted array.
+ */
 void	allocate_mem_sort_var(t_info *structure)
 {
 	int	i;
@@ -51,6 +79,15 @@ void	allocate_mem_sort_var(t_info *structure)
 	structure->envp_sorted[i] = NULL;
 }
 
+/* Function: selectiton_sort_variables
+ * -----------------------------------
+ * Sorts the environment variables array using the selection sort algorithm.
+ * 
+ * envp: The environment variables array to be sorted.
+ * 
+ * This function iterates over the envp array and for each element, finds the smallest string
+ * in the remaining array. If the smallest string is not the current element, it swaps them.
+ */
 void	selectiton_sort_variables(char **envp)
 {
 	int		length;

@@ -6,12 +6,25 @@
 /*   By: sfrankie <sfrankie@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:50:12 by sfrankie          #+#    #+#             */
-/*   Updated: 2024/04/23 18:50:57 by sfrankie         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:32:51 by sfrankie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+/* Function: getpid_from_stat
+ * --------------------------
+ * Retrieves the process ID of the current process by reading from /proc/self/stat.
+ * 
+ * prompt: A pointer to the prompt structure containing whitespace characters to be considered.
+ * 
+ * Returns a string containing the process ID or NULL if an error occurs.
+ * 
+ * The function opens the /proc/self/stat file to read process information, reads the first line
+ * to extract the process ID, allocates memory for the process ID string, and copies the ID into
+ * the allocated string. It handles errors such as file opening failure and memory allocation failure.
+ * The function ensures to close the file and free allocated resources before returning.
+ */
 char	*getpid_from_stat(t_prompt *prompt)
 {
 	char	*file;
