@@ -72,13 +72,11 @@ static void	fork_and_execution(t_info *structure, int i)
  */
 static void	pipeline_execution(t_info *structure)
 {
-	char	**current;
 	t_cmd	*head;
 	int		i;
 	int		status;
 	pid_t	w_id;
 
-	current = structure->table->arr;
 	head = structure->table;
 	i = 0;
 	while (structure->table)
@@ -89,6 +87,7 @@ static void	pipeline_execution(t_info *structure)
 	}
 	structure->table = head;
 	w_id = wait_child_processes(structure, &status);
+	(void)w_id;
 	free_pipe_structure(structure);
 }
 

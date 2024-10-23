@@ -50,9 +50,7 @@ static void	print_colored_prompt(t_prompt *prompt, t_info *structure)
 int	default_display_with_history(t_prompt *prompt, t_info *structure)
 {
     char	*tmp;
-    size_t	size;
 
-    size = PATH_MAX;
     tmp = getcwd(NULL, 0);
     if (tmp)
         prompt->buf = getcwd(NULL, 0);

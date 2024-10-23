@@ -76,9 +76,6 @@ void	run_heredoc(t_token *token, char *delimiter)
 void	wait_for_heredoc_delimiter(char **heredoc_newline, char **heredoc_msg,
     char *delimiter)
 {
-    char	*tmp;
-
-    tmp = NULL;
     handle_heredoc_key_combos();
     *heredoc_newline = readline("> ");
     if (*heredoc_newline == NULL)
