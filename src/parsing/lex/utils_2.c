@@ -45,11 +45,9 @@ int	get_word_length(t_prompt *prompt)
 {
 	int		len;
 	int		i;
-	char	curr_quote;
 
 	len = 0;
 	i = 0;
-	curr_quote = 0;
 	while (prompt->msg[i])
 	{
 		if (ft_strchr(prompt->whitespace, prompt->msg[i])

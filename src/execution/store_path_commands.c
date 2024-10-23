@@ -21,9 +21,6 @@
  */
 static void	allocate_memory_path_commands(t_info *structure)
 {
-	int	i;
-
-	i = 0;
 	structure->path_commands = (char **)malloc((structure->number_commands + 1)
 			* sizeof(char *));
 	if (!structure->path_commands)
